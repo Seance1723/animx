@@ -1,5 +1,6 @@
 import { saveInteractionState, getInteractionState, removeInteractionState } from './interaction-state.js';
 import { dispatchInteractionEvent, getInteractionConfig, isMotionSafe } from './interaction-utils.js';
+import { createCleanupBucket } from '../core/cleanup-manager.js';
 
 export function runRipple(element, options = {}) {
   const config = getInteractionConfig();
@@ -9,6 +10,7 @@ export function runRipple(element, options = {}) {
   if (existing) existing.destroy();
   
   let isEnabled = true;
+  const cleanup = createCleanupBucket();
   element.classList.add('ax-interaction-ready', 'ax-ripple-container');
   
   const duration = options.duration || 600;
@@ -19,12 +21,7 @@ export function runRipple(element, options = {}) {
   const createRipple = (e) => {
     if (!isEnabled) return;
     
-    // Check motion
-    if (!isMotionSafe('ripple')) {
-      // Just visually toggle something quick if disabled? The user wanted instant or disabled.
-      // Easiest is to disable ripple for reduced motion.
-      return;
-    }
+    if (!isMotionSafe('ripple')) return;
     
     const rect = element.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
@@ -40,7 +37,6 @@ export function runRipple(element, options = {}) {
         clientX = e.touches[0].clientX;
         clientY = e.touches[0].clientY;
       }
-      // Provide defaults if triggered via keyboard
       if (clientX === undefined) clientX = rect.left + rect.width / 2;
       if (clientY === undefined) clientY = rect.top + rect.height / 2;
       
@@ -62,12 +58,18 @@ export function runRipple(element, options = {}) {
     dispatchInteractionEvent(element, 'ripple', { options });
     if (options.onRipple) options.onRipple(element);
     
-    // Cleanup
-    setTimeout(() => {
+    const id = setTimeout(() => {
       if (ripple.parentNode === element) {
         element.removeChild(ripple);
       }
     }, duration);
+    
+    cleanup.add(() => {
+      clearTimeout(id);
+      if (ripple.parentNode === element) {
+        element.removeChild(ripple);
+      }
+    });
   };
   
   const onPointerDown = (e) => {
@@ -92,6 +94,7 @@ export function runRipple(element, options = {}) {
     destroy: () => {
       element.removeEventListener('pointerdown', onPointerDown);
       element.removeEventListener('keydown', onKeyDown);
+      cleanup.run();
       instance.disable();
       element.classList.remove('ax-interaction-ready', 'ax-ripple-container');
       removeInteractionState(element, 'ripple');

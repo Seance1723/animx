@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 0.6.0
+**Current Version**: 1.1.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## v0.0.1 - Foundation (Completed)
@@ -73,6 +73,14 @@
 - Finalized public API stability using `requestAnimationFrame`, `Element.animate`, and `IntersectionObserver`.
 - Final output maintained as one `dist/animx.css` and one `dist/animx.js`.
 - Verified cross-browser performance and accessibility (reduced motion).
+
+## v1.1.0 - Performance and Cleanup Upgrade (Completed)
+- Implemented `scheduler.js` for lightweight `requestAnimationFrame` batching.
+- Implemented `instance-registry.js` (`WeakMap`) to safely track element initialization and prevent duplicate runs.
+- Implemented `cleanup-manager.js` to manage temporary event listeners and DOM lifecycle via buckets.
+- Implemented `safe-instance.js` returning Null Object patterns for missing DOM targets without crashing.
+- Implemented `debug.js` with `warnOnce` functionality to prevent console spam.
+- Integrated `AnimX.destroy()` cascading to clear timelines, staggers, interactions, and data trackers cleanly.
 
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.

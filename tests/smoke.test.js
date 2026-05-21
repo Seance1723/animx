@@ -25,7 +25,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.0.0', 'Version should be 1.0.0');
+  assert.strictEqual(AnimX.version, '1.1.0', 'Version should be 1.1.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -58,6 +58,13 @@ try {
   assert.strictEqual(typeof emptyAnim.play, 'function', 'Instance has play()');
   console.log('✅ AnimX.animate() exists and handles missing targets safely');
   
+  // 5.5 Repeated Init Safety
+  AnimX.init();
+  AnimX.init(); // Should not crash or double bind
+  AnimX.refresh();
+  AnimX.refresh(); // Should not crash
+  console.log('✅ AnimX.init() and refresh() can be called multiple times safely');
+  
   // 6. Global controls
   assert.strictEqual(typeof AnimX.stop, 'function');
   assert.strictEqual(typeof AnimX.init, 'function');
@@ -84,7 +91,8 @@ try {
   assert.strictEqual(steps[0].target, '.fake-target');
   
   tl.play(); // Should not crash on missing targets
-  console.log('✅ Timeline initializes and chains safely');
+  tl.destroy(); // Should safely destroy empty timelines
+  console.log('✅ Timeline initializes, chains, and destroys safely');
   
   // 8. Stagger Engine Check
   const staggerGroup = AnimX.stagger('.fake-stagger', 'fade-up', { each: 100 });

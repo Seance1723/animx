@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.0.0</title>
+  <title>AnimX v1.1.0</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -102,7 +102,7 @@
     <header data-ax-component="hero-fade-sequence">
       <h1 data-ax-component="hero-split-text">AnimX</h1>
       <p>Zero-Dependency Browser Animation Library</p>
-      <div class="status-badge">v1.0.0 Stable Public Release</div>
+      <div class="status-badge">v1.1.0 Performance and Cleanup Upgrade</div>
       <p style="margin-top:1.5rem; opacity:0.8;">Usage: One CSS + One JS File. No external libraries.</p>
     </header>
 
@@ -261,6 +261,48 @@
         <div class="skeleton" style="flex:1;" data-ax-component="skeleton-shimmer"></div>
         <div style="width:40px; height:40px; border:4px solid #e2e8f0; border-top-color:var(--primary); border-radius:50%;" data-ax-component="loader-spinner"></div>
       </div>
+    </section>
+
+    <!-- 10. Performance and Cleanup -->
+    <section>
+      <h2>10. Performance and Cleanup</h2>
+      <p>Test dynamic content, robust instance destruction, and memory safety without duplicating event listeners.</p>
+      <div style="display:flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="btn" onclick="testPerformanceStagger()">Run 100 Card Stagger</button>
+        <button class="btn" style="background:#ef4444;" onclick="AnimX.destroy('.perf-card')">Destroy 100 Card Stagger</button>
+        <button class="btn" onclick="addDynamicCard()">Add Dynamic Card</button>
+        <button class="btn" style="background:#f59e0b;" onclick="AnimX.refresh()">Refresh Dynamic Content</button>
+        <button class="btn" style="background:#1e1b4b;" onclick="AnimX.destroy()">Destroy All Demo Animations</button>
+      </div>
+      
+      <div class="grid" id="perf-grid" style="grid-template-columns: repeat(10, 1fr); gap: 0.5rem;"></div>
+      
+      <script>
+        function testPerformanceStagger() {
+          const grid = document.getElementById('perf-grid');
+          grid.innerHTML = '';
+          let html = '';
+          for (let i = 0; i < 100; i++) {
+            html += `<div class="box perf-card" style="height:30px; font-size:10px;">${i+1}</div>`;
+          }
+          grid.innerHTML = html;
+          
+          AnimX.stagger('.perf-card', 'fade-up', {
+            stagger: { each: 10 }
+          });
+        }
+        
+        function addDynamicCard() {
+          const grid = document.getElementById('perf-grid');
+          const newCard = document.createElement('div');
+          newCard.className = 'box dyn-card';
+          newCard.style.height = '30px';
+          newCard.style.background = '#0ea5e9';
+          newCard.setAttribute('data-ax', 'zoom-in');
+          newCard.textContent = 'Dyn';
+          grid.appendChild(newCard);
+        }
+      </script>
     </section>
 
     <!-- 11. API quick reference -->

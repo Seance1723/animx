@@ -4,9 +4,9 @@
 
 AnimX is a lightweight, zero-dependency animation engine designed for performance, accessibility, and developer experience. It bridges the gap between hardware-accelerated CSS animations and powerful Javascript sequencing (like Timelines, Stagger, and Text Splitting) without the heavy payload of traditional animation frameworks.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.1.0-blue)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-success)
-![Size](https://img.shields.io/badge/size-12kb_gzipped-success)
+![Size](https://img.shields.io/badge/size-24kb_gzipped-success)
 
 ## Features
 - **Zero Dependencies**: No GSAP, Anime.js, Motion, or jQuery.

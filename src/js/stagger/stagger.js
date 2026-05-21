@@ -3,7 +3,8 @@ import { isReducedMotion } from '../core/reduced-motion.js';
 import { parseStaggerOptions } from './stagger-parser.js';
 import { calculateStaggerDelays } from './stagger-calculator.js';
 import { StaggerGroup } from './stagger-group.js';
-import { log } from '../core/utils.js';
+import { debug } from '../core/debug.js';
+import { createSafeInstance } from '../core/safe-instance.js';
 
 let animxInstance = null;
 export function bindStaggerAnimX(instance) {
@@ -15,8 +16,8 @@ export function stagger(targets, animationInput, options = {}) {
   
   // If zero elements, log and return empty group safely
   if (elements.length === 0) {
-    if (options.debug) log('AnimX.stagger(): No targets found.');
-    return new StaggerGroup([], {}, animationInput, options);
+    if (options.debug) debug.warn('AnimX.stagger(): No targets found.');
+    return createSafeInstance(elements);
   }
   
   // If one element, stagger acts exactly like animate

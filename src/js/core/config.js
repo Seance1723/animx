@@ -34,6 +34,12 @@ const defaultConfig = {
     magnetic: true,
     tilt: true,
     reducedMotionSafe: true
+  },
+  performance: {
+    monitor: false,
+    warnLargeBatch: true,
+    largeBatchLimit: 100,
+    batchDomWrites: true
   }
 };
 

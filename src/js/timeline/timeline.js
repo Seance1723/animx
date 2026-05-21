@@ -271,7 +271,19 @@ export class Timeline {
   }
   
   destroy() {
-    this.clear();
+    this.stop();
+    if (this.groups) {
+      this.groups.forEach(group => {
+        group.forEach(step => {
+          if (step.instance && typeof step.instance.destroy === 'function') {
+            step.instance.destroy();
+          }
+        });
+      });
+    }
+    this.steps = [];
+    this.groups = [];
+    this.currentGroupIndex = 0;
     this.status = 'destroyed';
   }
   

@@ -7,6 +7,8 @@ import { isElementInitialized, setElementState, getElementState } from './data-s
 import { dispatchAnimEvent } from './data-events.js';
 import { parseInteractionAttributes } from '../interactions/interaction-parser.js';
 import { parseComponentAttributes } from '../components/component-parser.js';
+import { hasInstances } from '../core/instance-registry.js';
+import { debug } from '../core/debug.js';
 
 // We import AnimX dynamically or via a wrapper if needed, but to avoid circular deps we pass the animate function or resolve it from window.
 let animxInstance = null;
@@ -22,7 +24,7 @@ function processElement(element, forceRun = false) {
   // Warn if timeline trigger is used
   if (element.hasAttribute('data-ax-timeline')) {
     if (config.debug || parsed.debug) {
-      log('AnimX: data-ax-timeline is planned for a future release.', element);
+      debug.warnOnce('data-timeline', 'AnimX: data-ax-timeline is planned for a future release.', element);
     }
   }
 
@@ -40,7 +42,7 @@ function processElement(element, forceRun = false) {
   // Handle Unknown Preset
   if (typeof parsed.animation === 'string' && !getPreset(parsed.animation)) {
     if (config.debug || parsed.debug) {
-      log(`AnimX: preset '${parsed.animation}' was not found.`, element);
+      debug.warnOnce(`missing-preset:${parsed.animation}`, `AnimX: preset '${parsed.animation}' was not found.`, element);
     }
     dispatchAnimEvent(element, 'error', parsed);
     return;
@@ -123,6 +125,7 @@ export function initData(forceScan = false) {
 
 function processComponentElement(element) {
   if (!animxInstance) return;
+  if (hasInstances(element)) return; // prevent duplicate init
   const parsed = parseComponentAttributes(element);
   if (parsed) {
     // Let scroll-api handle scroll triggers
@@ -134,6 +137,7 @@ function processComponentElement(element) {
 
 function processInteractionElement(element) {
   if (!animxInstance) return;
+  if (hasInstances(element)) return; // prevent duplicate init
   const interactions = parseInteractionAttributes(element);
   if (interactions) {
     animxInstance.interact(element, interactions);

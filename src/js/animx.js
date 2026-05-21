@@ -1,6 +1,9 @@
 import { getConfig, setConfig } from './core/config.js';
 import { normalizeSelector } from './core/selector.js';
-import { log } from './core/utils.js';
+import { debug } from './core/debug.js';
+import { createSafeInstance } from './core/safe-instance.js';
+import { performanceMonitor } from './core/performance-monitor.js';
+import { destroyInstances, clearInstances } from './core/instance-registry.js';
 import { registerPreset, getPreset, getPresets, getComponentPresets, getPresetCategories } from './presets/preset-registry.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
@@ -22,7 +25,7 @@ import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
 import { interact, hover, press, focus, magnetic, ripple, tilt, feedback, bindInteractionAnimX, destroyInteractions } from './interactions/interaction-api.js';
 import { component, bindComponentAnimX } from './components/component-api.js';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -56,7 +59,7 @@ class AnimXCore {
   init() {
     if (this._initialized) return;
     this._initialized = true;
-    log(`AnimX v${this.version} Initialized.`);
+    debug.info(`AnimX v${this.version} Initialized.`);
     initData();
     refreshScroll();
   }
@@ -82,6 +85,7 @@ class AnimXCore {
   }
 
   refresh(root) {
+    performanceMonitor.trackRefresh();
     refreshData(root);
     refreshScroll(root);
   }
@@ -171,9 +175,9 @@ class AnimXCore {
     
     if (elements.length === 0) {
       if (options.debug || getConfig().debug) {
-        log('AnimX.animate(): No targets found for selector', selector);
+        debug.warn('AnimX.animate(): No targets found for selector', selector);
       }
-      return new AnimationInstance(null, null, {});
+      return createSafeInstance(elements);
     }
     
     // Route to stagger if multiple elements and stagger option exists
@@ -273,12 +277,21 @@ class AnimXCore {
 
   destroy(selector) {
     this.stop(selector);
-    // Remove initialization marks
+    // Remove initialization marks and destroy instances
     if (selector) {
       const elements = normalizeSelector(selector);
       elements.forEach(el => {
         el.dataset.axState = '';
         el.classList.remove('ax-animating', 'ax-paused');
+        destroyInstances(el);
+      });
+    } else {
+      // Destroy all
+      const allEls = document.querySelectorAll('[data-ax-state], .ax-animating, .ax-paused');
+      allEls.forEach(el => {
+        el.dataset.axState = '';
+        el.classList.remove('ax-animating', 'ax-paused');
+        destroyInstances(el);
       });
     }
   }
