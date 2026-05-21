@@ -1,0 +1,30 @@
+@use '../base/tokens' as *;
+
+/* Do not globally remove outline, only alter for elements participating in focus interaction */
+
+.ax-focus-glow {
+  outline: none; /* We provide a custom visible replacement */
+  transition: box-shadow var(--ax-duration-fast) var(--ax-ease-out);
+}
+.ax-focus-glow.ax-focused {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+.ax-focus-ring {
+  outline: none;
+  transition: box-shadow var(--ax-duration-fast) var(--ax-ease-out);
+}
+.ax-focus-ring.ax-focused {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3b82f6;
+}
+
+.ax-focus-soft {
+  outline: none;
+  transition: background-color var(--ax-duration-fast) var(--ax-ease-out);
+}
+.ax-focus-soft.ax-focused {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Input aliases */
+.ax-input-focus-glow { @extend .ax-focus-glow; }

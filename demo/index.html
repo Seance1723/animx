@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo - v0.7.0</title>
+  <title>AnimX Demo - v0.8.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
     body {
@@ -20,10 +20,7 @@
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
-    .grid-small {
-      grid-template-columns: repeat(4, 1fr);
-    }
-    .box {
+    .box, .demo-card {
       height: 100px;
       background: #4f46e5;
       border-radius: 8px;
@@ -34,20 +31,11 @@
       font-weight: bold;
       text-align: center;
       padding: 1rem;
+      cursor: pointer;
     }
-    .demo-card {
-      height: 80px;
-      background: #0ea5e9;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-    }
-    section { margin-top: 3rem; border-top: 2px solid #eaeaea; padding-top: 2rem; min-height: 40vh; }
-    h2 { padding-bottom: 0.5rem; }
-    h2.hero { font-size: 3rem; color: #1e1b4b; line-height: 1.2; margin-top: 1rem; }
+    .demo-card { background: #0ea5e9; }
+    
+    section { margin-top: 3rem; border-top: 2px solid #eaeaea; padding-top: 2rem; }
     
     .btn {
       padding: 0.75rem 1.5rem;
@@ -62,6 +50,14 @@
     }
     .btn:hover { background: #4338ca; }
     
+    .feedback-input {
+      padding: 0.75rem;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    
     .status-text {
       font-family: monospace;
       color: #16a34a;
@@ -69,20 +65,11 @@
       margin-top: 1rem;
       display: block;
     }
-
-    .demo-typewriter, .demo-scramble, .demo-counter {
-      font-size: 2rem;
-      font-weight: bold;
-      font-family: monospace;
-      color: #b91c1c;
-      min-height: 3rem;
-      margin-top: 1rem;
-    }
   </style>
 </head>
 <body>
-  <h1>AnimX v0.7.0</h1>
-  <p>Status: Text Animation Engine working</p>
+  <h1>AnimX v0.8.0</h1>
+  <p>Status: Interaction Animation System working</p>
   
   <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
     <strong>Global Controls:</strong>
@@ -91,91 +78,82 @@
   </div>
 
   <section>
-    <h2>1. Character split reveal</h2>
-    <button class="btn" onclick="AnimX.text('.demo-text-chars', { split: 'chars', animation: 'text-rise', stagger: 30 })">Run Char Split</button>
-    <h2 class="hero demo-text-chars">Character animation looks premium</h2>
+    <h2>1. Hover interactions</h2>
+    <button class="btn" data-ax-hover="ax-button-lift">Hover Lift</button>
+    <button class="btn" data-ax-hover="ax-button-glow">Hover Glow</button>
+    <div class="demo-card" data-ax-hover="ax-card-lift">Card Lift</div>
   </section>
 
   <section>
-    <h2>2. Word split reveal</h2>
-    <button class="btn" onclick="AnimX.text('.demo-text-words', { split: 'words', animation: 'text-fade', stagger: { each: 80, from: 'center' } })">Run Word Split</button>
-    <h2 class="hero demo-text-words">Words should reveal smoothly from the center outwards</h2>
+    <h2>2. Press interactions</h2>
+    <button class="btn" data-ax-press="ax-button-press">Press Me</button>
   </section>
 
   <section>
-    <h2>3. Line split reveal</h2>
-    <button class="btn" onclick="AnimX.text('.demo-text-lines', { split: 'lines', animation: 'text-mask-up', stagger: 120, mask: 'lines' })">Run Line Mask</button>
-    <h2 class="hero demo-text-lines" style="max-width: 600px;">
-      A multi-line heading with mask reveal. It will dynamically wrap and reveal line by line gracefully.
-    </h2>
+    <h2>3. Focus interactions</h2>
+    <input class="feedback-input" data-ax-focus="ax-input-focus-glow" placeholder="Focus me" />
   </section>
 
   <section>
-    <h2>4. Typewriter</h2>
-    <button class="btn" onclick="AnimX.text('.demo-typewriter', { type: 'typewriter', text: 'Build beautiful motion faster.', speed: 45 })">Run Typewriter</button>
-    <div class="demo-typewriter"></div>
+    <h2>4. Ripple</h2>
+    <button class="btn" data-ax-ripple>Ripple Button</button>
   </section>
 
   <section>
-    <h2>5. Scramble</h2>
-    <button class="btn" onclick="AnimX.text('.demo-scramble', { type: 'scramble', text: 'ANIMX TEXT ENGINE', duration: 1200 })">Run Scramble</button>
-    <div class="demo-scramble">ANIMX</div>
+    <h2>5. Magnetic button</h2>
+    <button class="btn" 
+      data-ax-magnetic
+      data-ax-magnetic-strength="0.35"
+      data-ax-magnetic-radius="120">
+      Magnetic Button
+    </button>
   </section>
 
   <section>
-    <h2>6. Counter</h2>
-    <button class="btn" onclick="AnimX.text('.demo-counter', { type: 'counter', from: 0, to: 1250, duration: 1200, format: 'number' })">Run Counter</button>
-    <div class="demo-counter">0</div>
+    <h2>6. Tilt card</h2>
+    <div class="demo-card" 
+      data-ax-tilt
+      data-ax-tilt-max="12"
+      data-ax-tilt-glare="true">
+      Tilt Card
+    </div>
   </section>
 
   <section>
-    <h2>7. Data attribute text animation on load</h2>
-    <h2 class="hero"
-      data-ax-text="chars"
-      data-ax="text-rise"
-      data-ax-stagger="35">
-      Data attribute text reveal
-    </h2>
+    <h2>7. Feedback demo</h2>
+    <input class="feedback-input js-feedback" placeholder="Email" />
+    <button class="btn" onclick="AnimX.feedback('.js-feedback', 'error')">Show Error</button>
+    <button class="btn" onclick="AnimX.feedback('.js-feedback', 'success')">Show Success</button>
   </section>
 
   <section>
-    <h2>8. Scroll text animation</h2>
-    <h2 class="hero"
-      data-ax-text="words"
-      data-ax="text-fade"
-      data-ax-on="scroll"
-      data-ax-stagger="80">
-      This text animates when scrolled into view
-    </h2>
+    <h2>8. JS API demo</h2>
+    <div class="demo-card js-hover-card">Hover me via JS</div>
+    <br>
+    <button class="btn js-ripple-btn">Ripple via JS</button>
+    <br><br>
+    <div class="demo-card js-tilt-card">Tilt me via JS</div>
   </section>
 
   <section>
-    <h2>9. Timeline text animation</h2>
-    <button class="btn" id="btn-tl-text">Run Text Timeline</button>
-    <h2 class="hero timeline-text-title">Stunning Timeline Integration</h2>
-    <h3 class="hero timeline-text-subtitle" style="color:#666;">Beautiful secondary heading</h3>
-  </section>
-
-  <section>
-    <h2>10. Revert demo</h2>
-    <button class="btn" onclick="AnimX.text('.demo-text-revert', { split: 'chars', animation: 'text-pop', stagger: 50 })">Split & Animate</button>
-    <button class="btn" onclick="AnimX.revertText('.demo-text-revert')" style="background:#dc2626;">Revert HTML</button>
-    <h2 class="hero demo-text-revert">Destroy and Revert Safely</h2>
+    <h2>9. Interaction event demo</h2>
+    <p>Last interaction: <span id="event-log" class="status-text">None</span></p>
+    <button class="btn" data-ax-ripple>Trigger Ripple Event</button>
   </section>
 
   <script src="../dist/animx.js"></script>
   <script>
-    // 9. Timeline Integration
-    document.getElementById('btn-tl-text').addEventListener('click', () => {
-      AnimX.timeline()
-        .add(".timeline-text-title", {
-          type: "text",
-          split: "chars",
-          animation: "text-rise",
-          stagger: 30
-        })
-        .add(".timeline-text-subtitle", "fade-up")
-        .play();
+    // 8. JS APIs
+    AnimX.hover(".js-hover-card", "ax-card-lift");
+    AnimX.ripple(".js-ripple-btn");
+    AnimX.tilt(".js-tilt-card", { max: 10, glare: true });
+    
+    // 9. Events
+    document.addEventListener('animx:ripple', (e) => {
+      document.getElementById('event-log').textContent = 'Ripple triggered on ' + e.target.tagName;
+    });
+    document.addEventListener('animx:hover-enter', (e) => {
+      document.getElementById('event-log').textContent = 'Hover entered on ' + e.target.tagName;
     });
   </script>
 </body>

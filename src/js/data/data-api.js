@@ -5,6 +5,7 @@ import { getPreset } from '../presets/preset-registry.js';
 import { parseDataAttributes } from './data-parser.js';
 import { isElementInitialized, setElementState, getElementState } from './data-state.js';
 import { dispatchAnimEvent } from './data-events.js';
+import { parseInteractionAttributes } from '../interactions/interaction-parser.js';
 
 // We import AnimX dynamically or via a wrapper if needed, but to avoid circular deps we pass the animate function or resolve it from window.
 let animxInstance = null;
@@ -99,22 +100,44 @@ function processElement(element, forceRun = false) {
 
 export function initData(forceScan = false) {
   const config = getConfig();
-  if (!config.dataApi) return;
   
   if (typeof document === 'undefined') return;
   
-  const elements = document.querySelectorAll('[data-ax]');
-  elements.forEach(el => processElement(el, forceScan));
+  // Normal animx scanning
+  if (config.dataApi) {
+    const elements = document.querySelectorAll('[data-ax]');
+    elements.forEach(el => processElement(el, forceScan));
+  }
+  
+  // Interaction scanning
+  if (config.interactions && config.interactions.enabled) {
+    const interactionEls = document.querySelectorAll('[data-ax-hover], [data-ax-press], [data-ax-focus], [data-ax-magnetic], [data-ax-ripple], [data-ax-tilt], [data-ax-feedback]');
+    interactionEls.forEach(el => processInteractionElement(el));
+  }
+}
+
+function processInteractionElement(element) {
+  if (!animxInstance) return;
+  const interactions = parseInteractionAttributes(element);
+  if (interactions) {
+    animxInstance.interact(element, interactions);
+  }
 }
 
 export function refreshData(root = document) {
   const config = getConfig();
-  if (!config.dataApi) return;
   
   if (!root || typeof root.querySelectorAll !== 'function') return;
   
-  const elements = root.querySelectorAll('[data-ax]');
-  elements.forEach(el => processElement(el, false));
+  if (config.dataApi) {
+    const elements = root.querySelectorAll('[data-ax]');
+    elements.forEach(el => processElement(el, false));
+  }
+  
+  if (config.interactions && config.interactions.enabled) {
+    const interactionEls = root.querySelectorAll('[data-ax-hover], [data-ax-press], [data-ax-focus], [data-ax-magnetic], [data-ax-ripple], [data-ax-tilt], [data-ax-feedback]');
+    interactionEls.forEach(el => processInteractionElement(el));
+  }
 }
 
 export function runData(target) {

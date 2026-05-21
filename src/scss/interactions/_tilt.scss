@@ -1,0 +1,21 @@
+.ax-tilt {
+  transform-style: preserve-3d;
+  transition: transform var(--ax-duration-fast) var(--ax-ease-out);
+  position: relative;
+}
+
+.ax-tilt.ax-interaction-active {
+  transition: none; /* Let JS handle immediate updates during hover */
+}
+
+.ax-tilt-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--ax-duration-fast) var(--ax-ease-out);
+}
+
+.ax-tilt.ax-interaction-active .ax-tilt-glare {
+  transition: none;
+}

@@ -1,0 +1,8 @@
+.ax-magnetic {
+  /* Requires inline transform applied by JS, but we want smooth snapping back on release */
+  transition: transform var(--ax-duration-fast) var(--ax-ease-out);
+}
+.ax-magnetic.ax-interaction-active {
+  /* Remove transition while moving so it perfectly tracks pointer */
+  transition: none;
+}

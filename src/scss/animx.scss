@@ -40,3 +40,12 @@
 @use 'text/text-cursor';
 @use 'text/text-reveal';
 @use 'text/text-effects';
+
+@use 'interactions/interaction-base';
+@use 'interactions/hover';
+@use 'interactions/press';
+@use 'interactions/focus';
+@use 'interactions/magnetic';
+@use 'interactions/ripple';
+@use 'interactions/tilt';
+@use 'interactions/feedback';

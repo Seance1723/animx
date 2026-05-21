@@ -50,9 +50,15 @@
 - Ensured strict accessibility protections via `aria-label` and `aria-hidden`.
 - Seamlessly integrated text triggering into Timelines, Scroll API, and HTML `data-ax` APIs.
 
-## v0.8.0 - Interaction Animation System (Planned Next)
-- Do not build advanced layout/FLIP motion yet.
-- Do not build drag/gesture physics yet.
+## v0.8.0 - Interaction Animation System (Completed)
+- Added `AnimX.interact()`, `AnimX.hover()`, `AnimX.press()`, `AnimX.focus()`, `AnimX.magnetic()`, `AnimX.ripple()`, `AnimX.tilt()`, `AnimX.feedback()`.
+- Added interaction data attributes (e.g. `data-ax-hover`, `data-ax-magnetic`).
+- Added accessible focus/keyboard/touch-safe behaviors natively across interactions.
+- Drag/gesture physics and advanced layout/FLIP are deferred to future updates.
+- Parallax/pinned scenes are deferred.
+
+## v0.9.0 - Component Preset Pack (Planned Next)
+- Planned extension to add rich pre-built component animations.
 
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.

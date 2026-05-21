@@ -18,8 +18,9 @@ import { bindScrollAnimX } from './scroll/scroll-observer.js';
 import { Timeline, bindTimelineAnimX } from './timeline/timeline.js';
 import { stagger, bindStaggerAnimX } from './stagger/stagger.js';
 import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
+import { interact, hover, press, focus, magnetic, ripple, tilt, feedback, bindInteractionAnimX, destroyInteractions } from './interactions/interaction-api.js';
 
-const VERSION = '0.7.0';
+const VERSION = '0.8.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -37,6 +38,7 @@ class AnimXCore {
     bindTimelineAnimX(this);
     bindStaggerAnimX(this);
     bindTextAnimX(this);
+    bindInteractionAnimX(this);
   }
 
   config(options) {
@@ -110,6 +112,38 @@ class AnimXCore {
   
   revertText(targets) {
     return revertText(targets);
+  }
+  
+  interact(targets, options) {
+    return interact(targets, options);
+  }
+  
+  hover(targets, animationOrOptions, options) {
+    return hover(targets, animationOrOptions, options);
+  }
+  
+  press(targets, animationOrOptions, options) {
+    return press(targets, animationOrOptions, options);
+  }
+  
+  focus(targets, animationOrOptions, options) {
+    return focus(targets, animationOrOptions, options);
+  }
+  
+  magnetic(targets, options) {
+    return magnetic(targets, options);
+  }
+  
+  ripple(targets, options) {
+    return ripple(targets, options);
+  }
+  
+  tilt(targets, options) {
+    return tilt(targets, options);
+  }
+  
+  feedback(targets, type, options) {
+    return feedback(targets, type, options);
   }
 
   animate(selector, animationInput, options = {}) {
@@ -201,13 +235,32 @@ class AnimXCore {
     this._instances.forEach(inst => inst.reset());
   }
 
-  stop() {
-    this._instances.forEach(inst => inst.stop());
+  stop(selector) {
+    if (selector) {
+      const elements = normalizeSelector(selector);
+      elements.forEach(el => {
+        this._instances.forEach(instance => {
+          if (instance.elements.includes(el)) instance.stop();
+        });
+      });
+      destroyInteractions(selector);
+    } else {
+      this._instances.forEach(instance => instance.stop());
+      this._instances.clear();
+      destroyInteractions(document.body);
+    }
   }
 
-  destroy() {
-    this._instances.forEach(inst => inst.destroy());
-    this._instances.clear();
+  destroy(selector) {
+    this.stop(selector);
+    // Remove initialization marks
+    if (selector) {
+      const elements = normalizeSelector(selector);
+      elements.forEach(el => {
+        el.dataset.axState = '';
+        el.classList.remove('ax-animating', 'ax-paused');
+      });
+    }
   }
 }
 

@@ -24,6 +24,16 @@ const defaultConfig = {
     typewriterSpeed: 45,
     scrambleDuration: 1000,
     counterDuration: 1000
+  },
+  interactions: {
+    enabled: true,
+    hover: true,
+    press: true,
+    focus: true,
+    ripple: true,
+    magnetic: true,
+    tilt: true,
+    reducedMotionSafe: true
   }
 };
 

@@ -196,6 +196,65 @@ AnimX.text('.scramble', {
 });
 ```
 
+## Interaction Engine
+
+AnimX v0.8.0 includes a zero-dependency physical interactions engine, allowing you to attach hover, focus, press, tilt, magnetic, and ripple effects safely.
+
+### Declarative Usage
+
+The easiest way to bind interactions is via data-attributes:
+
+```html
+<!-- Hover / Press -->
+<button data-ax-hover="ax-button-lift" data-ax-press="ax-button-press">
+  Interactive Button
+</button>
+
+<!-- Ripple Effect -->
+<button data-ax-ripple data-ax-ripple-color="rgba(0,0,0,0.1)">
+  Ripple Button
+</button>
+
+<!-- Magnetic Behavior -->
+<div data-ax-magnetic data-ax-magnetic-strength="0.35">
+  Pull me
+</div>
+
+<!-- 3D Tilt Card -->
+<div data-ax-tilt data-ax-tilt-glare="true" data-ax-tilt-max="15">
+  Look at me
+</div>
+```
+
+### Imperative API
+
+You can apply interactions dynamically.
+
+```javascript
+AnimX.hover('.card', 'ax-card-lift');
+
+AnimX.press('.btn', 'ax-button-press');
+
+AnimX.tilt('.card', {
+  max: 12,
+  perspective: 900,
+  scale: 1.05,
+  glare: true
+});
+
+AnimX.magnetic('.magnetic-btn', {
+  strength: 0.4,
+  radius: 150
+});
+
+// One-off Feedback triggers
+AnimX.feedback('.email-input', 'error'); // shakes
+AnimX.feedback('.alert', 'success'); // pops
+```
+
+### Reduced Motion
+AnimX automatically disables continuous physics updates (magnetic, tilt) and visual disturbances if `prefers-reduced-motion` is active natively in the user's OS, ensuring high accessibility compliance.
+
 ## Advanced Usage (JavaScript API)
 
 ```javascript

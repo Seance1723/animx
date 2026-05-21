@@ -1,6 +1,6 @@
 {
   "name": "animx",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Zero-dependency browser animation library",
   "main": "dist/animx.js",
   "style": "dist/animx.css",

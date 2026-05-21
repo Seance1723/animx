@@ -1,0 +1,67 @@
+@use '../base/tokens' as *;
+
+.ax-hover-lift {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-out);
+}
+.ax-hover-lift.ax-hovered {
+  transform: translateY(-4px);
+}
+
+.ax-hover-rise {
+  transition: transform var(--ax-duration-normal) var(--ax-ease-out), box-shadow var(--ax-duration-normal) var(--ax-ease-out);
+}
+.ax-hover-rise.ax-hovered {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.ax-hover-glow {
+  transition: box-shadow var(--ax-duration-normal) var(--ax-ease-out);
+}
+.ax-hover-glow.ax-hovered {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+.ax-hover-shine {
+  position: relative;
+  overflow: hidden;
+}
+.ax-hover-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  transition: none;
+}
+.ax-hover-shine.ax-hovered::after {
+  animation: ax-shine-slide 0.7s ease-out forwards;
+}
+
+@keyframes ax-shine-slide {
+  100% { left: 200%; }
+}
+
+.ax-hover-scale {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-out);
+}
+.ax-hover-scale.ax-hovered {
+  transform: scale(1.05);
+}
+
+.ax-hover-soft-tilt {
+  transition: transform var(--ax-duration-normal) var(--ax-ease-out);
+}
+.ax-hover-soft-tilt.ax-hovered {
+  transform: translateY(-4px) rotate(2deg);
+}
+
+/* Common aliases */
+.ax-button-lift { @extend .ax-hover-lift; }
+.ax-button-glow { @extend .ax-hover-glow; }
+.ax-button-shine { @extend .ax-hover-shine; }
+.ax-card-lift { @extend .ax-hover-lift; }
+.ax-card-hover-rise { @extend .ax-hover-rise; }

@@ -1,4 +1,4 @@
-# AnimX (v0.7.0)
+# AnimX (v0.8.0)
 
 A highly optimized, zero-dependency browser animation library.
 
@@ -9,6 +9,7 @@ A highly optimized, zero-dependency browser animation library.
 - **Timeline Engine**: Compose sequences intuitively with `<` positioning.
 - **Stagger Engine**: Easily animate grids, lists, and node collections with center/edge/random layouts.
 - **Text Engine**: Powerful, accessibility-safe text splitting, typewriters, counters, and scramblers.
+- **Interaction Engine**: Hover, Press, Focus, Ripple, Magnetic, Tilt, and Feedback interactions.
 
 ## Basic Usage
 
@@ -17,8 +18,10 @@ A highly optimized, zero-dependency browser animation library.
 <!-- Single Element -->
 <div data-ax="fade-up" data-ax-duration="800">Hello World</div>
 
-<!-- Scroll Reveal -->
-<div data-ax="slide-left" data-ax-on="scroll">Slide on scroll</div>
+<!-- Interaction Reveal -->
+<button data-ax-hover="ax-button-lift" data-ax-ripple>Hover & Ripple</button>
+<button data-ax-magnetic data-ax-magnetic-strength="0.35">Magnetic</button>
+<div data-ax-tilt data-ax-tilt-glare="true">Tilt Card</div>
 
 <!-- Group Stagger -->
 <section data-ax-group data-ax-child="fade-up" data-ax-stagger="100">
@@ -40,12 +43,10 @@ AnimX.animate(".card", "fade-up", {
   ease: "bouncy"
 });
 
-// Text Typewriter
-AnimX.text(".typing", {
-  type: "typewriter",
-  text: "Hello world",
-  speed: 45
-});
+// Interactions
+AnimX.hover(".card", "ax-card-lift");
+AnimX.ripple(".button");
+AnimX.tilt(".card", { max: 12, glare: true });
 ```
 
 ### 3. Quick Start

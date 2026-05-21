@@ -24,8 +24,8 @@ import { parseScrollAttributes } from '../src/js/scroll/scroll-parser.js';
 console.log('--- Running Smoke Test ---');
 
 try {
-  // 1. Version Check
-  assert.strictEqual(AnimX.version, '0.7.0', 'Version should be 0.7.0');
+  // 1. Basic API Presence & Version
+  assert.strictEqual(AnimX.version, '0.8.0', 'Version should be 0.8.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -140,6 +140,26 @@ try {
     parentNode: { replaceChild: () => {} } 
   });
   
+  // Test Interactions System
+  const testInteractions = () => {
+    try {
+      const hover = AnimX.hover('.fake-btn', 'ax-button-lift');
+      if (hover && hover.length !== 0) throw new Error('Hover returned instances for fake selector');
+      
+      const magnetic = AnimX.magnetic('.fake-btn');
+      if (magnetic && magnetic.length !== 0) throw new Error('Magnetic returned instances for fake selector');
+      
+      const feedback = AnimX.feedback('.fake-btn', 'error');
+      if (feedback && feedback.length !== 0) throw new Error('Feedback returned instances for fake selector');
+
+      console.log('✅ Interactions initialize safely on missing targets');
+    } catch (e) {
+      console.error('❌ Interactions Engine Error:', e.message);
+      process.exit(1);
+    }
+  };
+  testInteractions();
+
   const splitRes = AnimX.splitText([fakeTextNode], { split: 'chars' });
   assert.ok(splitRes, 'AnimX.splitText processes node gracefully');
   assert.strictEqual(typeof AnimX.revertText, 'function', 'AnimX.revertText parses gracefully');

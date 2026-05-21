@@ -1,0 +1,27 @@
+@use '../base/tokens' as *;
+
+.ax-press-compress {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-in-out);
+}
+.ax-press-compress.ax-pressed {
+  transform: scale(0.95);
+}
+
+.ax-press-pop {
+  transition: transform 0.1s var(--ax-ease-out);
+}
+.ax-press-pop.ax-pressed {
+  transform: scale(0.9) translateY(2px);
+}
+
+.ax-press-depth {
+  transition: transform 0.1s var(--ax-ease-out), box-shadow 0.1s var(--ax-ease-out);
+}
+.ax-press-depth.ax-pressed {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 rgba(0,0,0,0) !important;
+}
+
+/* Common aliases */
+.ax-button-press { @extend .ax-press-compress; }
+.ax-card-depth { @extend .ax-press-depth; }

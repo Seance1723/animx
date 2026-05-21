@@ -1,0 +1,38 @@
+@use '../base/tokens' as *;
+
+.ax-feedback-error-shake {
+  animation: ax-shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes ax-shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+.ax-feedback-success-pop {
+  animation: ax-success-pop 0.4s var(--ax-ease-out) both;
+}
+@keyframes ax-success-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.ax-feedback-warning-pulse {
+  animation: ax-warning-pulse 0.8s var(--ax-ease-in-out) both;
+}
+@keyframes ax-warning-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+.ax-feedback-info-glow {
+  animation: ax-info-glow 1s var(--ax-ease-in-out) both;
+}
+@keyframes ax-info-glow {
+  0% { box-shadow: 0 0 0 rgba(59, 130, 246, 0); }
+  50% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+  100% { box-shadow: 0 0 0 rgba(59, 130, 246, 0); }
+}
