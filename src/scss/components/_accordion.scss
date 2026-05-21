@@ -1,0 +1,5 @@
+.ax-accordion-expand { animation: ax-slide-down var(--ax-duration-normal) forwards; }
+.ax-accordion-collapse { animation: ax-slide-up var(--ax-duration-normal) forwards; }
+.ax-accordion-fade { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+.ax-accordion-icon-rotate { transition: transform var(--ax-duration-fast); }
+.ax-accordion-soft-reveal { animation: ax-fade-up var(--ax-duration-normal) forwards; }

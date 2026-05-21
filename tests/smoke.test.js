@@ -25,7 +25,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '0.8.0', 'Version should be 0.8.0');
+  assert.strictEqual(AnimX.version, '0.9.0', 'Version should be 0.9.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -152,9 +152,28 @@ try {
       const feedback = AnimX.feedback('.fake-btn', 'error');
       if (feedback && feedback.length !== 0) throw new Error('Feedback returned instances for fake selector');
 
+      // Test Component System
+      const presets = AnimX.getComponentPresets();
+      assert.ok(presets.button, 'Button presets exist');
+      assert.ok(presets.button.includes('button-ripple'), 'button-ripple exists');
+      assert.ok(presets.card.includes('card-lift'), 'card-lift exists');
+      assert.ok(presets.modal.includes('modal-pop'), 'modal-pop exists');
+      assert.ok(presets.toast.includes('toast-slide-right'), 'toast-slide-right exists');
+      assert.ok(presets.form.includes('input-error-shake'), 'input-error-shake exists');
+      assert.ok(presets.loader.includes('loader-spinner'), 'loader-spinner exists');
+      assert.ok(presets.hero.includes('hero-fade-sequence'), 'hero-fade-sequence exists');
+
+      const cats = AnimX.getPresetCategories();
+      assert.ok(cats.includes('component'), 'Component category exists');
+
+      // Test component routing handles missing preset safely
+      const missing = AnimX.component('.fake-btn', 'invalid-component');
+      assert.strictEqual(missing, null, 'AnimX.component safely handles missing presets');
+
+      console.log('✅ Component Engine and registry initializes safely');
       console.log('✅ Interactions initialize safely on missing targets');
     } catch (e) {
-      console.error('❌ Interactions Engine Error:', e.message);
+      console.error('❌ Component/Interactions Engine Error:', e.message);
       process.exit(1);
     }
   };

@@ -1,0 +1,7 @@
+.ax-skeleton-shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: ax-slide-right var(--ax-duration-slow) infinite; }
+.ax-skeleton-wave { animation: ax-fade-up var(--ax-duration-normal) infinite alternate; }
+.ax-skeleton-pulse { animation: ax-pulse var(--ax-duration-normal) infinite; }
+.ax-skeleton-glow { animation: ax-pulse var(--ax-duration-slow) infinite; }
+.ax-skeleton-card { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+.ax-skeleton-text-lines { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+.ax-skeleton-avatar { animation: ax-fade-in var(--ax-duration-normal) forwards; }

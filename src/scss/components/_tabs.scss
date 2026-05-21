@@ -1,0 +1,5 @@
+.ax-tabs-line-glide { transition: transform var(--ax-duration-fast) var(--ax-ease-smooth); }
+.ax-tabs-pill-slide { transition: transform var(--ax-duration-fast) var(--ax-ease-smooth); }
+.ax-tabs-content-fade { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+.ax-tabs-content-slide { animation: ax-slide-left var(--ax-duration-normal) forwards; }
+.ax-tabs-active-pop { animation: ax-zoom-in var(--ax-duration-normal) forwards; }

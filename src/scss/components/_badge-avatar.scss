@@ -1,0 +1,6 @@
+.ax-badge-pulse { animation: ax-pulse var(--ax-duration-normal) forwards; }
+.ax-badge-pop { animation: ax-bounce var(--ax-duration-normal) forwards; }
+.ax-badge-notification-ping { animation: ax-pulse var(--ax-duration-fast) infinite; }
+.ax-avatar-pop { animation: ax-zoom-in var(--ax-duration-normal) forwards; }
+.ax-avatar-ring-pulse { box-shadow: 0 0 0 0 rgba(0,0,0,0.2); animation: ax-pulse var(--ax-duration-normal) infinite; }
+.ax-avatar-stack-reveal { animation: ax-fade-right var(--ax-duration-normal) forwards; }

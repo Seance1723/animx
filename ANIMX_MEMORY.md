@@ -57,8 +57,18 @@
 - Drag/gesture physics and advanced layout/FLIP are deferred to future updates.
 - Parallax/pinned scenes are deferred.
 
-## v0.9.0 - Component Preset Pack (Planned Next)
-- Planned extension to add rich pre-built component animations.
+## v0.9.0 - Component Preset Pack (Completed)
+- Added `AnimX.component(target, presetName, options)`.
+- Added `AnimX.getComponentPresets()` and `AnimX.getPresetCategories()`.
+- Added 100+ logical component presets (Buttons, Cards, Modals, Loaders, Toasts, Skeletons, etc).
+- Integrated `data-ax-component` attribute into `data-api.js` and `scroll-parser.js`.
+- Component preset engine dynamically routes to physics drivers (Ripple, Hover, Magnetic, Tilt, Feedback) securely without duplicating core logic.
+- Implemented lightweight SCSS mixin assignments instead of heavy `@extend` paths to keep bundle small.
+- AnimX is NOT a UI framework; presets only provide animations, not state logic.
+
+## v1.0.0 - Stable Public Release (Planned Next)
+- Finalize public API stability. (`requestAnimationFrame`, `Element.animate`, `IntersectionObserver`, CSS).
+- Final public output must remain one `dist/animx.css` and one `dist/animx.js`.
 
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.

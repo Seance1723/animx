@@ -1,0 +1,4 @@
+.ax-nav-mega-menu-reveal { animation: ax-fade-up var(--ax-duration-normal) forwards; }
+.ax-nav-mobile-drawer { animation: ax-slide-left var(--ax-duration-normal) forwards; }
+.ax-nav-hamburger-morph { transition: transform var(--ax-duration-fast); }
+.ax-nav-active-glow { text-shadow: 0 0 8px rgba(255,255,255,0.5); }

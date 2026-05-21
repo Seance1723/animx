@@ -1,0 +1,9 @@
+.ax-loader-spinner { animation: ax-spin var(--ax-duration-normal) infinite linear; }
+.ax-loader-dots { animation: ax-pulse var(--ax-duration-fast) infinite alternate; }
+.ax-loader-bars { animation: ax-pulse var(--ax-duration-fast) infinite alternate; }
+.ax-loader-ring { animation: ax-spin var(--ax-duration-normal) infinite linear; }
+.ax-loader-orbit { animation: ax-spin var(--ax-duration-normal) infinite linear; }
+.ax-loader-shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: ax-slide-right var(--ax-duration-slow) infinite; }
+.ax-loader-progress { transition: width var(--ax-duration-normal); }
+.ax-loader-wave { animation: ax-fade-up var(--ax-duration-normal) infinite alternate; }
+.ax-loader-pulse { animation: ax-pulse var(--ax-duration-normal) infinite; }

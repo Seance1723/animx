@@ -42,6 +42,8 @@ export function parseScrollAttributes(element) {
   const childAnim = baseParsed.childAnimation || ds.axChild || null;
   const isText = baseParsed.isText || ds.axText !== undefined || ds.axTextType !== undefined;
   const textOptions = baseParsed.textOptions || null;
+  const isComponent = ds.axComponent !== undefined;
+  const componentName = ds.axComponent || null;
   
   return {
     animation,
@@ -55,6 +57,10 @@ export function parseScrollAttributes(element) {
     stagger,
     isGroup,
     childAnim,
+    isText,
+    textOptions,
+    isComponent,
+    componentName,
     options: baseParsed.options
   };
 }

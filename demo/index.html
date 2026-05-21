@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo - v0.8.0</title>
+  <title>AnimX Demo - v0.9.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
     body {
@@ -34,6 +34,7 @@
       cursor: pointer;
     }
     .demo-card { background: #0ea5e9; }
+    .skeleton-box { height: 100px; border-radius: 8px; background: #e2e8f0; }
     
     section { margin-top: 3rem; border-top: 2px solid #eaeaea; padding-top: 2rem; }
     
@@ -65,11 +66,14 @@
       margin-top: 1rem;
       display: block;
     }
+    
+    .demo-modal { display:none; background:white; padding:2rem; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.2); position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:100; }
+    .demo-modal.active { display:block; }
   </style>
 </head>
 <body>
-  <h1>AnimX v0.8.0</h1>
-  <p>Status: Interaction Animation System working</p>
+  <h1>AnimX v0.9.0</h1>
+  <p>Status: Component Preset Pack working</p>
   
   <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
     <strong>Global Controls:</strong>
@@ -78,83 +82,93 @@
   </div>
 
   <section>
-    <h2>1. Hover interactions</h2>
-    <button class="btn" data-ax-hover="ax-button-lift">Hover Lift</button>
-    <button class="btn" data-ax-hover="ax-button-glow">Hover Glow</button>
-    <div class="demo-card" data-ax-hover="ax-card-lift">Card Lift</div>
+    <h2>1. Button presets</h2>
+    <button class="btn" data-ax-component="button-lift">Lift Button</button>
+    <button class="btn" data-ax-component="button-glow">Glow Button</button>
+    <button class="btn" data-ax-component="button-ripple">Ripple Button</button>
+    <button class="btn" data-ax-component="button-magnetic">Magnetic Button</button>
+    <button class="btn" data-ax-component="button-success-pop">Success Pop</button>
+    <button class="btn" data-ax-component="button-error-shake">Error Shake</button>
+    <button class="btn" data-ax-component="button-loading-fill">Loading Fill</button>
   </section>
 
   <section>
-    <h2>2. Press interactions</h2>
-    <button class="btn" data-ax-press="ax-button-press">Press Me</button>
-  </section>
-
-  <section>
-    <h2>3. Focus interactions</h2>
-    <input class="feedback-input" data-ax-focus="ax-input-focus-glow" placeholder="Focus me" />
-  </section>
-
-  <section>
-    <h2>4. Ripple</h2>
-    <button class="btn" data-ax-ripple>Ripple Button</button>
-  </section>
-
-  <section>
-    <h2>5. Magnetic button</h2>
-    <button class="btn" 
-      data-ax-magnetic
-      data-ax-magnetic-strength="0.35"
-      data-ax-magnetic-radius="120">
-      Magnetic Button
-    </button>
-  </section>
-
-  <section>
-    <h2>6. Tilt card</h2>
-    <div class="demo-card" 
-      data-ax-tilt
-      data-ax-tilt-max="12"
-      data-ax-tilt-glare="true">
-      Tilt Card
+    <h2>2. Card presets</h2>
+    <div class="grid">
+      <div class="demo-card" data-ax-component="card-lift">Card Lift</div>
+      <div class="demo-card" data-ax-component="card-glint">Card Glint</div>
+      <div class="demo-card" data-ax-component="card-tilt">Card Tilt</div>
+      <div class="demo-card" data-ax-component="card-reveal" data-ax-on="hover">Card Reveal</div>
+      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="hover">Card Fade Up</div>
     </div>
   </section>
 
   <section>
-    <h2>7. Feedback demo</h2>
-    <input class="feedback-input js-feedback" placeholder="Email" />
-    <button class="btn" onclick="AnimX.feedback('.js-feedback', 'error')">Show Error</button>
-    <button class="btn" onclick="AnimX.feedback('.js-feedback', 'success')">Show Success</button>
+    <h2>3. Modal / drawer presets</h2>
+    <button class="btn" onclick="AnimX.component('.demo-modal', 'modal-pop').elements[0].classList.add('active')">Trigger Modal Pop</button>
+    <div class="demo-modal">
+      <h3>Modal Pop</h3>
+      <p>This is a component preset modal.</p>
+      <button class="btn" onclick="this.parentElement.classList.remove('active')">Close</button>
+    </div>
   </section>
 
   <section>
-    <h2>8. JS API demo</h2>
-    <div class="demo-card js-hover-card">Hover me via JS</div>
-    <br>
-    <button class="btn js-ripple-btn">Ripple via JS</button>
-    <br><br>
-    <div class="demo-card js-tilt-card">Tilt me via JS</div>
+    <h2>4. Toast / alert presets</h2>
+    <div style="background:#10b981; color:white; padding:1rem; border-radius:8px; display:inline-block; margin-right:1rem;" data-ax-component="toast-slide-right">
+      Success Toast (slide-right)
+    </div>
+    <div style="background:#f59e0b; color:white; padding:1rem; border-radius:8px; display:inline-block;" data-ax-component="toast-pop">
+      Warning Toast (pop)
+    </div>
   </section>
 
   <section>
-    <h2>9. Interaction event demo</h2>
-    <p>Last interaction: <span id="event-log" class="status-text">None</span></p>
-    <button class="btn" data-ax-ripple>Trigger Ripple Event</button>
+    <h2>5. Navigation presets</h2>
+    <div style="display:flex; gap:1rem;">
+      <a href="#" style="color:#4f46e5; text-decoration:none; font-weight:bold;" data-ax-component="nav-underline-slide">Underline Slide</a>
+      <a href="#" style="color:#4f46e5; text-decoration:none; font-weight:bold;" data-ax-component="nav-link-hover-rise">Hover Rise</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Form presets</h2>
+    <input class="feedback-input js-input" data-ax-component="input-focus-glow" placeholder="Focus Glow Input" />
+    <button class="btn" onclick="AnimX.component('.js-input', 'input-error-shake')">Trigger Error Feedback</button>
+    <button class="btn" onclick="AnimX.component('.js-input', 'input-success-pop')">Trigger Success Feedback</button>
+  </section>
+
+  <section>
+    <h2>7. Loader and skeleton presets</h2>
+    <div style="display:flex; gap:2rem; margin-bottom:2rem; align-items:center;">
+      <div style="width:40px; height:40px; border:4px solid #e2e8f0; border-top-color:#4f46e5; border-radius:50%;" data-ax-component="loader-spinner"></div>
+      <div style="width:40px; height:40px; border:4px solid #4f46e5; border-radius:50%; border-right-color:transparent;" data-ax-component="loader-ring"></div>
+      <div style="width:60px; height:20px; background:#4f46e5; display:flex; gap:4px; padding:4px;" data-ax-component="loader-dots"></div>
+    </div>
+    <div class="grid">
+      <div class="skeleton-box" data-ax-component="skeleton-shimmer"></div>
+      <div class="skeleton-box" data-ax-component="skeleton-wave"></div>
+      <div class="skeleton-box" data-ax-component="skeleton-pulse"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Hero & Section presets</h2>
+    <div data-ax-component="hero-fade-sequence" style="padding:4rem; background:#1e1b4b; color:white; border-radius:12px; text-align:center;">
+      <h2 data-ax-component="hero-split-text">Beautiful Hero Text</h2>
+      <button class="btn" data-ax-component="hero-cta-rise">Get Started</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>9. Data attribute components (Scroll)</h2>
+    <div class="grid">
+      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="scroll">Scroll Card 1</div>
+      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="scroll" data-ax-delay="100">Scroll Card 2</div>
+      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="scroll" data-ax-delay="200">Scroll Card 3</div>
+    </div>
   </section>
 
   <script src="../dist/animx.js"></script>
-  <script>
-    // 8. JS APIs
-    AnimX.hover(".js-hover-card", "ax-card-lift");
-    AnimX.ripple(".js-ripple-btn");
-    AnimX.tilt(".js-tilt-card", { max: 10, glare: true });
-    
-    // 9. Events
-    document.addEventListener('animx:ripple', (e) => {
-      document.getElementById('event-log').textContent = 'Ripple triggered on ' + e.target.tagName;
-    });
-    document.addEventListener('animx:hover-enter', (e) => {
-      document.getElementById('event-log').textContent = 'Hover entered on ' + e.target.tagName;
-    });
-  </script>
 </body>
 </html>

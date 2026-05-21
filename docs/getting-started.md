@@ -255,6 +255,57 @@ AnimX.feedback('.alert', 'success'); // pops
 ### Reduced Motion
 AnimX automatically disables continuous physics updates (magnetic, tilt) and visual disturbances if `prefers-reduced-motion` is active natively in the user's OS, ensuring high accessibility compliance.
 
+## Component Presets (v0.9.0)
+
+AnimX includes a zero-dependency **Component Preset Pack** providing 100+ logical animation recipes for common UI components (Buttons, Cards, Modals, Forms, Navigation, Loaders, and Skeletons).
+
+These presets do not provide UI layout/state rendering logic; they simply apply highly optimized native animations safely without duplicating animation engines.
+
+### Declarative Components
+
+Use the `data-ax-component` attribute directly on your UI elements.
+
+```html
+<!-- Buttons -->
+<button data-ax-component="button-ripple">Ripple Button</button>
+<button data-ax-component="button-glow">Glow Button</button>
+
+<!-- Cards -->
+<div data-ax-component="card-lift">Interactive Card</div>
+<div data-ax-component="card-fade-up" data-ax-on="scroll">Scroll Card</div>
+
+<!-- Loading states -->
+<div data-ax-component="skeleton-shimmer"></div>
+<div class="spinner" data-ax-component="loader-spinner"></div>
+```
+
+### Imperative Components API
+
+Use `AnimX.component()` to attach presets in Javascript.
+
+```javascript
+// Attach hover lift behavior
+AnimX.component('.card', 'card-lift');
+
+// Attach magnetic behavior
+AnimX.component('.btn-primary', 'button-magnetic');
+
+// Trigger immediate feedback
+AnimX.component('.email-input', 'input-error-shake');
+
+// Display modal popup animation
+const modal = document.querySelector('.modal');
+AnimX.component(modal, 'modal-pop');
+```
+
+You can view the full list of available presets organized by component type using:
+```javascript
+console.log(AnimX.getComponentPresets());
+```
+
+> [!NOTE]  
+> If an end-user navigates your site with `prefers-reduced-motion: reduce`, AnimX will automatically strip continuous loops and physics checks from Component interactions (like `magnetic` or `tilt`), dropping back to minimal transitions ensuring a11y compliance.
+
 ## Advanced Usage (JavaScript API)
 
 ```javascript

@@ -6,6 +6,7 @@ import { parseDataAttributes } from './data-parser.js';
 import { isElementInitialized, setElementState, getElementState } from './data-state.js';
 import { dispatchAnimEvent } from './data-events.js';
 import { parseInteractionAttributes } from '../interactions/interaction-parser.js';
+import { parseComponentAttributes } from '../components/component-parser.js';
 
 // We import AnimX dynamically or via a wrapper if needed, but to avoid circular deps we pass the animate function or resolve it from window.
 let animxInstance = null;
@@ -109,10 +110,25 @@ export function initData(forceScan = false) {
     elements.forEach(el => processElement(el, forceScan));
   }
   
+  // Component scanning
+  const componentEls = document.querySelectorAll('[data-ax-component]');
+  componentEls.forEach(el => processComponentElement(el));
+  
   // Interaction scanning
   if (config.interactions && config.interactions.enabled) {
     const interactionEls = document.querySelectorAll('[data-ax-hover], [data-ax-press], [data-ax-focus], [data-ax-magnetic], [data-ax-ripple], [data-ax-tilt], [data-ax-feedback]');
     interactionEls.forEach(el => processInteractionElement(el));
+  }
+}
+
+function processComponentElement(element) {
+  if (!animxInstance) return;
+  const parsed = parseComponentAttributes(element);
+  if (parsed) {
+    // Let scroll-api handle scroll triggers
+    if (parsed.trigger === 'scroll') return;
+    
+    animxInstance.component(element, parsed.presetName, parsed.options);
   }
 }
 
@@ -133,6 +149,9 @@ export function refreshData(root = document) {
     const elements = root.querySelectorAll('[data-ax]');
     elements.forEach(el => processElement(el, false));
   }
+  
+  const componentEls = root.querySelectorAll('[data-ax-component]');
+  componentEls.forEach(el => processComponentElement(el));
   
   if (config.interactions && config.interactions.enabled) {
     const interactionEls = root.querySelectorAll('[data-ax-hover], [data-ax-press], [data-ax-focus], [data-ax-magnetic], [data-ax-ripple], [data-ax-tilt], [data-ax-feedback]');

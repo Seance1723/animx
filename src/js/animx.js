@@ -1,8 +1,9 @@
 import { getConfig, setConfig } from './core/config.js';
 import { normalizeSelector } from './core/selector.js';
 import { log } from './core/utils.js';
-import { registerPreset, getPreset, getPresets } from './presets/preset-registry.js';
+import { registerPreset, getPreset, getPresets, getComponentPresets, getPresetCategories } from './presets/preset-registry.js';
 import { cssPresets } from './presets/css-presets.js';
+import { componentPresets } from './components/component-presets.js';
 
 import { isReducedMotion } from './core/reduced-motion.js';
 import { normalizeOptions } from './core/animation-normalizer.js';
@@ -19,13 +20,19 @@ import { Timeline, bindTimelineAnimX } from './timeline/timeline.js';
 import { stagger, bindStaggerAnimX } from './stagger/stagger.js';
 import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
 import { interact, hover, press, focus, magnetic, ripple, tilt, feedback, bindInteractionAnimX, destroyInteractions } from './interactions/interaction-api.js';
+import { component, bindComponentAnimX } from './components/component-api.js';
 
-const VERSION = '0.8.0';
+const VERSION = '0.9.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
   if (!preset.name) preset.name = name;
   registerPreset(name, preset);
+});
+
+// Pre-register component presets
+componentPresets.forEach(preset => {
+  registerPreset(preset.name, preset);
 });
 
 class AnimXCore {
@@ -39,6 +46,7 @@ class AnimXCore {
     bindStaggerAnimX(this);
     bindTextAnimX(this);
     bindInteractionAnimX(this);
+    bindComponentAnimX(this);
   }
 
   config(options) {
@@ -144,6 +152,18 @@ class AnimXCore {
   
   feedback(targets, type, options) {
     return feedback(targets, type, options);
+  }
+
+  component(targets, presetName, options) {
+    return component(targets, presetName, options);
+  }
+
+  getComponentPresets() {
+    return getComponentPresets();
+  }
+
+  getPresetCategories() {
+    return getPresetCategories();
   }
 
   animate(selector, animationInput, options = {}) {

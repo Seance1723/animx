@@ -63,7 +63,9 @@ function handleIntersection(entry) {
 function runScrollAnimation(element, config) {
   if (!animxInstance) return;
   
-  if (config.isText) {
+  if (config.isComponent) {
+    animxInstance.component(element, config.componentName, config.options);
+  } else if (config.isText) {
     animxInstance.text(element, { ...config.textOptions, ...config.options });
   } else if (config.isGroup) {
     const children = Array.from(element.children);

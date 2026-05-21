@@ -1,31 +1,8 @@
-@use '../base/mixins' as *;
-
-@keyframes ax-toast-slide-right {
-  from { opacity: 0; transform: translateX(100%); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@keyframes ax-toast-slide-left {
-  from { opacity: 0; transform: translateX(-100%); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@keyframes ax-toast-pop {
-  0% { opacity: 0; transform: scale(0.9) translateY(20px); }
-  60% { opacity: 1; transform: scale(1.02) translateY(-5px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes ax-alert-shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-8px); }
-  40%, 80% { transform: translateX(8px); }
-}
-@keyframes ax-success-stamp {
-  0% { opacity: 0; transform: scale(2) rotate(-20deg); }
-  50% { opacity: 1; transform: scale(0.9) rotate(5deg); }
-  100% { opacity: 1; transform: scale(1) rotate(0); }
-}
-
-.ax-toast-slide-right { @include ax-transform-animation(ax-toast-slide-right, var(--ax-duration-normal)); }
-.ax-toast-slide-left { @include ax-transform-animation(ax-toast-slide-left, var(--ax-duration-normal)); }
-.ax-toast-pop { @include ax-transform-animation(ax-toast-pop, var(--ax-duration-normal)); }
-.ax-alert-shake { @include ax-transform-animation(ax-alert-shake, var(--ax-duration-normal)); }
-.ax-success-stamp { @include ax-transform-animation(ax-success-stamp, var(--ax-duration-normal), var(--ax-ease-bounce)); }
+.ax-toast-slide-right { animation: ax-slide-right var(--ax-duration-normal) forwards; }
+.ax-toast-slide-left { animation: ax-slide-left var(--ax-duration-normal) forwards; }
+.ax-toast-slide-up { animation: ax-slide-up var(--ax-duration-normal) forwards; }
+.ax-toast-pop { animation: ax-bounce var(--ax-duration-normal) forwards; }
+.ax-toast-stack { animation: ax-slide-up var(--ax-duration-normal) forwards; }
+.ax-success-stamp { animation: ax-zoom-in var(--ax-duration-normal) forwards; }
+.ax-warning-glow { animation: ax-pulse var(--ax-duration-slow) infinite; }
+.ax-info-soft-pop { animation: ax-fade-up var(--ax-duration-normal) forwards; }

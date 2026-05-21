@@ -1,0 +1,6 @@
+.ax-drawer-left { animation: ax-slide-right var(--ax-duration-normal) forwards; }
+.ax-drawer-right { animation: ax-slide-left var(--ax-duration-normal) forwards; }
+.ax-drawer-top { animation: ax-slide-down var(--ax-duration-normal) forwards; }
+.ax-drawer-bottom { animation: ax-slide-up var(--ax-duration-normal) forwards; }
+.ax-drawer-push { animation: ax-slide-left var(--ax-duration-normal) forwards; }
+.ax-drawer-overlay-fade { animation: ax-fade-in var(--ax-duration-normal) forwards; }

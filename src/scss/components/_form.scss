@@ -1,31 +1,7 @@
-@use '../base/mixins' as *;
-
-@keyframes ax-input-focus-glow {
-  0% { box-shadow: 0 0 0 rgba(0,0,0,0); }
-  100% { box-shadow: 0 0 0 3px var(--ax-glow-color); }
-}
-@keyframes ax-input-error-shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-@keyframes ax-input-success-pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-@keyframes ax-checkbox-pop {
-  0% { transform: scale(0); opacity: 0; }
-  50% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-@keyframes ax-radio-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(0,0,0,0.2); }
-  100% { box-shadow: 0 0 0 8px rgba(0,0,0,0); }
-}
-
-.ax-input-focus-glow { @include ax-animation(ax-input-focus-glow, var(--ax-duration-fast)); }
-.ax-input-error-shake { @include ax-transform-animation(ax-input-error-shake, var(--ax-duration-fast)); }
-.ax-input-success-pop { @include ax-transform-animation(ax-input-success-pop, var(--ax-duration-fast)); }
-.ax-checkbox-pop { @include ax-transform-animation(ax-checkbox-pop, var(--ax-duration-fast), var(--ax-ease-bounce)); }
-.ax-radio-pulse { @include ax-animation(ax-radio-pulse, var(--ax-duration-normal)); }
+.ax-input-label-float { transition: transform var(--ax-duration-fast); }
+.ax-checkbox-pop { animation: ax-zoom-in var(--ax-duration-normal) forwards; }
+.ax-radio-pulse { animation: ax-pulse var(--ax-duration-normal) forwards; }
+.ax-switch-slide { transition: transform var(--ax-duration-fast); }
+.ax-range-fill { transition: width var(--ax-duration-fast); }
+.ax-form-row-reveal { animation: ax-fade-up var(--ax-duration-normal) forwards; }
+.ax-form-helper-fade { animation: ax-fade-in var(--ax-duration-normal) forwards; }

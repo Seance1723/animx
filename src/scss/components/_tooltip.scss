@@ -1,0 +1,5 @@
+.ax-tooltip-fade { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+.ax-tooltip-pop { animation: ax-bounce var(--ax-duration-normal) forwards; }
+.ax-tooltip-slide-up { animation: ax-slide-up var(--ax-duration-normal) forwards; }
+.ax-tooltip-slide-down { animation: ax-slide-down var(--ax-duration-normal) forwards; }
+.ax-tooltip-soft-bounce { animation: ax-bounce var(--ax-duration-normal) forwards; }

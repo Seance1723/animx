@@ -1,4 +1,4 @@
-# AnimX (v0.8.0)
+# AnimX (v0.9.0)
 
 A highly optimized, zero-dependency browser animation library.
 
@@ -10,43 +10,30 @@ A highly optimized, zero-dependency browser animation library.
 - **Stagger Engine**: Easily animate grids, lists, and node collections with center/edge/random layouts.
 - **Text Engine**: Powerful, accessibility-safe text splitting, typewriters, counters, and scramblers.
 - **Interaction Engine**: Hover, Press, Focus, Ripple, Magnetic, Tilt, and Feedback interactions.
+- **Component Presets**: Over 100+ ready-to-use animation UI recipes for buttons, cards, modals, loaders, and more.
 
 ## Basic Usage
 
 ### 1. Data Attributes (Declarative)
 ```html
-<!-- Single Element -->
+<!-- Core Animation -->
 <div data-ax="fade-up" data-ax-duration="800">Hello World</div>
 
-<!-- Interaction Reveal -->
-<button data-ax-hover="ax-button-lift" data-ax-ripple>Hover & Ripple</button>
-<button data-ax-magnetic data-ax-magnetic-strength="0.35">Magnetic</button>
-<div data-ax-tilt data-ax-tilt-glare="true">Tilt Card</div>
-
-<!-- Group Stagger -->
-<section data-ax-group data-ax-child="fade-up" data-ax-stagger="100">
-  <div>Item 1</div>
-  <div>Item 2</div>
-</section>
-
-<!-- Text Split Reveal -->
-<h1 data-ax-text="chars" data-ax="text-rise" data-ax-stagger="35">
-  Beautiful Typography
-</h1>
+<!-- Component Presets -->
+<button data-ax-component="button-ripple">Ripple Button</button>
+<div data-ax-component="card-lift">Card</div>
+<div data-ax-component="card-fade-up" data-ax-on="scroll">Scroll Card</div>
 ```
 
 ### 2. JavaScript API (Imperative)
 ```javascript
 // Simple Animate
-AnimX.animate(".card", "fade-up", {
-  duration: 600,
-  ease: "bouncy"
-});
+AnimX.animate(".card", "fade-up");
 
-// Interactions
-AnimX.hover(".card", "ax-card-lift");
-AnimX.ripple(".button");
-AnimX.tilt(".card", { max: 12, glare: true });
+// Components
+AnimX.component(".card", "card-lift");
+AnimX.component(".button", "button-ripple");
+AnimX.component(".input", "input-error-shake");
 ```
 
 ### 3. Quick Start

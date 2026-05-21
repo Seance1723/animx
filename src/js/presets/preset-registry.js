@@ -19,3 +19,19 @@ export function getPreset(name) {
 export function getPresets() {
   return Array.from(registry.entries()).map(([name, config]) => ({ name, ...config }));
 }
+
+export function getComponentPresets() {
+  const components = {};
+  for (const [name, config] of registry.entries()) {
+    if (config.type === 'component') {
+      const comp = config.component || 'other';
+      if (!components[comp]) components[comp] = [];
+      components[comp].push(name);
+    }
+  }
+  return components;
+}
+
+export function getPresetCategories() {
+  return ['core', 'component', 'text', 'interaction', 'loader', 'background', 'svg'];
+}
