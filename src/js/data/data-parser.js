@@ -35,6 +35,27 @@ export function parseDataAttributes(element) {
     }
   }
   
+  let stagger = null;
+  if (ds.axStagger !== undefined) {
+    stagger = {
+      each: parseInt(ds.axStagger, 10) || 0,
+      from: ds.axStaggerFrom || 'start',
+      startDelay: parseInt(ds.axStaggerStartDelay, 10) || 0,
+      reverse: ds.axStaggerReverse === 'true' || ds.axStaggerReverse === '1',
+      axis: ds.axStaggerAxis || 'both'
+    };
+    if (ds.axStaggerGrid) {
+      if (ds.axStaggerGrid === 'auto') {
+        stagger.grid = 'auto';
+      } else {
+        const parts = ds.axStaggerGrid.split('x').map(p => parseInt(p, 10));
+        if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+          stagger.grid = parts;
+        }
+      }
+    }
+  }
+  
   return {
     animation,
     trigger,
@@ -42,13 +63,17 @@ export function parseDataAttributes(element) {
     disabled,
     debug,
     extraClass,
+    isGroup: ds.axGroup !== undefined,
+    childAnimation: ds.axChild || null,
+    childSelector: ds.axChildSelector || null,
     options: {
       duration,
       delay,
       ease: ds.axEase, // normalized in animation-normalizer
       direction: ds.axDirection,
       fill: ds.axFill,
-      iterations
+      iterations,
+      stagger
     }
   };
 }

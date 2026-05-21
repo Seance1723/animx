@@ -16,8 +16,9 @@ import { initData, refreshData, runData, bindAnimX } from './data/data-api.js';
 import { observeScroll, refreshScroll, unobserveScroll } from './scroll/scroll-api.js';
 import { bindScrollAnimX } from './scroll/scroll-observer.js';
 import { Timeline, bindTimelineAnimX } from './timeline/timeline.js';
+import { stagger, bindStaggerAnimX } from './stagger/stagger.js';
 
-const VERSION = '0.5.0';
+const VERSION = '0.6.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -33,6 +34,7 @@ class AnimXCore {
     bindAnimX(this);
     bindScrollAnimX(this);
     bindTimelineAnimX(this);
+    bindStaggerAnimX(this);
   }
 
   config(options) {
@@ -91,12 +93,24 @@ class AnimXCore {
   timeline(options) {
     return new Timeline(options);
   }
+  
+  stagger(targets, animationInput, options) {
+    return stagger(targets, animationInput, options);
+  }
 
   animate(selector, animationInput, options = {}) {
     const elements = normalizeSelector(selector);
-    if (!elements || elements.length === 0) {
-      log('AnimX.animate(): No targets found for selector', selector);
-      return new AnimationInstance([], []);
+    
+    if (elements.length === 0) {
+      if (options.debug || getConfig().debug) {
+        log('AnimX.animate(): No targets found for selector', selector);
+      }
+      return new AnimationInstance(null, null, {});
+    }
+    
+    // Route to stagger if multiple elements and stagger option exists
+    if (elements.length > 1 && options.stagger && !options._isStaggerChild) {
+      return this.stagger(elements, animationInput, options);
     }
 
     const normOptions = normalizeOptions(options);

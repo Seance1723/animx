@@ -29,14 +29,17 @@ export function parseScrollAttributes(element) {
   let once = config.scroll.once;
   if (ds.axOnce === 'false' || ds.axOnce === '0') once = false;
   
-  let stagger = 0;
-  if (ds.axStagger !== undefined) {
+  let stagger = baseParsed.options.stagger || null;
+  if (!stagger && ds.axStagger !== undefined) {
     const p = parseInt(ds.axStagger, 10);
-    if (!isNaN(p)) stagger = p;
+    if (!isNaN(p)) {
+      stagger = { each: p };
+    }
   }
+  if (stagger) baseParsed.options.stagger = stagger;
   
-  const isGroup = ds.axGroup !== undefined;
-  const childAnim = ds.axChild || null;
+  const isGroup = baseParsed.isGroup || ds.axGroup !== undefined;
+  const childAnim = baseParsed.childAnimation || ds.axChild || null;
   
   return {
     animation,

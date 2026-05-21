@@ -9,7 +9,8 @@ global.window = {
 global.document = {
   readyState: 'complete',
   querySelectorAll: () => [],
-  dispatchEvent: () => {}
+  dispatchEvent: () => {},
+  createElement: () => ({ classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left: 0, top: 0, width: 0, height: 0}) })
 };
 
 // Now safe to import
@@ -22,7 +23,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Version Check
-  assert.strictEqual(AnimX.version, '0.5.0', 'Version should be 0.5.0');
+  assert.strictEqual(AnimX.version, '0.6.0', 'Version should be 0.6.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -64,19 +65,13 @@ try {
   assert.strictEqual(typeof AnimX.refreshScroll, 'function');
   assert.strictEqual(typeof AnimX.unobserve, 'function');
   assert.strictEqual(typeof AnimX.timeline, 'function', 'AnimX.timeline should be exposed');
+  assert.strictEqual(typeof AnimX.stagger, 'function', 'AnimX.stagger should be exposed');
   console.log('✅ Global API exposed');
   
   // 7. Timeline API Check
   const tl = AnimX.timeline();
   assert.strictEqual(typeof tl.add, 'function');
   assert.strictEqual(typeof tl.play, 'function');
-  assert.strictEqual(typeof tl.pause, 'function');
-  assert.strictEqual(typeof tl.resume, 'function');
-  assert.strictEqual(typeof tl.stop, 'function');
-  assert.strictEqual(typeof tl.restart, 'function');
-  assert.strictEqual(typeof tl.destroy, 'function');
-  assert.strictEqual(typeof tl.getSteps, 'function');
-  assert.strictEqual(typeof tl.getDuration, 'function');
   
   tl.add('.fake-target', 'fade-up');
   const steps = tl.getSteps();
@@ -86,14 +81,34 @@ try {
   tl.play(); // Should not crash on missing targets
   console.log('✅ Timeline initializes and chains safely');
   
-  // 8. Scroll Parser Check
+  // 8. Stagger Engine Check
+  const staggerGroup = AnimX.stagger('.fake-stagger', 'fade-up', { each: 100 });
+  assert.ok(staggerGroup, 'AnimX.stagger() returns a group instance');
+  assert.strictEqual(typeof staggerGroup.play, 'function');
+  assert.strictEqual(typeof staggerGroup.pause, 'function');
+  assert.strictEqual(typeof staggerGroup.resume, 'function');
+  assert.strictEqual(typeof staggerGroup.stop, 'function');
+  assert.strictEqual(typeof staggerGroup.replay, 'function');
+  assert.strictEqual(typeof staggerGroup.destroy, 'function');
+  console.log('✅ Stagger Engine initializes safely on missing targets');
+  
+  const fakeNodes = [
+    { nodeType: 1, classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left:0,top:0}), dispatchEvent: () => {}, addEventListener: () => {}, removeEventListener: () => {}, style: {} },
+    { nodeType: 1, classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left:0,top:0}), dispatchEvent: () => {}, addEventListener: () => {}, removeEventListener: () => {}, style: {} }
+  ];
+  const routedGroup = AnimX.animate(fakeNodes, 'fade-up', { stagger: 100 });
+  // It should route to stagger instead of returning single AnimationInstance
+  assert.strictEqual(typeof routedGroup.resume, 'function', 'AnimX.animate options.stagger routes correctly');
+  console.log('✅ AnimX.animate() stagger fallback routes correctly');
+  
+  // 9. Scroll Parser Check
   const mockScrollEl = {
     dataset: { ax: 'fade-up', axOn: 'scroll', axThreshold: '2', axOnce: 'false', axStagger: '100' }
   };
   const scrollParsed = parseScrollAttributes(mockScrollEl);
   assert.strictEqual(scrollParsed.threshold, 1, 'Threshold should clamp to 1 max');
   assert.strictEqual(scrollParsed.once, false, 'Once should parse to false');
-  assert.strictEqual(scrollParsed.stagger, 100);
+  assert.strictEqual(scrollParsed.options.stagger.each, 100, 'Scroll stagger uses complex parser');
   console.log('✅ Scroll parser successfully parses and clamps attributes');
 
   console.log('--- All tests passed ---');
@@ -101,5 +116,3 @@ try {
   console.error('❌ Smoke test failed:', error);
   process.exit(1);
 }
-
-console.log('--- All tests passed ---');

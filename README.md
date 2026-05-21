@@ -1,20 +1,49 @@
-# AnimX (v0.5.0)
+# AnimX (v0.6.0)
 
 A highly optimized, zero-dependency browser animation library.
 
 ## Features
+- **Zero Dependencies**: Pure Vanilla JS & CSS. No GSAP, Anime, or jQuery.
+- **Tiny Footprint**: Output is just one `.css` and one `.js` file.
+- **Hardware Accelerated**: Uses native Web Animations API (WAAPI) and optimized CSS Transforms.
+- **Timeline Engine**: Compose sequences intuitively with `<` positioning.
+- **Stagger Engine**: Easily animate grids, lists, and node collections with center/edge/random layouts.
 
-- **Zero Dependencies**: No GSAP, Anime.js, Motion, or jQuery required.
-- **One CSS, One JS**: Output is strictly limited to `animx.css` and `animx.js`.
-- **CSS Presets**: 20+ hardware-accelerated CSS animation families.
-- **JavaScript API**: Built-in Web Animations API (WAAPI) engine with RAF fallback.
-- **Data Attributes**: Declarative HTML engine (`data-ax="fade-up"`).
-- **Scroll Reveal**: Native `IntersectionObserver` support (`data-ax-on="scroll"`).
+## Basic Usage
 
-## Quick Start
-
+### 1. Data Attributes (Declarative)
 ```html
-<!-- Include in your project -->
+<!-- Single Element -->
+<div data-ax="fade-up" data-ax-duration="800">Hello World</div>
+
+<!-- Scroll Reveal -->
+<div data-ax="slide-left" data-ax-on="scroll">Slide on scroll</div>
+
+<!-- Group Stagger -->
+<section data-ax-group data-ax-child="fade-up" data-ax-stagger="100">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</section>
+```
+
+### 2. JavaScript API (Imperative)
+```javascript
+// Simple Animate
+AnimX.animate(".card", "fade-up", {
+  duration: 600,
+  ease: "bouncy"
+});
+
+// Advanced Stagger
+AnimX.stagger(".grid-item", "zoom-in", {
+  each: 80,
+  from: "center",
+  grid: "auto"
+});
+```
+
+### 3. Quick Start
+```html
 <link rel="stylesheet" href="dist/animx.min.css">
 <script src="dist/animx.min.js"></script>
 ```

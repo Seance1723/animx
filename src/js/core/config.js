@@ -9,6 +9,12 @@ const defaultConfig = {
     threshold: 0.15,
     rootMargin: '0px 0px -10% 0px',
     once: true
+  },
+  stagger: {
+    each: 100,
+    from: 'start',
+    startDelay: 0,
+    axis: 'both'
   }
 };
 

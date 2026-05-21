@@ -120,6 +120,38 @@ tl.destroy();
 
 *(Note: Reduced motion automatically collapses timeline durations to ensure content reveals instantly!)*
 
+## Stagger Animations
+
+The Stagger Engine allows you to create dynamic delay patterns across multiple elements.
+
+### Basic Stagger
+```javascript
+AnimX.stagger('.card', 'fade-up', {
+  each: 100 // 100ms delay between each element
+});
+// Alternatively, pass options to animate():
+AnimX.animate('.card', 'fade-up', { stagger: 100 });
+```
+
+### Advanced Stagger (Center / Edges / Random)
+```javascript
+AnimX.stagger('.grid-item', 'zoom-in', {
+  each: 80,
+  from: 'center' // Elements ripple outwards from the middle!
+});
+```
+Supported `from` values: `start`, `end`, `center`, `edges`, `random`, `index`.
+
+### Grid Stagger
+For 2D layouts, the engine calculates distances properly across rows and columns.
+```javascript
+AnimX.stagger('.grid-item', 'fade-up', {
+  each: 50,
+  from: 'center',
+  grid: 'auto' // AnimX will automatically calculate the rows/cols based on DOM positions
+});
+```
+
 ## Advanced Usage (JavaScript API)
 
 ```javascript

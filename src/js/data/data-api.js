@@ -79,7 +79,19 @@ function processElement(element, forceRun = false) {
       }
     };
 
-    animxInstance.animate(element, parsed.animation, runOptions);
+    if (parsed.isGroup) {
+      const children = parsed.childSelector 
+        ? Array.from(element.querySelectorAll(parsed.childSelector))
+        : Array.from(element.children);
+        
+      if (children.length > 0 && parsed.childAnimation) {
+        // Group staggers will use AnimX.stagger directly which forwards everything
+        runOptions.groupElement = element;
+        animxInstance.stagger(children, parsed.childAnimation, runOptions);
+      }
+    } else {
+      animxInstance.animate(element, parsed.animation, runOptions);
+    }
   }
 }
 

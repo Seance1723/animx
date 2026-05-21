@@ -65,11 +65,14 @@ function runScrollAnimation(element, config) {
   
   if (config.isGroup) {
     const children = Array.from(element.children);
-    children.forEach((child, index) => {
-      const childAnim = config.childAnim || child.dataset.ax || 'fade-up';
-      const delay = (config.options.delay || 0) + (index * config.stagger);
-      animxInstance.animate(child, childAnim, { ...config.options, delay });
-    });
+    if (children.length > 0) {
+      const childAnim = config.childAnim || element.dataset.ax || 'fade-up';
+      const runOptions = {
+        ...config.options,
+        groupElement: element
+      };
+      animxInstance.stagger(children, childAnim, runOptions);
+    }
   } else {
     animxInstance.animate(element, config.animation, config.options);
   }
