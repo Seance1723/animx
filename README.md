@@ -28,6 +28,21 @@ Include the minified files in your HTML:
 <script src="dist/animx.min.js"></script>
 ```
 
+## Run Locally
+
+```bash
+npm install
+npm run dev
+```
+Open: `http://localhost:5173`
+
+For preview:
+```bash
+npm run build
+npm run preview
+```
+Open: `http://localhost:4173`
+
 ### Declarative Usage
 
 No Javascript required. Just add data attributes to your elements:

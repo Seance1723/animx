@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AnimX v1.0.0</title>
-  <link rel="stylesheet" href="../dist/animx.css">
+  <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
       --bg-color: #f8fafc;
@@ -277,7 +277,7 @@ AnimX.animate('.el', { from: { opacity: 0 }, to: { opacity: 1 } });
 
 // Stagger & Timeline
 AnimX.stagger('.items', 'zoom-in', { stagger: { each: 50 } });
-AnimX.timeline().add('.el1', 'fade-in').add('.el2', 'fade-in', '<');
+AnimX.timeline().add('.el1', 'fade-in').add('.el2', 'fade-in', '&lt;');
 
 // Text
 AnimX.text('.title', { split: 'chars', animation: 'text-rise' });
@@ -297,6 +297,6 @@ AnimX.destroy();
 
   </div>
 
-  <script src="../dist/animx.js"></script>
+  <script type="module" src="/src/js/animx.js"></script>
 </body>
 </html>

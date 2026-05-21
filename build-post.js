@@ -43,7 +43,8 @@ async function run() {
   if (fs.existsSync(demoSrc)) {
     // Update paths in demo HTML to work in dist/
     let demoHtml = fs.readFileSync(demoSrc, 'utf8');
-    demoHtml = demoHtml.replace(/\.\.\/dist\//g, '');
+    demoHtml = demoHtml.replace(/\/src\/scss\/animx\.scss/g, 'animx.css');
+    demoHtml = demoHtml.replace(/<script type="module" src="\/src\/js\/animx\.js"><\/script>/g, '<script src="animx.js"></script>');
     fs.writeFileSync(demoDest, demoHtml);
     console.log('Generated animx.demo.html');
   }

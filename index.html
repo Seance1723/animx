@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX Local Dev</title>
+  <link rel="stylesheet" href="/src/scss/animx.scss">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 2rem;
+      background: #f8fafc;
+      color: #334155;
+    }
+    .ax-placeholder {
+      width: 100px;
+      height: 100px;
+      background: #4f46e5;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>AnimX</h1>
+  <p id="version-text">Loading version...</p>
+  <p>✅ Local development server working</p>
+  
+  <p><a href="/demo/index.html">View Full Demo Gallery</a></p>
+
+  <div class="ax ax-placeholder" data-ax="bounce"></div>
+
+  <script type="module">
+    import AnimX from '/src/js/animx.js';
+    
+    // Test global exposure
+    window.AnimX = AnimX;
+    
+    document.getElementById('version-text').textContent = 'Version: ' + AnimX.version;
+    
+    AnimX.config({ debug: true });
+    AnimX.init();
+    
+    console.log("AnimX loaded:", AnimX.version);
+  </script>
+</body>
+</html>

@@ -62,6 +62,9 @@
 - Added `AnimX.getComponentPresets()` and `AnimX.getPresetCategories()`.
 - Added 100+ logical component presets (Buttons, Cards, Modals, Loaders, Toasts, Skeletons, etc).
 - Integrated `data-ax-component` attribute into `data-api.js` and `scroll-parser.js`.
+- Component Presets: 100+ native `data-ax-component` recipes automatically compiled into the single CSS output.
+- Documentation & Demo: Comprehensive gallery and docs generated for `v1.0.0`.
+- Local Dev: Local dev uses root index.html (`npm run dev` at port 5173). Preview uses port 4173. `dist/animx.demo.html` is generated during build.
 - Component preset engine dynamically routes to physics drivers (Ripple, Hover, Magnetic, Tilt, Feedback) securely without duplicating core logic.
 - Implemented lightweight SCSS mixin assignments instead of heavy `@extend` paths to keep bundle small.
 - AnimX is NOT a UI framework; presets only provide animations, not state logic.

@@ -6,9 +6,9 @@
   "style": "dist/animx.css",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0 --port 5173",
     "build": "vite build && node build-post.js",
-    "preview": "vite preview",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
     "clean": "node -e \"const fs = require('fs'); fs.rmSync('dist', { recursive: true, force: true });\""
   },
   "keywords": [
