@@ -5,3 +5,12 @@
 .ax-range-fill { transition: width var(--ax-duration-fast); }
 .ax-form-row-reveal { animation: ax-fade-up var(--ax-duration-normal) forwards; }
 .ax-form-helper-fade { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+
+
+.ax-input-focus-glow {
+  transition: box-shadow var(--ax-duration-fast) var(--ax-ease-smooth), border-color var(--ax-duration-fast) var(--ax-ease-smooth);
+}
+.ax-input-focus-glow.ax-interaction-active {
+  box-shadow: 0 0 0 3px rgba(var(--ax-primary-rgb, 79, 70, 229), 0.3);
+  border-color: var(--ax-primary, #4f46e5);
+}

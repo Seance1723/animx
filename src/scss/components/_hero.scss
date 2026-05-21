@@ -6,3 +6,11 @@
 .ax-hero-curtain-reveal { animation: ax-slide-up var(--ax-duration-normal) forwards; }
 .ax-hero-stagger-cards { animation: ax-fade-up var(--ax-duration-normal) forwards; }
 .ax-hero-soft-intro { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+
+
+.ax-hero-fade-sequence {
+  animation: ax-fade-up var(--ax-duration-slow) forwards;
+}
+.ax-hero-split-text {
+  animation: ax-fade-up var(--ax-duration-normal) forwards;
+}

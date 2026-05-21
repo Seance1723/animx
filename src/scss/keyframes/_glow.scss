@@ -36,3 +36,11 @@
 .ax-shine { @include ax-animation(ax-shine, var(--ax-duration-cinematic)); }
 .ax-glint { @include ax-transform-animation(ax-glint, var(--ax-duration-cinematic)); }
 .ax-highlight { @include ax-animation(ax-highlight, var(--ax-duration-cinematic)); }
+
+
+@keyframes ax-glow-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(var(--ax-primary-rgb, 79, 70, 229), 0.4); }
+  50% { box-shadow: 0 0 20px 0 rgba(var(--ax-primary-rgb, 79, 70, 229), 0.8); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--ax-primary-rgb, 79, 70, 229), 0.4); }
+}
+.ax-glow-pulse { animation: ax-glow-pulse var(--ax-duration-slow) infinite ease-in-out; }

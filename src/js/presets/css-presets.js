@@ -31,5 +31,13 @@ export const cssPresets = {
   'bounce': { className: 'ax-bounce', type: 'css', family: 'bounce' },
   
   // Loaders
-  'loader-spin': { className: 'ax-loader-spin', type: 'css', family: 'loader' }
+  'loader-spin': { className: 'ax-loader-spin', type: 'css', family: 'loader' },
+  
+  // Custom / Missing
+  'blur-up': { className: 'ax-blur-up', type: 'css', family: 'blur' },
+  'glow-pulse': { className: 'ax-glow-pulse', type: 'css', family: 'glow' },
+  
+  // Text
+  'text-rise': { className: 'ax-text-rise', type: 'css', family: 'text' },
+  'text-slide-up': { className: 'ax-text-slide-up', type: 'css', family: 'text' }
 };

@@ -5,3 +5,14 @@
 .ax-skeleton-card { animation: ax-fade-in var(--ax-duration-normal) forwards; }
 .ax-skeleton-text-lines { animation: ax-fade-in var(--ax-duration-normal) forwards; }
 .ax-skeleton-avatar { animation: ax-fade-in var(--ax-duration-normal) forwards; }
+
+
+@keyframes ax-skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.ax-skeleton-shimmer {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 400% 100%;
+  animation: ax-skeleton-shimmer 1.5s infinite linear;
+}

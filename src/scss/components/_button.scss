@@ -4,3 +4,32 @@
   animation: ax-loader-bars var(--ax-duration-slow) infinite linear;
 }
 .ax-button-pulse-attention { animation: ax-pulse var(--ax-duration-normal) infinite; }
+
+
+.ax-button-press {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-smooth);
+}
+.ax-button-press.ax-interaction-active {
+  transform: scale(0.95);
+}
+
+.ax-button-lift {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-smooth), box-shadow var(--ax-duration-fast) var(--ax-ease-smooth);
+}
+.ax-button-lift.ax-interaction-active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.ax-button-magnetic {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-out);
+}
+
+@keyframes ax-button-loading-fill {
+  0% { background-position: 100% 0; }
+  100% { background-position: 0 0; }
+}
+.ax-button-loading-fill {
+  background-size: 200% 100%;
+  animation: ax-button-loading-fill var(--ax-duration-slow) infinite linear;
+}

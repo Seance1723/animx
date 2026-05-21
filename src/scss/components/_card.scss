@@ -1,3 +1,16 @@
 .ax-card-fade-up { animation: ax-fade-up var(--ax-duration-normal) forwards; }
 .ax-card-reveal { animation: ax-zoom-in var(--ax-duration-normal) forwards; }
 .ax-card-stack-rise { transition: transform var(--ax-duration-normal) var(--ax-ease-smooth); }
+
+
+.ax-card-lift {
+  transition: transform var(--ax-duration-normal) var(--ax-ease-smooth), box-shadow var(--ax-duration-normal) var(--ax-ease-smooth);
+}
+.ax-card-lift.ax-interaction-active {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.ax-card-tilt {
+  transition: transform var(--ax-duration-fast) var(--ax-ease-out);
+}

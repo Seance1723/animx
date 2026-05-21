@@ -41,3 +41,10 @@
 .ax-blur-right { @include ax-transform-animation(ax-blur-right); }
 .ax-blur-zoom-in { @include ax-transform-animation(ax-blur-zoom-in); }
 .ax-blur-zoom-out { @include ax-transform-animation(ax-blur-zoom-out); }
+
+
+@keyframes ax-blur-up {
+  0% { opacity: 0; filter: blur(10px); transform: translateY(20px); }
+  100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+.ax-blur-up { @include ax-transform-animation(ax-blur-up); }

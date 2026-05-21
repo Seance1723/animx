@@ -7,3 +7,12 @@
 .ax-loader-progress { transition: width var(--ax-duration-normal); }
 .ax-loader-wave { animation: ax-fade-up var(--ax-duration-normal) infinite alternate; }
 .ax-loader-pulse { animation: ax-pulse var(--ax-duration-normal) infinite; }
+
+
+@keyframes ax-loader-spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.ax-loader-spinner {
+  animation: ax-loader-spinner 1s infinite linear;
+}
