@@ -1,6 +1,7 @@
 import { normalizeSelector } from '../core/selector.js';
 import { getPreset } from '../presets/preset-registry.js';
 import { dispatchComponentEvent } from './component-utils.js';
+import { getConfig } from '../core/config.js';
 
 let coreInstance = null;
 
@@ -12,14 +13,35 @@ export function component(selector, presetName, options = {}) {
   const elements = normalizeSelector(selector);
   const preset = getPreset(presetName);
   
-  if (!preset || preset.type !== 'component') {
-    if (coreInstance) {
-      // In debug mode, warn.
-      const config = coreInstance.config ? coreInstance.config() : {}; // need way to get config.
+  const createEmptyInstance = () => ({
+    elements: [],
+    preset: presetName,
+    enable: () => {},
+    disable: () => {},
+    play: () => {},
+    pause: () => {},
+    resume: () => {},
+    stop: () => {},
+    replay: () => {},
+    reset: () => {},
+    destroy: () => {},
+    isEnabled: () => false,
+    isRunning: () => false
+  });
+
+  if (elements.length === 0) {
+    if (getConfig().debug) {
+      console.warn(`AnimX.component: No targets found for selector`, selector);
     }
-    // We can dispatch error event on the elements
+    return createEmptyInstance();
+  }
+
+  if (!preset || preset.type !== 'component') {
+    if (getConfig().debug) {
+      console.warn(`AnimX.component: Preset '${presetName}' not found.`);
+    }
     elements.forEach(el => dispatchComponentEvent(el, 'error', { presetName, error: 'Preset not found' }));
-    return null;
+    return createEmptyInstance();
   }
   
   const instances = elements.map(el => runComponentPreset(el, preset, options)).filter(Boolean);
@@ -91,6 +113,16 @@ function runComponentPreset(element, preset, options) {
     play: () => {
       if (underlyingInstance && underlyingInstance.play) underlyingInstance.play();
     },
+    pause: () => {
+      if (underlyingInstance && underlyingInstance.pause) underlyingInstance.pause();
+    },
+    resume: () => {
+      if (underlyingInstance && underlyingInstance.resume) underlyingInstance.resume();
+      else if (underlyingInstance && underlyingInstance.play) underlyingInstance.play();
+    },
+    stop: () => {
+      if (underlyingInstance && underlyingInstance.stop) underlyingInstance.stop();
+    },
     replay: () => {
       if (underlyingInstance && underlyingInstance.replay) underlyingInstance.replay();
     },
@@ -105,6 +137,10 @@ function runComponentPreset(element, preset, options) {
     isEnabled: () => {
       if (underlyingInstance && underlyingInstance.isEnabled) return underlyingInstance.isEnabled();
       return true;
+    },
+    isRunning: () => {
+      if (underlyingInstance && underlyingInstance.isRunning) return underlyingInstance.isRunning();
+      return false;
     }
   };
 }

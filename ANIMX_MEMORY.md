@@ -66,9 +66,10 @@
 - Implemented lightweight SCSS mixin assignments instead of heavy `@extend` paths to keep bundle small.
 - AnimX is NOT a UI framework; presets only provide animations, not state logic.
 
-## v1.0.0 - Stable Public Release (Planned Next)
-- Finalize public API stability. (`requestAnimationFrame`, `Element.animate`, `IntersectionObserver`, CSS).
-- Final public output must remain one `dist/animx.css` and one `dist/animx.js`.
+## v1.0.0 - Stable Public Release (Completed)
+- Finalized public API stability using `requestAnimationFrame`, `Element.animate`, and `IntersectionObserver`.
+- Final output maintained as one `dist/animx.css` and one `dist/animx.js`.
+- Verified cross-browser performance and accessibility (reduced motion).
 
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.
@@ -89,14 +90,7 @@ dist/
 ├── animx.min.js
 └── animx.demo.html
 
-## Current Version Scope
-v0.1.0 implemented the core CSS animation preset system.
-- Main animation families added (Fade, Slide, Zoom, Rotate, Flip, Blur, Reveal, Wipe, Skew, Bounce, Elastic, Pulse, Shake, Glow, Float, Loader, Skeleton, Background, SVG).
-- Component preset classes added.
-- Utility classes for duration, delay, easing, and state added.
-JS animation engine is still not implemented.
-
-## Current Public API Placeholders
+## Current Public API
 AnimX.version
 AnimX.config()
 AnimX.init()

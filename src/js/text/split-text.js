@@ -138,8 +138,12 @@ export function performSplitText(element, options) {
   const originalHTML = element.innerHTML;
   const originalText = getRawTextContent(element);
 
+  let accessibilityPreserved = false;
   if (options.preserveAccessibility) {
-    preserveAccessibility(element, originalText);
+    if (!element.hasAttribute('aria-label')) {
+      preserveAccessibility(element, originalText);
+      accessibilityPreserved = true;
+    }
   }
 
   // Ensure element has split class
@@ -170,7 +174,8 @@ export function performSplitText(element, options) {
     chars: arrays.chars,
     words: arrays.words,
     lines: arrays.lines,
-    type: 'split'
+    type: 'split',
+    accessibilityPreserved
   };
 
   saveTextState(element, state);
@@ -191,6 +196,8 @@ export function revertSplitText(element) {
   
   element.innerHTML = state.originalHTML;
   element.classList.remove('ax-text-split');
-  // We leave aria-label if it was generated, or we can clean it up. We'll leave it for safety.
+  if (state.accessibilityPreserved) {
+    element.removeAttribute('aria-label');
+  }
   textStateMap.delete(element);
 }

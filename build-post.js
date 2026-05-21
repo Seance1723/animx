@@ -47,6 +47,15 @@ async function run() {
     fs.writeFileSync(demoDest, demoHtml);
     console.log('Generated animx.demo.html');
   }
+  // 4. Generate animx.version.json
+  const versionJsonPath = path.join(distDir, 'animx.version.json');
+  const versionJson = {
+    name: 'AnimX',
+    version: '1.0.0',
+    type: 'zero-dependency browser animation library'
+  };
+  fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));
+  console.log('Generated animx.version.json');
 }
 
 run().catch(console.error);

@@ -3,171 +3,299 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo - v0.9.0</title>
+  <title>AnimX v1.0.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
+    :root {
+      --bg-color: #f8fafc;
+      --text-color: #334155;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+    }
     body {
       font-family: system-ui, -apple-system, sans-serif;
-      padding: 2rem;
-      background: #fafafa;
-      color: #333;
-      max-width: 1200px;
+      margin: 0; padding: 2rem;
+      background: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+      padding: 3rem 1rem;
+      background: #1e1b4b;
+      color: white;
+      border-radius: 12px;
+    }
+    h1 { margin: 0; font-size: 3rem; }
+    .status-badge {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 99px;
+      font-weight: bold;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+    }
+    .container {
+      max-width: 1000px;
       margin: 0 auto;
     }
+    section {
+      margin-bottom: 4rem;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    h2 { border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; margin-top: 0; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 1.5rem;
-      margin-bottom: 3rem;
+      margin-top: 1.5rem;
     }
-    .box, .demo-card {
-      height: 100px;
-      background: #4f46e5;
+    .box {
+      height: 80px;
+      background: var(--primary);
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: bold;
-      text-align: center;
-      padding: 1rem;
       cursor: pointer;
     }
-    .demo-card { background: #0ea5e9; }
-    .skeleton-box { height: 100px; border-radius: 8px; background: #e2e8f0; }
-    
-    section { margin-top: 3rem; border-top: 2px solid #eaeaea; padding-top: 2rem; }
-    
     .btn {
       padding: 0.75rem 1.5rem;
-      background: #4f46e5;
+      background: var(--primary);
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
       margin-right: 0.5rem;
       margin-bottom: 0.5rem;
+      font-size: 0.9rem;
     }
-    .btn:hover { background: #4338ca; }
-    
-    .feedback-input {
-      padding: 0.75rem;
-      border: 2px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-      margin-right: 0.5rem;
-    }
-    
-    .status-text {
+    .btn:hover { background: var(--primary-hover); }
+    .btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 6px;
       font-family: monospace;
-      color: #16a34a;
-      font-weight: bold;
-      margin-top: 1rem;
-      display: block;
+      font-size: 0.875rem;
+      overflow-x: auto;
     }
-    
-    .demo-modal { display:none; background:white; padding:2rem; border-radius:8px; box-shadow:0 10px 25px rgba(0,0,0,0.2); position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:100; }
-    .demo-modal.active { display:block; }
+    .skeleton { height: 80px; background: #e2e8f0; border-radius: 8px; }
+    .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
-  <h1>AnimX v0.9.0</h1>
-  <p>Status: Component Preset Pack working</p>
-  
-  <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
-    <strong>Global Controls:</strong>
-    <br><br>
-    <button class="btn" onclick="AnimX.refresh()" style="background:#16a34a;">Refresh Engine</button>
+
+  <div class="container">
+    <header data-ax-component="hero-fade-sequence">
+      <h1 data-ax-component="hero-split-text">AnimX</h1>
+      <p>Zero-Dependency Browser Animation Library</p>
+      <div class="status-badge">v1.0.0 Stable Public Release</div>
+      <p style="margin-top:1.5rem; opacity:0.8;">Usage: One CSS + One JS File. No external libraries.</p>
+    </header>
+
+    <div class="note">
+      <strong>10. Reduced Motion Note:</strong> AnimX respects your OS settings. If <em>prefers-reduced-motion</em> is active, all continuous physics loops and heavy transforms drop to a 1ms instantaneous state automatically to ensure accessibility compliance without hiding content.
+    </div>
+
+    <!-- 1. Core CSS animations -->
+    <section>
+      <h2>1. Core CSS animations</h2>
+      <p>Pure hardware-accelerated CSS keyframes you can use declaratively or imperatively.</p>
+      <div class="grid">
+        <div class="box ax-fade-up">fade-up</div>
+        <div class="box ax-slide-left">slide-left</div>
+        <div class="box ax-zoom-in">zoom-in</div>
+        <div class="box ax-blur-up">blur-up</div>
+        <div class="box ax-bounce">bounce</div>
+        <div class="box ax-glow-pulse">glow-pulse</div>
+      </div>
+    </section>
+
+    <!-- 2. JavaScript animation API -->
+    <section>
+      <h2>2. JavaScript animation API</h2>
+      <button class="btn" onclick="AnimX.animate('.js-preset-box', 'bounce')">Play Preset via JS</button>
+      <button class="btn" onclick="AnimX.animate('.js-custom-box', { from: { rotate: '0deg', scale: 1 }, to: { rotate: '360deg', scale: 1.2 } }, { duration: 800, ease: 'smooth' })">Play Custom via JS</button>
+      <div class="grid">
+        <div class="box js-preset-box">JS Preset</div>
+        <div class="box js-custom-box" style="background:#0ea5e9;">JS Custom</div>
+      </div>
+    </section>
+
+    <!-- 3. Data attribute animation -->
+    <section>
+      <h2>3. Data attribute animation</h2>
+      <div class="grid">
+        <div class="box" data-ax="fade-right" data-ax-duration="1000">Auto Load</div>
+        <div class="box" data-ax="zoom-in" data-ax-on="manual" id="manual-box">Manual (Click Me)</div>
+        <div class="box" data-ax="slide-up" data-ax-disabled>Disabled</div>
+      </div>
+      <script>
+        document.getElementById('manual-box').addEventListener('click', function() {
+          AnimX.run(this);
+        });
+      </script>
+    </section>
+
+    <!-- 4. Scroll reveal -->
+    <section>
+      <h2>4. Scroll reveal</h2>
+      <div class="grid">
+        <div class="box" data-ax="fade-up" data-ax-on="scroll">Scroll Card</div>
+        <div class="box" data-ax="zoom-in" data-ax-on="scroll" data-ax-once="false">Repeat Scroll</div>
+      </div>
+      <div data-ax-group data-ax-on="scroll" data-ax-child="slide-up" data-ax-stagger="100" class="grid" style="margin-top:1.5rem;">
+        <div class="box" style="background:#8b5cf6;">Group 1</div>
+        <div class="box" style="background:#8b5cf6;">Group 2</div>
+        <div class="box" style="background:#8b5cf6;">Group 3</div>
+      </div>
+    </section>
+
+    <!-- 5. Timeline -->
+    <section>
+      <h2>5. Timeline</h2>
+      <button class="btn" onclick="playTimeline()">Play Timeline</button>
+      <div class="grid" id="timeline-container">
+        <div class="box tl-box-1">Step 1</div>
+        <div class="box tl-box-2">Step 2 (Group)</div>
+        <div class="box tl-box-3">Step 2 (Group)</div>
+        <div class="box tl-box-4" style="background:#ec4899;">Step 3 (Custom)</div>
+      </div>
+      <script>
+        let tl = null;
+        function playTimeline() {
+          if (tl) tl.destroy();
+          tl = AnimX.timeline()
+            .add('.tl-box-1', 'fade-up')
+            .add('.tl-box-2', 'zoom-in', { duration: 500 })
+            .add('.tl-box-3', 'zoom-in', { duration: 500 }, '<')
+            .add('.tl-box-4', { from: { rotate: '-10deg' }, to: { rotate: '0deg' } });
+        }
+      </script>
+    </section>
+
+    <!-- 6. Stagger -->
+    <section>
+      <h2>6. Stagger</h2>
+      <button class="btn" onclick="AnimX.stagger('.stag-box', 'zoom-in', { stagger: { each: 50, from: 'start' }})">Start Stagger</button>
+      <button class="btn" onclick="AnimX.stagger('.stag-box', 'zoom-in', { stagger: { each: 50, from: 'center' }})">Center Stagger</button>
+      <button class="btn" onclick="AnimX.stagger('.stag-box', 'zoom-in', { stagger: { each: 50, from: 'random' }})">Random Stagger</button>
+      <button class="btn" onclick="AnimX.stagger('.stag-box', 'fade-up', { stagger: { each: 50, from: 'start', axis: 'both' }})">Grid Stagger</button>
+      
+      <div class="grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="box stag-box">1</div><div class="box stag-box">2</div><div class="box stag-box">3</div><div class="box stag-box">4</div>
+        <div class="box stag-box">5</div><div class="box stag-box">6</div><div class="box stag-box">7</div><div class="box stag-box">8</div>
+      </div>
+    </section>
+
+    <!-- 7. Text animation -->
+    <section>
+      <h2>7. Text animation</h2>
+      <div style="display:flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+        <button class="btn" onclick="AnimX.text('.txt-chars', { split: 'chars', animation: 'text-rise' })">Chars</button>
+        <button class="btn" onclick="AnimX.text('.txt-words', { split: 'words', animation: 'fade-up' })">Words</button>
+        <button class="btn" onclick="AnimX.text('.txt-lines', { split: 'lines', animation: 'text-slide-up', mask: true })">Lines</button>
+        <button class="btn" onclick="AnimX.text('.txt-type', { type: 'typewriter', speed: 50 })">Typewriter</button>
+        <button class="btn" onclick="AnimX.text('.txt-scramble', { type: 'scramble', duration: 1500 })">Scramble</button>
+        <button class="btn" onclick="AnimX.text('.txt-counter', { type: 'counter', from: 0, to: 1000 })">Counter</button>
+        <button class="btn" onclick="AnimX.revertText('.txt-demo')" style="background:#ef4444;">Revert Text</button>
+      </div>
+      
+      <div style="background: #f1f5f9; padding: 1.5rem; border-radius: 8px;">
+        <h3 class="txt-chars txt-demo">Character Split</h3>
+        <p class="txt-words txt-demo">This text is split into words for smooth staggered reveals.</p>
+        <p class="txt-lines txt-demo">Line splitting measures offset tops.<br>It wraps lines cleanly for mask effects.<br>Highly responsive.</p>
+        <div class="txt-type txt-demo" style="font-family:monospace; font-weight:bold;">> Initializing system protocols... done.</div>
+        <h2 class="txt-scramble txt-demo">ENCRYPTED_DATA_8891</h2>
+        <h1 class="txt-counter txt-demo" style="color:var(--primary); font-size:3rem; margin:0;">0</h1>
+      </div>
+    </section>
+
+    <!-- 8. Interactions -->
+    <section>
+      <h2>8. Interactions</h2>
+      <div class="grid">
+        <div class="box" data-ax-hover="ax-card-lift">Hover Lift</div>
+        <div class="box" data-ax-press="ax-button-press">Press Down</div>
+        <div class="box" data-ax-ripple>Ripple Click</div>
+        <div class="box" data-ax-magnetic data-ax-magnetic-strength="0.4">Magnetic</div>
+        <div class="box" data-ax-tilt data-ax-tilt-max="15" data-ax-tilt-glare="true">Tilt Glare</div>
+        <div style="display:flex; align-items:center;">
+          <input placeholder="Focus me" style="padding:10px; width:100%; border:2px solid #ccc; border-radius:4px;" data-ax-focus="ax-input-focus-glow">
+        </div>
+        <div style="display:flex; align-items:center;">
+          <button class="btn" style="margin:0; width:100%;" onclick="AnimX.feedback(this, 'error')">Feedback (Error)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Component presets -->
+    <section>
+      <h2>9. Component presets</h2>
+      <p>High-level declarative presets for common UI blocks.</p>
+      <div style="display:flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="btn" data-ax-component="button-lift">Button Lift</button>
+        <button class="btn" data-ax-component="button-magnetic">Button Magnetic</button>
+        <button class="btn" data-ax-component="button-loading-fill">Button Loading</button>
+      </div>
+      
+      <div class="grid">
+        <div class="box" style="background:#fff; color:#333; border:1px solid #ccc;" data-ax-component="card-tilt">Card Tilt</div>
+        <div class="box" style="background:#fff; color:#333; border:1px solid #ccc;" data-ax-component="card-lift">Card Lift</div>
+      </div>
+
+      <div style="margin-top: 1.5rem; display:flex; gap: 1rem; align-items: center;">
+        <div class="skeleton" style="flex:1;" data-ax-component="skeleton-shimmer"></div>
+        <div style="width:40px; height:40px; border:4px solid #e2e8f0; border-top-color:var(--primary); border-radius:50%;" data-ax-component="loader-spinner"></div>
+      </div>
+    </section>
+
+    <!-- 11. API quick reference -->
+    <section>
+      <h2>11. API quick reference</h2>
+      <pre class="code-block">
+// Setup
+AnimX.config({ debug: false, autoInit: true });
+AnimX.init();
+
+// Animate
+AnimX.animate('.el', 'fade-up', { duration: 600, delay: 100 });
+AnimX.animate('.el', { from: { opacity: 0 }, to: { opacity: 1 } });
+
+// Stagger & Timeline
+AnimX.stagger('.items', 'zoom-in', { stagger: { each: 50 } });
+AnimX.timeline().add('.el1', 'fade-in').add('.el2', 'fade-in', '<');
+
+// Text
+AnimX.text('.title', { split: 'chars', animation: 'text-rise' });
+
+// Scroll
+AnimX.scroll('.card', { animation: 'fade-up', once: true });
+
+// Interactions & Components
+AnimX.ripple('.btn', { color: 'rgba(255,255,255,0.3)' });
+AnimX.component('.card', 'card-lift');
+
+// Global Control
+AnimX.stop();
+AnimX.destroy();
+      </pre>
+    </section>
+
   </div>
-
-  <section>
-    <h2>1. Button presets</h2>
-    <button class="btn" data-ax-component="button-lift">Lift Button</button>
-    <button class="btn" data-ax-component="button-glow">Glow Button</button>
-    <button class="btn" data-ax-component="button-ripple">Ripple Button</button>
-    <button class="btn" data-ax-component="button-magnetic">Magnetic Button</button>
-    <button class="btn" data-ax-component="button-success-pop">Success Pop</button>
-    <button class="btn" data-ax-component="button-error-shake">Error Shake</button>
-    <button class="btn" data-ax-component="button-loading-fill">Loading Fill</button>
-  </section>
-
-  <section>
-    <h2>2. Card presets</h2>
-    <div class="grid">
-      <div class="demo-card" data-ax-component="card-lift">Card Lift</div>
-      <div class="demo-card" data-ax-component="card-glint">Card Glint</div>
-      <div class="demo-card" data-ax-component="card-tilt">Card Tilt</div>
-      <div class="demo-card" data-ax-component="card-reveal" data-ax-on="hover">Card Reveal</div>
-      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="hover">Card Fade Up</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>3. Modal / drawer presets</h2>
-    <button class="btn" onclick="AnimX.component('.demo-modal', 'modal-pop').elements[0].classList.add('active')">Trigger Modal Pop</button>
-    <div class="demo-modal">
-      <h3>Modal Pop</h3>
-      <p>This is a component preset modal.</p>
-      <button class="btn" onclick="this.parentElement.classList.remove('active')">Close</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>4. Toast / alert presets</h2>
-    <div style="background:#10b981; color:white; padding:1rem; border-radius:8px; display:inline-block; margin-right:1rem;" data-ax-component="toast-slide-right">
-      Success Toast (slide-right)
-    </div>
-    <div style="background:#f59e0b; color:white; padding:1rem; border-radius:8px; display:inline-block;" data-ax-component="toast-pop">
-      Warning Toast (pop)
-    </div>
-  </section>
-
-  <section>
-    <h2>5. Navigation presets</h2>
-    <div style="display:flex; gap:1rem;">
-      <a href="#" style="color:#4f46e5; text-decoration:none; font-weight:bold;" data-ax-component="nav-underline-slide">Underline Slide</a>
-      <a href="#" style="color:#4f46e5; text-decoration:none; font-weight:bold;" data-ax-component="nav-link-hover-rise">Hover Rise</a>
-    </div>
-  </section>
-
-  <section>
-    <h2>6. Form presets</h2>
-    <input class="feedback-input js-input" data-ax-component="input-focus-glow" placeholder="Focus Glow Input" />
-    <button class="btn" onclick="AnimX.component('.js-input', 'input-error-shake')">Trigger Error Feedback</button>
-    <button class="btn" onclick="AnimX.component('.js-input', 'input-success-pop')">Trigger Success Feedback</button>
-  </section>
-
-  <section>
-    <h2>7. Loader and skeleton presets</h2>
-    <div style="display:flex; gap:2rem; margin-bottom:2rem; align-items:center;">
-      <div style="width:40px; height:40px; border:4px solid #e2e8f0; border-top-color:#4f46e5; border-radius:50%;" data-ax-component="loader-spinner"></div>
-      <div style="width:40px; height:40px; border:4px solid #4f46e5; border-radius:50%; border-right-color:transparent;" data-ax-component="loader-ring"></div>
-      <div style="width:60px; height:20px; background:#4f46e5; display:flex; gap:4px; padding:4px;" data-ax-component="loader-dots"></div>
-    </div>
-    <div class="grid">
-      <div class="skeleton-box" data-ax-component="skeleton-shimmer"></div>
-      <div class="skeleton-box" data-ax-component="skeleton-wave"></div>
-      <div class="skeleton-box" data-ax-component="skeleton-pulse"></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>8. Hero & Section presets</h2>
-    <div data-ax-component="hero-fade-sequence" style="padding:4rem; background:#1e1b4b; color:white; border-radius:12px; text-align:center;">
-      <h2 data-ax-component="hero-split-text">Beautiful Hero Text</h2>
-      <button class="btn" data-ax-component="hero-cta-rise">Get Started</button>
-    </div>
-  </section>
-
-  <section>
-    <h2>9. Data attribute components (Scroll)</h2>
-    <div class="grid">
-      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="scroll">Scroll Card 1</div>
-      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="scroll" data-ax-delay="100">Scroll Card 2</div>
-      <div class="demo-card" data-ax-component="card-fade-up" data-ax-on="scroll" data-ax-delay="200">Scroll Card 3</div>
-    </div>
-  </section>
 
   <script src="../dist/animx.js"></script>
 </body>

@@ -25,7 +25,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '0.9.0', 'Version should be 0.9.0');
+  assert.strictEqual(AnimX.version, '1.0.0', 'Version should be 1.0.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -127,6 +127,7 @@ try {
     textContent: 'Hello', 
     classList: { add: () => {}, remove: () => {} }, 
     setAttribute: () => {}, 
+    removeAttribute: () => {},
     hasAttribute: () => false, 
     appendChild: () => {}, 
     dispatchEvent: () => {},
@@ -168,7 +169,7 @@ try {
 
       // Test component routing handles missing preset safely
       const missing = AnimX.component('.fake-btn', 'invalid-component');
-      assert.strictEqual(missing, null, 'AnimX.component safely handles missing presets');
+      assert.ok(missing && missing.elements.length === 0, 'AnimX.component safely handles missing presets and returns empty instance');
 
       console.log('✅ Component Engine and registry initializes safely');
       console.log('✅ Interactions initialize safely on missing targets');

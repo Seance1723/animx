@@ -44,6 +44,18 @@ export function getConfig() {
 }
 
 export function setConfig(userConfig = {}) {
-  currentConfig = { ...currentConfig, ...userConfig };
+  const deepMerge = (target, source) => {
+    for (const key in source) {
+      if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        deepMerge(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+    return target;
+  };
+  
+  currentConfig = deepMerge({ ...currentConfig }, userConfig);
   return currentConfig;
 }

@@ -22,7 +22,7 @@ import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
 import { interact, hover, press, focus, magnetic, ripple, tilt, feedback, bindInteractionAnimX, destroyInteractions } from './interactions/interaction-api.js';
 import { component, bindComponentAnimX } from './components/component-api.js';
 
-const VERSION = '0.9.0';
+const VERSION = '1.0.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {

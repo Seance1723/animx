@@ -12,6 +12,10 @@ export class AnimationInstance {
     return this;
   }
 
+  resume() {
+    return this.play();
+  }
+
   pause() {
     if (this._status === 'destroyed' || this._status === 'finished') return this;
     this.drivers.forEach(d => d.pause && d.pause());
