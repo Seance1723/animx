@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo - v0.4.0</title>
+  <title>AnimX Demo - v0.5.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
     body {
@@ -63,8 +63,8 @@
   </style>
 </head>
 <body>
-  <h1>AnimX v0.4.0</h1>
-  <p>Status: Scroll Reveal Engine working. Scroll down!</p>
+  <h1>AnimX v0.5.0</h1>
+  <p>Status: Timeline Engine working.</p>
   
   <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
     <strong>Global Controls:</strong>
@@ -73,78 +73,108 @@
   </div>
 
   <section>
-    <h2>1. Basic Scroll Reveal</h2>
+    <h2>1. Basic Timeline Sequence</h2>
+    <button class="btn timeline-button-run">Run Timeline</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box timeline-title">Title</div>
+      <div class="box timeline-subtitle">Subtitle</div>
+      <div class="box timeline-button">CTA</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Same-Time Group</h2>
+    <button class="btn group-button-run">Run Group Timeline</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box card-1">Card 1</div>
+      <div class="box card-2">Card 2</div>
+      <div class="box card-3">Card 3</div>
+      <div class="box group-cta">Group CTA</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Custom From/To Timeline</h2>
+    <button class="btn custom-button-run">Run Custom Timeline</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box custom-box" style="opacity:0;">Custom Box</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Timeline Controls & Callbacks</h2>
+    <p>Status: <span id="tl-status-text" class="status-text">idle</span></p>
+    <button class="btn btn-tl-play">Play</button>
+    <button class="btn btn-tl-pause">Pause</button>
+    <button class="btn btn-tl-resume">Resume</button>
+    <button class="btn btn-tl-restart">Restart</button>
+    <button class="btn btn-tl-stop">Stop</button>
+    <button class="btn btn-tl-destroy">Destroy</button>
+    
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box ctrl-1">Box 1</div>
+      <div class="box ctrl-2">Box 2</div>
+      <div class="box ctrl-3">Box 3</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Basic Scroll Reveal</h2>
     <div class="grid">
       <div class="box" data-ax="fade-up" data-ax-on="scroll">Fade up on scroll</div>
     </div>
   </section>
 
-  <section>
-    <h2>2. Different Animations</h2>
-    <div class="grid">
-      <div class="box" data-ax="slide-left" data-ax-on="scroll">Slide left</div>
-      <div class="box" data-ax="zoom-in" data-ax-on="scroll">Zoom in</div>
-      <div class="box" data-ax="flip-x" data-ax-on="scroll">Flip x</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>3. Threshold Demo</h2>
-    <p>Will not animate until 50% visible</p>
-    <div class="grid">
-      <div class="box" data-ax="fade-up" data-ax-on="scroll" data-ax-threshold="0.5" style="height: 300px;">
-        Runs when 50% visible
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>4. Repeat Scroll Demo</h2>
-    <p>Scroll me out of view and back in!</p>
-    <div class="grid">
-      <div class="box" data-ax="pulse" data-ax-on="scroll" data-ax-once="false">
-        Repeats when entering viewport
-      </div>
-    </div>
-  </section>
-  
-  <section>
-    <h2>5. Group Stagger Demo</h2>
-    <div class="grid" data-ax-group data-ax-child="fade-up" data-ax-on="scroll" data-ax-stagger="120">
-      <div class="box">Card 1</div>
-      <div class="box">Card 2</div>
-      <div class="box">Card 3</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>6. JS Scroll API Demo</h2>
-    <button class="btn" onclick="AnimX.scroll('.js-scroll-card', { animation: 'zoom-in', once: false })">
-      Register JS Scroll Animation
-    </button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="box js-scroll-card">Watch me (JS)</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>7. Event Demo</h2>
-    <span class="status-text" id="scroll-event-status">Status: Waiting for scroll...</span>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="box" data-ax="rotate-in" data-ax-on="scroll" id="scroll-event-box">Watch my events</div>
-    </div>
-  </section>
-
   <script src="../dist/animx.js"></script>
   <script>
-    const eventBox = document.getElementById('scroll-event-box');
-    const eventStatus = document.getElementById('scroll-event-status');
+    // 1. Basic Timeline
+    document.querySelector('.timeline-button-run').addEventListener('click', () => {
+      AnimX.timeline()
+        .add(".timeline-title", "fade-up")
+        .add(".timeline-subtitle", "fade-up", { delay: 100 })
+        .add(".timeline-button", "zoom-in", { delay: 150 })
+        .play();
+    });
     
-    if (eventBox) {
-      eventBox.addEventListener('animx:scroll-enter', () => {
-        eventStatus.textContent = 'Status: Scroll element entered viewport!';
-      });
-    }
+    // 2. Same-time Group
+    document.querySelector('.group-button-run').addEventListener('click', () => {
+      AnimX.timeline()
+        .add(".card-1", "fade-up")
+        .add(".card-2", "fade-up", {}, "<")
+        .add(".card-3", "fade-up", {}, "<")
+        .add(".group-cta", "zoom-in")
+        .play();
+    });
+    
+    // 3. Custom From/To
+    document.querySelector('.custom-button-run').addEventListener('click', () => {
+      AnimX.timeline({ defaults: { duration: 700, ease: "smooth" } })
+        .add(".custom-box", {
+          from: { opacity: 0, y: 40, scale: 0.85 },
+          to: { opacity: 1, y: 0, scale: 1 }
+        })
+        .play();
+    });
+    
+    // 4. Controls
+    const statusText = document.getElementById('tl-status-text');
+    const ctrlTl = AnimX.timeline({
+      onStart: () => statusText.textContent = 'running',
+      onStepComplete: (step) => statusText.textContent = `step completed`,
+      onComplete: () => statusText.textContent = 'complete',
+      onCancel: () => statusText.textContent = 'stopped/cancelled'
+    });
+    
+    ctrlTl.add(".ctrl-1", "slide-left", { duration: 1000 })
+          .add(".ctrl-2", "slide-left", { duration: 1000 })
+          .add(".ctrl-3", "slide-left", { duration: 1000 });
+          
+    document.querySelector('.btn-tl-play').addEventListener('click', () => ctrlTl.play());
+    document.querySelector('.btn-tl-pause').addEventListener('click', () => { ctrlTl.pause(); statusText.textContent = 'paused'; });
+    document.querySelector('.btn-tl-resume').addEventListener('click', () => { ctrlTl.resume(); statusText.textContent = 'running'; });
+    document.querySelector('.btn-tl-restart').addEventListener('click', () => ctrlTl.restart());
+    document.querySelector('.btn-tl-stop').addEventListener('click', () => ctrlTl.stop());
+    document.querySelector('.btn-tl-destroy').addEventListener('click', () => { ctrlTl.destroy(); statusText.textContent = 'destroyed'; });
   </script>
 </body>
 </html>

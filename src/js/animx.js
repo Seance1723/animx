@@ -15,8 +15,9 @@ import { createRAFDriver } from './drivers/raf-driver.js';
 import { initData, refreshData, runData, bindAnimX } from './data/data-api.js';
 import { observeScroll, refreshScroll, unobserveScroll } from './scroll/scroll-api.js';
 import { bindScrollAnimX } from './scroll/scroll-observer.js';
+import { Timeline, bindTimelineAnimX } from './timeline/timeline.js';
 
-const VERSION = '0.4.0';
+const VERSION = '0.5.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -31,6 +32,7 @@ class AnimXCore {
     this._initialized = false;
     bindAnimX(this);
     bindScrollAnimX(this);
+    bindTimelineAnimX(this);
   }
 
   config(options) {
@@ -84,6 +86,10 @@ class AnimXCore {
   
   unobserve(target) {
     unobserveScroll(target);
+  }
+  
+  timeline(options) {
+    return new Timeline(options);
   }
 
   animate(selector, animationInput, options = {}) {

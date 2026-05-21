@@ -1,4 +1,4 @@
-# AnimX (v0.4.0)
+# AnimX (v0.5.0)
 
 A highly optimized, zero-dependency browser animation library.
 
@@ -33,7 +33,24 @@ A highly optimized, zero-dependency browser animation library.
 </div>
 ```
 
-### 3. Custom JS Animation (WAAPI/RAF)
+### 3. Timeline Engine
+```javascript
+const tl = AnimX.timeline();
+
+tl.add(".title", "fade-up")
+  .add(".subtitle", "fade-up")
+  .add(".button", "zoom-in")
+  .play();
+
+// Advanced Custom Timeline
+const tl2 = AnimX.timeline({ defaults: { duration: 700 } });
+tl2.add(".box", {
+  from: { opacity: 0, y: 40 },
+  to: { opacity: 1, y: 0 }
+}).play();
+```
+
+### 4. Custom JS Animation (WAAPI/RAF)
 ```javascript
 window.AnimX.config({ debug: true });
 window.AnimX.init();

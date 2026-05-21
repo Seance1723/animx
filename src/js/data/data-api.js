@@ -17,8 +17,13 @@ function processElement(element, forceRun = false) {
   const config = getConfig();
   const parsed = parseDataAttributes(element);
   
-  if (!parsed) return;
-  
+  // Warn if timeline trigger is used
+  if (element.hasAttribute('data-ax-timeline')) {
+    if (config.debug || parsed.debug) {
+      log('AnimX: data-ax-timeline is planned for a future release.', element);
+    }
+  }
+
   // Let scroll-api handle scroll triggers
   if (parsed.trigger === 'scroll') {
     return;

@@ -8,7 +8,8 @@ global.window = {
 };
 global.document = {
   readyState: 'complete',
-  querySelectorAll: () => []
+  querySelectorAll: () => [],
+  dispatchEvent: () => {}
 };
 
 // Now safe to import
@@ -21,7 +22,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Version Check
-  assert.strictEqual(AnimX.version, '0.4.0', 'Version should be 0.4.0');
+  assert.strictEqual(AnimX.version, '0.5.0', 'Version should be 0.5.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -62,9 +63,30 @@ try {
   assert.strictEqual(typeof AnimX.scroll, 'function', 'AnimX.scroll should be exposed');
   assert.strictEqual(typeof AnimX.refreshScroll, 'function');
   assert.strictEqual(typeof AnimX.unobserve, 'function');
+  assert.strictEqual(typeof AnimX.timeline, 'function', 'AnimX.timeline should be exposed');
   console.log('✅ Global API exposed');
   
-  // 7. Scroll Parser Check
+  // 7. Timeline API Check
+  const tl = AnimX.timeline();
+  assert.strictEqual(typeof tl.add, 'function');
+  assert.strictEqual(typeof tl.play, 'function');
+  assert.strictEqual(typeof tl.pause, 'function');
+  assert.strictEqual(typeof tl.resume, 'function');
+  assert.strictEqual(typeof tl.stop, 'function');
+  assert.strictEqual(typeof tl.restart, 'function');
+  assert.strictEqual(typeof tl.destroy, 'function');
+  assert.strictEqual(typeof tl.getSteps, 'function');
+  assert.strictEqual(typeof tl.getDuration, 'function');
+  
+  tl.add('.fake-target', 'fade-up');
+  const steps = tl.getSteps();
+  assert.strictEqual(steps.length, 1);
+  assert.strictEqual(steps[0].target, '.fake-target');
+  
+  tl.play(); // Should not crash on missing targets
+  console.log('✅ Timeline initializes and chains safely');
+  
+  // 8. Scroll Parser Check
   const mockScrollEl = {
     dataset: { ax: 'fade-up', axOn: 'scroll', axThreshold: '2', axOnce: 'false', axStagger: '100' }
   };

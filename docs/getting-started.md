@@ -78,7 +78,49 @@ AnimX.refreshScroll(); // Rescan DOM
 AnimX.unobserve('.card'); // Stop observing
 ```
 
-*(Note: Advanced timelines and text-splitting will be introduced in future versions)*
+## Timeline Sequencing
+
+Sequence complex animations without nested callbacks!
+
+```javascript
+const tl = AnimX.timeline({
+  defaults: { duration: 500, ease: 'smooth' }
+});
+
+tl.add('.hero-title', 'fade-up')
+  .add('.hero-subtitle', 'fade-up', { delay: 100 })
+  .add('.hero-button', 'zoom-in', { delay: 150 })
+  .play();
+```
+
+### Same-Time Grouping
+
+Use `"<"` to execute multiple steps at exactly the same time.
+
+```javascript
+AnimX.timeline()
+  .add('.card-1', 'fade-up')
+  .add('.card-2', 'fade-up', {}, '<')
+  .add('.card-3', 'fade-up', {}, '<')
+  .add('.cta', 'zoom-in') // Runs after ALL cards complete
+  .play();
+```
+
+### Timeline Controls
+
+The timeline instance returns powerful playback controls:
+```javascript
+tl.play();
+tl.pause();
+tl.resume();
+tl.stop();
+tl.restart();
+tl.destroy();
+```
+
+*(Note: Reduced motion automatically collapses timeline durations to ensure content reveals instantly!)*
+
+## Advanced Usage (JavaScript API)
 
 ```javascript
 AnimX.init();

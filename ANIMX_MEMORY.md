@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 0.4.0
+**Current Version**: 0.5.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## v0.0.1 - Foundation (Completed)
@@ -31,9 +31,15 @@
 - Added group stagger logic (`data-ax-group`).
 - Added `AnimX.scroll()`, `AnimX.refreshScroll()`, and `AnimX.unobserve()`.
 
-## v0.5.0 - Timeline Engine (Planned Next)
+## v0.5.0 - Timeline Engine (Completed)
+- Added `AnimX.timeline()`.
+- Implemented `tl.add()`, `tl.play()`, `tl.pause()`, `tl.resume()`, `tl.stop()`, `tl.restart()`, `tl.destroy()`.
+- Supports sequential steps and same-time `<` groupings.
+- Timeline uses existing `AnimX.animate()` logic directly.
+
+## v0.6.0 - Stagger Engine (Planned Next)
 - Do not build text split yet.
-- Do not build full stagger yet.
+- Do not build advanced scroll scenes yet.
 
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.
