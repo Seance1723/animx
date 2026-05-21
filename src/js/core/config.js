@@ -3,7 +3,8 @@ const defaultConfig = {
   autoInit: true,
   reducedMotion: 'system', // 'system', 'reduce', or 'allow'
   defaultDuration: 420,
-  defaultEase: 'smooth'
+  defaultEase: 'smooth',
+  dataApi: true
 };
 
 let currentConfig = { ...defaultConfig };

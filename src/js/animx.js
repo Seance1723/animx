@@ -12,7 +12,9 @@ import { createCSSDriver } from './drivers/css-driver.js';
 import { createWAAPIDriver } from './drivers/waapi-driver.js';
 import { createRAFDriver } from './drivers/raf-driver.js';
 
-const VERSION = '0.2.0';
+import { initData, refreshData, runData, bindAnimX } from './data/data-api.js';
+
+const VERSION = '0.3.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -24,6 +26,8 @@ class AnimXCore {
   constructor() {
     this.version = VERSION;
     this._instances = new Set();
+    this._initialized = false;
+    bindAnimX(this);
   }
 
   config(options) {
@@ -31,7 +35,10 @@ class AnimXCore {
   }
 
   init() {
+    if (this._initialized) return;
+    this._initialized = true;
     log(`AnimX v${this.version} Initialized.`);
+    initData();
   }
 
   ready(callback) {
@@ -52,6 +59,14 @@ class AnimXCore {
 
   getPresets() {
     return getPresets();
+  }
+
+  refresh(root) {
+    refreshData(root);
+  }
+
+  run(target) {
+    runData(target);
   }
 
   animate(selector, animationInput, options = {}) {
@@ -149,6 +164,20 @@ const AnimX = new AnimXCore();
 
 if (typeof window !== 'undefined') {
   window.AnimX = AnimX;
+  
+  if (typeof document !== 'undefined') {
+    // Auto initialization
+    const doAutoInit = () => {
+      const conf = getConfig();
+      if (conf.autoInit) AnimX.init();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', doAutoInit);
+    } else {
+      doAutoInit();
+    }
+  }
 }
 
 export default AnimX;

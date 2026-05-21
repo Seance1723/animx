@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo - v0.2.0</title>
+  <title>AnimX Demo - v0.3.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
     body {
@@ -58,8 +58,8 @@
   </style>
 </head>
 <body>
-  <h1>AnimX v0.2.0</h1>
-  <p>Status: JavaScript Animation API working</p>
+  <h1>AnimX v0.3.0</h1>
+  <p>Status: Data Attribute Engine working</p>
   
   <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
     <strong>Global Controls:</strong>
@@ -68,106 +68,75 @@
     <button class="btn" onclick="AnimX.stop()">Stop All</button>
     <button class="btn" onclick="AnimX.reset()">Reset All</button>
     <button class="btn" onclick="AnimX.destroy()">Destroy All</button>
+    <button class="btn" onclick="AnimX.refresh()" style="background:#16a34a;">Refresh Engine</button>
   </div>
 
   <section>
-    <h2>1. CSS Preset via JS</h2>
-    <button class="btn" id="btn-trigger-fade">Trigger Fade Up</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="box demo-fade">CSS Preset</div>
+    <h2>1. Auto Animation on Load</h2>
+    <div class="grid">
+      <div class="box" data-ax="fade-up">Fade up on load</div>
+      <div class="box" data-ax="zoom-in" data-ax-delay="200">Zoom in delayed</div>
+      <div class="box" data-ax="slide-left" data-ax-duration="700">Slide left custom duration</div>
     </div>
   </section>
 
   <section>
-    <h2>2. Custom JS Animation (WAAPI)</h2>
-    <button class="btn" id="btn-trigger-custom">Trigger Custom Anim</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="box demo-custom">Custom Object</div>
+    <h2>2. Easing Examples</h2>
+    <div class="grid">
+      <div class="box" data-ax="fade-up" data-ax-ease="smooth">Smooth</div>
+      <div class="box" data-ax="fade-up" data-ax-ease="snappy">Snappy</div>
+      <div class="box" data-ax="fade-up" data-ax-ease="bounce">Bounce</div>
     </div>
   </section>
 
   <section>
-    <h2>3. Multiple Elements</h2>
-    <button class="btn" id="btn-trigger-multi">Trigger Group Anim</button>
+    <h2>3. Repeat Examples</h2>
+    <div class="grid">
+      <div class="box" data-ax="pulse" data-ax-repeat="2">Pulse twice</div>
+      <div class="box" data-ax="glow-pulse" data-ax-repeat="infinite">Infinite glow</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Manual Trigger</h2>
+    <button class="btn" onclick="AnimX.run('[data-ax-id=manual-box]')">Run Manual Box</button>
+    <button class="btn" onclick="AnimX.run()">Run All Manual</button>
     <div class="grid" style="margin-top: 1rem;">
-      <div class="box demo-card">Card 1</div>
-      <div class="box demo-card">Card 2</div>
-      <div class="box demo-card">Card 3</div>
+      <div class="box" data-ax="zoom-in" data-ax-on="manual" data-ax-id="manual-box">Manual box</div>
+      <div class="box" data-ax="flip-x" data-ax-on="manual">Another manual</div>
     </div>
   </section>
   
   <section>
-    <h2>4. Instance Controls & Callbacks</h2>
-    <button class="btn" id="btn-ctrl-play">Play</button>
-    <button class="btn" id="btn-ctrl-pause">Pause</button>
-    <button class="btn" id="btn-ctrl-reverse">Reverse</button>
-    <span class="status-text" id="callback-status">Status: Idle</span>
+    <h2>5. Disabled Example</h2>
+    <div class="grid">
+      <div class="box" data-ax="fade-up" data-ax-disabled="true">Disabled animation</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Event Example</h2>
+    <span class="status-text" id="event-status">Status: Waiting...</span>
     <div class="grid" style="margin-top: 1rem;">
-      <div class="box demo-ctrl">Control Me</div>
+      <div class="box" data-ax="rotate-in" id="event-box">Watch my events</div>
     </div>
   </section>
 
   <script src="../dist/animx.js"></script>
   <script>
-    if (window.AnimX) {
-      AnimX.config({ debug: true });
-      AnimX.init();
-      
-      // 1. CSS Preset via JS
-      document.getElementById('btn-trigger-fade').addEventListener('click', () => {
-        AnimX.animate('.demo-fade', 'fade-up', { duration: 600 });
+    // The autoInit is enabled by default in config, so it will parse the DOM on load.
+    
+    // Set up event listener for the event demo
+    const eventBox = document.getElementById('event-box');
+    const eventStatus = document.getElementById('event-status');
+    
+    if (eventBox) {
+      eventBox.addEventListener('animx:start', () => {
+        eventStatus.textContent = 'Status: Animation started!';
       });
-
-      // 2. Custom JS Animation
-      document.getElementById('btn-trigger-custom').addEventListener('click', () => {
-        AnimX.animate('.demo-custom', {
-          from: { opacity: 0, y: 40, scale: 0.9, rotate: -10, blur: 5 },
-          to: { opacity: 1, y: 0, scale: 1, rotate: 0, blur: 0 }
-        }, { 
-          duration: 700, 
-          ease: 'snappy' 
-        });
+      eventBox.addEventListener('animx:complete', () => {
+        eventStatus.textContent = 'Status: Animation completed!';
       });
-
-      // 3. Multiple Elements
-      document.getElementById('btn-trigger-multi').addEventListener('click', () => {
-        AnimX.animate('.demo-card', 'zoom-in', { duration: 500, ease: 'bounce' });
-      });
-
-      // 4. Instance Controls & Callbacks
-      const statusEl = document.getElementById('callback-status');
-      let ctrlInstance = null;
-      
-      function initCtrlInstance() {
-        if (ctrlInstance) ctrlInstance.destroy();
-        ctrlInstance = AnimX.animate('.demo-ctrl', {
-          from: { x: -100, rotate: -45, opacity: 0 },
-          to: { x: 100, rotate: 45, opacity: 1 }
-        }, {
-          duration: 2000,
-          ease: 'smooth',
-          onStart: () => statusEl.textContent = 'Status: Started!',
-          onComplete: () => statusEl.textContent = 'Status: Completed!',
-          onCancel: () => statusEl.textContent = 'Status: Cancelled!'
-        });
-      }
-      
-      document.getElementById('btn-ctrl-play').addEventListener('click', () => {
-        if (!ctrlInstance || ctrlInstance._status === 'destroyed' || ctrlInstance._status === 'finished') {
-          initCtrlInstance();
-        } else {
-          ctrlInstance.play();
-        }
-      });
-      document.getElementById('btn-ctrl-pause').addEventListener('click', () => {
-        if (ctrlInstance) ctrlInstance.pause();
-      });
-      document.getElementById('btn-ctrl-reverse').addEventListener('click', () => {
-        if (ctrlInstance) ctrlInstance.reverse();
-      });
-      
-    } else {
-      console.error('AnimX failed to load.');
     }
   </script>
 </body>

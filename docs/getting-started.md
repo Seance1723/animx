@@ -11,13 +11,30 @@ Download the `dist/` folder and include it in your HTML:
 <script src="path/to/dist/animx.min.js"></script>
 ```
 
-## Basic Usage (CSS)
+## Basic Usage (Data Attributes)
 
-Add `.ax` and an animation class directly to your HTML:
+You can animate elements automatically on load just by adding data attributes. You don't even need to write JS.
 
 ```html
-<div class="ax ax-fade-up ax-duration-slow">Hello World</div>
+<div data-ax="fade-up">Fade up</div>
+
+<div 
+  data-ax="zoom-in"
+  data-ax-duration="700"
+  data-ax-delay="200"
+  data-ax-ease="snappy">
+  Zoom in with options
+</div>
 ```
+
+If you want to manually trigger a data-attribute animation later, use `data-ax-on="manual"`:
+
+```html
+<div data-ax="slide-left" data-ax-on="manual" data-ax-id="box">Manual</div>
+<button onclick="AnimX.run('[data-ax-id=box]')">Run</button>
+```
+
+*(Note: Scroll triggers will be introduced in v0.4.0)*
 
 ## Advanced Usage (JavaScript API)
 

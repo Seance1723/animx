@@ -14,12 +14,13 @@ global.document = {
 // Now safe to import
 import AnimX from '../src/js/animx.js';
 import { normalizeSelector } from '../src/js/core/selector.js';
+import { parseDataAttributes } from '../src/js/data/data-parser.js';
 
 console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Version Check
-  assert.strictEqual(AnimX.version, '0.2.0', 'Version should be 0.2.0');
+  assert.strictEqual(AnimX.version, '0.3.0', 'Version should be 0.3.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -54,7 +55,20 @@ try {
   
   // 6. Global controls
   assert.strictEqual(typeof AnimX.stop, 'function');
+  assert.strictEqual(typeof AnimX.init, 'function');
+  assert.strictEqual(typeof AnimX.refresh, 'function');
+  assert.strictEqual(typeof AnimX.run, 'function');
   console.log('✅ Global API exposed');
+  
+  // 7. Data Parser Check
+  const mockEl = {
+    dataset: { ax: 'fade-up', axDuration: '700', axRepeat: 'infinite', axDelay: 'invalid' }
+  };
+  const parsed = parseDataAttributes(mockEl);
+  assert.strictEqual(parsed.options.duration, 700);
+  assert.strictEqual(parsed.options.iterations, Infinity);
+  assert.strictEqual(parsed.options.delay, undefined); // Invalid delay parsed as undefined
+  console.log('✅ Data parser safely normalizes string options');
 
   console.log('--- All tests passed ---');
 } catch (error) {

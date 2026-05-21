@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 0.2.0
+**Current Version**: 0.3.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## v0.0.1 - Foundation (Completed)
@@ -14,16 +14,20 @@
 
 ## v0.2.0 - JavaScript Animation API (Completed)
 - Added `AnimX.animate()`.
-- Implemented **WAAPI Driver** for custom from/to animations.
-- Implemented **CSS Driver** for preset resolution via JS.
-- Implemented **RAF Driver** fallback logic.
-- Exposed animation instance controls (`play`, `pause`, `stop`, `destroy`, `reverse`).
-- Added robust selector normalization and default easing mapping.
+- Implemented **WAAPI Driver**, **CSS Driver**, and **RAF Driver**.
 
-## v0.3.0 - Data Attribute Engine (Planned Next)
+## v0.3.0 - Data Attribute Engine (Completed)
+- Added HTML declarative system (`data-ax="fade-up"`).
+- Added `data-ax-duration`, `data-ax-delay`, `data-ax-ease`, `data-ax-repeat`, `data-ax-disabled`.
+- Added state tracking (`ax-ready`, `ax-running`) to prevent double-initialization.
+- Added `AnimX.refresh()` and `AnimX.run()`.
+- Triggers support `load` and `manual`.
+- Dispatches CustomEvents (`animx:start`, `animx:complete`).
+
+## v0.4.0 - Scroll Reveal Engine (Planned Next)
 - Do not build timeline yet.
-- Do not build scroll reveal yet.
 - Do not build text split yet.
+- Do not build stagger yet.
 
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.
