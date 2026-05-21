@@ -1,0 +1,26 @@
+@use '../base/tokens' as *;
+
+.ax-text-rise {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.ax-text-rise.ax-running, .ax-text-rise.ax-complete {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ax-text-fade {
+  opacity: 0;
+}
+.ax-text-fade.ax-running, .ax-text-fade.ax-complete {
+  opacity: 1;
+}
+
+.ax-text-mask-up {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.ax-text-mask-up.ax-running, .ax-text-mask-up.ax-complete {
+  opacity: 1;
+  transform: translateY(0);
+}

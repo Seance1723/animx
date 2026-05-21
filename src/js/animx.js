@@ -17,8 +17,9 @@ import { observeScroll, refreshScroll, unobserveScroll } from './scroll/scroll-a
 import { bindScrollAnimX } from './scroll/scroll-observer.js';
 import { Timeline, bindTimelineAnimX } from './timeline/timeline.js';
 import { stagger, bindStaggerAnimX } from './stagger/stagger.js';
+import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
 
-const VERSION = '0.6.0';
+const VERSION = '0.7.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -35,6 +36,7 @@ class AnimXCore {
     bindScrollAnimX(this);
     bindTimelineAnimX(this);
     bindStaggerAnimX(this);
+    bindTextAnimX(this);
   }
 
   config(options) {
@@ -96,6 +98,18 @@ class AnimXCore {
   
   stagger(targets, animationInput, options) {
     return stagger(targets, animationInput, options);
+  }
+  
+  text(targets, options) {
+    return text(targets, options);
+  }
+  
+  splitText(targets, options) {
+    return splitText(targets, options);
+  }
+  
+  revertText(targets) {
+    return revertText(targets);
   }
 
   animate(selector, animationInput, options = {}) {

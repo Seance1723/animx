@@ -1,0 +1,46 @@
+@use '../base/tokens' as *;
+
+.ax-text-blur {
+  opacity: 0;
+  filter: blur(8px);
+}
+.ax-text-blur.ax-running, .ax-text-blur.ax-complete {
+  opacity: 1;
+  filter: blur(0);
+}
+
+.ax-text-pop {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.ax-text-pop.ax-running, .ax-text-pop.ax-complete {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ax-text-wave {
+  opacity: 0;
+  transform: translateY(20px) rotate(-10deg);
+}
+.ax-text-wave.ax-running, .ax-text-wave.ax-complete {
+  opacity: 1;
+  transform: translateY(0) rotate(0);
+}
+
+.ax-text-flip {
+  opacity: 0;
+  transform: perspective(400px) rotateX(-90deg);
+}
+.ax-text-flip.ax-running, .ax-text-flip.ax-complete {
+  opacity: 1;
+  transform: perspective(400px) rotateX(0deg);
+}
+
+.ax-text-soft-bounce {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.ax-text-soft-bounce.ax-running, .ax-text-soft-bounce.ax-complete {
+  opacity: 1;
+  transform: translateY(0);
+}

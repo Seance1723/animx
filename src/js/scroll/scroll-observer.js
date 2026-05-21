@@ -63,7 +63,9 @@ function handleIntersection(entry) {
 function runScrollAnimation(element, config) {
   if (!animxInstance) return;
   
-  if (config.isGroup) {
+  if (config.isText) {
+    animxInstance.text(element, { ...config.textOptions, ...config.options });
+  } else if (config.isGroup) {
     const children = Array.from(element.children);
     if (children.length > 0) {
       const childAnim = config.childAnim || element.dataset.ax || 'fade-up';

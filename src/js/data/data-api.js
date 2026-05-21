@@ -79,7 +79,9 @@ function processElement(element, forceRun = false) {
       }
     };
 
-    if (parsed.isGroup) {
+    if (parsed.isText) {
+      animxInstance.text(element, { ...parsed.textOptions, ...runOptions });
+    } else if (parsed.isGroup) {
       const children = parsed.childSelector 
         ? Array.from(element.querySelectorAll(parsed.childSelector))
         : Array.from(element.children);

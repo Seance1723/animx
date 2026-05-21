@@ -43,7 +43,14 @@
 - Upgraded `AnimX.animate()` and data-attribute scroll/load groups to use real stagger physics.
 - Added stagger group controls (`group.play()`, `group.pause()`, etc).
 
-## v0.7.0 - Text Animation Engine (Planned Next)
+## v0.7.0 - Text Animation Engine (Completed)
+- Added `AnimX.text()`, `AnimX.splitText()`, and `AnimX.revertText()`.
+- Implemented `chars`, `words`, and `lines` splitting.
+- Added `typewriter`, `scramble`, and `counter` engines.
+- Ensured strict accessibility protections via `aria-label` and `aria-hidden`.
+- Seamlessly integrated text triggering into Timelines, Scroll API, and HTML `data-ax` APIs.
+
+## v0.8.0 - Interaction Animation System (Planned Next)
 - Do not build advanced layout/FLIP motion yet.
 - Do not build drag/gesture physics yet.
 

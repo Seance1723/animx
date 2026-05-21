@@ -152,6 +152,50 @@ AnimX.stagger('.grid-item', 'fade-up', {
 });
 ```
 
+## Text Animations
+
+The Text Engine allows safe, accessibility-aware manipulations for dynamic content.
+
+### Split Text Reals
+Splits content into spans safely, preserving `aria-label` tags for screen readers so words don't get mispronounced!
+```javascript
+AnimX.text('.headline', {
+  split: 'chars', // chars, words, lines, or ['chars', 'words']
+  animation: 'text-rise', // Built-in preset
+  stagger: 35
+});
+```
+
+### Typewriters
+```javascript
+AnimX.text('.typing', {
+  type: 'typewriter',
+  text: 'Hello world',
+  speed: 45
+});
+```
+
+### Counters
+```javascript
+AnimX.text('.counter', {
+  type: 'counter',
+  from: 0,
+  to: 1000,
+  suffix: '+',
+  duration: 1200
+});
+```
+
+### Scramblers
+```javascript
+AnimX.text('.scramble', {
+  type: 'scramble',
+  text: 'DECRYPTED',
+  duration: 1000,
+  revealDirection: 'center'
+});
+```
+
 ## Advanced Usage (JavaScript API)
 
 ```javascript

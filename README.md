@@ -1,4 +1,4 @@
-# AnimX (v0.6.0)
+# AnimX (v0.7.0)
 
 A highly optimized, zero-dependency browser animation library.
 
@@ -8,6 +8,7 @@ A highly optimized, zero-dependency browser animation library.
 - **Hardware Accelerated**: Uses native Web Animations API (WAAPI) and optimized CSS Transforms.
 - **Timeline Engine**: Compose sequences intuitively with `<` positioning.
 - **Stagger Engine**: Easily animate grids, lists, and node collections with center/edge/random layouts.
+- **Text Engine**: Powerful, accessibility-safe text splitting, typewriters, counters, and scramblers.
 
 ## Basic Usage
 
@@ -24,6 +25,11 @@ A highly optimized, zero-dependency browser animation library.
   <div>Item 1</div>
   <div>Item 2</div>
 </section>
+
+<!-- Text Split Reveal -->
+<h1 data-ax-text="chars" data-ax="text-rise" data-ax-stagger="35">
+  Beautiful Typography
+</h1>
 ```
 
 ### 2. JavaScript API (Imperative)
@@ -34,11 +40,11 @@ AnimX.animate(".card", "fade-up", {
   ease: "bouncy"
 });
 
-// Advanced Stagger
-AnimX.stagger(".grid-item", "zoom-in", {
-  each: 80,
-  from: "center",
-  grid: "auto"
+// Text Typewriter
+AnimX.text(".typing", {
+  type: "typewriter",
+  text: "Hello world",
+  speed: 45
 });
 ```
 

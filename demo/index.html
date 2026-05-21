@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo - v0.6.0</title>
+  <title>AnimX Demo - v0.7.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
     body {
@@ -47,6 +47,7 @@
     }
     section { margin-top: 3rem; border-top: 2px solid #eaeaea; padding-top: 2rem; min-height: 40vh; }
     h2 { padding-bottom: 0.5rem; }
+    h2.hero { font-size: 3rem; color: #1e1b4b; line-height: 1.2; margin-top: 1rem; }
     
     .btn {
       padding: 0.75rem 1.5rem;
@@ -68,11 +69,20 @@
       margin-top: 1rem;
       display: block;
     }
+
+    .demo-typewriter, .demo-scramble, .demo-counter {
+      font-size: 2rem;
+      font-weight: bold;
+      font-family: monospace;
+      color: #b91c1c;
+      min-height: 3rem;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>AnimX v0.6.0</h1>
-  <p>Status: Stagger Engine working</p>
+  <h1>AnimX v0.7.0</h1>
+  <p>Status: Text Animation Engine working</p>
   
   <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
     <strong>Global Controls:</strong>
@@ -81,150 +91,92 @@
   </div>
 
   <section>
-    <h2>1. Basic stagger</h2>
-    <button class="btn" onclick="AnimX.stagger('.card-basic', 'fade-up', { each: 100 })">Run Basic Stagger</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="demo-card card-basic">1</div>
-      <div class="demo-card card-basic">2</div>
-      <div class="demo-card card-basic">3</div>
-      <div class="demo-card card-basic">4</div>
-    </div>
+    <h2>1. Character split reveal</h2>
+    <button class="btn" onclick="AnimX.text('.demo-text-chars', { split: 'chars', animation: 'text-rise', stagger: 30 })">Run Char Split</button>
+    <h2 class="hero demo-text-chars">Character animation looks premium</h2>
   </section>
 
   <section>
-    <h2>2. Center stagger</h2>
-    <button class="btn" onclick="AnimX.stagger('.card-center', 'zoom-in', { each: 80, from: 'center' })">Run Center Stagger</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="demo-card card-center">1</div>
-      <div class="demo-card card-center">2</div>
-      <div class="demo-card card-center">3</div>
-      <div class="demo-card card-center">4</div>
-      <div class="demo-card card-center">5</div>
-    </div>
+    <h2>2. Word split reveal</h2>
+    <button class="btn" onclick="AnimX.text('.demo-text-words', { split: 'words', animation: 'text-fade', stagger: { each: 80, from: 'center' } })">Run Word Split</button>
+    <h2 class="hero demo-text-words">Words should reveal smoothly from the center outwards</h2>
   </section>
 
   <section>
-    <h2>3. End stagger</h2>
-    <button class="btn" onclick="AnimX.stagger('.card-end', 'slide-left', { each: 80, from: 'end' })">Run End Stagger</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="demo-card card-end">1</div>
-      <div class="demo-card card-end">2</div>
-      <div class="demo-card card-end">3</div>
-      <div class="demo-card card-end">4</div>
-    </div>
+    <h2>3. Line split reveal</h2>
+    <button class="btn" onclick="AnimX.text('.demo-text-lines', { split: 'lines', animation: 'text-mask-up', stagger: 120, mask: 'lines' })">Run Line Mask</button>
+    <h2 class="hero demo-text-lines" style="max-width: 600px;">
+      A multi-line heading with mask reveal. It will dynamically wrap and reveal line by line gracefully.
+    </h2>
   </section>
 
   <section>
-    <h2>4. Random stagger</h2>
-    <button class="btn" onclick="AnimX.stagger('.card-random', 'fade-up', { each: 80, from: 'random' })">Run Random Stagger</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="demo-card card-random">1</div>
-      <div class="demo-card card-random">2</div>
-      <div class="demo-card card-random">3</div>
-      <div class="demo-card card-random">4</div>
-      <div class="demo-card card-random">5</div>
-      <div class="demo-card card-random">6</div>
-    </div>
+    <h2>4. Typewriter</h2>
+    <button class="btn" onclick="AnimX.text('.demo-typewriter', { type: 'typewriter', text: 'Build beautiful motion faster.', speed: 45 })">Run Typewriter</button>
+    <div class="demo-typewriter"></div>
   </section>
 
   <section>
-    <h2>5. Grid stagger</h2>
-    <button class="btn" onclick="AnimX.stagger('.grid-item', 'zoom-in', { each: 70, from: 'center', grid: 'auto' })">Run Grid Stagger</button>
-    <div class="grid grid-small" style="margin-top: 1rem;">
-      <div class="demo-card grid-item">1</div><div class="demo-card grid-item">2</div><div class="demo-card grid-item">3</div><div class="demo-card grid-item">4</div>
-      <div class="demo-card grid-item">5</div><div class="demo-card grid-item">6</div><div class="demo-card grid-item">7</div><div class="demo-card grid-item">8</div>
-      <div class="demo-card grid-item">9</div><div class="demo-card grid-item">10</div><div class="demo-card grid-item">11</div><div class="demo-card grid-item">12</div>
-    </div>
+    <h2>5. Scramble</h2>
+    <button class="btn" onclick="AnimX.text('.demo-scramble', { type: 'scramble', text: 'ANIMX TEXT ENGINE', duration: 1200 })">Run Scramble</button>
+    <div class="demo-scramble">ANIMX</div>
   </section>
 
   <section>
-    <h2>6. Data attribute group stagger on load</h2>
-    <div class="grid" 
-         data-ax-group 
-         data-ax-child="fade-up" 
-         data-ax-on="load" 
-         data-ax-stagger="100">
-      <div class="demo-card">One</div>
-      <div class="demo-card">Two</div>
-      <div class="demo-card">Three</div>
-    </div>
+    <h2>6. Counter</h2>
+    <button class="btn" onclick="AnimX.text('.demo-counter', { type: 'counter', from: 0, to: 1250, duration: 1200, format: 'number' })">Run Counter</button>
+    <div class="demo-counter">0</div>
   </section>
 
   <section>
-    <h2>7. Data attribute scroll stagger</h2>
-    <div class="grid grid-small" 
-         data-ax-group 
-         data-ax-child="fade-up" 
-         data-ax-on="scroll" 
-         data-ax-stagger="120" 
-         data-ax-stagger-from="center">
-      <div class="demo-card">One</div>
-      <div class="demo-card">Two</div>
-      <div class="demo-card">Three</div>
-      <div class="demo-card">Four</div>
-      <div class="demo-card">Five</div>
-      <div class="demo-card">Six</div>
-    </div>
+    <h2>7. Data attribute text animation on load</h2>
+    <h2 class="hero"
+      data-ax-text="chars"
+      data-ax="text-rise"
+      data-ax-stagger="35">
+      Data attribute text reveal
+    </h2>
   </section>
 
   <section>
-    <h2>8. Timeline stagger</h2>
-    <button class="btn" id="btn-tl-stagger">Run Timeline Stagger</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="demo-card timeline-stagger-card">C 1</div>
-      <div class="demo-card timeline-stagger-card">C 2</div>
-      <div class="demo-card timeline-stagger-card">C 3</div>
-      <div class="box timeline-stagger-button">Action</div>
-    </div>
+    <h2>8. Scroll text animation</h2>
+    <h2 class="hero"
+      data-ax-text="words"
+      data-ax="text-fade"
+      data-ax-on="scroll"
+      data-ax-stagger="80">
+      This text animates when scrolled into view
+    </h2>
   </section>
 
   <section>
-    <h2>9. Control demo</h2>
-    <p>Stagger status: <span id="stagger-status-text" class="status-text">idle</span></p>
-    <button class="btn btn-stg-play">Play stagger</button>
-    <button class="btn btn-stg-pause">Pause</button>
-    <button class="btn btn-stg-resume">Resume</button>
-    <button class="btn btn-stg-replay">Replay</button>
-    <button class="btn btn-stg-destroy">Destroy</button>
-    <div class="grid" style="margin-top: 1rem;">
-      <div class="demo-card ctrl-item">Item 1</div>
-      <div class="demo-card ctrl-item">Item 2</div>
-      <div class="demo-card ctrl-item">Item 3</div>
-      <div class="demo-card ctrl-item">Item 4</div>
-    </div>
+    <h2>9. Timeline text animation</h2>
+    <button class="btn" id="btn-tl-text">Run Text Timeline</button>
+    <h2 class="hero timeline-text-title">Stunning Timeline Integration</h2>
+    <h3 class="hero timeline-text-subtitle" style="color:#666;">Beautiful secondary heading</h3>
+  </section>
+
+  <section>
+    <h2>10. Revert demo</h2>
+    <button class="btn" onclick="AnimX.text('.demo-text-revert', { split: 'chars', animation: 'text-pop', stagger: 50 })">Split & Animate</button>
+    <button class="btn" onclick="AnimX.revertText('.demo-text-revert')" style="background:#dc2626;">Revert HTML</button>
+    <h2 class="hero demo-text-revert">Destroy and Revert Safely</h2>
   </section>
 
   <script src="../dist/animx.js"></script>
   <script>
-    // 8. Timeline Stagger
-    document.getElementById('btn-tl-stagger').addEventListener('click', () => {
+    // 9. Timeline Integration
+    document.getElementById('btn-tl-text').addEventListener('click', () => {
       AnimX.timeline()
-        .add(".timeline-stagger-card", "fade-up", {
-          stagger: { each: 100, from: "start" }
+        .add(".timeline-text-title", {
+          type: "text",
+          split: "chars",
+          animation: "text-rise",
+          stagger: 30
         })
-        .add(".timeline-stagger-button", "zoom-in")
+        .add(".timeline-text-subtitle", "fade-up")
         .play();
     });
-    
-    // 9. Controls
-    const statusText = document.getElementById('stagger-status-text');
-    let stg;
-    
-    document.querySelector('.btn-stg-play').addEventListener('click', () => {
-      if (stg) stg.destroy();
-      stg = AnimX.stagger('.ctrl-item', 'slide-left', {
-        duration: 1000,
-        each: 300,
-        onStart: () => statusText.textContent = 'running',
-        onComplete: () => statusText.textContent = 'complete',
-        onCancel: () => statusText.textContent = 'cancelled'
-      });
-    });
-    
-    document.querySelector('.btn-stg-pause').addEventListener('click', () => { if(stg) { stg.pause(); statusText.textContent = 'paused'; } });
-    document.querySelector('.btn-stg-resume').addEventListener('click', () => { if(stg) { stg.resume(); statusText.textContent = 'running'; } });
-    document.querySelector('.btn-stg-replay').addEventListener('click', () => { if(stg) { stg.replay(); statusText.textContent = 'running'; } });
-    document.querySelector('.btn-stg-destroy').addEventListener('click', () => { if(stg) { stg.destroy(); statusText.textContent = 'destroyed'; } });
   </script>
 </body>
 </html>

@@ -10,7 +10,9 @@ global.document = {
   readyState: 'complete',
   querySelectorAll: () => [],
   dispatchEvent: () => {},
-  createElement: () => ({ classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left: 0, top: 0, width: 0, height: 0}) })
+  createElement: () => ({ classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left: 0, top: 0, width: 0, height: 0}), setAttribute: () => {}, appendChild: () => {}, textContent: '' }),
+  createDocumentFragment: () => ({ appendChild: () => {} }),
+  createTextNode: () => ({ nodeValue: '' })
 };
 
 // Now safe to import
@@ -23,7 +25,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Version Check
-  assert.strictEqual(AnimX.version, '0.6.0', 'Version should be 0.6.0');
+  assert.strictEqual(AnimX.version, '0.7.0', 'Version should be 0.7.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -66,6 +68,9 @@ try {
   assert.strictEqual(typeof AnimX.unobserve, 'function');
   assert.strictEqual(typeof AnimX.timeline, 'function', 'AnimX.timeline should be exposed');
   assert.strictEqual(typeof AnimX.stagger, 'function', 'AnimX.stagger should be exposed');
+  assert.strictEqual(typeof AnimX.text, 'function', 'AnimX.text should be exposed');
+  assert.strictEqual(typeof AnimX.splitText, 'function', 'AnimX.splitText should be exposed');
+  assert.strictEqual(typeof AnimX.revertText, 'function', 'AnimX.revertText should be exposed');
   console.log('✅ Global API exposed');
   
   // 7. Timeline API Check
@@ -110,6 +115,36 @@ try {
   assert.strictEqual(scrollParsed.once, false, 'Once should parse to false');
   assert.strictEqual(scrollParsed.options.stagger.each, 100, 'Scroll stagger uses complex parser');
   console.log('✅ Scroll parser successfully parses and clamps attributes');
+
+  // 10. Text Engine API Check
+  const emptyText = AnimX.text('.fake-text', { split: 'chars' });
+  assert.ok(emptyText, 'AnimX.text safely handles missing targets');
+  
+  const fakeTextNode = { 
+    nodeType: 1, 
+    nodeName: 'DIV',
+    innerHTML: 'Hello', 
+    textContent: 'Hello', 
+    classList: { add: () => {}, remove: () => {} }, 
+    setAttribute: () => {}, 
+    hasAttribute: () => false, 
+    appendChild: () => {}, 
+    dispatchEvent: () => {},
+    childNodes: [],
+    style: {},
+    classList: { add: () => {}, remove: () => {} }
+  };
+  fakeTextNode.childNodes.push({ 
+    nodeType: 3, 
+    nodeValue: 'Hello', 
+    parentNode: { replaceChild: () => {} } 
+  });
+  
+  const splitRes = AnimX.splitText([fakeTextNode], { split: 'chars' });
+  assert.ok(splitRes, 'AnimX.splitText processes node gracefully');
+  assert.strictEqual(typeof AnimX.revertText, 'function', 'AnimX.revertText parses gracefully');
+  AnimX.revertText([fakeTextNode]);
+  console.log('✅ Text Engine and WeakMap revert gracefully handles mocks');
 
   console.log('--- All tests passed ---');
 } catch (error) {

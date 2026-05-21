@@ -1,0 +1,13 @@
+.ax-text-cursor {
+  display: inline-block;
+  opacity: 1;
+}
+
+.ax-text-cursor.is-blinking {
+  animation: ax-text-cursor-blink 0.8s steps(2, start) infinite;
+}
+
+@keyframes ax-text-cursor-blink {
+  0%, 45% { opacity: 1; }
+  46%, 100% { opacity: 0; }
+}

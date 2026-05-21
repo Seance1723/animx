@@ -56,6 +56,27 @@ export function parseDataAttributes(element) {
     }
   }
   
+  const isText = ds.axText !== undefined || ds.axTextType !== undefined;
+  let textOptions = null;
+  if (isText) {
+    textOptions = {
+      type: ds.axTextType || 'split',
+      split: ds.axText || 'chars',
+      animation,
+      text: ds.axTextValue || null,
+      mask: ds.axMask === 'true' ? true : (ds.axMask || false),
+      speed: parseInt(ds.axSpeed, 10) || 45,
+      from: parseInt(ds.axFrom, 10) || 0,
+      to: parseInt(ds.axTo, 10) || 100,
+      decimals: parseInt(ds.axDecimals, 10) || 0,
+      prefix: ds.axPrefix || '',
+      suffix: ds.axSuffix || '',
+      chars: ds.axScrambleChars || undefined,
+      duration,
+      stagger
+    };
+  }
+  
   return {
     animation,
     trigger,
@@ -66,6 +87,8 @@ export function parseDataAttributes(element) {
     isGroup: ds.axGroup !== undefined,
     childAnimation: ds.axChild || null,
     childSelector: ds.axChildSelector || null,
+    isText,
+    textOptions,
     options: {
       duration,
       delay,

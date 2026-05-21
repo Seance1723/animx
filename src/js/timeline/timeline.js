@@ -2,6 +2,7 @@ import { createStep } from './timeline-step.js';
 import { parseTimelineOptions, mergeStepOptions } from './timeline-parser.js';
 import { buildTimelineGroups } from './timeline-position.js';
 import { log } from '../core/utils.js';
+import { normalizeSelector } from '../core/selector.js';
 
 let animxInstance = null;
 export function bindTimelineAnimX(instance) {
@@ -85,16 +86,28 @@ export class Timeline {
     let completedInGroup = 0;
     
     group.forEach(step => {
+      const { target, animation, options } = step;
+      let targetElements = normalizeSelector(target);
+      if (targetElements.length === 0) return Promise.resolve();
+
+      // Normalize stagger if needed
+      const mergedOptions = { ...options };
+      if (mergedOptions.stagger && typeof mergedOptions.stagger === 'object') {
+        Object.assign(mergedOptions, mergedOptions.stagger);
+        delete mergedOptions.stagger;
+      }
+      
+      const isText = mergedOptions.type === 'text' || mergedOptions.type === 'typewriter' || mergedOptions.type === 'scramble' || mergedOptions.type === 'counter';
+
       step.status = 'running';
       if (this.options.onStepStart) this.options.onStepStart(step, this);
       dispatchEvent('timeline-step-start', { timeline: this, step });
-      
-      // Merge timeline scale into step options just before running
+
       const runOptions = {
-        ...step.options,
+        ...mergedOptions,
         playbackRate: this.playbackRate,
         onComplete: (el) => {
-          if (step.options.onComplete) step.options.onComplete(el);
+          if (mergedOptions.onComplete) mergedOptions.onComplete(el);
           step.status = 'complete';
           if (this.options.onStepComplete) this.options.onStepComplete(step, this);
           dispatchEvent('timeline-step-complete', { timeline: this, step });
@@ -107,12 +120,18 @@ export class Timeline {
           }
         },
         onCancel: (el) => {
-          if (step.options.onCancel) step.options.onCancel(el);
+          if (mergedOptions.onCancel) mergedOptions.onCancel(el);
           step.status = 'cancelled';
         }
       };
-      
-      step.instance = animxInstance.animate(step.target, step.animation, runOptions);
+
+      if (isText) {
+        step.instance = animxInstance.text(targetElements, runOptions);
+      } else if (targetElements.length > 1 && mergedOptions.stagger) {
+        step.instance = animxInstance.stagger(targetElements, animation, runOptions);
+      } else {
+        step.instance = animxInstance.animate(target, animation, runOptions);
+      }
     });
   }
   

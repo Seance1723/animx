@@ -15,6 +15,15 @@ const defaultConfig = {
     from: 'start',
     startDelay: 0,
     axis: 'both'
+  },
+  text: {
+    preserveAccessibility: true,
+    split: 'chars',
+    animation: 'text-rise',
+    stagger: 35,
+    typewriterSpeed: 45,
+    scrambleDuration: 1000,
+    counterDuration: 1000
   }
 };
 

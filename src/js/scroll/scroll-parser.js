@@ -40,6 +40,8 @@ export function parseScrollAttributes(element) {
   
   const isGroup = baseParsed.isGroup || ds.axGroup !== undefined;
   const childAnim = baseParsed.childAnimation || ds.axChild || null;
+  const isText = baseParsed.isText || ds.axText !== undefined || ds.axTextType !== undefined;
+  const textOptions = baseParsed.textOptions || null;
   
   return {
     animation,

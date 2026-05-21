@@ -1,0 +1,19 @@
+.ax-text-split {
+  /* wrapper */
+}
+
+.ax-text-char,
+.ax-text-word,
+.ax-text-line {
+  display: inline-block;
+}
+
+.ax-text-line {
+  display: block;
+}
+
+.ax-text-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
