@@ -4,7 +4,12 @@ const defaultConfig = {
   reducedMotion: 'system', // 'system', 'reduce', or 'allow'
   defaultDuration: 420,
   defaultEase: 'smooth',
-  dataApi: true
+  dataApi: true,
+  scroll: {
+    threshold: 0.15,
+    rootMargin: '0px 0px -10% 0px',
+    once: true
+  }
 };
 
 let currentConfig = { ...defaultConfig };

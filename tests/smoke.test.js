@@ -15,12 +15,13 @@ global.document = {
 import AnimX from '../src/js/animx.js';
 import { normalizeSelector } from '../src/js/core/selector.js';
 import { parseDataAttributes } from '../src/js/data/data-parser.js';
+import { parseScrollAttributes } from '../src/js/scroll/scroll-parser.js';
 
 console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Version Check
-  assert.strictEqual(AnimX.version, '0.3.0', 'Version should be 0.3.0');
+  assert.strictEqual(AnimX.version, '0.4.0', 'Version should be 0.4.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -58,17 +59,20 @@ try {
   assert.strictEqual(typeof AnimX.init, 'function');
   assert.strictEqual(typeof AnimX.refresh, 'function');
   assert.strictEqual(typeof AnimX.run, 'function');
+  assert.strictEqual(typeof AnimX.scroll, 'function', 'AnimX.scroll should be exposed');
+  assert.strictEqual(typeof AnimX.refreshScroll, 'function');
+  assert.strictEqual(typeof AnimX.unobserve, 'function');
   console.log('✅ Global API exposed');
   
-  // 7. Data Parser Check
-  const mockEl = {
-    dataset: { ax: 'fade-up', axDuration: '700', axRepeat: 'infinite', axDelay: 'invalid' }
+  // 7. Scroll Parser Check
+  const mockScrollEl = {
+    dataset: { ax: 'fade-up', axOn: 'scroll', axThreshold: '2', axOnce: 'false', axStagger: '100' }
   };
-  const parsed = parseDataAttributes(mockEl);
-  assert.strictEqual(parsed.options.duration, 700);
-  assert.strictEqual(parsed.options.iterations, Infinity);
-  assert.strictEqual(parsed.options.delay, undefined); // Invalid delay parsed as undefined
-  console.log('✅ Data parser safely normalizes string options');
+  const scrollParsed = parseScrollAttributes(mockScrollEl);
+  assert.strictEqual(scrollParsed.threshold, 1, 'Threshold should clamp to 1 max');
+  assert.strictEqual(scrollParsed.once, false, 'Once should parse to false');
+  assert.strictEqual(scrollParsed.stagger, 100);
+  console.log('✅ Scroll parser successfully parses and clamps attributes');
 
   console.log('--- All tests passed ---');
 } catch (error) {

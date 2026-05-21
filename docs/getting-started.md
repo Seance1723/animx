@@ -34,11 +34,51 @@ If you want to manually trigger a data-attribute animation later, use `data-ax-o
 <button onclick="AnimX.run('[data-ax-id=box]')">Run</button>
 ```
 
-*(Note: Scroll triggers will be introduced in v0.4.0)*
+## Scroll Reveal
 
-## Advanced Usage (JavaScript API)
+Animate elements as they scroll into view!
 
-AnimX exposes a global `window.AnimX` API.
+```html
+<div data-ax="fade-up" data-ax-on="scroll">
+  Fade up on scroll
+</div>
+
+<div 
+  data-ax="zoom-in"
+  data-ax-on="scroll"
+  data-ax-threshold="0.3"
+  data-ax-once="true">
+  Zoom in when 30% visible
+</div>
+```
+
+### Scroll Groups (Stagger)
+
+```html
+<section 
+  data-ax-group
+  data-ax-child="fade-up"
+  data-ax-on="scroll"
+  data-ax-stagger="120">
+  <div class="card">Card 1</div>
+  <div class="card">Card 2</div>
+  <div class="card">Card 3</div>
+</section>
+```
+
+### JS Scroll API
+```javascript
+AnimX.scroll('.card', {
+  animation: 'fade-up',
+  threshold: 0.2,
+  once: true
+});
+
+AnimX.refreshScroll(); // Rescan DOM
+AnimX.unobserve('.card'); // Stop observing
+```
+
+*(Note: Advanced timelines and text-splitting will be introduced in future versions)*
 
 ```javascript
 AnimX.init();

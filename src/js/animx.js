@@ -13,8 +13,10 @@ import { createWAAPIDriver } from './drivers/waapi-driver.js';
 import { createRAFDriver } from './drivers/raf-driver.js';
 
 import { initData, refreshData, runData, bindAnimX } from './data/data-api.js';
+import { observeScroll, refreshScroll, unobserveScroll } from './scroll/scroll-api.js';
+import { bindScrollAnimX } from './scroll/scroll-observer.js';
 
-const VERSION = '0.3.0';
+const VERSION = '0.4.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -28,6 +30,7 @@ class AnimXCore {
     this._instances = new Set();
     this._initialized = false;
     bindAnimX(this);
+    bindScrollAnimX(this);
   }
 
   config(options) {
@@ -39,6 +42,7 @@ class AnimXCore {
     this._initialized = true;
     log(`AnimX v${this.version} Initialized.`);
     initData();
+    refreshScroll();
   }
 
   ready(callback) {
@@ -63,10 +67,23 @@ class AnimXCore {
 
   refresh(root) {
     refreshData(root);
+    refreshScroll(root);
+  }
+  
+  refreshScroll(root) {
+    refreshScroll(root);
   }
 
   run(target) {
     runData(target);
+  }
+  
+  scroll(target, options) {
+    observeScroll(target, options);
+  }
+  
+  unobserve(target) {
+    unobserveScroll(target);
   }
 
   animate(selector, animationInput, options = {}) {

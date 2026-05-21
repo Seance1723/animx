@@ -1,4 +1,4 @@
-# AnimX (v0.3.0)
+# AnimX (v0.4.0)
 
 A highly optimized, zero-dependency browser animation library.
 
@@ -9,6 +9,7 @@ A highly optimized, zero-dependency browser animation library.
 - **CSS Presets**: 20+ hardware-accelerated CSS animation families.
 - **JavaScript API**: Built-in Web Animations API (WAAPI) engine with RAF fallback.
 - **Data Attributes**: Declarative HTML engine (`data-ax="fade-up"`).
+- **Scroll Reveal**: Native `IntersectionObserver` support (`data-ax-on="scroll"`).
 
 ## Quick Start
 
@@ -25,10 +26,11 @@ A highly optimized, zero-dependency browser animation library.
 <div data-ax="fade-up" data-ax-duration="600" data-ax-ease="smooth">Animated Box</div>
 ```
 
-### 2. Manual Data Attributes
+### 2. Scroll Reveal
 ```html
-<div data-ax="slide-left" data-ax-on="manual" data-ax-id="box">Manual</div>
-<button onclick="AnimX.run('[data-ax-id=box]')">Run</button>
+<div data-ax="fade-up" data-ax-on="scroll">
+  Fade up on scroll
+</div>
 ```
 
 ### 3. Custom JS Animation (WAAPI/RAF)

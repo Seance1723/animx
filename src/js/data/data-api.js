@@ -19,11 +19,8 @@ function processElement(element, forceRun = false) {
   
   if (!parsed) return;
   
-  // Warn if scroll trigger is used
+  // Let scroll-api handle scroll triggers
   if (parsed.trigger === 'scroll') {
-    if (config.debug || parsed.debug) {
-      log('AnimX: data-ax-on="scroll" is not implemented until v0.4.0', element);
-    }
     return;
   }
 
