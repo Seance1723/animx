@@ -1,0 +1,12 @@
+@use 'base/tokens';
+@use 'base/easings';
+@use 'base/mixins';
+@use 'base/reset';
+@use 'base/reduced-motion';
+
+@use 'utilities/duration';
+@use 'utilities/delay';
+@use 'utilities/repeat';
+
+@use 'keyframes/placeholder' as kf-placeholder;
+@use 'components/placeholder' as comp-placeholder;

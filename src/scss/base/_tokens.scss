@@ -1,0 +1,13 @@
+:root {
+  --ax-duration-fast: 180ms;
+  --ax-duration-normal: 420ms;
+  --ax-duration-slow: 760ms;
+
+  --ax-ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ax-ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
+  --ax-ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+
+  --ax-distance-sm: 12px;
+  --ax-distance-md: 32px;
+  --ax-distance-lg: 64px;
+}

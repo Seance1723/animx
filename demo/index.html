@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX Demo</title>
+  <link rel="stylesheet" href="../dist/animx.css">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      background: #fafafa;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #007bff;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AnimX</h1>
+    <p>Version: 0.0.1</p>
+    <p>Status: Foundation build working</p>
+    
+    <div class="ax ax-placeholder box"></div>
+  </div>
+
+  <script src="../dist/animx.js"></script>
+  <script>
+    if (window.AnimX) {
+      AnimX.config({ debug: true });
+      AnimX.init();
+      console.log('AnimX Version:', AnimX.version);
+    } else {
+      console.error('AnimX failed to load.');
+    }
+  </script>
+</body>
+</html>
