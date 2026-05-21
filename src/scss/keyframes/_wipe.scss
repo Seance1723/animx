@@ -1,0 +1,28 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-wipe-up {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ax-wipe-down {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ax-wipe-left {
+  from { clip-path: inset(0 0 0 100%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ax-wipe-right {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes ax-wipe-center {
+  from { clip-path: inset(50% 50% 50% 50%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.ax-wipe-up { @include ax-animation(ax-wipe-up); }
+.ax-wipe-down { @include ax-animation(ax-wipe-down); }
+.ax-wipe-left { @include ax-animation(ax-wipe-left); }
+.ax-wipe-right { @include ax-animation(ax-wipe-right); }
+.ax-wipe-center { @include ax-animation(ax-wipe-center); }

@@ -3,3 +3,19 @@
 .ax {
   @include ax-base;
 }
+
+.ax-paused {
+  animation-play-state: paused !important;
+}
+
+.ax-running {
+  animation-play-state: running !important;
+}
+
+.ax-hidden {
+  opacity: 0;
+}
+
+.ax-visible {
+  opacity: 1;
+}

@@ -1,0 +1,44 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-loader-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes ax-loader-dots {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes ax-loader-bars {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.5); }
+}
+@keyframes ax-loader-ring {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes ax-loader-pulse {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+@keyframes ax-loader-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes ax-loader-wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+@keyframes ax-loader-shimmer {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+.ax-loader-spin { @include ax-loop-animation(ax-loader-spin, 1s, linear); }
+.ax-loader-dots { @include ax-loop-animation(ax-loader-dots, 0.6s, ease-in-out); }
+.ax-loader-bars { @include ax-loop-animation(ax-loader-bars, 1s, ease-in-out); }
+.ax-loader-ring { @include ax-loop-animation(ax-loader-ring, 1.2s, linear); }
+.ax-loader-pulse { @include ax-loop-animation(ax-loader-pulse, 1.5s, ease-in-out); }
+.ax-loader-bounce { @include ax-loop-animation(ax-loader-bounce, 0.6s, ease-in-out); }
+.ax-loader-wave { @include ax-loop-animation(ax-loader-wave, 1s, ease-in-out); }
+.ax-loader-shimmer { @include ax-loop-animation(ax-loader-shimmer, 2s, linear); background-size: 200% 100%; background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%); }

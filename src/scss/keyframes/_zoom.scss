@@ -1,0 +1,35 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-zoom-in {
+  from { opacity: 0; transform: scale3d(var(--ax-scale-md), var(--ax-scale-md), 1); }
+  50% { opacity: 1; }
+  to { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+@keyframes ax-zoom-out {
+  from { opacity: 1; transform: scale3d(1, 1, 1); }
+  50% { opacity: 0; }
+  to { opacity: 0; transform: scale3d(var(--ax-scale-md), var(--ax-scale-md), 1); }
+}
+@keyframes ax-scale-in {
+  from { opacity: 0; transform: scale3d(0, 0, 1); }
+  to { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+@keyframes ax-scale-out {
+  from { opacity: 1; transform: scale3d(1, 1, 1); }
+  to { opacity: 0; transform: scale3d(0, 0, 1); }
+}
+@keyframes ax-scale-up {
+  from { transform: scale3d(var(--ax-scale-lg), var(--ax-scale-lg), 1); }
+  to { transform: scale3d(1, 1, 1); }
+}
+@keyframes ax-scale-down {
+  from { transform: scale3d(1, 1, 1); }
+  to { transform: scale3d(var(--ax-scale-lg), var(--ax-scale-lg), 1); }
+}
+
+.ax-zoom-in { @include ax-transform-animation(ax-zoom-in); }
+.ax-zoom-out { @include ax-transform-animation(ax-zoom-out); }
+.ax-scale-in { @include ax-transform-animation(ax-scale-in); }
+.ax-scale-out { @include ax-transform-animation(ax-scale-out); }
+.ax-scale-up { @include ax-transform-animation(ax-scale-up); }
+.ax-scale-down { @include ax-transform-animation(ax-scale-down); }

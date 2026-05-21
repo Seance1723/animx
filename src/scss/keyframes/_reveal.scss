@@ -1,0 +1,45 @@
+@use '../base/mixins' as *;
+
+// Clip-path reveals
+@keyframes ax-reveal-up {
+  from { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); transform: translateY(var(--ax-distance-md)); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); transform: translateY(0); }
+}
+@keyframes ax-reveal-down {
+  from { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transform: translateY(calc(-1 * var(--ax-distance-md))); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); transform: translateY(0); }
+}
+@keyframes ax-reveal-left {
+  from { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); transform: translateX(var(--ax-distance-md)); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); transform: translateX(0); }
+}
+@keyframes ax-reveal-right {
+  from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); transform: translateX(calc(-1 * var(--ax-distance-md))); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); transform: translateX(0); }
+}
+
+@keyframes ax-clip-up {
+  from { clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+}
+@keyframes ax-clip-down {
+  from { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+}
+@keyframes ax-clip-left {
+  from { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+}
+@keyframes ax-clip-right {
+  from { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); }
+  to { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+}
+
+.ax-reveal-up { @include ax-transform-animation(ax-reveal-up); }
+.ax-reveal-down { @include ax-transform-animation(ax-reveal-down); }
+.ax-reveal-left { @include ax-transform-animation(ax-reveal-left); }
+.ax-reveal-right { @include ax-transform-animation(ax-reveal-right); }
+.ax-clip-up { @include ax-animation(ax-clip-up); }
+.ax-clip-down { @include ax-animation(ax-clip-down); }
+.ax-clip-left { @include ax-animation(ax-clip-left); }
+.ax-clip-right { @include ax-animation(ax-clip-right); }

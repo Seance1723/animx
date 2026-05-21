@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Demo</title>
+  <title>AnimX Demo - v0.2.0</title>
   <link rel="stylesheet" href="../dist/animx.css">
   <style>
     body {
@@ -11,35 +11,161 @@
       padding: 2rem;
       background: #fafafa;
       color: #333;
-    }
-    .container {
-      max-width: 600px;
+      max-width: 1200px;
       margin: 0 auto;
     }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
     .box {
-      width: 100px;
       height: 100px;
-      background: #007bff;
+      background: #4f46e5;
       border-radius: 8px;
-      margin-top: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      padding: 1rem;
+    }
+    section { margin-top: 3rem; border-top: 2px solid #eaeaea; padding-top: 2rem; }
+    h2 { padding-bottom: 0.5rem; }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .btn:hover { background: #4338ca; }
+    
+    .status-text {
+      font-family: monospace;
+      color: #16a34a;
+      font-weight: bold;
+      margin-top: 1rem;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>AnimX</h1>
-    <p>Version: 0.0.1</p>
-    <p>Status: Foundation build working</p>
-    
-    <div class="ax ax-placeholder box"></div>
+  <h1>AnimX v0.2.0</h1>
+  <p>Status: JavaScript Animation API working</p>
+  
+  <div style="margin-bottom: 2rem; padding: 1rem; background: #eef2ff; border-radius: 8px;">
+    <strong>Global Controls:</strong>
+    <br><br>
+    <button class="btn" onclick="AnimX.replay()">Replay All</button>
+    <button class="btn" onclick="AnimX.stop()">Stop All</button>
+    <button class="btn" onclick="AnimX.reset()">Reset All</button>
+    <button class="btn" onclick="AnimX.destroy()">Destroy All</button>
   </div>
+
+  <section>
+    <h2>1. CSS Preset via JS</h2>
+    <button class="btn" id="btn-trigger-fade">Trigger Fade Up</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box demo-fade">CSS Preset</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Custom JS Animation (WAAPI)</h2>
+    <button class="btn" id="btn-trigger-custom">Trigger Custom Anim</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box demo-custom">Custom Object</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Multiple Elements</h2>
+    <button class="btn" id="btn-trigger-multi">Trigger Group Anim</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box demo-card">Card 1</div>
+      <div class="box demo-card">Card 2</div>
+      <div class="box demo-card">Card 3</div>
+    </div>
+  </section>
+  
+  <section>
+    <h2>4. Instance Controls & Callbacks</h2>
+    <button class="btn" id="btn-ctrl-play">Play</button>
+    <button class="btn" id="btn-ctrl-pause">Pause</button>
+    <button class="btn" id="btn-ctrl-reverse">Reverse</button>
+    <span class="status-text" id="callback-status">Status: Idle</span>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box demo-ctrl">Control Me</div>
+    </div>
+  </section>
 
   <script src="../dist/animx.js"></script>
   <script>
     if (window.AnimX) {
       AnimX.config({ debug: true });
       AnimX.init();
-      console.log('AnimX Version:', AnimX.version);
+      
+      // 1. CSS Preset via JS
+      document.getElementById('btn-trigger-fade').addEventListener('click', () => {
+        AnimX.animate('.demo-fade', 'fade-up', { duration: 600 });
+      });
+
+      // 2. Custom JS Animation
+      document.getElementById('btn-trigger-custom').addEventListener('click', () => {
+        AnimX.animate('.demo-custom', {
+          from: { opacity: 0, y: 40, scale: 0.9, rotate: -10, blur: 5 },
+          to: { opacity: 1, y: 0, scale: 1, rotate: 0, blur: 0 }
+        }, { 
+          duration: 700, 
+          ease: 'snappy' 
+        });
+      });
+
+      // 3. Multiple Elements
+      document.getElementById('btn-trigger-multi').addEventListener('click', () => {
+        AnimX.animate('.demo-card', 'zoom-in', { duration: 500, ease: 'bounce' });
+      });
+
+      // 4. Instance Controls & Callbacks
+      const statusEl = document.getElementById('callback-status');
+      let ctrlInstance = null;
+      
+      function initCtrlInstance() {
+        if (ctrlInstance) ctrlInstance.destroy();
+        ctrlInstance = AnimX.animate('.demo-ctrl', {
+          from: { x: -100, rotate: -45, opacity: 0 },
+          to: { x: 100, rotate: 45, opacity: 1 }
+        }, {
+          duration: 2000,
+          ease: 'smooth',
+          onStart: () => statusEl.textContent = 'Status: Started!',
+          onComplete: () => statusEl.textContent = 'Status: Completed!',
+          onCancel: () => statusEl.textContent = 'Status: Cancelled!'
+        });
+      }
+      
+      document.getElementById('btn-ctrl-play').addEventListener('click', () => {
+        if (!ctrlInstance || ctrlInstance._status === 'destroyed' || ctrlInstance._status === 'finished') {
+          initCtrlInstance();
+        } else {
+          ctrlInstance.play();
+        }
+      });
+      document.getElementById('btn-ctrl-pause').addEventListener('click', () => {
+        if (ctrlInstance) ctrlInstance.pause();
+      });
+      document.getElementById('btn-ctrl-reverse').addEventListener('click', () => {
+        if (ctrlInstance) ctrlInstance.reverse();
+      });
+      
     } else {
       console.error('AnimX failed to load.');
     }

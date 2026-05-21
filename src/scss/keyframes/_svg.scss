@@ -1,0 +1,22 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-svg-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes ax-svg-undraw {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 1000; }
+}
+@keyframes ax-svg-stroke-dash {
+  to { stroke-dashoffset: -1000; }
+}
+@keyframes ax-svg-fill-in {
+  from { fill-opacity: 0; }
+  to { fill-opacity: 1; }
+}
+
+.ax-svg-draw { @include ax-animation(ax-svg-draw, var(--ax-duration-cinematic)); stroke-dasharray: 1000; }
+.ax-svg-undraw { @include ax-animation(ax-svg-undraw, var(--ax-duration-cinematic)); stroke-dasharray: 1000; }
+.ax-svg-stroke-dash { @include ax-loop-animation(ax-svg-stroke-dash, 5s, linear); stroke-dasharray: 1000; }
+.ax-svg-fill-in { @include ax-animation(ax-svg-fill-in, var(--ax-duration-slow)); }

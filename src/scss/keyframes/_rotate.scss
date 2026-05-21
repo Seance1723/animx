@@ -1,0 +1,33 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-rotate-in {
+  from { opacity: 0; transform: rotate3d(0, 0, 1, -200deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes ax-rotate-out {
+  from { opacity: 1; }
+  to { opacity: 0; transform: rotate3d(0, 0, 1, 200deg); }
+}
+@keyframes ax-rotate-left {
+  from { transform: rotate3d(0, 0, 1, calc(-1 * var(--ax-rotate-lg))); }
+  to { transform: rotate3d(0, 0, 1, 0); }
+}
+@keyframes ax-rotate-right {
+  from { transform: rotate3d(0, 0, 1, var(--ax-rotate-lg)); }
+  to { transform: rotate3d(0, 0, 1, 0); }
+}
+@keyframes ax-spin {
+  from { transform: rotate3d(0, 0, 1, 0deg); }
+  to { transform: rotate3d(0, 0, 1, 360deg); }
+}
+@keyframes ax-spin-reverse {
+  from { transform: rotate3d(0, 0, 1, 360deg); }
+  to { transform: rotate3d(0, 0, 1, 0deg); }
+}
+
+.ax-rotate-in { @include ax-transform-animation(ax-rotate-in); }
+.ax-rotate-out { @include ax-transform-animation(ax-rotate-out); }
+.ax-rotate-left { @include ax-transform-animation(ax-rotate-left); }
+.ax-rotate-right { @include ax-transform-animation(ax-rotate-right); }
+.ax-spin { @include ax-loop-animation(ax-spin); }
+.ax-spin-reverse { @include ax-loop-animation(ax-spin-reverse); }

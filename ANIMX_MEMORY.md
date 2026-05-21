@@ -1,23 +1,34 @@
 # AnimX Project Memory
 
-## Project Identity
-- Project name: AnimX
-- Version: 0.0.1
-- Type: Zero-dependency browser animation library
-- Final output: one CSS file and one JS file
-- Runtime dependency: none
+**Project**: AnimX
+**Current Version**: 0.2.0
+**Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
-## Core Product Direction
-- AnimX must be built from scratch.
-- Do not use GSAP, Anime.js, Motion, Animate.css, AOS, jQuery, or any external animation library.
-- Native browser APIs are allowed:
-  - CSS animations
-  - Web Animations API
-  - requestAnimationFrame
-  - IntersectionObserver
-  - matchMedia
-  - MutationObserver
-  - ResizeObserver
+## v0.0.1 - Foundation (Completed)
+- Set up project structure, SCSS variables, Vite build, and basic tests.
+- Output strictly mapped to `dist/animx.css` and `dist/animx.js`.
+
+## v0.1.0 - Core CSS Animation System (Completed)
+- Completed exhaustive CSS families (Fade, Slide, Zoom, Rotate, Pulse, Skeleton, etc.).
+- Integrated `AnimX.getPresets()` for tracking classes via JS.
+
+## v0.2.0 - JavaScript Animation API (Completed)
+- Added `AnimX.animate()`.
+- Implemented **WAAPI Driver** for custom from/to animations.
+- Implemented **CSS Driver** for preset resolution via JS.
+- Implemented **RAF Driver** fallback logic.
+- Exposed animation instance controls (`play`, `pause`, `stop`, `destroy`, `reverse`).
+- Added robust selector normalization and default easing mapping.
+
+## v0.3.0 - Data Attribute Engine (Planned Next)
+- Do not build timeline yet.
+- Do not build scroll reveal yet.
+- Do not build text split yet.
+
+## Technical Constraints (CRITICAL)
+- No GSAP, Anime.js, Motion, or jQuery.
+- Use only native browser APIs (`requestAnimationFrame`, `Element.animate`, `IntersectionObserver`, CSS).
+- Final public output must remain one `dist/animx.css` and one `dist/animx.js`.
 
 ## Final User Usage Goal
 Users should be able to use AnimX with:
@@ -34,10 +45,11 @@ dist/
 └── animx.demo.html
 
 ## Current Version Scope
-v0.0.1 is only the foundation version.
-Do not build actual animation presets yet.
-Do not build the animation engine yet.
-Only create the project foundation, build setup, global AnimX object, SCSS base structure, demo page, and documentation starter.
+v0.1.0 implemented the core CSS animation preset system.
+- Main animation families added (Fade, Slide, Zoom, Rotate, Flip, Blur, Reveal, Wipe, Skew, Bounce, Elastic, Pulse, Shake, Glow, Float, Loader, Skeleton, Background, SVG).
+- Component preset classes added.
+- Utility classes for duration, delay, easing, and state added.
+JS animation engine is still not implemented.
 
 ## Current Public API Placeholders
 AnimX.version
@@ -46,6 +58,7 @@ AnimX.init()
 AnimX.ready()
 AnimX.registerPreset()
 AnimX.getPreset()
+AnimX.getPresets()
 
 ## Development Rules
 - Keep code clean and modular internally.

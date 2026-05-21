@@ -1,0 +1,31 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-bg-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes ax-bg-gradient-pulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+@keyframes ax-bg-pan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+@keyframes ax-bg-zoom {
+  0% { background-size: 100%; }
+  50% { background-size: 150%; }
+  100% { background-size: 100%; }
+}
+@keyframes ax-bg-spotlight-sweep {
+  0% { background-position: -100% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.ax-bg-gradient-shift { @include ax-loop-animation(ax-bg-gradient-shift, 10s, ease); background-size: 200% 200%; }
+.ax-bg-gradient-pulse { @include ax-loop-animation(ax-bg-gradient-pulse, 3s, ease-in-out); }
+.ax-bg-pan { @include ax-loop-animation(ax-bg-pan, 20s, linear); }
+.ax-bg-zoom { @include ax-loop-animation(ax-bg-zoom, 15s, ease-in-out); }
+.ax-bg-spotlight-sweep { @include ax-loop-animation(ax-bg-spotlight-sweep, 5s, linear); }

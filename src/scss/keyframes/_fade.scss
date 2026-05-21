@@ -1,0 +1,44 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ax-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes ax-fade-up {
+  from { opacity: 0; transform: translate3d(0, var(--ax-distance-md), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ax-fade-down {
+  from { opacity: 0; transform: translate3d(0, calc(-1 * var(--ax-distance-md)), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ax-fade-left {
+  from { opacity: 0; transform: translate3d(var(--ax-distance-md), 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ax-fade-right {
+  from { opacity: 0; transform: translate3d(calc(-1 * var(--ax-distance-md)), 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes ax-fade-center {
+  from { opacity: 0; transform: scale3d(var(--ax-scale-md), var(--ax-scale-md), 1); }
+  to { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+.ax-fade-in { @include ax-animation(ax-fade-in); }
+.ax-fade-out { @include ax-animation(ax-fade-out); }
+.ax-fade-up { @include ax-transform-animation(ax-fade-up); }
+.ax-fade-down { @include ax-transform-animation(ax-fade-down); }
+.ax-fade-left { @include ax-transform-animation(ax-fade-left); }
+.ax-fade-right { @include ax-transform-animation(ax-fade-right); }
+.ax-fade-center { @include ax-transform-animation(ax-fade-center); }

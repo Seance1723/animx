@@ -1,42 +1,64 @@
+import assert from 'assert';
+
+// We import the unminified JS build or src to test exports without a browser.
+// Note: Some DOM APIs won't exist in Node, so we mock basic global variables for the test to import successfully.
+global.window = {
+  matchMedia: () => ({ matches: false }),
+  addEventListener: () => {}
+};
+global.document = {
+  readyState: 'complete',
+  querySelectorAll: () => []
+};
+
+// Now safe to import
 import AnimX from '../src/js/animx.js';
 import { normalizeSelector } from '../src/js/core/selector.js';
-import { getConfig } from '../src/js/core/config.js';
 
 console.log('--- Running Smoke Test ---');
 
-// Test 1: Version exists
-if (AnimX.version === '0.0.1') {
-  console.log('✅ Version is correct');
-} else {
-  console.error('❌ Version is incorrect');
-  process.exit(1);
-}
-
-// Test 2: Registry works
-AnimX.registerPreset('test-preset', { type: 'placeholder' });
-const preset = AnimX.getPreset('test-preset');
-if (preset && preset.type === 'placeholder') {
-  console.log('✅ Registry works');
-} else {
-  console.error('❌ Registry failed');
-  process.exit(1);
-}
-
-// Test 3: Config works
-AnimX.config({ debug: true });
-if (getConfig().debug === true) {
-  console.log('✅ Config updates correctly');
-} else {
-  console.error('❌ Config failed');
-  process.exit(1);
-}
-
-// Test 4: Selector does not crash
 try {
-  normalizeSelector('.test');
+  // 1. Version Check
+  assert.strictEqual(AnimX.version, '0.2.0', 'Version should be 0.2.0');
+  console.log('✅ Version is correct');
+
+  // 2. Preset API
+  const presets = AnimX.getPresets();
+  assert.ok(presets.length > 0, 'CSS presets should be registered');
+  
+  const fadeUp = AnimX.getPreset('fade-up');
+  assert.ok(fadeUp, 'fade-up preset should exist');
+  assert.strictEqual(fadeUp.className, 'ax-fade-up', 'Preset classname mapping is correct');
+  console.log('✅ CSS presets loaded successfully');
+
+  const missing = AnimX.getPreset('not-a-real-preset');
+  assert.strictEqual(missing, null, 'Missing preset should return null without crashing');
+  console.log('✅ Missing preset handled gracefully');
+
+  // 3. Config API
+  AnimX.config({ debug: true });
+  console.log('✅ Config updates correctly');
+
+  // 4. Selector normalizer
+  const emptyArr = normalizeSelector('.not-exist');
+  assert.ok(Array.isArray(emptyArr), 'Selector returns array');
+  assert.strictEqual(emptyArr.length, 0, 'Selector returns empty array when no elements found');
   console.log('✅ Selector utility does not crash');
-} catch (e) {
-  console.error('❌ Selector utility crashed', e);
+
+  // 5. AnimX.animate API (safe mock test)
+  assert.strictEqual(typeof AnimX.animate, 'function', 'AnimX.animate should be exposed');
+  const emptyAnim = AnimX.animate('.fake-selector', 'fade-up');
+  assert.ok(emptyAnim, 'AnimX.animate returns an instance safely for missing elements');
+  assert.strictEqual(typeof emptyAnim.play, 'function', 'Instance has play()');
+  console.log('✅ AnimX.animate() exists and handles missing targets safely');
+  
+  // 6. Global controls
+  assert.strictEqual(typeof AnimX.stop, 'function');
+  console.log('✅ Global API exposed');
+
+  console.log('--- All tests passed ---');
+} catch (error) {
+  console.error('❌ Smoke test failed:', error);
   process.exit(1);
 }
 

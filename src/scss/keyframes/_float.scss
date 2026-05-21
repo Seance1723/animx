@@ -1,0 +1,35 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(calc(-1 * var(--ax-distance-xs))); }
+  100% { transform: translateY(0); }
+}
+@keyframes ax-float-up-down {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(calc(-1 * var(--ax-distance-sm))); }
+  100% { transform: translateY(0); }
+}
+@keyframes ax-float-left-right {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(calc(-1 * var(--ax-distance-sm))); }
+  100% { transform: translateX(0); }
+}
+@keyframes ax-drift {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(calc(var(--ax-distance-sm) / 2), calc(-1 * var(--ax-distance-xs))); }
+  66% { transform: translate(calc(-1 * var(--ax-distance-xs)), calc(var(--ax-distance-sm) / 2)); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes ax-slow-sway {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.ax-float { @include ax-loop-animation(ax-float, 3s, ease-in-out); }
+.ax-float-up-down { @include ax-loop-animation(ax-float-up-down, 4s, ease-in-out); }
+.ax-float-left-right { @include ax-loop-animation(ax-float-left-right, 4s, ease-in-out); }
+.ax-drift { @include ax-loop-animation(ax-drift, 5s, ease-in-out); }
+.ax-slow-sway { @include ax-loop-animation(ax-slow-sway, 5s, ease-in-out); transform-origin: top center; }

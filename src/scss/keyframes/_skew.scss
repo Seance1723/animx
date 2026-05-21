@@ -1,0 +1,23 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-skew-in {
+  from { opacity: 0; transform: skewX(-20deg); }
+  to { opacity: 1; transform: skewX(0); }
+}
+@keyframes ax-skew-out {
+  from { opacity: 1; transform: skewX(0); }
+  to { opacity: 0; transform: skewX(20deg); }
+}
+@keyframes ax-skew-left {
+  from { opacity: 0; transform: translateX(var(--ax-distance-lg)) skewX(-20deg); }
+  to { opacity: 1; transform: translateX(0) skewX(0); }
+}
+@keyframes ax-skew-right {
+  from { opacity: 0; transform: translateX(calc(-1 * var(--ax-distance-lg))) skewX(20deg); }
+  to { opacity: 1; transform: translateX(0) skewX(0); }
+}
+
+.ax-skew-in { @include ax-transform-animation(ax-skew-in); }
+.ax-skew-out { @include ax-transform-animation(ax-skew-out); }
+.ax-skew-left { @include ax-transform-animation(ax-skew-left); }
+.ax-skew-right { @include ax-transform-animation(ax-skew-right); }

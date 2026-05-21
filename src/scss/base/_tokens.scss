@@ -1,13 +1,43 @@
 :root {
+  --ax-duration-instant: 80ms;
   --ax-duration-fast: 180ms;
   --ax-duration-normal: 420ms;
   --ax-duration-slow: 760ms;
+  --ax-duration-cinematic: 1200ms;
 
+  --ax-delay-none: 0ms;
+  --ax-delay-100: 100ms;
+  --ax-delay-200: 200ms;
+  --ax-delay-300: 300ms;
+  --ax-delay-500: 500ms;
+  --ax-delay-700: 700ms;
+  --ax-delay-1000: 1000ms;
+
+  --ax-ease-linear: linear;
   --ax-ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
   --ax-ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
   --ax-ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --ax-ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ax-ease-dramatic: cubic-bezier(0.77, 0, 0.175, 1);
 
-  --ax-distance-sm: 12px;
+  --ax-distance-xs: 8px;
+  --ax-distance-sm: 16px;
   --ax-distance-md: 32px;
   --ax-distance-lg: 64px;
+  --ax-distance-xl: 96px;
+
+  --ax-scale-sm: 0.96;
+  --ax-scale-md: 0.88;
+  --ax-scale-lg: 0.72;
+
+  --ax-rotate-sm: 6deg;
+  --ax-rotate-md: 16deg;
+  --ax-rotate-lg: 32deg;
+
+  --ax-blur-sm: 4px;
+  --ax-blur-md: 10px;
+  --ax-blur-lg: 20px;
+
+  --ax-glow-color: rgba(99, 102, 241, 0.45);
+  --ax-shadow-soft: 0 12px 32px rgba(15, 23, 42, 0.12);
 }

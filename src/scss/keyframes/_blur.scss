@@ -1,0 +1,43 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-blur-in {
+  from { opacity: 0; filter: blur(var(--ax-blur-lg)); }
+  to { opacity: 1; filter: blur(0); }
+}
+@keyframes ax-blur-out {
+  from { opacity: 1; filter: blur(0); }
+  to { opacity: 0; filter: blur(var(--ax-blur-lg)); }
+}
+@keyframes ax-blur-up {
+  from { opacity: 0; transform: translate3d(0, var(--ax-distance-md), 0); filter: blur(var(--ax-blur-md)); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+}
+@keyframes ax-blur-down {
+  from { opacity: 0; transform: translate3d(0, calc(-1 * var(--ax-distance-md)), 0); filter: blur(var(--ax-blur-md)); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+}
+@keyframes ax-blur-left {
+  from { opacity: 0; transform: translate3d(var(--ax-distance-md), 0, 0); filter: blur(var(--ax-blur-md)); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+}
+@keyframes ax-blur-right {
+  from { opacity: 0; transform: translate3d(calc(-1 * var(--ax-distance-md)), 0, 0); filter: blur(var(--ax-blur-md)); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); filter: blur(0); }
+}
+@keyframes ax-blur-zoom-in {
+  from { opacity: 0; transform: scale3d(var(--ax-scale-md), var(--ax-scale-md), 1); filter: blur(var(--ax-blur-lg)); }
+  to { opacity: 1; transform: scale3d(1, 1, 1); filter: blur(0); }
+}
+@keyframes ax-blur-zoom-out {
+  from { opacity: 1; transform: scale3d(1, 1, 1); filter: blur(0); }
+  to { opacity: 0; transform: scale3d(var(--ax-scale-lg), var(--ax-scale-lg), 1); filter: blur(var(--ax-blur-lg)); }
+}
+
+.ax-blur-in { @include ax-transform-animation(ax-blur-in); }
+.ax-blur-out { @include ax-transform-animation(ax-blur-out); }
+.ax-blur-up { @include ax-transform-animation(ax-blur-up); }
+.ax-blur-down { @include ax-transform-animation(ax-blur-down); }
+.ax-blur-left { @include ax-transform-animation(ax-blur-left); }
+.ax-blur-right { @include ax-transform-animation(ax-blur-right); }
+.ax-blur-zoom-in { @include ax-transform-animation(ax-blur-zoom-in); }
+.ax-blur-zoom-out { @include ax-transform-animation(ax-blur-zoom-out); }

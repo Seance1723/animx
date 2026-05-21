@@ -1,1 +1,5 @@
-// Placeholder file for duration utilities
+.ax-instant { animation-duration: var(--ax-duration-instant) !important; }
+.ax-fast { animation-duration: var(--ax-duration-fast) !important; }
+.ax-normal { animation-duration: var(--ax-duration-normal) !important; }
+.ax-slow { animation-duration: var(--ax-duration-slow) !important; }
+.ax-cinematic { animation-duration: var(--ax-duration-cinematic) !important; }

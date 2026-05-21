@@ -1,4 +1,27 @@
 @mixin ax-base {
   animation-fill-mode: both;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+@mixin ax-animation($name, $duration: var(--ax-duration-normal), $ease: var(--ax-ease-smooth)) {
+  animation-name: #{$name};
+  animation-duration: #{$duration};
+  animation-timing-function: #{$ease};
+  animation-fill-mode: both;
+}
+
+@mixin ax-transform-animation($name, $duration: var(--ax-duration-normal), $ease: var(--ax-ease-smooth)) {
+  @include ax-animation($name, $duration, $ease);
+  will-change: transform, opacity;
+}
+
+@mixin ax-loop-animation($name, $duration: var(--ax-duration-normal), $ease: var(--ax-ease-linear)) {
+  @include ax-animation($name, $duration, $ease);
+  animation-iteration-count: infinite;
+}
+
+@mixin ax-hover-transition($duration: var(--ax-duration-fast), $ease: var(--ax-ease-smooth)) {
+  transition: all #{$duration} #{$ease};
+  will-change: transform, opacity, box-shadow;
 }

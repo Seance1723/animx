@@ -1,0 +1,35 @@
+@use '../base/mixins' as *;
+
+@keyframes ax-elastic-in {
+  0% { transform: scale(0); opacity: 0; }
+  16% { transform: scale(1.32); opacity: 1; }
+  28% { transform: scale(0.87); }
+  44% { transform: scale(1.05); }
+  59% { transform: scale(0.98); }
+  73% { transform: scale(1.01); }
+  88% { transform: scale(1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes ax-elastic-out {
+  0% { transform: scale(1); opacity: 1; }
+  16% { transform: scale(0.95); opacity: 1; }
+  28% { transform: scale(1.05); }
+  44% { transform: scale(0.8); }
+  100% { transform: scale(0); opacity: 0; }
+}
+@keyframes ax-elastic-pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes ax-elastic-drop {
+  0% { transform: translateY(-200px) scale(0.9); opacity: 0; }
+  50% { transform: translateY(20px) scale(1.1); opacity: 1; }
+  70% { transform: translateY(-10px) scale(0.95); }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.ax-elastic-in { @include ax-transform-animation(ax-elastic-in, var(--ax-duration-cinematic)); }
+.ax-elastic-out { @include ax-transform-animation(ax-elastic-out, var(--ax-duration-slow)); }
+.ax-elastic-pop { @include ax-transform-animation(ax-elastic-pop, var(--ax-duration-normal), var(--ax-ease-bounce)); }
+.ax-elastic-drop { @include ax-transform-animation(ax-elastic-drop, var(--ax-duration-slow), var(--ax-ease-bounce)); }

@@ -1,0 +1,12 @@
+.ax-linear { animation-timing-function: var(--ax-ease-linear) !important; }
+.ax-smooth { animation-timing-function: var(--ax-ease-smooth) !important; }
+.ax-snappy { animation-timing-function: var(--ax-ease-snappy) !important; }
+.ax-soft { animation-timing-function: var(--ax-ease-soft) !important; }
+.ax-bounce { animation-timing-function: var(--ax-ease-bounce) !important; }
+.ax-dramatic { animation-timing-function: var(--ax-ease-dramatic) !important; }
+
+.ax-origin-center { transform-origin: center !important; }
+.ax-origin-top { transform-origin: top !important; }
+.ax-origin-bottom { transform-origin: bottom !important; }
+.ax-origin-left { transform-origin: left !important; }
+.ax-origin-right { transform-origin: right !important; }

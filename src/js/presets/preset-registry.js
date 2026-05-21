@@ -15,3 +15,7 @@ export function getPreset(name) {
   }
   return registry.get(name);
 }
+
+export function getPresets() {
+  return Array.from(registry.entries()).map(([name, config]) => ({ name, ...config }));
+}
