@@ -28,3 +28,10 @@
 
 ## Instances
 Most methods return an instance exposing: `.play()`, `.pause()`, `.resume()`, `.stop()`, `.replay()`, `.reset()`, `.destroy()`, and `.isRunning()`.
+
+## Preset Registry (v1.5.0+)
+- **`AnimX.getPresets()`**: Returns an array of all registered preset configuration objects.
+- **`AnimX.getPresetCategories()`**: Returns a sorted array of available categories (e.g., `'entrance'`, `'attention'`).
+- **`AnimX.getPresetsByCategory(category)`**: Returns all presets belonging to the specified category string.
+- **`AnimX.searchPresets(query)`**: Deep searches presets by `name`, `category`, `family`, `tags`, or `description`. Returns matching preset objects.
+- **`AnimX.getPresetTags()`**: Returns a sorted list of all unique tags used across the preset registry.

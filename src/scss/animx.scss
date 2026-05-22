@@ -66,3 +66,13 @@
 @use 'interactions/ripple';
 @use 'interactions/tilt';
 @use 'interactions/feedback';
+@use 'presets/entrance' as preset-entrance;
+@use 'presets/exit' as preset-exit;
+@use 'presets/attention' as preset-attention;
+@use 'presets/emphasis' as preset-emphasis;
+@use 'presets/transforms' as preset-transforms;
+@use 'presets/reveals' as preset-reveals;
+@use 'presets/media' as preset-media;
+@use 'presets/background' as preset-background;
+@use 'presets/skeleton' as preset-skeleton;
+@use 'presets/utility-combinations' as preset-utility;

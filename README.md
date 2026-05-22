@@ -1,21 +1,26 @@
 <div align="center">
   <h1>AnimX</h1>
-  <p><strong>Zero-Dependency Browser Animation Library</strong></p>
-  <p>v1.4.0</p>
+  <p><strong>v1.5.0</strong> — Zero-dependency, high-performance browser animation engine.</p>
+  
+  [![npm version](https://img.shields.io/npm/v/animx.svg?style=flat-square)](https://www.npmjs.com/package/animx)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+  [![Size: 8KB](https://img.shields.io/badge/Size-~8KB_gzip-success.svg?style=flat-square)](#)
 </div>
 
 AnimX is a robust, lightweight, zero-dependency animation library built natively for modern browsers. It leverages the Web Animations API (WAAPI) with seamless CSS fallbacks, offering high performance without the bloat of traditional animation engines.
 
-### Why AnimX?
-- **Zero Dependencies:** No GSAP, no Anime.js, no jQuery.
-- **Single File Output:** Just one `animx.css` and one `animx.js`.
-- **Everything Built-in:** Scroll reveals, stagger, timelines, advanced text, and SVG path animations all included.
+## Features
+- **Zero Dependencies:** Pure Vanilla JavaScript & CSS.
+- **Over 300+ Built-in Presets:** Instantly use high-quality animations with classes like `.ax-fade-up-soft`, `.ax-zoom-in`, `.ax-bg-pan`.
+- **Advanced Scroll Engine:** Progress triggers, parallax, pin scenes, reading progress.
+- **Advanced Text Pack:** Split-text decoding, character waves, ticker-tape, gradient sweeps.
+- **SVG Animation Pack:** Stroke draw, fill reveal, dash loops, path follow.
 
-## ✨ What's New in v1.4.0 (Advanced Text Pack)
-- **Responsive Text Re-Splitting**: Text safely re-splits dynamically on resize and font load.
-- **Wave & Line Effects**: Premium `ax-text-line-inner` wrapping and character wave keyframes.
-- **Scramble Decode**: Hacker/numeric/glitch text decoders.
-- **Text Swap**: Animate through an array of strings natively.
+## ✨ What's New in v1.5.0 (Preset Expansion)
+- **300+ Presets**: Vastly expanded built-in CSS presets (entrance, exit, attention, transform, background, skeleton).
+- **Search API**: Built-in methods to query registered presets: `AnimX.searchPresets(query)` and `AnimX.getPresetsByCategory()`.
+- **SCSS Primitive System**: Modular SCSS mixins and base keyframes to effortlessly generate combinations.
+- **Utility Modifiers**: Chain classes like `.ax-infinite`, `.ax-fast`, `.ax-delay-300`, and `.ax-origin-center`.
 - **Ticker/Marquee**: Zero-dependency seamless scroll text.
 - **Gradient Text**: Advanced `background-clip` gradients with motion.
 - **Advanced Counters**: Animated numbers synced with `Intl.NumberFormat`.

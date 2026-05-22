@@ -30,21 +30,39 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.4.0', 'Version should be 1.4.0');
+  assert.strictEqual(AnimX.version, '1.5.0', 'Version should be 1.5.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
   const presets = AnimX.getPresets();
-  assert.ok(presets.length > 0, 'CSS presets should be registered');
+  assert.ok(presets.length >= 300, 'Expanded presets should be registered (>300)');
   
-  const fadeUp = AnimX.getPreset('fade-up');
-  assert.ok(fadeUp, 'fade-up preset should exist');
-  assert.strictEqual(fadeUp.className, 'ax-fade-up', 'Preset classname mapping is correct');
-  console.log('✅ CSS presets loaded successfully');
+  const fadeUpSoft = AnimX.getPreset('fade-up-soft');
+  assert.ok(fadeUpSoft, 'fade-up-soft preset should exist');
+  assert.strictEqual(fadeUpSoft.className, 'ax-fade-up-soft', 'Preset classname mapping is correct');
+  console.log('✅ Preset metadata loaded successfully');
 
   const missing = AnimX.getPreset('not-a-real-preset');
   assert.strictEqual(missing, null, 'Missing preset should return null without crashing');
   console.log('✅ Missing preset handled gracefully');
+  
+  // 2.5 New Search APIs
+  assert.strictEqual(typeof AnimX.getPresetsByCategory, 'function');
+  assert.strictEqual(typeof AnimX.searchPresets, 'function');
+  assert.strictEqual(typeof AnimX.getPresetTags, 'function');
+  
+  const entrancePresets = AnimX.getPresetsByCategory('entrance');
+  assert.ok(entrancePresets.length > 0, 'Should find entrance presets');
+  
+  const searchResults = AnimX.searchPresets('fade');
+  assert.ok(searchResults.length > 0, 'Search should return results for fade');
+  
+  const emptySearch = AnimX.searchPresets('thisisanimpossiblesearchstring');
+  assert.strictEqual(emptySearch.length, 0, 'Empty search handled gracefully');
+  
+  const tags = AnimX.getPresetTags();
+  assert.ok(tags.includes('entrance') && tags.includes('opacity'), 'Tags extracted correctly');
+  console.log('✅ New Preset Search APIs working');
 
   // 3. Config API
   AnimX.config({ debug: true });
@@ -183,7 +201,7 @@ try {
       assert.ok(presets.hero.includes('hero-fade-sequence'), 'hero-fade-sequence exists');
 
       const cats = AnimX.getPresetCategories();
-      assert.ok(cats.includes('component'), 'Component category exists');
+      assert.ok(cats.includes('entrance'), 'Entrance category exists');
 
       // Test component routing handles missing preset safely
       const missing = AnimX.component('.fake-btn', 'invalid-component');

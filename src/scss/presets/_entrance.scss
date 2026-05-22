@@ -1,0 +1,29 @@
+// ENTRANCE PRESETS
+
+$directions: (up, down, left, right);
+$intensities: (soft, hard);
+
+@each $dir in $directions {
+  .ax-fade-#{$dir} { animation-name: ax-fade-#{$dir}; }
+  @each $intensity in $intensities {
+    .ax-fade-#{$dir}-#{$intensity} { 
+      animation-name: ax-fade-#{$dir}; 
+      @if $intensity == 'soft' { --ax-distance: 15px; }
+      @if $intensity == 'hard' { --ax-distance: 100px; }
+    }
+  }
+}
+
+.ax-fade-in { animation-name: ax-fade; }
+
+@each $dir in $directions {
+  .ax-slide-#{$dir} { animation-name: ax-slide-#{$dir}; }
+}
+
+.ax-zoom-in, .ax-zoom-up, .ax-zoom-down { animation-name: ax-zoom-in; }
+.ax-blur-in, .ax-blur-up, .ax-blur-down { animation-name: ax-blur-in; }
+.ax-rotate-in, .ax-spin-in { animation-name: ax-rotate-in; }
+.ax-scale-in { animation-name: ax-scale-in; }
+
+.ax-flip-in-x { animation-name: ax-flip-x; }
+.ax-flip-in-y { animation-name: ax-flip-y; }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.4.0</title>
+  <title>AnimX v1.5.0</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -101,22 +101,120 @@
       background: var(--primary);
       z-index: 100;
     }
+    .search-box {
+      display: flex; gap: 10px; margin-bottom: 20px;
+    }
+    .search-input {
+      flex: 1; padding: 10px; font-size: 16px; border: 1px solid var(--border); border-radius: 6px;
+    }
+    .search-btn {
+      padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;
+    }
+    .search-results {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; max-height: 400px; overflow-y: auto;
+    }
+    .result-item {
+      padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; background: #f1f5f9; cursor: pointer;
+    }
+    .preset-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;
+    }
+    .preset-box {
+      padding: 30px 10px; text-align: center; border: 1px dashed var(--border); border-radius: 8px; background: white; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80px; font-size: 14px;
+    }
   </style>
 </head>
 <body>
   <div class="reading-bar" data-ax-reading-progress></div>
 
   <div class="container">
-    <header data-ax-component="hero-fade-sequence">
-      <h1 data-ax-component="hero-split-text">AnimX</h1>
-      <p>Zero-Dependency Browser Animation Library</p>
-      <div class="status-badge">v1.4.0 SVG Animation Pack</div>
-      <p style="margin-top:1.5rem; opacity:0.8;">Usage: One CSS + One JS File. No external libraries.</p>
+    <header>
+      <h1>AnimX v1.5.0</h1>
+      <p>Zero-dependency high-performance animation engine</p>
+      <div class="status-badge">Preset Expansion</div>
     </header>
 
     <div class="note">
       <strong>10. Reduced Motion Note:</strong> AnimX respects your OS settings. If <em>prefers-reduced-motion</em> is active, all continuous physics loops and heavy transforms drop to a 1ms instantaneous state automatically to ensure accessibility compliance without hiding content.
     </div>
+
+    <!-- Preset Expansion Search -->
+    <section>
+      <h2>Preset Search Demo</h2>
+      <p>Search over 300+ registered presets by name, category, or tags using <code>AnimX.searchPresets(query)</code>.</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search presets (e.g., 'fade', 'button', 'entrance')..." value="fade">
+        <button id="searchBtn" class="search-btn">Search</button>
+      </div>
+      <div id="searchResults" class="search-results"></div>
+    </section>
+
+    <!-- Expanded Entrance Gallery -->
+    <section>
+      <h2>Entrance Presets</h2>
+      <p>Click any box to replay the entrance animation.</p>
+      <div class="preset-grid" id="entranceGallery">
+        <div class="preset-box" data-ax="fade-up-soft" data-ax-once="false">fade-up-soft</div>
+        <div class="preset-box" data-ax="fade-down" data-ax-once="false">fade-down</div>
+        <div class="preset-box" data-ax="slide-left" data-ax-once="false">slide-left</div>
+        <div class="preset-box" data-ax="zoom-in" data-ax-once="false">zoom-in</div>
+        <div class="preset-box" data-ax="blur-up" data-ax-once="false">blur-up</div>
+        <div class="preset-box" data-ax="reveal-up" data-ax-once="false">reveal-up</div>
+        <div class="preset-box" data-ax="wipe-left" data-ax-once="false">wipe-left</div>
+        <div class="preset-box" data-ax="flip-in-x" data-ax-once="false">flip-in-x</div>
+      </div>
+    </section>
+
+    <!-- Expanded Exit Gallery -->
+    <section>
+      <h2>Exit Presets</h2>
+      <p>Click any box to trigger its exit animation. It will reset after 2s.</p>
+      <div class="preset-grid" id="exitGallery">
+        <div class="preset-box exit-btn" data-preset="fade-out">fade-out</div>
+        <div class="preset-box exit-btn" data-preset="slide-out-right">slide-out-right</div>
+        <div class="preset-box exit-btn" data-preset="zoom-out">zoom-out</div>
+        <div class="preset-box exit-btn" data-preset="blur-out">blur-out</div>
+      </div>
+    </section>
+
+    <!-- Expanded Attention Gallery -->
+    <section>
+      <h2>Attention Presets</h2>
+      <p>Hover over boxes to trigger attention animations.</p>
+      <div class="preset-grid">
+        <div class="preset-box" data-ax-component="button-pulse-attention">pulse</div>
+        <div class="preset-box" data-ax-component="button-error-shake">shake</div>
+        <div class="preset-box ax-wobble">wobble</div>
+        <div class="preset-box ax-tada">tada</div>
+        <div class="preset-box ax-glow-pulse">glow-pulse</div>
+        <div class="preset-box ax-heartbeat">heartbeat</div>
+      </div>
+    </section>
+    
+    <!-- Component Gallery -->
+    <section>
+      <h2>Component Presets</h2>
+      <p>A few component interactions from the new registries.</p>
+      <div class="preset-grid">
+        <button class="preset-box ax-button-magnetic">Button Magnetic</button>
+        <button class="preset-box ax-button-glow-soft" style="border:none;">Button Glow</button>
+        <div class="preset-box ax-card-lift-soft">Card Lift Soft</div>
+        <div class="preset-box ax-skeleton-shimmer">Skeleton Shimmer</div>
+      </div>
+    </section>
+    
+    <!-- Modifiers -->
+    <section>
+      <h2>Modifiers</h2>
+      <p>Mix base animations with modifier classes like <code>ax-fast</code>, <code>ax-delay-300</code>, <code>ax-infinite</code>, <code>ax-bounce</code>.</p>
+      <div class="preset-grid">
+        <div class="preset-box ax-fade-up ax-fast ax-infinite">ax-fast + ax-infinite</div>
+        <div class="preset-box ax-fade-up ax-delay-300">ax-delay-300</div>
+        <div class="preset-box ax-fade-up ax-bounce">ax-bounce</div>
+        <div class="preset-box ax-fade-up ax-dramatic ax-infinite">ax-dramatic</div>
+      </div>
+    </section>
 
     <!-- 1. Core CSS animations -->
     <section>

@@ -1,0 +1,16 @@
+// MEDIA PRESETS
+
+.ax-image-zoom-in { animation-name: ax-zoom-in; }
+.ax-image-zoom-out { animation-name: ax-zoom-out; }
+.ax-image-blur-in { animation-name: ax-blur-in; }
+.ax-image-parallax-soft { animation-name: ax-float-y; --ax-dist: -10%; }
+.ax-image-kenburns { animation-name: ax-zoom-in; animation-duration: 10s; }
+
+.ax-image-pan-left { animation-name: ax-float-x; --ax-dist: -5%; }
+.ax-image-pan-right { animation-name: ax-float-x; --ax-dist: 5%; }
+
+.ax-image-light-sweep { animation-name: ax-glint; }
+.ax-image-frame-lift { animation-name: ax-lift; }
+.ax-image-mask-reveal { animation-name: ax-mask-up; }
+.ax-video-fade-in { animation-name: ax-fade; }
+.ax-media-card-lift { animation-name: ax-lift; }

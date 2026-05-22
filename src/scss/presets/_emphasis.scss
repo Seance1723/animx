@@ -1,0 +1,11 @@
+// EMPHASIS PRESETS
+
+.ax-lift, .ax-rise { animation-name: ax-lift; transition: transform 0.3s ease; }
+.ax-pop { animation-name: ax-pop; }
+.ax-soft-pop { animation-name: ax-pop; --ax-scale: 1.05; }
+.ax-depth-pop { animation-name: ax-pop; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+.ax-scale-pop { animation-name: ax-pop; --ax-scale: 1.15; }
+
+.ax-border-glow, .ax-glow { animation-name: ax-glow; }
+.ax-shine, .ax-glint { animation-name: ax-glint; }
+.ax-light-sweep, .ax-shadow-lift, .ax-focus-ring, .ax-spotlight { animation-name: ax-glow; }

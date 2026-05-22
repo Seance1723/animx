@@ -1,0 +1,26 @@
+// ATTENTION PRESETS
+
+.ax-pulse { animation-name: ax-pulse; }
+.ax-pulse-soft { animation-name: ax-pulse; --ax-scale: 1.05; }
+.ax-pulse-strong { animation-name: ax-pulse; --ax-scale: 1.2; }
+
+.ax-shake { animation-name: ax-shake; }
+.ax-shake-x { animation-name: ax-shake-x; }
+.ax-shake-y { animation-name: ax-shake-y; }
+.ax-shake-soft { animation-name: ax-shake; --ax-shake-dist: 5px; }
+.ax-shake-hard { animation-name: ax-shake; --ax-shake-dist: 20px; }
+
+.ax-heartbeat { animation-name: ax-heartbeat; }
+.ax-ping { animation-name: ax-ping; }
+
+.ax-bounce { animation-name: ax-bounce; }
+.ax-bounce-soft { animation-name: ax-bounce; --ax-bounce-dist: -10px; }
+
+.ax-swing { animation-name: ax-swing; }
+.ax-wobble { animation-name: ax-wobble; }
+.ax-tada { animation-name: ax-tada; }
+.ax-jello { animation-name: ax-jello; }
+
+.ax-glow-pulse { animation-name: ax-glow-pulse; }
+.ax-vibrate { animation-name: ax-shake; --ax-shake-dist: 2px; }
+.ax-highlight { animation-name: ax-highlight; }

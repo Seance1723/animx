@@ -1,0 +1,13 @@
+// REVEAL PRESETS
+
+$directions: (up, down, left, right);
+
+@each $dir in $directions {
+  .ax-mask-#{$dir} { animation-name: ax-mask-#{$dir}; }
+  .ax-curtain-#{$dir} { animation-name: ax-curtain-#{$dir}; }
+  .ax-clip-#{$dir} { animation-name: ax-clip-#{$dir}; }
+  .ax-wipe-#{$dir} { animation-name: ax-wipe-#{$dir}; }
+}
+
+.ax-split-reveal-horizontal { animation-name: ax-split-h; }
+.ax-split-reveal-vertical { animation-name: ax-split-v; }

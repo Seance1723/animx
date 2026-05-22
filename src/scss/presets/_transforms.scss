@@ -1,0 +1,17 @@
+// TRANSFORM PRESETS
+
+.ax-rotate-left { animation-name: ax-rotate-left; }
+.ax-rotate-right { animation-name: ax-rotate-right; }
+.ax-spin { animation-name: ax-spin; }
+.ax-spin-reverse { animation-name: ax-spin-reverse; }
+
+.ax-float { animation-name: ax-float; }
+.ax-float-up-down { animation-name: ax-float-y; }
+.ax-float-left-right { animation-name: ax-float-x; }
+.ax-drift { animation-name: ax-float-x; --ax-dist: 20px; }
+.ax-sway { animation-name: ax-swing; }
+
+.ax-skew-left { animation-name: ax-skew-left; }
+.ax-skew-right { animation-name: ax-skew-right; }
+.ax-tilt-soft { animation-name: ax-skew-left; --ax-skew: -2deg; }
+.ax-tilt-hard { animation-name: ax-skew-left; --ax-skew: -15deg; }

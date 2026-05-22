@@ -4,9 +4,10 @@ import { debug } from './core/debug.js';
 import { createSafeInstance } from './core/safe-instance.js';
 import { performanceMonitor } from './core/performance-monitor.js';
 import { destroyInstances, clearInstances } from './core/instance-registry.js';
-import { registerPreset, getPreset, getPresets, getComponentPresets, getPresetCategories } from './presets/preset-registry.js';
+import { registerPreset, getPreset, getPresets, getComponentPresets, getPresetCategories, getPresetsByCategory, searchPresets, getPresetTags } from './presets/preset-registry.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
+import { expandedPresets } from './presets/expanded-presets.js';
 
 import { isReducedMotion } from './core/reduced-motion.js';
 import { normalizeOptions } from './core/animation-normalizer.js';
@@ -29,16 +30,10 @@ import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
 
-const VERSION = '1.4.0';
+const VERSION = '1.5.0';
 
-// Pre-register core CSS presets
-Object.entries(cssPresets).forEach(([name, preset]) => {
-  if (!preset.name) preset.name = name;
-  registerPreset(name, preset);
-});
-
-// Pre-register component presets
-componentPresets.forEach(preset => {
+// Pre-register all presets
+[...Object.values(cssPresets), ...componentPresets, ...expandedPresets].forEach(preset => {
   registerPreset(preset.name, preset);
 });
 
@@ -88,6 +83,18 @@ class AnimXCore {
 
   getPresets() {
     return getPresets();
+  }
+  
+  getPresetsByCategory(category) {
+    return getPresetsByCategory(category);
+  }
+  
+  searchPresets(query) {
+    return searchPresets(query);
+  }
+  
+  getPresetTags() {
+    return getPresetTags();
   }
 
   refresh(root) {

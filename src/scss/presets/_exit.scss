@@ -1,0 +1,21 @@
+// EXIT PRESETS
+
+$directions: (up, down, left, right);
+
+.ax-fade-out { animation-name: ax-fade-out; }
+
+@each $dir in $directions {
+  .ax-fade-out-#{$dir} { animation-name: ax-fade-out-#{$dir}; }
+  .ax-slide-out-#{$dir} { animation-name: ax-slide-out-#{$dir}; }
+}
+
+.ax-zoom-out, .ax-scale-out { animation-name: ax-zoom-out; }
+.ax-blur-out { animation-name: ax-blur-out; }
+.ax-flip-out-x { animation-name: ax-flip-out-x; }
+.ax-flip-out-y { animation-name: ax-flip-out-y; }
+.ax-rotate-out { animation-name: ax-rotate-out; }
+.ax-collapse-out { animation-name: ax-collapse-out; }
+
+@each $dir in (up, down) {
+  .ax-wipe-out-#{$dir} { animation-name: ax-wipe-out-#{$dir}; }
+}
