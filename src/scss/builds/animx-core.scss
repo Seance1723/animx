@@ -1,0 +1,24 @@
+/**
+ * AnimX Core Build (Lightweight)
+ */
+
+@use '../base/tokens';
+@use '../base/easings';
+@use '../base/mixins';
+@use '../base/reset';
+@use '../base/reduced-motion';
+
+@use '../utilities/duration';
+@use '../utilities/delay';
+@use '../utilities/repeat';
+@use '../utilities/state';
+
+@use '../keyframes/fade';
+@use '../keyframes/slide';
+@use '../keyframes/zoom';
+
+@use '../presets/entrance';
+@use '../presets/exit';
+@use '../presets/attention';
+
+// Omitted: Text, SVG, Advanced Scroll, Layout, Gestures, CMS Recipes

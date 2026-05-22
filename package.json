@@ -1,13 +1,17 @@
 {
   "name": "animx",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Zero-dependency animation engine",
   "main": "dist/animx.js",
   "style": "dist/animx.css",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
-    "build": "vite build && node build-post.js",
+    "build:full": "vite build",
+    "build:core": "vite build -c vite.core.config.js",
+    "build": "npm run build:full && npm run build:core && node build-post.js",
+    "verify:dist": "node scripts/verify-dist.js",
+    "size": "node scripts/size-check.js",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
     "clean": "node -e \"const fs = require('fs'); fs.rmSync('dist', { recursive: true, force: true });\"",
     "test": "node tests/run.js"

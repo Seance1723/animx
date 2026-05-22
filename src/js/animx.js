@@ -4,7 +4,7 @@ import { debug } from './core/debug.js';
 import { createSafeInstance } from './core/safe-instance.js';
 import { performanceMonitor } from './core/performance-monitor.js';
 import { destroyInstances, clearInstances } from './core/instance-registry.js';
-import { toggleDebug, diagnose, features, versionInfo } from './core/devtools.js';
+import { toggleDebug, diagnose, features, versionInfo, productionCheck } from './core/devtools.js';
 import { inspect } from './core/inspector.js';
 import { validate } from './core/validator.js';
 import { getExamples, copyExample } from './core/example-builder.js';
@@ -40,7 +40,7 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.6.0';
+const VERSION = '2.7.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
@@ -139,6 +139,10 @@ class AnimXCore {
   
   diagnose() {
     return diagnose();
+  }
+  
+  productionCheck() {
+    return productionCheck();
   }
   
   features() {
@@ -486,6 +490,11 @@ class AnimXCore {
 }
 
 const AnimX = new AnimXCore();
+AnimX.build = {
+  name: 'full',
+  version: VERSION,
+  modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
+};
 
 if (typeof window !== 'undefined') {
   window.AnimX = AnimX;

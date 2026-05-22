@@ -1,6 +1,11 @@
-# AnimX
+<div align="center">
+  <h1>🚀 AnimX</h1>
+  <p><strong>v2.7.0</strong> — The zero-dependency, ultra-lightweight, high-performance animation engine for the modern web.</p>
+</div>
 
-**AnimX v2.3.0 — Layout Motion System**
+<br>
+
+> **Now in v2.7.0**: Production Optimization and Bundle Control. Generate lightweight "core" builds, verify payload sizes, and easily check production readiness natively from the console!
 
 AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Layout, Text, SVG, and Interaction engines. 
 

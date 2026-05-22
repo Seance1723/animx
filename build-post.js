@@ -9,31 +9,46 @@ const __dirname = path.dirname(__filename);
 async function run() {
   const distDir = path.resolve(__dirname, 'dist');
   
-  // 1. Minify JS
-  const jsPath = path.join(distDir, 'animx.js');
-  const minJsPath = path.join(distDir, 'animx.min.js');
-  
-  if (fs.existsSync(jsPath)) {
-    const code = fs.readFileSync(jsPath, 'utf8');
-    const result = await minify(code);
-    fs.writeFileSync(minJsPath, result.code);
-    console.log('Generated animx.min.js');
-  }
+  // 1. Minify JS & CSS for all builds
+  const builds = ['animx', 'animx.core'];
+  const reportFiles = [];
 
-  // 2. Minify CSS (using a simple regex based minifier or sass compress since we don't have cssnano installed)
-  // Actually, we can just remove whitespace since it's zero-dependency.
-  const cssPath = path.join(distDir, 'animx.css');
-  const minCssPath = path.join(distDir, 'animx.min.css');
-  
-  if (fs.existsSync(cssPath)) {
-    let cssCode = fs.readFileSync(cssPath, 'utf8');
-    // Basic CSS minification
-    cssCode = cssCode.replace(/\/\*[\s\S]*?\*\//g, ''); // Remove comments
-    cssCode = cssCode.replace(/\s+/g, ' '); // Collapse whitespace
-    cssCode = cssCode.replace(/\s*([{}:;,])\s*/g, '$1'); // Remove space around separators
-    cssCode = cssCode.replace(/;}/g, '}'); // Remove trailing semicolon
-    fs.writeFileSync(minCssPath, cssCode.trim());
-    console.log('Generated animx.min.css');
+  for (const base of builds) {
+    // JS
+    const jsPath = path.join(distDir, `${base}.js`);
+    const minJsPath = path.join(distDir, `${base}.min.js`);
+    if (fs.existsSync(jsPath)) {
+      const code = fs.readFileSync(jsPath, 'utf8');
+      const result = await minify(code);
+      fs.writeFileSync(minJsPath, result.code);
+      console.log(`Generated ${base}.min.js`);
+      
+      reportFiles.push({
+        file: `${base}.min.js`,
+        bytes: Buffer.byteLength(result.code, 'utf8'),
+        kb: +(Buffer.byteLength(result.code, 'utf8') / 1024).toFixed(2)
+      });
+    }
+
+    // CSS
+    const cssPath = path.join(distDir, `${base}.css`);
+    const minCssPath = path.join(distDir, `${base}.min.css`);
+    if (fs.existsSync(cssPath)) {
+      let cssCode = fs.readFileSync(cssPath, 'utf8');
+      cssCode = cssCode.replace(/\/\*[\s\S]*?\*\//g, ''); // Remove comments
+      cssCode = cssCode.replace(/\s+/g, ' '); // Collapse whitespace
+      cssCode = cssCode.replace(/\s*([{}:;,])\s*/g, '$1'); // Remove space around separators
+      cssCode = cssCode.replace(/;}/g, '}'); // Remove trailing semicolon
+      const finalCss = cssCode.trim();
+      fs.writeFileSync(minCssPath, finalCss);
+      console.log(`Generated ${base}.min.css`);
+      
+      reportFiles.push({
+        file: `${base}.min.css`,
+        bytes: Buffer.byteLength(finalCss, 'utf8'),
+        kb: +(Buffer.byteLength(finalCss, 'utf8') / 1024).toFixed(2)
+      });
+    }
   }
 
   // 3. Copy HTML Pages
@@ -58,9 +73,13 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '2.6.0',
-    release: 'Framework Adapters / Integration Layer',
-    dependency: 'zero-runtime-dependency'
+    version: '2.7.0',
+    release: 'Production Optimization and Bundle Control',
+    dependency: 'zero-runtime-dependency',
+    defaultFiles: {
+      css: 'animx.min.css',
+      js: 'animx.min.js'
+    }
   };
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));
   console.log('Generated animx.version.json');
@@ -112,10 +131,34 @@ async function run() {
         const minified = await minify(code);
         fs.writeFileSync(destMinJS, minified.code);
         
+        reportFiles.push({
+          file: `adapters/${outFileName.replace('.js', '.min.js')}`,
+          bytes: Buffer.byteLength(minified.code, 'utf8'),
+          kb: +(Buffer.byteLength(minified.code, 'utf8') / 1024).toFixed(2)
+        });
+        
         console.log(`Generated ${outFileName} and ${outFileName.replace('.js', '.min.js')}`);
       }
     }
   }
+
+  // 7. Generate Bundle Report
+  const bundleReportPath = path.join(distDir, 'animx.bundle-report.json');
+  const bundleReport = {
+    name: "AnimX",
+    version: "2.7.0",
+    generatedAt: new Date().toISOString(),
+    files: reportFiles,
+    builds: {
+      "default": ["animx.css", "animx.js"],
+      "minified": ["animx.min.css", "animx.min.js"],
+      "core": ["animx.core.min.css", "animx.core.min.js"],
+      "full": ["animx.full.min.css", "animx.full.min.js"]
+    },
+    dependency: "zero-runtime-dependency"
+  };
+  fs.writeFileSync(bundleReportPath, JSON.stringify(bundleReport, null, 2));
+  console.log('Generated animx.bundle-report.json');
 }
 
 run().catch(console.error);

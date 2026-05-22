@@ -15,7 +15,7 @@ import AnimX from '../src/js/animx.js';
 ${body}
 `;
 
-const VERSION = '2.6.0';
+const VERSION = '2.7.0';
 const files = {
   'adapter.test.js': `
     // Mock environments

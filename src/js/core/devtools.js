@@ -34,8 +34,9 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '2.6.0',
-    release: 'Framework Adapters / Integration Layer',
+    version: '2.7.0',
+    release: 'Production Optimization and Bundle Control',
+    build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
     jsLoaded: true,
@@ -65,9 +66,29 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '2.6.0',
-    release: 'Framework Adapters / Integration Layer',
+    version: '2.7.0',
+    release: 'Production Optimization and Bundle Control',
     dependency: 'zero-runtime-dependency',
     features: features()
+  };
+}
+
+export function productionCheck() {
+  const diag = diagnose();
+  const warnings = [];
+  
+  if (!diag.cssLoaded) warnings.push('AnimX CSS not detected on :root. Check stylesheet.');
+  if (diag.presetsRegistered === 0) warnings.push('No presets are registered.');
+  if (diag.issues.length > 0) warnings.push(...diag.issues);
+  
+  return {
+    ok: warnings.length === 0,
+    warnings,
+    checks: {
+      cssLoaded: diag.cssLoaded,
+      reducedMotionSupported: diag.reducedMotion,
+      presetCount: diag.presetsRegistered,
+      buildType: diag.build
+    }
   };
 }
