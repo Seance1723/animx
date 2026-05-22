@@ -14,9 +14,10 @@ import AnimX from '../src/js/animx.js';
 ${body}
 `;
 
+const VERSION = '2.4.0';
 const files = {
   'core.test.js': `
-    assert.strictEqual(AnimX.version, '2.3.0');
+    assert.strictEqual(AnimX.version, '${VERSION}');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));

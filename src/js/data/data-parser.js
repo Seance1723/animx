@@ -103,6 +103,8 @@ export function parseDataAttributes(element) {
     svgOptions = parseSvgAttributes(element);
   }
   
+  const gestures = parseGestureAttributes(element);
+  
   return {
     animation,
     trigger,
@@ -130,6 +132,7 @@ export function parseDataAttributes(element) {
       ease: ds.axLayoutEase || undefined,
       on: ds.axLayoutOn || undefined
     },
+    gestures,
     options: {
       duration,
       delay,

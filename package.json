@@ -1,7 +1,7 @@
 {
   "name": "animx",
-  "version": "2.3.0",
-  "description": "A zero-dependency UI animation library using Web Animations API",
+  "version": "2.4.0",
+  "description": "Zero-dependency animation engine",
   "main": "dist/animx.js",
   "style": "dist/animx.css",
   "type": "module",

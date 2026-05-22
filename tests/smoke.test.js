@@ -63,7 +63,7 @@ try {
   assert.ok('waapi' in featuresRes, 'Features returns expected keys');
   
   const dxVersion = AnimX.versionInfo();
-  assert.strictEqual(dxVersion.version, '2.3.0', 'versionInfo returns correct version');
+  assert.strictEqual(dxVersion.version, '2.4.0', 'versionInfo returns correct version');
   
   const findRes = AnimX.findPreset('fade-up');
   assert.ok(findRes.name === 'fade-up', 'findPreset returns exact match');

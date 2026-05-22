@@ -1,0 +1,22 @@
+// _gesture-base.scss
+// Base normalization for gesture physics
+
+.ax-draggable,
+.ax-pan-ready,
+.ax-pinch-ready {
+  touch-action: none;
+  user-select: none;
+}
+
+.ax-swipe-ready,
+.ax-long-press-ready {
+  user-select: none;
+}
+
+.ax-drag-handle {
+  cursor: grab;
+}
+
+.ax-drag-handle:active {
+  cursor: grabbing;
+}

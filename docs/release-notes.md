@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.4.0 — Gesture and Drag Physics
+- **Pointer Events Engine:** Added a zero-dependency gesture tracking system natively handling Pointer Events.
+- **Interactions:** Added `AnimX.drag()`, `AnimX.swipe()`, `AnimX.pan()`, `AnimX.pinch()`, `AnimX.longPress()`.
+- **Physics Simulators:** Included `inertia` and `spring` logic directly tied to `requestAnimationFrame` for 60fps tracking.
+- **No-Code Data API:** Added `data-ax-drag`, `data-ax-swipe`, `data-ax-pinch`, and more for code-free initialization.
+- **Drag Reorder:** Combined FLIP layouts with drag logic via `AnimX.dragReorder()`.
 ## v2.3.0 — Layout Motion System
 - **Layout Engines:** Added `AnimX.flip()`, `AnimX.layout()`, `AnimX.expand()`, `AnimX.collapse()`, `AnimX.sharedElement()`, and `AnimX.swap()`.
 - **Zero Dependencies:** All layout motion is achieved with native DOM measurements, WAAPI, and requestAnimationFrame.

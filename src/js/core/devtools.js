@@ -64,9 +64,10 @@ export function features() {
 
 export function versionInfo() {
   return {
-    name: "AnimX",
-    version: "2.3.0",
-    release: "Layout Motion System",
-    dependency: "zero-runtime-dependency"
+    name: 'AnimX',
+    version: '2.4.0',
+    release: 'Gesture and Drag Physics',
+    dependency: 'zero-runtime-dependency',
+    features: features()
   };
 }

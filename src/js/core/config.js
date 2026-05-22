@@ -60,6 +60,25 @@ const defaultConfig = {
     largeBatchLimit: 100,
     batchDomWrites: true
   },
+  components: {
+    enabled: true,
+    autoInit: true
+  },
+  layout: {
+    enabled: true
+  },
+  gestures: {
+    enabled: true,
+    drag: true,
+    swipe: true,
+    pan: true,
+    pinch: true,
+    longPress: true,
+    inertia: true,
+    reducedMotionSafe: true,
+    pointerCapture: true,
+    defaultAxis: 'both'
+  },
   cms: {
     enabled: true,
     autoScan: true,

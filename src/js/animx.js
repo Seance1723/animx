@@ -37,11 +37,13 @@ import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, dest
 import { cms, refreshCMS, observeCMS, disconnectCMS, getCMSRecipes, applyRecipe, bindCMSApi } from './cms/cms-api.js';
 import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
+import { bindGestureAnimX } from './gestures/gesture-api.js';
+import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.3.0';
+const VERSION = '2.4.0';
 
 // Pre-register all presets
-[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets].forEach(preset => {
+[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
   registerPreset(preset.name, preset);
 });
 
@@ -61,6 +63,7 @@ class AnimXCore {
     bindSvgAnimX(this);
     bindCMSApi(this);
     bindLayoutAnimX(this);
+    bindGestureAnimX(this);
   }
 
   config(options) {

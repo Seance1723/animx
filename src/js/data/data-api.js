@@ -135,6 +135,26 @@ export function initData(forceScan = false) {
   // Layout scanning
   const layoutEls = document.querySelectorAll('[data-ax-layout], [data-ax-toggle], [data-ax-shared], [data-ax-swap]');
   layoutEls.forEach(el => processLayoutElement(el));
+
+  // Gesture scanning
+  const gestureEls = document.querySelectorAll('[data-ax-gesture], [data-ax-drag], [data-ax-swipe], [data-ax-pan], [data-ax-pinch], [data-ax-long-press], [data-ax-drag-reorder]');
+  gestureEls.forEach(el => processGestureElement(el));
+}
+
+function processGestureElement(el) {
+  const data = parseDataAttributes(el);
+  if (data.gestures) {
+    if (data.gestures.disabled) {
+      if (animxInstance && animxInstance.destroyGestures) {
+        animxInstance.destroyGestures(el);
+      }
+      return;
+    }
+    if (animxInstance && animxInstance.gesture) {
+      animxInstance.destroyGestures(el); // Clean up old
+      animxInstance.gesture(el, data.gestures);
+    }
+  }
 }
 
 function processLayoutElement(element) {
@@ -227,6 +247,9 @@ export function refreshData(root = document) {
   
   const layoutEls = root.querySelectorAll('[data-ax-layout], [data-ax-toggle], [data-ax-shared], [data-ax-swap]');
   layoutEls.forEach(el => processLayoutElement(el));
+
+  const gestureEls = root.querySelectorAll('[data-ax-gesture], [data-ax-drag], [data-ax-swipe], [data-ax-pan], [data-ax-pinch], [data-ax-long-press], [data-ax-drag-reorder]');
+  gestureEls.forEach(el => processGestureElement(el));
 }
 
 export function runData(target) {

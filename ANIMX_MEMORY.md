@@ -37,6 +37,7 @@
   - Added `dist/animx.playground.html` for live interactive building of preset, stagger, text, and SVG engines with snippet exporting.
 - **v2.3.0** - Layout Motion System
   - Added FLIP reordering, expand/collapse, morphing, and DOM swapping with data attributes.
+- **v2.4.0** - Gesture and Drag Physics
 
 ## Completed Milestones
 
