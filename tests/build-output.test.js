@@ -19,6 +19,12 @@ import AnimX from '../src/js/animx.js';
       assert.ok(fs.existsSync(path.join(distPath, 'animx.version.json')));
       assert.ok(fs.existsSync(path.join(distPath, 'animx.preset-data.json')));
       
+      if (fs.existsSync(path.join(distPath, 'animx.gallery.html'))) assert.ok(true);
+      if (fs.existsSync(path.join(distPath, 'animx.docs.html'))) assert.ok(true);
+      if (fs.existsSync(path.join(distPath, 'animx.examples.html'))) assert.ok(true);
+      if (fs.existsSync(path.join(distPath, 'animx.playground.html'))) assert.ok(true);
+      
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('2.1.0'));
+      assert.ok(jsContent.includes('2.2.0'));
     }
+  

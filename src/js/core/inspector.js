@@ -7,7 +7,7 @@ export function inspect(selector) {
   if (!selector) {
     // Global inspection
     return {
-      version: '2.1.0',
+      version: '2.2.0',
       activeAnimations: Object.keys(data).length,
       presetCount: getPresets().length,
       categories: getPresetCategories(),

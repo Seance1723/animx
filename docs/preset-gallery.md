@@ -1,6 +1,7 @@
 # Preset Gallery Overview
 
 The AnimX Preset Gallery is an interactive catalog of all available animations packaged within the core library.
+> **New in v2.2.0:** We now also feature a full `animx.playground.html` which goes beyond simple searching to offer full live-building controls and text/svg timeline support!
 
 ## Purpose
 

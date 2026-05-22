@@ -1,0 +1,646 @@
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const playgroundHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX Live Playground & Builder</title>
+  <link rel="stylesheet" href="../dist/animx.min.css">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --accent: #10b981;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Layout */
+    .sidebar {
+      width: 320px;
+      background: var(--panel-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    .canvas-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .export-panel {
+      width: 350px;
+      background: var(--panel-bg);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Common UI Elements */
+    .header {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border);
+      font-weight: bold;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 8px 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+    .slider-group {
+      margin-bottom: 15px;
+    }
+    .slider-group input[type="range"] {
+      width: 100%;
+      margin-top: 5px;
+    }
+    .slider-val {
+      float: right;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    button:hover { background: var(--primary-hover); }
+    button.secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    button.secondary:hover { background: rgba(255,255,255,0.05); }
+
+    /* Canvas Area */
+    .canvas-toolbar {
+      padding: 10px 20px;
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .canvas {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #1e1b4b 0%, var(--bg) 100%);
+      overflow: hidden;
+      perspective: 1000px;
+    }
+    
+    /* Previews */
+    .preview-box {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #6366f1, #a855f7);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .preview-text {
+      font-size: 3rem;
+      font-weight: bold;
+      max-width: 80%;
+      text-align: center;
+    }
+    .preview-stagger-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+    .stagger-item {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      border-radius: 8px;
+    }
+    .preview-svg {
+      width: 200px;
+      height: 200px;
+    }
+    .preview-svg path {
+      stroke: #a855f7;
+      stroke-width: 4;
+      fill: none;
+    }
+
+    /* Export Panel */
+    .code-block {
+      background: #020617;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #a5b4fc;
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+      border: 1px solid #1e1b4b;
+      position: relative;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      background: var(--border);
+    }
+    
+    /* Tabs */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--panel-bg);
+    }
+    .tab {
+      padding: 12px 15px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+    }
+    .tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      body { flex-direction: column; overflow: auto; }
+      .sidebar, .export-panel { width: 100%; border-right: none; border-left: none; border-bottom: 1px solid var(--border); }
+      .canvas-container { min-height: 500px; }
+    }
+    
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar">
+    <div class="header">
+      <span>AnimX Builder</span>
+      <span style="font-size: 0.75rem; color: var(--muted)">v2.2.0</span>
+    </div>
+    
+    <div class="tabs" id="modeTabs">
+      <div class="tab active" data-mode="preset">Presets</div>
+      <div class="tab" data-mode="stagger">Stagger</div>
+      <div class="tab" data-mode="text">Text</div>
+      <div class="tab" data-mode="svg">SVG</div>
+    </div>
+
+    <!-- PRESET CONTROLS -->
+    <div id="controls-preset" class="mode-controls">
+      <div class="section">
+        <label class="label">Search Preset</label>
+        <input type="text" id="presetSearch" placeholder="e.g. fade-up, bounce">
+        <select id="presetSelect" size="5" style="margin-bottom:0;"></select>
+      </div>
+    </div>
+
+    <!-- STAGGER CONTROLS -->
+    <div id="controls-stagger" class="mode-controls hidden">
+      <div class="section">
+        <label class="label">Base Animation</label>
+        <select id="staggerAnim">
+          <option value="zoom-in">zoom-in</option>
+          <option value="fade-up">fade-up</option>
+          <option value="flip-in-y">flip-in-y</option>
+        </select>
+        
+        <div class="slider-group">
+          <label class="label">Stagger Delay <span class="slider-val" id="val-stagger-delay">50ms</span></label>
+          <input type="range" id="staggerDelay" min="10" max="300" step="10" value="50">
+        </div>
+        
+        <label class="label">Origin (From)</label>
+        <select id="staggerFrom">
+          <option value="start">Start</option>
+          <option value="center">Center</option>
+          <option value="end">End</option>
+          <option value="edges">Edges</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- TEXT CONTROLS -->
+    <div id="controls-text" class="mode-controls hidden">
+      <div class="section">
+        <label class="label">Text Engine</label>
+        <select id="textType">
+          <option value="split">Split Animation</option>
+          <option value="typewriter">Typewriter</option>
+          <option value="scramble">Scramble</option>
+        </select>
+        
+        <div id="textSplitControls">
+          <label class="label">Split By</label>
+          <select id="textSplitMode">
+            <option value="chars">Characters</option>
+            <option value="words">Words</option>
+            <option value="lines">Lines</option>
+          </select>
+          <label class="label">Animation</label>
+          <select id="textAnim">
+            <option value="text-rise">text-rise</option>
+            <option value="text-wave">text-wave</option>
+            <option value="fade-up">fade-up</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- SVG CONTROLS -->
+    <div id="controls-svg" class="mode-controls hidden">
+      <div class="section">
+        <label class="label">SVG Engine</label>
+        <select id="svgType">
+          <option value="draw">Draw (Line Animation)</option>
+          <option value="undraw">Undraw</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- COMMON CONTROLS (Shared) -->
+    <div class="section">
+      <div class="slider-group">
+        <label class="label">Duration <span class="slider-val" id="val-duration">800ms</span></label>
+        <input type="range" id="cfgDuration" min="100" max="3000" step="100" value="800">
+      </div>
+      <div class="slider-group">
+        <label class="label">Delay <span class="slider-val" id="val-delay">0ms</span></label>
+        <input type="range" id="cfgDelay" min="0" max="2000" step="100" value="0">
+      </div>
+      <label class="label">Easing</label>
+      <select id="cfgEase">
+        <option value="smooth">Smooth (Default)</option>
+        <option value="snappy">Snappy</option>
+        <option value="bounce">Bounce</option>
+        <option value="linear">Linear</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- CENTER CANVAS -->
+  <div class="canvas-container">
+    <div class="canvas-toolbar">
+      <button id="btnReplay">Replay Animation</button>
+      <button id="btnReset" class="secondary">Reset View</button>
+      <div style="flex:1"></div>
+      <label style="font-size: 0.85rem; display: flex; align-items: center; gap: 5px;">
+        <input type="checkbox" id="chkReducedMotion"> Simulate Reduced Motion
+      </label>
+    </div>
+    
+    <div class="canvas" id="canvasArea">
+      <!-- Dynamic Content rendered here by JS -->
+    </div>
+  </div>
+
+  <!-- RIGHT EXPORT PANEL -->
+  <div class="export-panel">
+    <div class="header">Export Snippets</div>
+    <div class="section" style="flex:1; overflow-y:auto;">
+      
+      <label class="label">HTML (Classes)</label>
+      <div class="code-block">
+        <button class="copy-btn secondary" onclick="copyCode('codeHtml')">Copy</button>
+        <span id="codeHtml">&lt;div class="ax ax-fade-up"&gt;&lt;/div&gt;</span>
+      </div>
+
+      <label class="label">HTML (Data Attributes)</label>
+      <div class="code-block">
+        <button class="copy-btn secondary" onclick="copyCode('codeData')">Copy</button>
+        <span id="codeData">&lt;div data-ax="fade-up"&gt;&lt;/div&gt;</span>
+      </div>
+
+      <label class="label">JavaScript API</label>
+      <div class="code-block">
+        <button class="copy-btn secondary" onclick="copyCode('codeJs')">Copy</button>
+        <span id="codeJs">AnimX.animate('.target', 'fade-up');</span>
+      </div>
+      
+    </div>
+  </div>
+
+  <script src="../dist/animx.min.js"></script>
+  <script>
+    // --- Playground State ---
+    const state = {
+      mode: 'preset',
+      preset: 'fade-up',
+      duration: 800,
+      delay: 0,
+      ease: 'smooth',
+      stagger: { anim: 'zoom-in', delay: 50, from: 'start' },
+      text: { type: 'split', split: 'chars', anim: 'text-rise' },
+      svg: { type: 'draw' }
+    };
+    
+    let activeInstance = null;
+
+    // --- DOM Elements ---
+    const DOM = {
+      canvas: document.getElementById('canvasArea'),
+      tabs: document.querySelectorAll('.tab'),
+      modeControls: document.querySelectorAll('.mode-controls'),
+      presetSearch: document.getElementById('presetSearch'),
+      presetSelect: document.getElementById('presetSelect'),
+      sliders: document.querySelectorAll('input[type="range"]'),
+      cfgEase: document.getElementById('cfgEase'),
+      chkReducedMotion: document.getElementById('chkReducedMotion')
+    };
+
+    // --- Initialization ---
+    function init() {
+      AnimX.init();
+      loadState();
+      populatePresets('');
+      setupListeners();
+      switchMode(state.mode);
+    }
+
+    function setupListeners() {
+      // Tabs
+      DOM.tabs.forEach(t => t.addEventListener('click', (e) => {
+        switchMode(e.target.dataset.mode);
+      }));
+
+      // Presets
+      DOM.presetSearch.addEventListener('input', (e) => populatePresets(e.target.value));
+      DOM.presetSelect.addEventListener('change', (e) => {
+        state.preset = e.target.value;
+        renderAndPlay();
+      });
+
+      // Global Sliders
+      document.getElementById('cfgDuration').addEventListener('input', (e) => {
+        state.duration = parseInt(e.target.value);
+        document.getElementById('val-duration').innerText = state.duration + 'ms';
+        renderAndPlay();
+      });
+      document.getElementById('cfgDelay').addEventListener('input', (e) => {
+        state.delay = parseInt(e.target.value);
+        document.getElementById('val-delay').innerText = state.delay + 'ms';
+        renderAndPlay();
+      });
+      DOM.cfgEase.addEventListener('change', (e) => {
+        state.ease = e.target.value;
+        renderAndPlay();
+      });
+
+      // Stagger
+      document.getElementById('staggerAnim').addEventListener('change', (e) => { state.stagger.anim = e.target.value; renderAndPlay(); });
+      document.getElementById('staggerFrom').addEventListener('change', (e) => { state.stagger.from = e.target.value; renderAndPlay(); });
+      document.getElementById('staggerDelay').addEventListener('input', (e) => { 
+        state.stagger.delay = parseInt(e.target.value);
+        document.getElementById('val-stagger-delay').innerText = state.stagger.delay + 'ms';
+        renderAndPlay();
+      });
+
+      // Text
+      document.getElementById('textType').addEventListener('change', (e) => {
+        state.text.type = e.target.value;
+        document.getElementById('textSplitControls').style.display = (state.text.type === 'split') ? 'block' : 'none';
+        renderAndPlay();
+      });
+      document.getElementById('textSplitMode').addEventListener('change', (e) => { state.text.split = e.target.value; renderAndPlay(); });
+      document.getElementById('textAnim').addEventListener('change', (e) => { state.text.anim = e.target.value; renderAndPlay(); });
+
+      // SVG
+      document.getElementById('svgType').addEventListener('change', (e) => { state.svg.type = e.target.value; renderAndPlay(); });
+
+      // Toolbar
+      document.getElementById('btnReplay').addEventListener('click', renderAndPlay);
+      document.getElementById('btnReset').addEventListener('click', () => {
+        if(activeInstance) activeInstance.destroy();
+        renderCanvas();
+      });
+      
+      DOM.chkReducedMotion.addEventListener('change', (e) => {
+        AnimX.config({ reducedMotion: e.target.checked ? 'always' : 'auto' });
+        renderAndPlay();
+      });
+    }
+
+    // --- UI Logic ---
+    function switchMode(mode) {
+      state.mode = mode;
+      DOM.tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+      DOM.modeControls.forEach(c => c.classList.add('hidden'));
+      document.getElementById('controls-' + mode).classList.remove('hidden');
+      saveState();
+      renderAndPlay();
+    }
+
+    function populatePresets(query) {
+      const presets = query ? AnimX.searchPresets(query) : AnimX.getPresetsByCategory('entrance');
+      DOM.presetSelect.innerHTML = presets.map(p => \`<option value="\${p.name}">\${p.name}</option>\`).join('');
+      if (presets.length > 0 && !query) {
+        DOM.presetSelect.value = state.preset || presets[0].name;
+        state.preset = DOM.presetSelect.value;
+      }
+    }
+
+    // --- Canvas Rendering & Animation ---
+    function renderCanvas() {
+      DOM.canvas.innerHTML = '';
+      if (activeInstance) {
+        activeInstance.destroy();
+        activeInstance = null;
+      }
+
+      if (state.mode === 'preset') {
+        DOM.canvas.innerHTML = \`<div class="preview-box" id="target">AnimX</div>\`;
+      } else if (state.mode === 'stagger') {
+        let grid = '<div class="preview-stagger-grid" id="staggerGrid">';
+        for(let i=0; i<20; i++) grid += \`<div class="stagger-item"></div>\`;
+        grid += '</div>';
+        DOM.canvas.innerHTML = grid;
+      } else if (state.mode === 'text') {
+        DOM.canvas.innerHTML = \`<div class="preview-text" id="textTarget">Zero Dependency Animation Engine</div>\`;
+      } else if (state.mode === 'svg') {
+        DOM.canvas.innerHTML = \`<svg class="preview-svg" viewBox="0 0 100 100" id="svgTarget"><path d="M10,50 Q25,25 50,50 T90,50" /></svg>\`;
+      }
+    }
+
+    function renderAndPlay() {
+      saveState();
+      renderCanvas();
+      updateExportCode();
+
+      // Trigger animation
+      const opts = { duration: state.duration, delay: state.delay, ease: state.ease };
+      
+      try {
+        if (state.mode === 'preset') {
+          activeInstance = AnimX.animate('#target', state.preset, opts);
+        } else if (state.mode === 'stagger') {
+          activeInstance = AnimX.stagger('.stagger-item', state.stagger.anim, {
+            ...opts,
+            each: state.stagger.delay,
+            from: state.stagger.from
+          });
+        } else if (state.mode === 'text') {
+          if (state.text.type === 'split') {
+            activeInstance = AnimX.text('#textTarget', { type: 'split', splitType: state.text.split, animation: state.text.anim, ...opts });
+          } else if (state.text.type === 'typewriter') {
+            activeInstance = AnimX.text('#textTarget', { type: 'typewriter', text: 'Zero Dependency Animation Engine', ...opts });
+          } else if (state.text.type === 'scramble') {
+            activeInstance = AnimX.text('#textTarget', { type: 'scramble', text: 'Zero Dependency Animation Engine', ...opts });
+          }
+        } else if (state.mode === 'svg') {
+          if (state.svg.type === 'draw') {
+            activeInstance = AnimX.svgDraw('#svgTarget path', opts);
+          } else {
+            AnimX.svgDraw('#svgTarget path', { duration: 0 }).then(() => {
+               activeInstance = AnimX.animate('#svgTarget path', 'svg-undraw', opts);
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('Animation error:', e);
+      }
+    }
+
+    // --- Code Export ---
+    function updateExportCode() {
+      let htmlStr = '';
+      let dataStr = '';
+      let jsStr = '';
+
+      const durStr = state.duration !== 800 ? \` duration: \${state.duration},\` : '';
+      const delStr = state.delay > 0 ? \` delay: \${state.delay},\` : '';
+      const easeStr = state.ease !== 'smooth' ? \` ease: '\${state.ease}',\` : '';
+      const optsObj = (durStr || delStr || easeStr) ? \` { \${durStr}\${delStr}\${easeStr} }\`.replace(/, }$/, ' }') : '';
+
+      if (state.mode === 'preset') {
+        htmlStr = \`<div class="ax ax-\${state.preset}"></div>\`;
+        dataStr = \`<div data-ax="\${state.preset}"\${state.duration !== 800 ? ' data-ax-duration="'+state.duration+'"' : ''}\${state.delay > 0 ? ' data-ax-delay="'+state.delay+'"' : ''}></div>\`;
+        jsStr = \`AnimX.animate('.target', '\${state.preset}'\${optsObj ? ', ' + optsObj : ''});\`;
+      } else if (state.mode === 'stagger') {
+        htmlStr = \`<!-- Use JS API for staggers -->\`;
+        dataStr = \`<div data-ax-group data-ax-child="\${state.stagger.anim}" data-ax-stagger="\${state.stagger.delay}">\\n  <div class="item"></div>\\n  <div class="item"></div>\\n</div>\`;
+        jsStr = \`AnimX.stagger('.item', '\${state.stagger.anim}', {\\n  each: \${state.stagger.delay},\\n  from: '\${state.stagger.from}'\${durStr ? ',\\n ' + durStr : ''}\\n});\`;
+      } else if (state.mode === 'text') {
+        htmlStr = \`<!-- Use JS API for complex text -->\`;
+        dataStr = \`<!-- Use JS API for complex text -->\`;
+        if (state.text.type === 'split') {
+          jsStr = \`AnimX.text('.title', {\\n  type: 'split',\\n  splitType: '\${state.text.split}',\\n  animation: '\${state.text.anim}'\${durStr ? ',\\n ' + durStr : ''}\\n});\`;
+        } else {
+          jsStr = \`AnimX.text('.title', {\\n  type: '\${state.text.type}',\\n  text: 'Hello World'\${durStr ? ',\\n ' + durStr : ''}\\n});\`;
+        }
+      } else if (state.mode === 'svg') {
+        htmlStr = \`<!-- Use JS API for SVG drawing -->\`;
+        dataStr = \`<!-- Use JS API for SVG drawing -->\`;
+        jsStr = \`AnimX.svgDraw('path', \${optsObj || '{}'});\`;
+      }
+
+      document.getElementById('codeHtml').innerText = htmlStr;
+      document.getElementById('codeData').innerText = dataStr;
+      document.getElementById('codeJs').innerText = jsStr;
+    }
+
+    window.copyCode = function(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copied to clipboard!');
+      }).catch(err => console.error('Copy failed', err));
+    }
+
+    // --- Local Storage ---
+    function saveState() {
+      try {
+        localStorage.setItem('animx_playground', JSON.stringify(state));
+      } catch(e) {}
+    }
+    function loadState() {
+      try {
+        const saved = localStorage.getItem('animx_playground');
+        if (saved) Object.assign(state, JSON.parse(saved));
+      } catch(e) {}
+      
+      // Update UI from state
+      document.getElementById('cfgDuration').value = state.duration;
+      document.getElementById('val-duration').innerText = state.duration + 'ms';
+      document.getElementById('cfgDelay').value = state.delay;
+      document.getElementById('val-delay').innerText = state.delay + 'ms';
+      DOM.cfgEase.value = state.ease;
+      
+      document.getElementById('staggerAnim').value = state.stagger.anim;
+      document.getElementById('staggerFrom').value = state.stagger.from;
+      document.getElementById('staggerDelay').value = state.stagger.delay;
+      
+      document.getElementById('textType').value = state.text.type;
+      document.getElementById('textSplitMode').value = state.text.split;
+      document.getElementById('textAnim').value = state.text.anim;
+      
+      document.getElementById('svgType').value = state.svg.type;
+    }
+
+    // Boot
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
+`;
+
+fs.writeFileSync(path.join(__dirname, '../demo/playground.html'), playgroundHTML);
+console.log('Created demo/playground.html');

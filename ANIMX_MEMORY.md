@@ -33,6 +33,8 @@
 - **v2.1.0** - Documentation Site and Preset Gallery Upgrade
   - Added local `dist/animx.gallery.html`, `dist/animx.examples.html`, and `dist/animx.docs.html`.
   - Automated export of `dist/animx.preset-data.json`.
+- **v2.2.0** - Playground and Live Builder Upgrade
+  - Added `dist/animx.playground.html` for live interactive building of preset, stagger, text, and SVG engines with snippet exporting.
 
 ## Completed Milestones
 
@@ -47,10 +49,11 @@
 - **v1.8.0**: Testing and Stability Release (100% Core coverage, strict target safety, QA)
 - **v2.0.0**: Hero Release (Polished demo, docs, CDN-ready output, production finish)
 - **v2.1.0**: Documentation Site / Gallery Upgrade (Comprehensive local browsing, preset JSON export)
+- **v2.2.0**: Playground and Live Builder Upgrade (Live interactive snippet building)
 
 ## Current Objective
 
-**AnimX v2.1.0 is Complete.**
+**AnimX v2.2.0 is Complete.**
 Next Planned Version: **v2.5.0 Layout Motion**
 
 ## v0.0.1 - Foundation (Completed)

@@ -37,7 +37,7 @@ async function run() {
   }
 
   // 3. Copy HTML Pages
-  const pages = ['index.html', 'gallery.html', 'examples.html', 'docs.html'];
+  const pages = ['index.html', 'gallery.html', 'examples.html', 'docs.html', 'playground.html'];
   pages.forEach(page => {
     const srcPath = path.resolve(__dirname, `demo/${page}`);
     const destName = page === 'index.html' ? 'animx.demo.html' : `animx.${page}`;
@@ -58,8 +58,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '2.1.0',
-    release: 'Documentation Site and Preset Gallery Upgrade',
+    version: '2.2.0',
+    release: 'Playground and Live Builder Upgrade',
     dependency: 'zero-runtime-dependency'
   };
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));

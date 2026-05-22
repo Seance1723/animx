@@ -1,5 +1,10 @@
 # Release Notes
 
+## v2.2.0 — Playground and Live Builder Upgrade
+- **Live Playground:** Added `dist/animx.playground.html` offering a zero-dependency interactive visual builder for Presets, Text, Stagger, and SVG animations.
+- **Export Snippets:** The playground automatically generates copy-paste HTML, Data Attribute, and JS API snippets.
+- **Local Storage:** The playground safely remembers your configurations using local storage.
+
 ## v2.1.0 — Documentation Site and Preset Gallery Upgrade
 - **Local Docs & Demo:** Added `dist/animx.gallery.html`, `dist/animx.docs.html`, and `dist/animx.examples.html` for comprehensive local browsing of the library.
 - **Preset Data Export:** Automated export of `dist/animx.preset-data.json` during build for tooling integration.

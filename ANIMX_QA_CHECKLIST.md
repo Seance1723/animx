@@ -1,6 +1,6 @@
-# AnimX QA Checklist (v2.1.0)
+# AnimX QA Checklist (v2.2.0)
 
-**Target Version:** 2.1.0
+**Target Version:** 2.2.0
 
 ## 1. Build & Serve
 - [ ] Run `npm run build` - verify it completes without errors.

@@ -1,14 +1,15 @@
 # AnimX
 
-**AnimX v2.1.0 — Documentation Site and Preset Gallery Upgrade**
+**AnimX v2.2.0 — Playground and Live Builder Upgrade**
 
 AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Text, SVG, and Interaction engines. 
 
 AnimX achieves GSAP-like declarative power with absolute minimal footprint: exactly one CSS file and one JS file. 
 
-## Local Documentation & Gallery
-AnimX now includes a full local documentation site and preset gallery!
+## Local Playground & Builder
+AnimX v2.2.0 includes a fully interactive local Playground and Builder!
 After building the project, simply open:
+- \`dist/animx.playground.html\` (Live Builder & Playground)
 - \`dist/animx.demo.html\` (Hero Demo)
 - \`dist/animx.gallery.html\` (Preset Gallery)
 - \`dist/animx.examples.html\` (Copy-Paste Recipes)
