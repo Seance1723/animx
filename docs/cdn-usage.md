@@ -1,6 +1,6 @@
 # CDN & Local Usage
 
-AnimX is distributed as a single CSS file and a single JS file. 
+AnimX is distributed as a single CSS file and a single JS file. The newly added gallery and docs pages are intended for local development only and do not need to be deployed to production. 
 
 ## 1. Using a CDN (Recommended)
 You can link directly to the unpkg or jsdelivr CDNs for fast, cached global delivery.

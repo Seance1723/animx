@@ -1,5 +1,7 @@
 # Quick Examples
 
+> **Live Preview:** You can interact with these examples and copy the code directly from the **Examples Page**. Run `npm run build` and open `dist/animx.examples.html`.
+
 Here are common use-cases to help you learn the AnimX syntax rapidly.
 
 ### 1. Basic Stagger

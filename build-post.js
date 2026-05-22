@@ -36,28 +36,56 @@ async function run() {
     console.log('Generated animx.min.css');
   }
 
-  // 3. Copy Demo HTML
-  const demoSrc = path.resolve(__dirname, 'demo/index.html');
-  const demoDest = path.join(distDir, 'animx.demo.html');
-  
-  if (fs.existsSync(demoSrc)) {
-    // Update paths in demo HTML to work in dist/
-    let demoHtml = fs.readFileSync(demoSrc, 'utf8');
-    demoHtml = demoHtml.replace(/\/src\/scss\/animx\.scss/g, 'animx.css');
-    demoHtml = demoHtml.replace(/<script type="module" src="\/src\/js\/animx\.js"><\/script>/g, '<script src="animx.js"></script>');
-    fs.writeFileSync(demoDest, demoHtml);
-    console.log('Generated animx.demo.html');
-  }
+  // 3. Copy HTML Pages
+  const pages = ['index.html', 'gallery.html', 'examples.html', 'docs.html'];
+  pages.forEach(page => {
+    const srcPath = path.resolve(__dirname, `demo/${page}`);
+    const destName = page === 'index.html' ? 'animx.demo.html' : `animx.${page}`;
+    const destPath = path.join(distDir, destName);
+    
+    if (fs.existsSync(srcPath)) {
+      let html = fs.readFileSync(srcPath, 'utf8');
+      html = html.replace(/\/src\/scss\/animx\.scss/g, 'animx.css');
+      html = html.replace(/<script type="module" src="\/src\/js\/animx\.js"><\/script>/g, '<script src="animx.js"></script>');
+      html = html.replace(/<link rel="stylesheet" href="\.\.\/dist\/animx\.min\.css">/g, '<link rel="stylesheet" href="animx.css">');
+      html = html.replace(/<script src="\.\.\/dist\/animx\.min\.js"><\/script>/g, '<script src="animx.js"></script>');
+      fs.writeFileSync(destPath, html);
+      console.log(`Generated ${destName}`);
+    }
+  });
+
   // 4. Generate animx.version.json
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '2.0.0',
-    release: 'Hero Release',
+    version: '2.1.0',
+    release: 'Documentation Site and Preset Gallery Upgrade',
     dependency: 'zero-runtime-dependency'
   };
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));
   console.log('Generated animx.version.json');
+
+  // 5. Generate animx.preset-data.json
+  try {
+    const presetDataPath = path.join(distDir, 'animx.preset-data.json');
+    await import('./tests/setup.js');
+    const AnimX = (await import('./src/js/animx.js')).default;
+    
+    const presets = AnimX.getPresets();
+    const categories = AnimX.getPresetCategories();
+    
+    const presetData = {
+      version: '2.1.0',
+      total: presets.length,
+      categories: categories,
+      presets: presets
+    };
+    
+    fs.writeFileSync(presetDataPath, JSON.stringify(presetData, null, 2));
+    console.log('Generated animx.preset-data.json');
+  } catch (err) {
+    console.error('Failed to generate preset data:', err);
+  }
 }
 
 run().catch(console.error);

@@ -1,6 +1,8 @@
-# Preset List (v1.5.0)
+# Preset List (v2.1.0)
 
-AnimX comes with an extensive registry of 300+ built-in animation presets categorized by their intended usage.
+> **New in v2.1.0:** The easiest way to explore presets is to use the local **Preset Gallery**. Simply run `npm run build` and open `dist/animx.gallery.html` to search, preview, and copy code for over 300 presets!
+
+AnimX comes with an extensive registry of built-in animation presets categorized by their intended usage.
 
 ## 1. Categories
 You can search the registry programmatically via `AnimX.searchPresets('fade')` or `AnimX.getPresetsByCategory('entrance')`.

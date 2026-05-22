@@ -30,6 +30,9 @@
 - **v1.7.0** - No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
 - **v1.8.0** - Testing and Stability Release (100% Core coverage, strict target safety, zero-dependency test runner, QA demo section)
 - **v2.0.0** - Hero Release (Production-ready distribution, professional demo, polished docs, clean QA)
+- **v2.1.0** - Documentation Site and Preset Gallery Upgrade
+  - Added local `dist/animx.gallery.html`, `dist/animx.examples.html`, and `dist/animx.docs.html`.
+  - Automated export of `dist/animx.preset-data.json`.
 
 ## Completed Milestones
 
@@ -43,11 +46,12 @@
 - **v1.7.0**: No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
 - **v1.8.0**: Testing and Stability Release (100% Core coverage, strict target safety, QA)
 - **v2.0.0**: Hero Release (Polished demo, docs, CDN-ready output, production finish)
+- **v2.1.0**: Documentation Site / Gallery Upgrade (Comprehensive local browsing, preset JSON export)
 
 ## Current Objective
 
-**AnimX v2.0.0 is Complete.**
-Next Planned Version: **v2.1.0 Documentation Site / Gallery Upgrade** or **v2.5.0 Layout Motion**
+**AnimX v2.1.0 is Complete.**
+Next Planned Version: **v2.5.0 Layout Motion**
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.

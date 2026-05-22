@@ -1,6 +1,8 @@
-# Developer Experience & Debugging (v1.6.0)
+# Developer Experience &# Debugging AnimX
 
-AnimX ships with a suite of lightweight, production-safe Developer Experience (DX) tools. These APIs help you inspect elements, validate your configuration, diagnose the environment, and fetch examples directly within the browser console.
+AnimX (v2.1.0) includes powerful built-in diagnostics.
+
+> **Tip:** You can interactively test these debug tools by opening the local docs landing page `dist/animx.docs.html` and running the commands in your browser console!
 
 ## 1. Debug Mode
 Enable debug mode to surface structured warnings (`AX_*` codes) and helpful suggestions (like typo corrections for presets) in the console.

@@ -1,10 +1,18 @@
 # AnimX
 
-**AnimX v2.0.0 — Hero Release**
+**AnimX v2.1.0 — Documentation Site and Preset Gallery Upgrade**
 
 AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Text, SVG, and Interaction engines. 
 
 AnimX achieves GSAP-like declarative power with absolute minimal footprint: exactly one CSS file and one JS file. 
+
+## Local Documentation & Gallery
+AnimX now includes a full local documentation site and preset gallery!
+After building the project, simply open:
+- \`dist/animx.demo.html\` (Hero Demo)
+- \`dist/animx.gallery.html\` (Preset Gallery)
+- \`dist/animx.examples.html\` (Copy-Paste Recipes)
+- \`dist/animx.docs.html\` (Documentation Landing Page)
 
 ## 1. What AnimX Is
 AnimX bridges the gap between simple CSS animations and heavy JavaScript animation frameworks. It exposes a clean, intuitive API for creating complex timelines, scroll-linked animations, and staggered sequences while relying entirely on native browser features.
@@ -136,6 +144,8 @@ AnimX supports all modern browsers (Chrome, Firefox, Safari, Edge). Older browse
 ```bash
 npm install
 npm run build
+npm run dev
+npm run preview
 ```
 
 ## 25. How to Run Demo

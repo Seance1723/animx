@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX v2.1.0 - Preset Gallery</title>
+  <link rel="stylesheet" href="../dist/animx.min.css">
+  <style>
+    :root {
+      --bg: #0f172a; --text: #f8fafc; --primary: #6366f1; --primary-hover: #4f46e5;
+      --card: #1e293b; --border: #334155; --text-muted: #94a3b8;
+    }
+    body {
+      margin: 0; font-family: system-ui, sans-serif;
+      background-color: var(--bg); color: var(--text);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+    header { text-align: center; margin-bottom: 40px; }
+    h1 { color: #818cf8; margin-bottom: 10px; font-size: 3rem; }
+    
+    .nav-links { margin-bottom: 30px; display: flex; justify-content: center; gap: 20px; }
+    .nav-links a { color: #818cf8; text-decoration: none; font-weight: bold; }
+    .nav-links a:hover { text-decoration: underline; }
+
+    .controls {
+      display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px;
+      background: var(--card); padding: 20px; border-radius: 12px; border: 1px solid var(--border);
+    }
+    .search-bar input {
+      width: 100%; padding: 12px 20px; border-radius: 8px;
+      border: 1px solid var(--border); background: #020617; color: white; font-size: 1.1rem;
+      box-sizing: border-box;
+    }
+    .filters {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: #334155; color: white; border: none; padding: 6px 12px;
+      border-radius: 99px; cursor: pointer; font-size: 0.9rem;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--primary); }
+
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;
+    }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; display: flex; flex-direction: column;
+    }
+    .card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
+    .card-title { font-size: 1.2rem; font-weight: bold; color: #e2e8f0; margin: 0; }
+    .badge { background: #334155; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; }
+    
+    .preview-box {
+      height: 120px; background: #020617; border-radius: 8px; border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 15px; overflow: hidden;
+      position: relative;
+    }
+    .preview-target {
+      padding: 10px 20px; background: var(--primary); border-radius: 6px; font-weight: bold;
+    }
+    
+    .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+    .btn {
+      background: #334155; color: white; border: none; padding: 6px 12px;
+      border-radius: 6px; cursor: pointer; font-size: 0.85rem; flex: 1; text-align: center;
+    }
+    .btn:hover { background: #475569; }
+    .btn-replay { background: var(--primary); }
+    .btn-replay:hover { background: var(--primary-hover); }
+
+    .empty-state { text-align: center; padding: 40px; color: var(--text-muted); }
+    .tag-list { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { color: var(--primary); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>AnimX Preset Gallery</h1>
+      <p style="color: var(--text-muted);">Browse, preview, and copy over 300 zero-dependency animation presets.</p>
+      <div class="nav-links">
+        <a href="index.html">← Back to Home</a>
+        <a href="examples.html">Examples</a>
+        <a href="docs.html">Documentation</a>
+      </div>
+    </header>
+
+    <div class="controls">
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search presets (e.g. 'fade', 'bounce', 'entrance')...">
+      </div>
+      <div class="filters" id="categoryFilters">
+        <button class="filter-btn active" data-category="all">All</button>
+      </div>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <label style="color: var(--text-muted); font-size: 0.9rem;">
+          <input type="checkbox" id="reducedMotionToggle"> Simulate Reduced Motion (Demo Only)
+        </label>
+        <span id="resultCount" style="color: var(--text-muted); font-size: 0.9rem; margin-left: auto;"></span>
+      </div>
+    </div>
+
+    <div id="galleryGrid" class="grid"></div>
+  </div>
+
+  <script src="../dist/animx.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const grid = document.getElementById('galleryGrid');
+      const searchInput = document.getElementById('searchInput');
+      const filtersContainer = document.getElementById('categoryFilters');
+      const resultCount = document.getElementById('resultCount');
+      const rmToggle = document.getElementById('reducedMotionToggle');
+      
+      let allPresets = AnimX.getPresets();
+      let currentCategory = 'all';
+
+      // Setup categories
+      const categories = AnimX.getPresetCategories();
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.category = cat;
+        btn.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        filtersContainer.appendChild(btn);
+      });
+
+      // Filter handling
+      filtersContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('filter-btn')) {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentCategory = e.target.dataset.category;
+          render();
+        }
+      });
+
+      // Search handling
+      searchInput.addEventListener('input', () => render());
+
+      // Reduced Motion
+      rmToggle.addEventListener('change', (e) => {
+        AnimX.config({ reducedMotion: e.target.checked ? 'always' : 'system' });
+      });
+
+      // Render loop
+      function render() {
+        const query = searchInput.value.trim();
+        let filtered = query ? AnimX.searchPresets(query) : allPresets;
+        
+        if (currentCategory !== 'all') {
+          filtered = filtered.filter(p => p.category === currentCategory);
+        }
+
+        resultCount.textContent = `${filtered.length} presets found`;
+        grid.innerHTML = '';
+
+        if (filtered.length === 0) {
+          const suggestions = AnimX.suggestPreset(query);
+          grid.innerHTML = `<div class="empty-state">
+            <h3>No presets found</h3>
+            ${suggestions.length ? `<p>Did you mean: ${suggestions.join(', ')}?</p>` : ''}
+          </div>`;
+          return;
+        }
+
+        const fragment = document.createDocumentFragment();
+        filtered.slice(0, 100).forEach(preset => { // Limit to 100 for performance, usually enough per search
+          const card = document.createElement('div');
+          card.className = 'card';
+          
+          let previewHtml = `<div class="preview-target ${preset.className || ''}">AnimX</div>`;
+          if (preset.category === 'svg') {
+            previewHtml = `
+              <svg width="60" height="60" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" stroke="#6366f1" stroke-width="4" fill="none" class="${preset.className || ''}" />
+              </svg>
+            `;
+          }
+
+          card.innerHTML = `
+            <div class="card-header">
+              <h3 class="card-title">${preset.name}</h3>
+              <span class="badge">${preset.category}</span>
+            </div>
+            <div class="tag-list">
+              ${(preset.tags || []).slice(0, 4).map(t => `<span class="tag">#${t}</span>`).join('')}
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0 0 15px 0;">${preset.description || ''}</p>
+            
+            <div class="preview-box" id="preview-${preset.name}">
+              ${previewHtml}
+            </div>
+            
+            <div class="card-actions">
+              <button class="btn btn-replay" onclick="replay('${preset.name}')">Replay</button>
+            </div>
+            <div class="card-actions">
+              <button class="btn" onclick="copyCode('${preset.className}', this)">Copy Class</button>
+              <button class="btn" onclick="copyCode('data-ax="${preset.name}"', this)">Copy Data</button>
+              <button class="btn" onclick="copyCode('AnimX.animate(el, \'${preset.name}\')', this)">Copy JS</button>
+            </div>
+          `;
+          fragment.appendChild(card);
+        });
+        grid.appendChild(fragment);
+      }
+
+      window.replay = (presetName) => {
+        const box = document.getElementById(`preview-${presetName}`);
+        if (!box) return;
+        const target = box.firstElementChild;
+        if (!target) return;
+        
+        // Remove and re-add class to restart CSS animation safely
+        const preset = AnimX.getPreset(presetName);
+        if (preset && preset.className) {
+            target.classList.remove(preset.className);
+            void target.offsetWidth; // trigger reflow
+            target.classList.add(preset.className);
+        }
+        
+        // Use AnimX to replay if it was activated via JS
+        AnimX.replay(target);
+      };
+
+      window.copyCode = (text, btn) => {
+        if (!text || text === 'undefined') text = 'N/A';
+        
+        // Fallback for clipboard
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text);
+        } else {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "absolute";
+            textArea.style.left = "-999999px";
+            document.body.prepend(textArea);
+            textArea.select();
+            try { document.execCommand('copy'); } catch (error) { console.error(error); }
+            textArea.remove();
+        }
+        
+        const originalText = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = originalText; }, 1500);
+      };
+
+      // Initial URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('q')) searchInput.value = urlParams.get('q');
+      if (urlParams.has('category')) {
+        const cat = urlParams.get('category');
+        currentCategory = cat;
+        setTimeout(() => {
+          const btn = document.querySelector(`.filter-btn[data-category="${cat}"]`);
+          if (btn) btn.click();
+        }, 100);
+      } else {
+        render();
+      }
+    });
+  </script>
+</body>
+</html>

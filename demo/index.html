@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v2.0.0 - Hero Release</title>
+  <title>AnimX v2.1.0 - Documentation Site and Preset Gallery Upgrade</title>
   <link rel="stylesheet" href="../dist/animx.min.css">
   <style>
     :root {
@@ -49,7 +49,7 @@
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
     .badge {
       background: rgba(99, 102, 241, 0.2);
@@ -59,6 +59,25 @@
       font-size: 0.9rem;
       font-weight: 600;
       border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .nav-links a {
+      color: #818cf8;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 16px;
+      background: var(--card);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .nav-links a:hover {
+      background: #334155;
     }
     section {
       padding: 80px 0;
@@ -172,9 +191,15 @@
       <p class="subtitle" data-ax="fade-up" data-ax-delay="500">The zero-dependency UI animation library built on the Web Animations API. One CSS file, one JS file. Endless possibilities.</p>
       
       <div class="badges" data-ax-items="zoom-in" data-ax-delay="800" data-ax-delay-step="150">
-        <div class="badge">v2.0.0 Hero Release</div>
+        <div class="badge">v2.1.0 Hero Release</div>
         <div class="badge">Zero Dependencies</div>
         <div class="badge">HTML, React, Vue, CMS</div>
+      </div>
+
+      <div class="nav-links" data-ax="fade-up" data-ax-delay="1000">
+        <a href="gallery.html">Preset Gallery</a>
+        <a href="examples.html">Examples</a>
+        <a href="docs.html">Documentation</a>
       </div>
     </div>
   </header>

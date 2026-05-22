@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX v2.1.0 - Documentation</title>
+  <link rel="stylesheet" href="../dist/animx.min.css">
+  <style>
+    :root {
+      --bg: #0f172a; --text: #f8fafc; --primary: #6366f1; --card: #1e293b; --border: #334155; --text-muted: #94a3b8;
+    }
+    body { margin: 0; font-family: system-ui, sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+    header { text-align: center; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+    h1 { color: #818cf8; margin-bottom: 10px; font-size: 3rem; }
+    h2 { color: #e2e8f0; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 40px; }
+    h3 { color: #cbd5e1; }
+    .nav-links { display: flex; justify-content: center; gap: 20px; }
+    .nav-links a { color: #818cf8; text-decoration: none; font-weight: bold; }
+    
+    .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+    .doc-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    .doc-card h3 { margin-top: 0; color: #a5b4fc; }
+    
+    pre { background: #020617; padding: 15px; border-radius: 8px; color: #a5b4fc; overflow-x: auto; font-size: 0.9rem; border: 1px solid var(--border); }
+    code { font-family: monospace; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Documentation</h1>
+      <p style="color: var(--text-muted);">The official guides and API references for AnimX.</p>
+      <div class="nav-links">
+        <a href="index.html">← Home</a>
+        <a href="gallery.html">Preset Gallery</a>
+        <a href="examples.html">Examples</a>
+      </div>
+    </header>
+
+    <h2>Getting Started</h2>
+    <p>AnimX is a zero-dependency animation library running on the native Web Animations API. To start, include the files:</p>
+<pre><code>&lt;link rel="stylesheet" href="animx.min.css"&gt;
+&lt;script src="animx.min.js"&gt;&lt;/script&gt;</code></pre>
+
+    <h2>Quick Reference</h2>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <h3>HTML / CSS Usage</h3>
+        <p>Use classes for pure CSS animations (no JS observer).</p>
+        <code>&lt;div class="ax-fade-up"&gt;</code>
+      </div>
+      <div class="doc-card">
+        <h3>Data Attributes</h3>
+        <p>Use data attributes for auto scroll-reveal.</p>
+        <code>&lt;div data-ax="zoom-in"&gt;</code>
+      </div>
+      <div class="doc-card">
+        <h3>JS API</h3>
+        <p>Control programmatically.</p>
+        <code>AnimX.animate('.box', 'fade');</code>
+      </div>
+    </div>
+
+    <h2>Core APIs</h2>
+    
+    <h3>AnimX.animate(targets, presetName, options)</h3>
+    <p>Animates target elements using a registered preset or a custom WAAPI keyframe array.</p>
+<pre><code>AnimX.animate('.hero', 'fade-up', { duration: 1000, delay: 200 });</code></pre>
+
+    <h3>AnimX.timeline()</h3>
+    <p>Creates a chainable timeline sequence.</p>
+<pre><code>const tl = AnimX.timeline();
+tl.add('.a', 'fade-up').add('.b', 'zoom-in', {}, '-=100').play();</code></pre>
+
+    <h3>AnimX.stagger(targets, preset, options)</h3>
+    <p>Animates multiple items with a delay between them. Supports directions: <code>start</code>, <code>center</code>, <code>random</code>.</p>
+<pre><code>AnimX.stagger('.items', 'slide-left', { stagger: 50 });</code></pre>
+
+    <h3>AnimX.scroll(targets, preset, options)</h3>
+    <p>Manually sets up an IntersectionObserver for targets.</p>
+
+    <h2>Advanced Engines</h2>
+    
+    <h3>Text Engine</h3>
+    <p>Splits text by chars, words, or lines, or runs tickers and scramblers.</p>
+<pre><code>AnimX.text('h1', { type: 'split', splitType: 'words', animation: 'fade-up' });</code></pre>
+
+    <h3>SVG Engine</h3>
+    <p>Draws strokes or runs objects along a path.</p>
+<pre><code>AnimX.svgDraw('path');</code></pre>
+
+    <h2>QA & Diagnostics</h2>
+    <p>Ensure your setup is working flawlessly.</p>
+<pre><code>console.log(AnimX.diagnose()); // Memory & Module State
+console.log(AnimX.validate()); // Checks missing DOM nodes
+console.log(AnimX.versionInfo()); // Version details</code></pre>
+
+    <h2>Reduced Motion</h2>
+    <p>AnimX natively respects <code>prefers-reduced-motion</code>. If a user requests reduced motion in their OS, AnimX instantly resolves all animations to their final state, preserving layout and functionality without motion sickness.</p>
+  </div>
+
+</body>
+</html>

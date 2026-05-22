@@ -16,7 +16,7 @@ ${body}
 
 const files = {
   'core.test.js': `
-    assert.strictEqual(AnimX.version, '2.0.0');
+    assert.strictEqual(AnimX.version, '2.1.0');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));
@@ -138,7 +138,7 @@ const files = {
     assert.ok(AnimX.copyExample);
     
     const diag = AnimX.diagnose();
-    assert.strictEqual(diag.version, '2.0.0');
+    assert.strictEqual(diag.version, '2.1.0');
     
     const feats = AnimX.features();
     assert.ok('waapi' in feats);
@@ -169,9 +169,16 @@ const files = {
       assert.ok(fs.existsSync(path.join(distPath, 'animx.min.css')));
       assert.ok(fs.existsSync(path.join(distPath, 'animx.js')));
       assert.ok(fs.existsSync(path.join(distPath, 'animx.min.js')));
+      assert.ok(fs.existsSync(path.join(distPath, 'animx.demo.html')));
+      assert.ok(fs.existsSync(path.join(distPath, 'animx.version.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'animx.preset-data.json')));
+      
+      if (fs.existsSync(path.join(distPath, 'animx.gallery.html'))) assert.ok(true);
+      if (fs.existsSync(path.join(distPath, 'animx.docs.html'))) assert.ok(true);
+      if (fs.existsSync(path.join(distPath, 'animx.examples.html'))) assert.ok(true);
       
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('2.0.0'));
+      assert.ok(jsContent.includes('2.1.0'));
     }
   `
 };

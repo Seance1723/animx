@@ -1,5 +1,10 @@
 # Release Notes
 
+## v2.1.0 — Documentation Site and Preset Gallery Upgrade
+- **Local Docs & Demo:** Added `dist/animx.gallery.html`, `dist/animx.docs.html`, and `dist/animx.examples.html` for comprehensive local browsing of the library.
+- **Preset Data Export:** Automated export of `dist/animx.preset-data.json` during build for tooling integration.
+- **Improved DX:** Enhanced copy-paste capabilities for all 300+ presets straight from the gallery.
+
 ## v2.0.0 — Hero Release
 *The production-ready zero-dependency animation library.*
 - **Major Milestone:** Achieved 100% Core API stability and missing-target safety.

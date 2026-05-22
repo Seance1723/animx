@@ -1,6 +1,7 @@
 # Getting Started with AnimX
 
-AnimX (v0.2.0) is a zero-dependency animation library. It includes both purely CSS-driven classes and a robust JavaScript API.
+AnimX (v2.1.0) is a zero-dependency animation library. It includes both purely CSS-driven classes and a robust JavaScript API.
+> **Tip:** You can view live interactive examples by opening `dist/animx.examples.html` or browse all presets in `dist/animx.gallery.html` after building the project!
 
 ## Installation
 
