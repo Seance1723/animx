@@ -10,8 +10,14 @@ export function setupMockBrowser() {
   
   global.document = {
     readyState: 'complete',
-    querySelectorAll: () => [],
-    querySelector: () => null,
+    querySelectorAll: (s) => {
+      if (s && s.includes('[') && !s.includes(']')) throw new Error('SyntaxError');
+      return [];
+    },
+    querySelector: (s) => {
+      if (s && s.includes('[') && !s.includes(']')) throw new Error('SyntaxError');
+      return null;
+    },
     dispatchEvent: () => {},
     createElement: (tag) => {
       const el = { 
@@ -62,6 +68,24 @@ export function setupMockBrowser() {
     constructor(type, params = { bubbles: false, cancelable: false, detail: null }) {
       this.type = type;
       this.detail = params.detail;
+    }
+  };
+  
+  global.DOMParser = class DOMParser {
+    parseFromString(str, type) {
+      return {
+        querySelectorAll: (q) => {
+          if (q === 'script') return str.includes('<script>') ? [{ remove: () => {} }] : [];
+          if (q === '*') return [{
+            attributes: str.includes('onclick') ? [{ name: 'onclick' }] : [],
+            removeAttribute: () => {},
+            hasAttribute: (a) => a === 'href' && str.includes('javascript:'),
+            getAttribute: () => 'javascript:x'
+          }];
+          return [];
+        },
+        body: { innerHTML: '', childNodes: [] }
+      };
     }
   };
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v2.6.0 - Framework Adapters</title>
+  <title>AnimX v2.9.0 - Security and Defensive Runtime Hardening</title>
   <link rel="stylesheet" href="../dist/animx.min.css">
   <style>
     :root {
@@ -191,7 +191,7 @@
       <p class="subtitle" data-ax="fade-up" data-ax-delay="500">The zero-dependency UI animation library built on the Web Animations API. One CSS file, one JS file. Endless possibilities.</p>
       
       <div class="badges" data-ax-items="zoom-in" data-ax-delay="800" data-ax-delay-step="150">
-        <div class="badge">v2.2.0 Hero Release</div>
+        <div class="badge">v2.9.0 Security and Defensive Runtime Hardening</div>
         <div class="badge">Zero Dependencies</div>
         <div class="badge">HTML, React, Vue, CMS</div>
       </div>
@@ -372,6 +372,54 @@
           <div class="card-code">AnimX.swap('#swapTarget', 'New Content', { animation: 'fade-slide' });</div>
           <button class="btn" onclick="AnimX.swap('#swapTarget', document.getElementById('swapTarget').innerText === 'Original Content' ? 'New Content' : 'Original Content', { animation: 'fade-slide' })">Swap Content</button>
         </div>
+      </div>
+    </section>
+
+    <!-- Security and Defensive Runtime -->
+    <section class="demo-section" id="security-demo">
+      <h2>Security and Defensive Runtime</h2>
+      <p class="section-desc">AnimX v2.9.0 introduces a robust defensive runtime. AnimX core does not use <code>eval</code> or <code>new Function</code>. Inline styles are used for animation transforms where needed.</p>
+      
+      <div class="qa-panel" style="margin-bottom: 20px;">
+        <h3>1. Security Config & Audit</h3>
+        <div class="qa-controls">
+          <button onclick="document.getElementById('secOutput').innerText = JSON.stringify(AnimX.security(), null, 2); document.getElementById('secOutput').style.display='block';">Show AnimX.security()</button>
+          <button onclick="AnimX.security({ safeMode: true }); alert('Safe Mode Enabled');">Enable Safe Mode</button>
+          <button onclick="AnimX.security({ allowHTMLStringSwap: false }); alert('HTML String Swap Disabled');">Disable HTML String Swap</button>
+          <button onclick="document.getElementById('secOutput').innerText = JSON.stringify(AnimX.securityAudit(), null, 2); document.getElementById('secOutput').style.display='block';">Run AnimX.securityAudit()</button>
+          <button onclick="document.getElementById('secOutput').innerText = JSON.stringify(AnimX.productionCheck(), null, 2); document.getElementById('secOutput').style.display='block';">Run AnimX.productionCheck()</button>
+        </div>
+        <pre id="secOutput" style="background:#020617; padding:15px; border-radius:8px; color:#34d399; font-family:monospace; display:none; white-space:pre-wrap; max-height:400px; overflow-y:auto;"></pre>
+      </div>
+
+      <div class="qa-panel" style="margin-bottom: 20px;">
+        <h3>2. Safe Selector</h3>
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+          <input type="text" id="safeSelInput" value="[bad-selector" style="flex:1; padding:10px; border-radius:6px; background:#020617; color:#fff; border:1px solid #334155;">
+          <button onclick="document.getElementById('selOutput').innerText = JSON.stringify(AnimX.safeSelector(document.getElementById('safeSelInput').value), null, 2); document.getElementById('selOutput').style.display='block';">Validate Selector</button>
+        </div>
+        <pre id="selOutput" style="background:#020617; padding:15px; border-radius:8px; color:#34d399; font-family:monospace; display:none; white-space:pre-wrap;"></pre>
+      </div>
+
+      <div class="qa-panel" style="margin-bottom: 20px;">
+        <h3>3. Safe HTML</h3>
+        <p style="color:#94a3b8; font-size:0.9rem; margin-bottom:10px;">Defensive parsing of untrusted strings.</p>
+        <div style="margin-bottom:15px;">
+          <textarea id="safeHtmlInput" rows="3" style="width:100%; padding:10px; border-radius:6px; background:#020617; color:#fff; border:1px solid #334155;">&lt;p&gt;Safe text&lt;/p&gt;&lt;script&gt;alert('hacked')&lt;/script&gt;&lt;a href="javascript:alert(1)" onclick="steal()"&gt;Click me&lt;/a&gt;</textarea>
+        </div>
+        <button style="margin-bottom:15px;" onclick="const res = AnimX.safeHTML(document.getElementById('safeHtmlInput').value); document.getElementById('htmlOutput').innerText = JSON.stringify({ ok: res.ok, html: res.html, removed: res.removed, warnings: res.warnings }, null, 2); document.getElementById('htmlOutput').style.display='block';">Run AnimX.safeHTML()</button>
+        <pre id="htmlOutput" style="background:#020617; padding:15px; border-radius:8px; color:#34d399; font-family:monospace; display:none; white-space:pre-wrap;"></pre>
+      </div>
+
+      <div class="qa-panel" style="margin-bottom: 20px;">
+        <h3>4. Swap Safety</h3>
+        <div class="safe-swap-area" style="padding:15px; border:1px solid #334155; margin-bottom:15px; border-radius:6px; background:#020617;">Target Area (Watch console if Disabled)</div>
+        <button onclick="AnimX.swap('.safe-swap-area', '&lt;img src=x onerror=alert(1)&gt;', { animation: 'fade' });">Try unsafe swap</button>
+      </div>
+
+      <div class="qa-panel">
+        <h3>5. Prototype Pollution Protection</h3>
+        <button onclick="const payload = JSON.parse('{&quot;__proto__&quot;:{&quot;polluted&quot;:true}}'); AnimX.config(payload); alert('Polluted? ' + ({}.polluted));">Run prototype pollution test</button>
       </div>
     </section>
 

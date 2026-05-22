@@ -27,7 +27,7 @@ export function runTicker(element, options) {
   // Create first instance
   const item1 = document.createElement('div');
   item1.className = 'ax-text-ticker-item';
-  item1.innerHTML = textValue;
+  item1.textContent = textValue;
   track.appendChild(item1);
   
   // Create duplicate for seamless loop

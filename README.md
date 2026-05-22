@@ -1,23 +1,30 @@
 <div align="center">
   <h1>🚀 AnimX</h1>
-  <p><strong>v2.8.0</strong> — The zero-dependency, ultra-lightweight, high-performance animation engine for the modern web.</p>
+  <p><strong>v2.9.0</strong> — The zero-dependency, ultra-lightweight, high-performance animation engine for the modern web.</p>
 </div>
 
 <br>
 
-> **Now in v2.8.0**: Accessibility and Compliance Hardening. A powerful native suite of accessibility APIs (`AnimX.a11y()`, `focusSafe()`, `announce()`) and heavily enforced reduced-motion clamping ensures AnimX strictly respects WCAG guidelines and OS-level motion preferences without leaving content permanently hidden.
+## Releases
+- **v2.9.0**: Security and Defensive Runtime Hardening
+- **v2.8.0**: Accessibility and Compliance Hardening
+- **v2.7.0**: Production Optimization and Bundle Control
 
 AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Layout, Text, SVG, and Interaction engines. 
 
 AnimX achieves GSAP-like declarative power with absolute minimal footprint: exactly one CSS file and one JS file. 
 
+## Security and Defensive Runtime
+AnimX v2.9.0 introduces a robust defensive runtime.
+- **Zero eval() or new Function()**: AnimX is entirely CSP friendly.
+- **Prototype Pollution Guards**: Deep merging is securely constrained.
+- **Safe HTML String Management**: Unsafe `<script>` and inline handlers are sanitized or blocked by default.
+- **Selector Crash Prevention**: Broken CSS selectors will fail gracefully instead of breaking execution.
+Check `AnimX.securityAudit()` or the docs for full details.
+
 ## Local Playground & Builder
 AnimX v2.2.0 includes a fully interactive local Playground and Builder!
 After building the project, simply open:
-- \`dist/animx.playground.html\` (Live Builder & Playground)
-- \`dist/animx.demo.html\` (Hero Demo)
-- \`dist/animx.gallery.html\` (Preset Gallery)
-- \`dist/animx.examples.html\` (Copy-Paste Recipes)
 - \`dist/animx.docs.html\` (Documentation Landing Page)
 
 ## 1. What AnimX Is

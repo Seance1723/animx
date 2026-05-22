@@ -20,6 +20,12 @@ import { focusSafe } from './accessibility/focus-safety.js';
 import { announce, createLiveRegion } from './accessibility/live-region.js';
 import { auditAccessibility } from './accessibility/accessibility-audit.js';
 
+import { security } from './security/security-api.js';
+import { securityAudit } from './security/security-audit.js';
+import { safeHTML } from './security/safe-html.js';
+import { safeSelector } from './security/safe-selector.js';
+import { sanitizeOptions } from './security/safe-options.js';
+
 import { normalizeOptions } from './core/animation-normalizer.js';
 import { buildTransformAndFilter } from './core/transform-builder.js';
 import { AnimationInstance } from './core/animation-instance.js';
@@ -45,7 +51,7 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.8.0';
+const VERSION = '2.9.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
@@ -113,6 +119,31 @@ class AnimXCore {
   
   createLiveRegion(options) {
     return createLiveRegion(options);
+  }
+
+  // Security APIs
+  security(options) {
+    return security(options);
+  }
+
+  securityAudit() {
+    return securityAudit();
+  }
+
+  safeHTML(htmlString) {
+    return safeHTML(htmlString);
+  }
+
+  safeSelector(selectorString) {
+    return safeSelector(selectorString);
+  }
+
+  sanitizeOptions(options) {
+    return sanitizeOptions(options);
+  }
+
+  productionCheck() {
+    return productionCheck();
   }
 
   init() {

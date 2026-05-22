@@ -1,6 +1,8 @@
 import { normalizeSelector } from '../core/selector.js';
 import { getLayoutConfig, LayoutInstance, dispatchLayoutEvent } from './layout-utils.js';
 import { isReducedMotion } from '../accessibility/accessibility-state.js';
+import { safeHTML } from '../security/safe-html.js';
+import { getSecurityConfig } from '../security/security-state.js';
 
 export function swap(selector, newContent, options = {}) {
   const elements = normalizeSelector(selector);
@@ -14,7 +16,18 @@ export function swap(selector, newContent, options = {}) {
 
     const applyContent = () => {
       if (typeof newContent === 'string') {
-        el.innerHTML = newContent;
+        const security = getSecurityConfig();
+        if (!security.allowHTMLStringSwap) {
+          console.warn('[AnimX Security] HTML string swap is disabled by default (allowHTMLStringSwap: false). Ignored unsafe string swap.');
+          return;
+        }
+        const safe = safeHTML(newContent);
+        if (safe.ok && safe.fragment) {
+          el.innerHTML = '';
+          el.appendChild(safe.fragment);
+        } else {
+          console.warn('[AnimX Security] safeHTML parsing failed.', safe.warnings);
+        }
       } else if (newContent instanceof HTMLElement || newContent instanceof DocumentFragment) {
         el.innerHTML = '';
         el.appendChild(newContent);

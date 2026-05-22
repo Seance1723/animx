@@ -19,7 +19,7 @@ export function runSwap(element, options, coreInstance) {
   let isDestroyed = false;
 
   element.classList.add('ax-text-swap');
-  element.innerHTML = values[0];
+  element.textContent = String(values[0]);
   
   // Clean up existing element structure to avoid jump on first swap if needed
   const swapContainer = document.createElement('span');

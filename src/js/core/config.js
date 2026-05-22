@@ -1,3 +1,5 @@
+import { safeMerge } from '../security/safe-merge.js';
+
 const defaultConfig = {
   debug: false,
   autoInit: true,
@@ -95,6 +97,18 @@ const defaultConfig = {
     autoRefresh: true,
     recipePrefix: "ax",
     maxAutoItems: 300
+  },
+  security: {
+    safeMode: true,
+    allowHTMLStringSwap: false,
+    blockScriptHTML: true,
+    blockInlineEventHandlers: true,
+    blockJavascriptURLs: true,
+    safeObjectMerge: true,
+    validateSelectors: true,
+    validateDataAttributes: true,
+    freezePresetMetadata: false,
+    debugWarnings: true
   }
 };
 
@@ -105,18 +119,6 @@ export function getConfig() {
 }
 
 export function setConfig(userConfig = {}) {
-  const deepMerge = (target, source) => {
-    for (const key in source) {
-      if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-        if (!target[key]) Object.assign(target, { [key]: {} });
-        deepMerge(target[key], source[key]);
-      } else {
-        Object.assign(target, { [key]: source[key] });
-      }
-    }
-    return target;
-  };
-  
-  currentConfig = deepMerge({ ...currentConfig }, userConfig);
+  currentConfig = safeMerge({ ...currentConfig }, userConfig);
   return currentConfig;
 }

@@ -3,7 +3,12 @@ export function normalizeSelector(selector) {
   if (typeof document === 'undefined') return [];
   
   if (typeof selector === 'string') {
-    return Array.from(document.querySelectorAll(selector));
+    try {
+      return Array.from(document.querySelectorAll(selector));
+    } catch (e) {
+      console.warn(`[AnimX Security] Invalid selector "${selector}" ignored safely.`);
+      return [];
+    }
   }
   
   // Handling standard NodeList / HTMLCollection / Array

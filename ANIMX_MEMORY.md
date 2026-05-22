@@ -42,6 +42,8 @@
   - Introduced modular `core` vs `full` bundles via Vite, bundle report generation, and internal `productionCheck()` APIs.
 - **v2.8.0** - Accessibility and Compliance Hardening
   - Added `AnimX.accessibility()`, `auditAccessibility()`, `motionSafe()`, `focusSafe()`, `announce()`, and `setReducedMotion()`.
+- **v2.9.0** - Security and Defensive Runtime Hardening
+  - Added security API, safeHTML, safeSelector, and safe object merging against prototype pollution. Blocked unsafe HTML insertion by default.
 
 ## Completed Milestones
 
