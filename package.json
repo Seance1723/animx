@@ -1,7 +1,7 @@
 {
   "name": "animx",
-  "version": "1.6.0",
-  "description": "Zero-dependency browser animation library",
+  "version": "1.7.0",
+  "description": "Zero-dependency, high-performance browser animation engine.",
   "main": "dist/animx.js",
   "style": "dist/animx.css",
   "type": "module",

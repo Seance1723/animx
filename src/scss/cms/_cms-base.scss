@@ -1,0 +1,24 @@
+/* CMS & No-Code Helper Classes */
+
+.ax-cms-ready {
+  opacity: 1;
+}
+
+.ax-cms-active {
+  pointer-events: auto;
+}
+
+/* Editor Safe Mode: Prevents builders from hiding elements waiting for scroll triggers */
+.ax-editor-safe {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  pointer-events: auto !important;
+}
+
+/* Recipe helpers */
+[data-ax-recipe] {
+  // Base structural safety if needed
+}

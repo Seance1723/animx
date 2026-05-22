@@ -4,6 +4,7 @@
 @use 'base/reset';
 @use 'base/reduced-motion';
 
+
 @use 'utilities/duration';
 @use 'utilities/delay';
 @use 'utilities/repeat';
@@ -76,3 +77,6 @@
 @use 'presets/background' as preset-background;
 @use 'presets/skeleton' as preset-skeleton;
 @use 'presets/utility-combinations' as preset-utility;
+
+// 6. CMS / No-Code Layer
+@use 'cms/cms-base';

@@ -7,7 +7,7 @@ export function inspect(selector) {
   if (!selector) {
     // Global inspection
     return {
-      version: '1.6.0',
+      version: '1.7.0',
       config: getConfig(),
       presetCount: getPresets().length,
       categories: getPresetCategories(),

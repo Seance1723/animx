@@ -8,9 +8,13 @@ export function parseDataAttributes(element) {
   const ds = element.dataset;
   if (!ds.ax && !ds.axSvg) return null;
   
+  // Handle no-code aliases
+  const rawAnimation = ds.ax || ds.axPreset || ds.axHoverPreset || null;
+  const isScrollAlias = ds.axScroll !== undefined;
+  
   // Basic attributes
-  const animation = ds.ax || 'svg';
-  const trigger = ds.axOn || 'load';
+  const animation = isScrollAlias ? ds.axScroll : (rawAnimation || 'svg');
+  const trigger = isScrollAlias ? 'scroll' : (ds.axOn || ds.axTrigger || 'load');
   const id = ds.axId || null;
   const disabled = ds.axDisabled === 'true' || ds.axDisabled === '1' || ds.axDisabled === '';
   const debug = ds.axDebug === 'true';
@@ -40,9 +44,10 @@ export function parseDataAttributes(element) {
   }
   
   let stagger = null;
-  if (ds.axStagger !== undefined) {
+  const rawStagger = ds.axStagger !== undefined ? ds.axStagger : (ds.axDelayStep !== undefined ? ds.axDelayStep : undefined);
+  if (rawStagger !== undefined) {
     stagger = {
-      each: parseInt(ds.axStagger, 10) || 0,
+      each: parseInt(rawStagger, 10) || 0,
       from: ds.axStaggerFrom || 'start',
       startDelay: parseInt(ds.axStaggerStartDelay, 10) || 0,
       reverse: ds.axStaggerReverse === 'true' || ds.axStaggerReverse === '1',

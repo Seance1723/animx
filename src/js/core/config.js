@@ -59,6 +59,16 @@ const defaultConfig = {
     warnLargeBatch: true,
     largeBatchLimit: 100,
     batchDomWrites: true
+  },
+  cms: {
+    enabled: true,
+    autoScan: true,
+    observe: false,
+    observerDebounce: 120,
+    editorSafe: true,
+    autoRefresh: true,
+    recipePrefix: "ax",
+    maxAutoItems: 300
   }
 };
 

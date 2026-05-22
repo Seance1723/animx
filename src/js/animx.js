@@ -34,8 +34,9 @@ import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdv
 import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
+import { cms, refreshCMS, observeCMS, disconnectCMS, getCMSRecipes, applyRecipe, bindCMSApi } from './cms/cms-api.js';
 
-const VERSION = '1.6.0';
+const VERSION = '1.7.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets].forEach(preset => {
@@ -56,6 +57,7 @@ class AnimXCore {
     bindComponentAnimX(this);
     bindScrollSceneAnimX(this);
     bindSvgAnimX(this);
+    bindCMSApi(this);
   }
 
   config(options) {
@@ -66,7 +68,13 @@ class AnimXCore {
     if (this._initialized) return;
     this._initialized = true;
     debug.info(`AnimX v${this.version} Initialized.`);
-    initData();
+    
+    const conf = getConfig();
+    if (conf.cms && conf.cms.autoScan) {
+      cms(document, { observe: conf.cms.observe });
+    } else {
+      initData();
+    }
     refreshScroll();
   }
 
@@ -141,6 +149,31 @@ class AnimXCore {
   
   copyExample(presetName, type) {
     return copyExample(presetName, type);
+  }
+
+  // CMS / No-Code APIs
+  cms(root, options) {
+    return cms(root, options);
+  }
+
+  refreshCMS(root) {
+    return refreshCMS(root);
+  }
+
+  observeCMS(root, options) {
+    return observeCMS(root, options);
+  }
+
+  disconnectCMS() {
+    return disconnectCMS();
+  }
+
+  getCMSRecipes() {
+    return getCMSRecipes();
+  }
+
+  applyRecipe(target, recipeName) {
+    return applyRecipe(target, recipeName);
   }
 
   refresh(root) {

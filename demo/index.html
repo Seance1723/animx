@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.5.0</title>
+  <title>AnimX v1.7.0 CMS Demo</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -734,7 +734,99 @@ AnimX.destroy();
       </pre>
     </section>
 
-  </div>
+  <!-- CMS & NO-CODE SECTIONS -->
+  
+  <section id="cms-alias">
+    <h2>18. CMS: No-Code Aliases</h2>
+    <p>Using <code>data-ax-preset</code> and <code>data-ax-scroll</code> for simpler authoring without writing JS.</p>
+    <div class="grid">
+      <div class="box" data-ax-preset="zoom-in" data-ax-trigger="hover">Hover Preset</div>
+      <div class="box" data-ax-scroll="fade-up">Scroll Alias</div>
+    </div>
+  </section>
+
+  <section id="cms-items">
+    <h2>19. CMS: data-ax-items (Stagger Shortcut)</h2>
+    <p>Animating a list of items using a single parent attribute.</p>
+    <ul data-ax-items="fade-right" data-ax-delay-step="150" data-ax-trigger="scroll" style="list-style: none; padding: 0;">
+      <li style="padding: 10px; background: #e0e7ff; margin-bottom: 5px;">List Item 1</li>
+      <li style="padding: 10px; background: #e0e7ff; margin-bottom: 5px;">List Item 2</li>
+      <li style="padding: 10px; background: #e0e7ff; margin-bottom: 5px;">List Item 3</li>
+      <li style="padding: 10px; background: #e0e7ff; margin-bottom: 5px;">List Item 4</li>
+    </ul>
+  </section>
+
+  <section id="cms-sequence">
+    <h2>20. CMS: HTML Sequence</h2>
+    <p>Building a timeline animation directly in HTML.</p>
+    <div data-ax-sequence data-ax-trigger="scroll" style="padding: 20px; background: #f1f5f9; border-radius: 8px;">
+      <h3 data-ax-step="text-rise">Sequence Title</h3>
+      <p data-ax-step="fade-up" data-ax-step-position="-=200">This paragraph fades in after the title starts rising.</p>
+      <button data-ax-step="zoom-in" data-ax-step-position="-=100">Click Me</button>
+    </div>
+  </section>
+
+  <section id="cms-recipe">
+    <h2>21. CMS: Recipe Implementation</h2>
+    <p>Applying the <code>hero-saas-intro</code> recipe purely via data attributes.</p>
+    <div data-ax-recipe="hero-saas-intro" style="text-align: center; padding: 40px; background: #1e1b4b; color: white; border-radius: 12px;">
+      <h2 data-ax-role="heading" style="font-size: 2.5rem; margin-bottom: 1rem;">SaaS Product Launch</h2>
+      <p data-ax-role="copy" style="font-size: 1.2rem; opacity: 0.8; margin-bottom: 2rem;">The best way to automate your workflow without writing code.</p>
+      <button data-ax-role="cta" style="padding: 12px 24px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: bold;">Get Started</button>
+    </div>
+  </section>
+
+  <section id="cms-stats">
+    <h2>22. CMS: Stats Counter Reveal</h2>
+    <p>Using the <code>stats-counter-reveal</code> recipe.</p>
+    <div data-ax-recipe="stats-counter-reveal" style="display: flex; gap: 2rem; justify-content: space-around; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+      <div style="text-align: center;">
+        <div data-ax-counter data-ax-to="99" data-ax-suffix="%" style="font-size: 3rem; font-weight: bold; color: #4f46e5;">0</div>
+        <div class="stat-label">Satisfaction</div>
+      </div>
+      <div style="text-align: center;">
+        <div data-ax-counter data-ax-to="150" data-ax-suffix="k" style="font-size: 3rem; font-weight: bold; color: #10b981;">0</div>
+        <div class="stat-label">Users</div>
+      </div>
+      <div style="text-align: center;">
+        <div data-ax-counter data-ax-to="24" data-ax-suffix="/7" style="font-size: 3rem; font-weight: bold; color: #f59e0b;">0</div>
+        <div class="stat-label">Support</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cms-dynamic">
+    <h2>23. CMS: Dynamic Content Injection (Observer)</h2>
+    <p>Items added to the DOM are automatically animated because <code>cms.autoScan</code> and <code>data-ax-observe</code> are active.</p>
+    <div id="dynamic-container" data-ax-observe="true" style="min-height: 100px; padding: 20px; border: 2px dashed #cbd5e1; border-radius: 8px;">
+      <!-- Dynamic content injected here -->
+    </div>
+    <button onclick="injectDynamicContent()" style="margin-top: 10px;">Inject Animated Item</button>
+    <script>
+      let dynamicCount = 0;
+      function injectDynamicContent() {
+        dynamicCount++;
+        const container = document.getElementById('dynamic-container');
+        const el = document.createElement('div');
+        el.className = 'box';
+        el.setAttribute('data-ax', 'zoom-in');
+        el.innerText = 'Injected ' + dynamicCount;
+        container.appendChild(el);
+      }
+    </script>
+  </section>
+  
+  <section id="cms-editor-safe">
+    <h2>24. CMS: Editor-Safe Mode</h2>
+    <p>Elements with <code>data-ax-editor-safe="true"</code> bypass animation if a builder environment (like <code>wp-admin</code>) is detected. To test, add <code>wp-admin</code> to the body class and refresh.</p>
+    <button onclick="document.body.classList.toggle('wp-admin'); alert('wp-admin toggled. Refresh to see editor-safe mode bypass animations.');">Toggle Editor Environment</button>
+    <div class="grid" style="margin-top: 1rem;">
+      <div class="box" data-ax="fade-up" data-ax-editor-safe="true">Safe Box</div>
+      <div class="box" data-ax="slide-left" data-ax-editor-safe="true">Safe Box</div>
+    </div>
+  </section>
+
+</div>
 
   <script type="module" src="/src/js/animx.js"></script>
   <script type="module">

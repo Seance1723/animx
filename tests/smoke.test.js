@@ -30,7 +30,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.6.0', 'Version should be 1.6.0');
+  assert.strictEqual(AnimX.version, '1.7.0', 'Version should be 1.7.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -82,7 +82,7 @@ try {
   const featuresRes = AnimX.features();
   assert.ok('waapi' in featuresRes, 'Features returns expected keys');
   
-  assert.strictEqual(AnimX.versionInfo().version, '1.6.0', 'versionInfo returns correct version');
+  assert.strictEqual(AnimX.versionInfo().version, '1.7.0', 'versionInfo returns correct version');
   
   const findRes = AnimX.findPreset('fade-up');
   assert.ok(findRes.name === 'fade-up', 'findPreset returns exact match');
@@ -140,7 +140,27 @@ try {
   assert.strictEqual(typeof AnimX.pin, 'function');
   assert.strictEqual(typeof AnimX.scrollScene, 'function');
   assert.strictEqual(typeof AnimX.readingProgress, 'function');
-  console.log('✅ Global API exposed');
+  
+  // 6.5 CMS APIs
+  assert.strictEqual(typeof AnimX.cms, 'function', 'AnimX.cms should be exposed');
+  assert.strictEqual(typeof AnimX.refreshCMS, 'function', 'AnimX.refreshCMS should be exposed');
+  assert.strictEqual(typeof AnimX.observeCMS, 'function', 'AnimX.observeCMS should be exposed');
+  assert.strictEqual(typeof AnimX.disconnectCMS, 'function', 'AnimX.disconnectCMS should be exposed');
+  assert.strictEqual(typeof AnimX.getCMSRecipes, 'function', 'AnimX.getCMSRecipes should be exposed');
+  assert.strictEqual(typeof AnimX.applyRecipe, 'function', 'AnimX.applyRecipe should be exposed');
+  
+  const recipes = AnimX.getCMSRecipes();
+  assert.ok(Array.isArray(recipes) && recipes.length > 0, 'getCMSRecipes returns recipes');
+  
+  // Test applyRecipe with fake target does not crash
+  AnimX.applyRecipe('.fake-recipe-target', 'hero-saas-intro');
+  AnimX.applyRecipe('.fake-recipe-target', 'fake-recipe');
+  
+  // Test observe does not crash
+  AnimX.observeCMS();
+  AnimX.disconnectCMS();
+  
+  console.log('✅ Global API exposed and CMS APIs work safely');
   
   // 7. Timeline API Check
   const tl = AnimX.timeline();

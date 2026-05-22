@@ -1,21 +1,23 @@
 <div align="center">
   <h1>AnimX</h1>
-  <p><strong>v1.6.0</strong> — Zero-dependency, high-performance browser animation engine.</p>
+  <p><strong>v1.7.0</strong> — Zero-dependency, high-performance browser animation engine.</p>
   
-  [![npm version](https://img.shields.io/npm/v/animx.svg?style=flat-square)](https://www.npmjs.com/package/animx)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-  [![Size: 8KB](https://img.shields.io/badge/Size-~8KB_gzip-success.svg?style=flat-square)](#)
+  ![AnimX Size](https://img.shields.io/badge/size-9kb_gzipped-brightgreen)
+  ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-blue)
+  ![Waapi Powered](https://img.shields.io/badge/engine-WAAPI-orange)
 </div>
 
-AnimX is a robust, lightweight, zero-dependency animation library built natively for modern browsers. It leverages the Web Animations API (WAAPI) with seamless CSS fallbacks, offering high performance without the bloat of traditional animation engines.
+AnimX is a comprehensive animation library built directly on top of the native Web Animations API (WAAPI). It provides the power of GSAP or Framer Motion without the massive bundle size or external dependencies.
 
-## Features
-- **Zero Dependencies:** Pure Vanilla JavaScript & CSS.
-- **Over 300+ Built-in Presets:** Instantly use high-quality animations with classes like `.ax-fade-up-soft`, `.ax-zoom-in`, `.ax-bg-pan`.
+## Key Features
+- **Zero Dependencies**: 100% native WAAPI and Vanilla JS.
+- **Micro-Bundle**: ~9kb gzipped.
+- **Scroll Engine**: Built-in IntersectionObserver for scroll-triggered animations.
+- **Timeline & Stagger**: Robust sequential and batch animations.
+- **Text & SVG Packs**: Advanced character/word splitting and SVG path drawing.
+- **No-Code & CMS Friendly**: Complete data-attribute mapping, recipes, and MutationObservers for WordPress/Webflow.
+- **Accessibility First**: Built-in `prefers-reduced-motion` detection.
 - **Developer Experience Utilities:** Built-in validation, diagnostics, and environment inspection (`AnimX.validate()`, `AnimX.diagnose()`).
-- **Advanced Scroll Engine:** Progress triggers, parallax, pin scenes, reading progress.
-- **Advanced Text Pack:** Split-text decoding, character waves, ticker-tape, gradient sweeps.
-- **SVG Animation Pack:** Stroke draw, fill reveal, dash loops, path follow.
 
 ## ✨ What's New in v1.6.0 (Developer Experience Upgrade)
 - **AnimX now includes DX helpers** natively with no external dependency.

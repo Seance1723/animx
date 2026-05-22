@@ -27,7 +27,22 @@
   - Added preset suggestions and example generators.
   - Added Demo UI Diagnostics panel.
   - Runtime dependency remains zero, output remains 1 CSS + 1 JS.
-  - Next planned version: v1.7.0 No-Code / CMS Friendly Layer.
+
+## Completed Milestones
+
+- **v1.0.0**: Stable Public Release (Core Engine)
+- **v1.1.0**: Performance & Cleanup (WAAPI standardization)
+- **v1.2.0**: Advanced Scroll System (Parallax, Progress, Scenes)
+- **v1.3.0**: Advanced Text Pack (Re-splitting, Scramble, Typing)
+- **v1.4.0**: SVG Animation Pack (Strokes, Undraw, Progress)
+- **v1.5.0**: Preset Expansion (>300 Utility & UI combinations)
+- **v1.6.0**: Developer Experience Upgrade (Debug, Inspect, DX tools)
+- **v1.7.0**: No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
+
+## Current Objective
+
+**AnimX v1.8.0**
+*(Pending Requirements)*
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.
