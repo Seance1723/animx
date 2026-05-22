@@ -1,40 +1,121 @@
 import { getConfig } from '../core/config.js';
 
 export function normalizeTextOptions(options = {}) {
-  const config = getConfig().text || {};
-  
-  const type = options.type || 'split'; // split, typewriter, scramble, counter
+  const conf = getConfig().text || {};
   
   return {
-    type,
-    split: options.split || config.split || 'chars', // chars, words, lines, or array
-    animation: options.animation || config.animation || 'text-rise',
-    stagger: options.stagger !== undefined ? options.stagger : config.stagger || 35,
-    duration: options.duration || config.duration || undefined,
-    ease: options.ease || undefined,
-    mask: options.mask || false, // true, false, 'lines'
-    preserveAccessibility: options.preserveAccessibility !== undefined ? options.preserveAccessibility : config.preserveAccessibility !== false,
-    
-    // Typewriter
-    text: options.text || null,
-    speed: options.speed || config.typewriterSpeed || 45,
-    cursor: options.cursor !== false,
-    cursorChar: options.cursorChar || '|',
-    
-    // Scramble
-    chars: options.chars || 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
-    revealDirection: options.revealDirection || 'start',
-    
-    // Counter
-    from: options.from !== undefined ? Number(options.from) : 0,
-    to: options.to !== undefined ? Number(options.to) : 100,
-    decimals: options.decimals !== undefined ? Number(options.decimals) : 0,
+    type: options.type || conf.type || 'split',
+    split: options.split || conf.split || 'chars',
+    animation: options.animation || conf.animation || 'text-rise',
+    stagger: options.stagger !== undefined ? options.stagger : conf.stagger,
+    text: options.text || '',
+    mask: options.mask || false,
+    speed: options.speed || conf.speed || conf.typewriterSpeed || 45,
+    from: options.from !== undefined ? options.from : 0,
+    to: options.to !== undefined ? options.to : 100,
+    decimals: options.decimals || 0,
     prefix: options.prefix || '',
     suffix: options.suffix || '',
-    format: options.format || 'number', // 'number' means we can use localeString
+    chars: options.chars || undefined,
+    duration: options.duration || conf.scrambleDuration || conf.counterDuration || 1000,
+    responsive: options.responsive !== undefined ? options.responsive : (conf.responsive !== false),
+    resplitDebounce: options.resplitDebounce || conf.resplitDebounce || 150,
+    replayOnResplit: options.replayOnResplit || false,
+    preset: options.preset || undefined,
+    values: options.values || [],
+    interval: options.interval || conf.swapInterval || 1600,
+    format: options.format || undefined,
+    locale: options.locale || undefined,
+    currency: options.currency || undefined,
+    separator: options.separator || undefined,
+    compact: options.compact !== undefined ? options.compact : false,
+    direction: options.direction || 'left',
+    pauseOnHover: options.pauseOnHover !== undefined ? options.pauseOnHover : true,
+    preserveAccessibility: options.preserveAccessibility !== undefined ? options.preserveAccessibility : conf.preserveAccessibility,
     
     // Callbacks
     onStart: options.onStart || null,
     onComplete: options.onComplete || null
   };
+}
+
+export function parseTextAttributes(element) {
+  const result = { type: 'split' };
+  
+  if (element.hasAttribute('data-ax-text-type')) {
+    result.type = element.getAttribute('data-ax-text-type');
+  }
+  if (element.hasAttribute('data-ax-text-value')) {
+    result.text = element.getAttribute('data-ax-text-value');
+  }
+  if (element.hasAttribute('data-ax-text')) {
+    result.split = element.getAttribute('data-ax-text').split(' ');
+  }
+  if (element.hasAttribute('data-ax-responsive')) {
+    result.responsive = element.getAttribute('data-ax-responsive') !== 'false';
+  }
+  if (element.hasAttribute('data-ax-scramble-preset')) {
+    result.preset = element.getAttribute('data-ax-scramble-preset');
+  }
+  if (element.hasAttribute('data-ax-values')) {
+    result.values = element.getAttribute('data-ax-values').split('|');
+  }
+  if (element.hasAttribute('data-ax-interval')) {
+    result.interval = parseInt(element.getAttribute('data-ax-interval'), 10);
+  }
+  if (element.hasAttribute('data-ax-animation')) {
+    result.animation = element.getAttribute('data-ax-animation');
+  }
+  if (element.hasAttribute('data-ax-format')) {
+    result.format = element.getAttribute('data-ax-format');
+  }
+  if (element.hasAttribute('data-ax-locale')) {
+    result.locale = element.getAttribute('data-ax-locale');
+  }
+  if (element.hasAttribute('data-ax-currency')) {
+    result.currency = element.getAttribute('data-ax-currency');
+  }
+  if (element.hasAttribute('data-ax-separator')) {
+    result.separator = element.getAttribute('data-ax-separator');
+  }
+  if (element.hasAttribute('data-ax-compact')) {
+    result.compact = element.getAttribute('data-ax-compact') !== 'false';
+  }
+  if (element.hasAttribute('data-ax-direction')) {
+    result.direction = element.getAttribute('data-ax-direction');
+  }
+  if (element.hasAttribute('data-ax-pause-on-hover')) {
+    result.pauseOnHover = element.getAttribute('data-ax-pause-on-hover') !== 'false';
+  }
+  
+  if (element.hasAttribute('data-ax-mask')) {
+    const maskVal = element.getAttribute('data-ax-mask');
+    result.mask = maskVal === 'lines' ? 'lines' : maskVal !== 'false';
+  }
+  
+  if (element.hasAttribute('data-ax-speed')) {
+    const speed = parseInt(element.getAttribute('data-ax-speed'), 10);
+    if (!isNaN(speed)) result.speed = speed;
+  }
+
+  // Fallback to old behavior for backward compat
+  if (element.hasAttribute('data-ax-typewriter-speed')) {
+    result.type = 'typewriter';
+    result.speed = parseInt(element.getAttribute('data-ax-typewriter-speed'), 10) || 45;
+  }
+  
+  if (element.hasAttribute('data-ax-from')) {
+    result.from = parseFloat(element.getAttribute('data-ax-from'));
+  }
+  if (element.hasAttribute('data-ax-to')) {
+    result.to = parseFloat(element.getAttribute('data-ax-to'));
+  }
+  if (element.hasAttribute('data-ax-prefix')) {
+    result.prefix = element.getAttribute('data-ax-prefix');
+  }
+  if (element.hasAttribute('data-ax-suffix')) {
+    result.suffix = element.getAttribute('data-ax-suffix');
+  }
+
+  return result;
 }

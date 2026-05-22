@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.2.0</title>
+  <title>AnimX v1.3.0</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -110,7 +110,7 @@
     <header data-ax-component="hero-fade-sequence">
       <h1 data-ax-component="hero-split-text">AnimX</h1>
       <p>Zero-Dependency Browser Animation Library</p>
-      <div class="status-badge">v1.2.0 Advanced Scroll System Upgrade</div>
+      <div class="status-badge">v1.3.0 Advanced Text Pack</div>
       <p style="margin-top:1.5rem; opacity:0.8;">Usage: One CSS + One JS File. No external libraries.</p>
     </header>
 
@@ -323,9 +323,101 @@
       </script>
     </section>
 
-    <!-- 11. Performance and Cleanup -->
+    <!-- 11. Advanced Text Pack -->
     <section>
-      <h2>11. Performance and Cleanup</h2>
+      <h2>11. Advanced Text Pack</h2>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3 style="margin-top:0;">1. Responsive line mask reveal</h3>
+        <button class="btn" onclick="AnimX.text('.advanced-line-mask', { split: 'lines', animation: 'text-mask-up', mask: true, responsive: true, stagger: 100 })">Run Line Mask</button>
+        <h2 class="advanced-line-mask" style="margin-top:1rem;">A premium line mask reveal that adapts on resize</h2>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>2. Character wave</h3>
+        <button class="btn" onclick="AnimX.text('.char-wave-demo', { split: 'chars', animation: 'text-wave', stagger: 24 })">Run Char Wave</button>
+        <h2 class="char-wave-demo" style="margin-top:1rem;">Character wave animation</h2>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>3. Word wave</h3>
+        <button class="btn" onclick="AnimX.text('.word-wave-demo', { split: 'words', animation: 'text-word-wave', stagger: 60 })">Run Word Wave</button>
+        <h2 class="word-wave-demo" style="margin-top:1rem;">Words can move with rhythm</h2>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>4. Scramble decode</h3>
+        <button class="btn" onclick="AnimX.text('.scramble-decode-demo', { type: 'scramble', text: 'ANIMX ADVANCED TEXT', preset: 'decode', duration: 1400 })">Run Decode</button>
+        <div class="scramble-decode-demo" style="margin-top:1rem; font-family:monospace; font-weight:bold; font-size:1.5rem;">ANIMX</div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>5. Text swap</h3>
+        <button class="btn" onclick="AnimX.textSwap('.text-swap-demo', { values: ['Fast', 'Smooth', 'Accessible', 'Zero Dependency'], interval: 1600, animation: 'text-swap-up' })">Run Text Swap</button>
+        <div class="text-swap-demo" style="margin-top:1rem; font-weight:bold; font-size:1.5rem;">Ready</div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>6. Ticker</h3>
+        <button class="btn" onclick="AnimX.ticker('.ticker-demo', { text: 'AnimX • Zero Dependency • Smooth UI Motion • ', speed: 60 })">Run Ticker</button>
+        <div class="ticker-demo" style="margin-top:1rem; font-weight:bold; font-size:1.5rem; background:#1e293b; color:white; padding:0.5rem 0; border-radius:4px;">Ready</div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>7. Gradient text</h3>
+        <h2 class="ax-text-gradient ax-text-gradient-shift">Gradient Motion Text</h2>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>8. Advanced counter</h3>
+        <button class="btn" onclick="AnimX.counter('.advanced-counter-demo', { from: 0, to: 125000, duration: 1400, format: 'compact', prefix: '$', suffix: '+' })">Run Counter</button>
+        <div class="advanced-counter-demo" style="margin-top:1rem; font-weight:bold; font-size:2rem; color:var(--primary);">0</div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>9. Data attribute advanced text examples</h3>
+        <div data-ax-text-type="swap" data-ax-values="Fast|Smooth|Accessible|Zero Dependency" data-ax-interval="1600" data-ax-animation="text-swap-up" style="font-weight:bold; font-size:1.5rem; margin-bottom:1rem;"></div>
+        <div data-ax-text-type="ticker" data-ax-text-value="AnimX • Zero Dependency • Smooth Motion • " data-ax-speed="60" style="font-weight:bold; font-size:1.5rem; background:#1e293b; color:white; padding:0.5rem 0; border-radius:4px; margin-bottom:1rem;"></div>
+        <div data-ax-text-type="counter" data-ax-from="0" data-ax-to="125000" data-ax-format="compact" data-ax-prefix="$" data-ax-suffix="+" style="font-weight:bold; font-size:2rem; color:var(--primary);">0</div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>10. Scroll advanced text</h3>
+        <div style="height: 150px; overflow-y: scroll; border: 1px solid #ccc; padding: 1rem; border-radius: 4px;">
+          <div style="height: 300px;">Scroll down...</div>
+          <h2 data-ax-text="lines" data-ax="text-mask-up" data-ax-on="scroll" data-ax-responsive="true" data-ax-mask="lines">Scroll responsive line reveal</h2>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>11. Timeline advanced text</h3>
+        <button class="btn" onclick="playTextTimeline()">Play Text Timeline</button>
+        <h2 class="timeline-hero-title">Timeline Title Mask</h2>
+        <div class="timeline-hero-kicker" style="font-family:monospace; font-weight:bold;">INITIAL</div>
+        <script>
+          let textTl = null;
+          function playTextTimeline() {
+            if (textTl) textTl.destroy();
+            textTl = AnimX.timeline()
+              .add('.timeline-hero-title', { type: 'text', mode: 'split', split: 'lines', animation: 'text-mask-up', mask: 'lines', responsive: true, stagger: 100 })
+              .add('.timeline-hero-kicker', { type: 'text', mode: 'scramble', text: 'ZERO DEPENDENCY' })
+              .play();
+          }
+        </script>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>12. Re-split test</h3>
+        <button class="btn" onclick="document.querySelector('.resplit-container').style.width = '300px'; setTimeout(() => AnimX.refresh(), 50);">Change Width</button>
+        <div class="resplit-container" style="border:1px solid #ccc; padding:1rem; transition:width 0.3s; width:100%;">
+          <h2 data-ax-text="lines" data-ax="text-mask-up" data-ax-mask="lines" data-ax-responsive="true" data-ax-replay-on-resplit="true">This container will resize and the text will automatically re-split to prevent broken lines.</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. Performance and Cleanup -->
+    <section>
+      <h2>12. Performance and Cleanup</h2>
       <p>Test dynamic content, robust instance destruction, and memory safety without duplicating event listeners.</p>
       <div style="display:flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
         <button class="btn" onclick="testPerformanceStagger()">Run 100 Card Stagger</button>
@@ -365,9 +457,9 @@
       </script>
     </section>
 
-    <!-- 12. API quick reference -->
+    <!-- 13. API quick reference -->
     <section>
-      <h2>12. API quick reference</h2>
+      <h2>13. API quick reference</h2>
       <pre class="code-block">
 // Setup
 AnimX.config({ debug: false, autoInit: true });

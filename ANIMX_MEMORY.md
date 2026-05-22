@@ -4,6 +4,30 @@
 **Current Version**: 1.2.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
+## Version History
+- **v0.0.1** - Foundation
+- **v0.1.0** - Core CSS animation preset system
+- **v0.2.0** - JavaScript Animation API
+- **v0.3.0** - Data Attribute Engine
+- **v0.4.0** - Scroll Reveal Engine
+- **v0.5.0** - Timeline Engine
+- **v0.6.0** - Stagger Engine
+- **v0.7.0** - Text Animation Engine
+- **v0.8.0** - Interaction Animation System
+- **v0.9.0** - Component Preset Pack
+- **v1.0.0** - Stable Public Release
+- **v1.1.0** - Performance and Cleanup Upgrade
+- **v1.2.0** - Advanced Scroll System
+- **v1.3.0** - Advanced Text Pack
+  - Added responsive re-splitting.
+  - Added improved line mask reveal.
+  - Added char/word wave effects.
+  - Added scramble decode presets.
+  - Added text swap, ticker/marquee, gradient motion.
+  - Added advanced counter formatting via `Intl.NumberFormat`.
+  - Final output remains one CSS and one JS file.
+  - Total package size sits at ~29kB gzipped.
+
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.
 - Output strictly mapped to `dist/animx.css` and `dist/animx.js`.

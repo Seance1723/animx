@@ -1,0 +1,29 @@
+.ax-text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-size: 200% 100%;
+}
+
+@keyframes ax-text-gradient-shift {
+  0% { background-position: 100% 50%; }
+  100% { background-position: -100% 50%; }
+}
+
+@keyframes ax-text-gradient-sweep {
+  0% { background-position: -100% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.ax-text-gradient-shift {
+  animation: ax-text-gradient-shift 3s ease infinite;
+}
+
+.ax-text-gradient-sweep {
+  animation: ax-text-gradient-sweep 2s ease-in-out infinite alternate;
+}
+
+.ax-text-gradient-pulse {
+  animation: ax-glow-pulse 2s ease-in-out infinite alternate;
+}

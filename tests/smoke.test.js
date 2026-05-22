@@ -30,7 +30,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.2.0', 'Version should be 1.2.0');
+  assert.strictEqual(AnimX.version, '1.3.0', 'Version should be 1.3.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -227,6 +227,12 @@ try {
   const rpInstance = AnimX.readingProgress(fakeScrollNode);
   assert.ok(rpInstance, 'readingProgress safely initializes');
   
+  // Validation for new text features
+  assert.strictEqual(typeof AnimX.textSwap, 'function', 'textSwap() should exist');
+  assert.strictEqual(typeof AnimX.ticker, 'function', 'ticker() should exist');
+  assert.strictEqual(typeof AnimX.counter, 'function', 'counter() should exist');
+  console.log('✅ New Text Engine features exposed');
+
   AnimX.destroy(); // Ensure deep cleanup works without crashing
   console.log('✅ Advanced Scroll System safely initializes and destroys');
 

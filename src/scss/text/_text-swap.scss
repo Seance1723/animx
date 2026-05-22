@@ -1,0 +1,34 @@
+@keyframes ax-text-swap-up-out {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-50%); opacity: 0; }
+}
+
+@keyframes ax-text-swap-up {
+  from { transform: translateY(50%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ax-text-swap-up-out { animation-name: ax-text-swap-up-out; }
+.ax-text-swap-up { animation-name: ax-text-swap-up; }
+
+@keyframes ax-text-swap-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes ax-text-swap-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ax-text-swap-fade-out { animation-name: ax-text-swap-fade-out; }
+.ax-text-swap-fade { animation-name: ax-text-swap-fade; }
+
+.ax-text-swap {
+  display: inline-block;
+  vertical-align: top;
+}
+.ax-text-swap-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+}

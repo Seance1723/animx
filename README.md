@@ -1,12 +1,23 @@
-# AnimX
+<h1 align="center">AnimX</h1>
+<p align="center"><strong>v1.3.0</strong> • Zero-Dependency Browser Animation Library</p>
 
-**Zero-Dependency Browser Animation Library for Modern UIs**
+<p align="center">
+  AnimX provides a powerful, modular, and extremely lightweight animation engine designed for modern web apps. It features robust CSS hardware acceleration, complex timelines, staggers, intelligent data attributes, component presets, an advanced scroll engine, and the <strong>Advanced Text Pack</strong>, all with zero external dependencies.
+</p>
 
-AnimX is a lightweight, zero-dependency animation engine designed for performance, accessibility, and developer experience. It bridges the gap between hardware-accelerated CSS animations and powerful Javascript sequencing (like Timelines, Stagger, and Text Splitting) without the heavy payload of traditional animation frameworks.
-
-![Version](https://img.shields.io/badge/version-1.2.0-blue)
-![Dependencies](https://img.shields.io/badge/dependencies-0-success)
-![Size](https://img.shields.io/badge/size-28kb_gzipped-success)
+## ✨ What's New in v1.3.0 (Advanced Text Pack)
+- **Responsive Text Re-Splitting**: Text safely re-splits dynamically on resize and font load.
+- **Wave & Line Effects**: Premium `ax-text-line-inner` wrapping and character wave keyframes.
+- **Scramble Decode**: Hacker/numeric/glitch text decoders.
+- **Text Swap**: Animate through an array of strings natively.
+- **Ticker/Marquee**: Zero-dependency seamless scroll text.
+- **Gradient Text**: Advanced `background-clip` gradients with motion.
+- **Advanced Counters**: Animated numbers synced with `Intl.NumberFormat`.
+- **Accessibility Guaranteed**: Reduced motion halts loops automatically.
+- **Text Animation**: Accessible character, word, and line splitting.
+- **Interaction Engine**: Magnetic, Tilt, Hover, Press, Focus, Ripple, and UI feedback without Physics loops draining battery.
+- **Component Presets**: 100+ native recipes for Cards, Buttons, Modals, Loaders, and Forms.
+- **Accessibility First**: Deeply integrates with `prefers-reduced-motion` and manages ARIA attributes automatically for text splits.
 
 ## Features
 - **Zero Dependencies**: No GSAP, ScrollTrigger, Anime.js, Motion, or jQuery.
@@ -15,10 +26,6 @@ AnimX is a lightweight, zero-dependency animation engine designed for performanc
 - **Declarative & Imperative**: Use `data-ax` attributes in HTML or `AnimX.animate()` in JS.
 - **Scroll Reveal**: Native `IntersectionObserver` integration for seamless scroll-triggered animations.
 - **Timelines & Stagger**: Sequence complex animations with ease.
-- **Text Animation**: Accessible character, word, and line splitting.
-- **Interaction Engine**: Magnetic, Tilt, Hover, Press, Focus, Ripple, and UI feedback without Physics loops draining battery.
-- **Component Presets**: 100+ native recipes for Cards, Buttons, Modals, Loaders, and Forms.
-- **Accessibility First**: Deeply integrates with `prefers-reduced-motion` and manages ARIA attributes automatically for text splits.
 
 ## Quick Start
 

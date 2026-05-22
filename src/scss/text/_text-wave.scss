@@ -1,0 +1,19 @@
+@keyframes ax-text-wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30%); }
+}
+
+.ax-text-wave {
+  animation-name: ax-text-wave;
+  transform-origin: center bottom;
+}
+
+.ax-text-char-wave {
+  animation-name: ax-text-wave;
+  transform-origin: center bottom;
+}
+
+.ax-text-word-wave {
+  animation-name: ax-text-wave;
+  transform-origin: center bottom;
+}

@@ -46,6 +46,10 @@
 @use 'text/text-cursor';
 @use 'text/text-reveal';
 @use 'text/text-effects';
+@use 'text/text-wave';
+@use 'text/text-swap';
+@use 'text/text-ticker';
+@use 'text/text-gradient';
 
 @use 'interactions/interaction-base';
 @use 'interactions/hover';

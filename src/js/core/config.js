@@ -29,9 +29,13 @@ const defaultConfig = {
     split: 'chars',
     animation: 'text-rise',
     stagger: 35,
+    responsive: true,
+    resplitDebounce: 150,
     typewriterSpeed: 45,
     scrambleDuration: 1000,
-    counterDuration: 1000
+    counterDuration: 1000,
+    tickerSpeed: 60,
+    swapInterval: 1600
   },
   interactions: {
     enabled: true,

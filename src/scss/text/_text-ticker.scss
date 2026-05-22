@@ -1,0 +1,35 @@
+@keyframes ax-text-ticker-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes ax-text-ticker-right {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+.ax-text-ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+}
+
+.ax-text-ticker-track {
+  display: flex;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.ax-ticker-left {
+  animation-name: ax-text-ticker-left;
+}
+
+.ax-ticker-right {
+  animation-name: ax-text-ticker-right;
+}
+
+.ax-text-ticker-item {
+  flex-shrink: 0;
+  padding-right: 2rem;
+}

@@ -5,7 +5,6 @@ import { isReducedMotion } from '../core/reduced-motion.js';
 export function runScramble(element, options) {
   const originalHTML = element.innerHTML;
   const targetText = options.text !== null ? options.text : getRawTextContent(element).trim();
-  const chars = options.chars;
   
   saveTextState(element, {
     originalHTML,
@@ -23,11 +22,22 @@ export function runScramble(element, options) {
   const textNode = document.createTextNode('');
   element.appendChild(textNode);
   
+  const PRESETS = {
+    decode: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+    hacker: '!<>-_\\\\/[]{}—=+*^?#________',
+    soft: 'abcdefghijklmnopqrstuvwxyz',
+    numeric: '0123456789',
+    glitch: 'ABCDEF0123456789!@#$%^&*'
+  };
+
+  const presetName = options.preset || 'decode';
+  const scrambleChars = options.chars || PRESETS[presetName] || PRESETS.decode;
+  const duration = options.duration || 1000;
+  
   let state = textStateMap.get(element);
   
   let isPaused = false;
   let startTime = null;
-  const duration = options.duration;
   
   if (isReducedMotion()) {
     textNode.nodeValue = targetText;
@@ -71,9 +81,9 @@ export function runScramble(element, options) {
       if (charProgress >= 1 || targetText[i] === ' ') {
         currentText += targetText[i];
       } else if (charProgress > 0) {
-        currentText += chars[Math.floor(Math.random() * chars.length)];
+        currentText += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
       } else {
-        currentText += chars[Math.floor(Math.random() * chars.length)];
+        currentText += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
       }
     }
     

@@ -28,7 +28,7 @@ import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdv
 import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -92,6 +92,7 @@ class AnimXCore {
     performanceMonitor.trackRefresh();
     refreshData(root);
     refreshScroll(root);
+    refreshScrollMetrics();
   }
   
   refreshScroll(root) {
@@ -149,6 +150,18 @@ class AnimXCore {
   
   revertText(targets) {
     return revertText(targets);
+  }
+  
+  textSwap(targets, options) {
+    return text(targets, { ...options, type: 'swap' });
+  }
+
+  ticker(targets, options) {
+    return text(targets, { ...options, type: 'ticker' });
+  }
+
+  counter(targets, options) {
+    return text(targets, { ...options, type: 'counter' });
   }
   
   interact(targets, options) {

@@ -105,21 +105,21 @@ function detectLines(element, wordElements, options, arrays) {
   lines.forEach(lineNodes => {
     if (lineNodes.length === 0) return;
     const lineWrapper = createWrapper('span', 'ax-text-line');
+    const innerWrapper = createWrapper('span', 'ax-text-line-inner');
     if (options.preserveAccessibility) applyAriaHidden(lineWrapper);
     
     // Insert line wrapper before first word
     const firstWord = lineNodes[0];
     firstWord.parentNode.insertBefore(lineWrapper, firstWord);
+    lineWrapper.appendChild(innerWrapper);
 
     // Move nodes into line wrapper
     // We need to grab siblings including whitespaces between words if they exist
-    // A safe approach is to append the words and just let spacing be handled by word blocks.
-    // However, to keep spacing native, we can append from firstWord to lastWord inclusive.
     const lastWord = lineNodes[lineNodes.length - 1];
     let current = firstWord;
     while (current) {
       const next = current.nextSibling;
-      lineWrapper.appendChild(current);
+      innerWrapper.appendChild(current);
       if (current === lastWord) break;
       current = next;
     }

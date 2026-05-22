@@ -4,8 +4,12 @@ import { performSplitText, revertSplitText } from './split-text.js';
 import { runTypewriter } from './text-typewriter.js';
 import { runScramble } from './text-scramble.js';
 import { runCounter } from './text-counter.js';
+import { runSwap } from './text-swap.js';
+import { runTicker } from './text-ticker.js';
 import { textStateMap } from './text-state.js';
 import { dispatchTextEvent } from './text-utils.js';
+import { observeResponsiveText, unobserveResponsiveText } from './responsive-split.js';
+import { refreshScrollMetrics } from '../scroll/scroll-ticker.js';
 
 let coreInstance = null;
 
@@ -44,6 +48,7 @@ export function revertText(selector) {
     
     if (state.type === 'split') {
       revertSplitText(el);
+      unobserveResponsiveText(el);
     } else {
       el.innerHTML = state.originalHTML;
       textStateMap.delete(el);
@@ -102,6 +107,35 @@ export function text(selector, options = {}) {
         const state = textStateMap.get(el);
         if (state) {
           state.stop = () => instance.stop();
+          state.replay = () => instance.replay();
+        }
+        
+        // Handle responsive re-splitting
+        if (normOptions.responsive) {
+          observeResponsiveText(el, normOptions, () => {
+            // Revert without killing the whole state object
+            revertSplitText(el);
+            const newSplitData = performSplitText(el, normOptions);
+            
+            // The existing stagger instance targets the OLD DOM nodes.
+            // We need to recreate the stagger instance silently.
+            if (instance && instance.destroy) instance.destroy();
+            
+            let newTargets = [];
+            const splits = Array.isArray(normOptions.split) ? normOptions.split : [normOptions.split];
+            if (splits.includes('chars')) newTargets = newSplitData.chars;
+            else if (splits.includes('words')) newTargets = newSplitData.words;
+            else if (splits.includes('lines')) newTargets = newSplitData.lines;
+            
+            instance = coreInstance.stagger(newTargets, normOptions.animation, staggerOpts);
+            const state = textStateMap.get(el);
+            if (state) {
+              state.stop = () => instance.stop();
+              state.replay = () => instance.replay();
+            }
+            refreshScrollMetrics(); // Update any scroll metrics if height changed
+            return newSplitData;
+          });
         }
       }
     } else if (normOptions.type === 'typewriter') {
@@ -110,6 +144,10 @@ export function text(selector, options = {}) {
       instance = runScramble(el, normOptions);
     } else if (normOptions.type === 'counter') {
       instance = runCounter(el, normOptions);
+    } else if (normOptions.type === 'swap') {
+      instance = runSwap(el, normOptions, coreInstance);
+    } else if (normOptions.type === 'ticker') {
+      instance = runTicker(el, normOptions);
     }
     
     return instance;
