@@ -47,9 +47,8 @@
 - **v3.0.0** - AnimX Studio / Visual Builder
   - Release Name: AnimX Studio / Visual Builder
   - Goal: Zero-dependency, performant, accessible animation framework.
-- **v3.1.0** - Studio Template Expansion and Export Packs
-  - Release Name: Studio Template Expansion and Export Packs
-  - Goal: Zero-dependency, performant, accessible animation framework.
+- **v3.1.0** - Studio Template Expansion and Export Packs. Added specialized export packs and JSON persistence.
+- **v3.2.0** - Studio Workflow Automation and Project Presets. Expanded Studio into a full-page workflow planner with motion systems, section planners, rule-based workflows, and project-level validation. Core remains zero-dependency.
 
 ## Completed Milestones
 

@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.1.0',
-    release: 'Studio Template Expansion and Export Packs',
+    version: '3.2.0',
+    release: 'Studio Workflow Automation and Project Presets',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.1.0',
-    release: 'Studio Template Expansion and Export Packs',
+    version: '3.2.0',
+    release: 'Studio Workflow Automation and Project Presets',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

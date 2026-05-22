@@ -3,9 +3,9 @@ import { initCanvas } from './studio-canvas.js';
 import { initPresets } from './studio-presets.js';
 import { initControls } from './studio-controls.js';
 import { runPreview } from './studio-preview.js';
-import { initExport, updateExportCode } from './studio-export.js';
 import { initAudit } from './studio-audit.js';
 import { exportStudioJson, importStudioJson } from './studio-template-json.js';
+import { initStudioProjects } from './studio-projects.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -14,7 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
   
-  console.log('[AnimX Studio] Initializing v3.1.0 Visual Builder...');
+  console.log('[AnimX Studio] Initializing v3.2.0 Visual Builder...');
+  
+  // Init Project System
+  initStudioProjects();
   
   // Load state from localStorage
   const state = loadState();
