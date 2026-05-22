@@ -40,7 +40,7 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.5.0';
+const VERSION = '2.6.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
@@ -143,6 +143,17 @@ class AnimXCore {
   
   features() {
     return features();
+  }
+  
+  detectIntegration() {
+    return {
+      jquery: typeof window !== 'undefined' && !!window.jQuery,
+      wordpress: typeof window !== 'undefined' && (!!window.wp || document.body?.classList.contains('wp-admin') || document.body?.classList.contains('block-editor-page')),
+      webflow: typeof window !== 'undefined' && !!window.Webflow,
+      alpine: typeof window !== 'undefined' && !!window.Alpine,
+      react: 'not-detectable',
+      vue: 'not-detectable'
+    };
   }
   
   versionInfo() {

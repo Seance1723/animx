@@ -58,8 +58,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '2.2.0',
-    release: 'Playground and Live Builder Upgrade',
+    version: '2.6.0',
+    release: 'Framework Adapters / Integration Layer',
     dependency: 'zero-runtime-dependency'
   };
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));
@@ -75,7 +75,7 @@ async function run() {
     const categories = AnimX.getPresetCategories();
     
     const presetData = {
-      version: '2.1.0',
+      version: '2.6.0',
       total: presets.length,
       categories: categories,
       presets: presets
@@ -85,6 +85,36 @@ async function run() {
     console.log('Generated animx.preset-data.json');
   } catch (err) {
     console.error('Failed to generate preset data:', err);
+  }
+
+  // 6. Build Adapters
+  const adaptersDir = path.resolve(__dirname, 'src/js/adapters');
+  const distAdaptersDir = path.join(distDir, 'adapters');
+  
+  if (fs.existsSync(adaptersDir)) {
+    if (!fs.existsSync(distAdaptersDir)) {
+      fs.mkdirSync(distAdaptersDir, { recursive: true });
+    }
+    
+    const adapters = ['jquery-adapter.js', 'wordpress-adapter.js', 'webflow-adapter.js', 'alpine-adapter.js'];
+    
+    for (const file of adapters) {
+      const src = path.join(adaptersDir, file);
+      if (fs.existsSync(src)) {
+        const destName = file.replace('-adapter.js', '.js'); // e.g. animx.jquery.js
+        const outFileName = `animx.${destName}`;
+        const destJS = path.join(distAdaptersDir, outFileName);
+        const destMinJS = path.join(distAdaptersDir, outFileName.replace('.js', '.min.js'));
+        
+        const code = fs.readFileSync(src, 'utf8');
+        fs.writeFileSync(destJS, code);
+        
+        const minified = await minify(code);
+        fs.writeFileSync(destMinJS, minified.code);
+        
+        console.log(`Generated ${outFileName} and ${outFileName.replace('.js', '.min.js')}`);
+      }
+    }
   }
 }
 

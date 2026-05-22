@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '2.3.0',
-    release: 'Layout Motion System',
+    version: '2.6.0',
+    release: 'Framework Adapters / Integration Layer',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
     jsLoaded: true,
@@ -65,8 +65,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '2.5.0',
-    release: 'Advanced SVG Morphing',
+    version: '2.6.0',
+    release: 'Framework Adapters / Integration Layer',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

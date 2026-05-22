@@ -9,13 +9,57 @@ const testsDir = path.join(__dirname);
 
 const testTemplate = (name, body) => `
 import assert from 'assert';
+import './setup.js';
 import AnimX from '../src/js/animx.js';
 
 ${body}
 `;
 
-const VERSION = '2.5.0';
+const VERSION = '2.6.0';
 const files = {
+  'adapter.test.js': `
+    // Mock environments
+    global.window.jQuery = function() { return { toArray: () => [], addClass: function() { return this; } }; };
+    global.window.jQuery.fn = {};
+    global.window.AnimX = AnimX;
+    
+    global.window.Alpine = {
+      directive: function(name, callback) {
+        this._directives = this._directives || {};
+        this._directives[name] = callback;
+      }
+    };
+    
+    // Load adapters (these usually execute immediately)
+    // We will dynamically import them to simulate browser loading
+    await import('../src/js/adapters/jquery-adapter.js');
+    await import('../src/js/adapters/alpine-adapter.js');
+    await import('../src/js/adapters/wordpress-adapter.js');
+    await import('../src/js/adapters/webflow-adapter.js');
+    
+    // Dispatch Alpine init to trigger directive registration
+    global.document.dispatchEvent(new Event('alpine:init'));
+    
+    assert.ok(typeof global.window.jQuery.fn.animx === 'function', 'jQuery plugin registered');
+    assert.ok(typeof AnimX.wp === 'object', 'WordPress helper registered');
+    assert.ok(typeof AnimX.webflow === 'object', 'Webflow helper registered');
+    
+    const integrations = AnimX.detectIntegration();
+    assert.strictEqual(integrations.jquery, true, 'detectIntegration finds jQuery');
+    assert.strictEqual(integrations.alpine, true, 'detectIntegration finds Alpine');
+    
+    console.log('✅ Adapter APIs exposed successfully');
+  `,
+  'smoke.test.js': `
+    assert.strictEqual(AnimX.version, '${VERSION}');
+    assert.doesNotThrow(() => AnimX.config({ debug: true }));
+    assert.doesNotThrow(() => AnimX.config({ debug: false }));
+    assert.doesNotThrow(() => AnimX.ready(() => {}));
+    const safeInst = AnimX.animate(null, 'fade-up');
+    assert.ok(safeInst.play);
+    assert.doesNotThrow(() => safeInst.destroy());
+    assert.doesNotThrow(() => AnimX.destroy('.missing-target-does-not-crash'));
+  `,
   'core.test.js': `
     assert.strictEqual(AnimX.version, '${VERSION}');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
@@ -139,7 +183,7 @@ const files = {
     assert.ok(AnimX.copyExample);
     
     const diag = AnimX.diagnose();
-    assert.strictEqual(diag.version, '2.3.0');
+    assert.strictEqual(diag.version, '${VERSION}');
     
     const feats = AnimX.features();
     assert.ok('waapi' in feats);
@@ -180,7 +224,7 @@ const files = {
       if (fs.existsSync(path.join(distPath, 'animx.playground.html'))) assert.ok(true);
       
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('2.3.0'));
+      assert.ok(jsContent.includes('${VERSION}'));
     }
   `
 };

@@ -1,5 +1,6 @@
 
 import assert from 'assert';
+import './setup.js';
 import AnimX from '../src/js/animx.js';
 
 
