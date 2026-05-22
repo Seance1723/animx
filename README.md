@@ -1,14 +1,14 @@
 <div align="center">
-  <h3>The Zero-Dependency UI Animation Engine (v3.2.0)</h3>
+  <h3>The Zero-Dependency UI Animation Engine (v3.3.0)</h3>
   <p>Production-ready, accessible, and fast.</p>
 </div>
 
 ---
 
-## ⚡ What's New in v3.2.0
+## ⚡ What's New in v3.3.0
 
-- **Studio Workflow Automation**: Generate entire page-level animations with rule-based workflows and Project Presets.
-- **Section Planner**: Build motion systems by organizing Hero, Pricing, and Feature sections visually in the local Studio.
+- **Studio Import Scanner**: Paste existing HTML templates and let AnimX identify sections and components safely without executing scripts.
+- **Smart Suggestions**: Get rule-based animation suggestions for your headings, buttons, cards, and heroes instantly, then export the ready-to-use HTML.
 
 ## ✨ Features
 - **v2.9.0**: Security and Defensive Runtime Hardening

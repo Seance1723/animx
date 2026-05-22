@@ -49,6 +49,7 @@
   - Goal: Zero-dependency, performant, accessible animation framework.
 - **v3.1.0** - Studio Template Expansion and Export Packs. Added specialized export packs and JSON persistence.
 - **v3.2.0** - Studio Workflow Automation and Project Presets. Expanded Studio into a full-page workflow planner with motion systems, section planners, rule-based workflows, and project-level validation. Core remains zero-dependency.
+- **v3.3.0** - Studio Import Scanner and Smart Suggestions. Added safe HTML import, deterministic DOM scanning, and rule-based animation suggestions (zero-AI). Core remains zero-dependency.
 
 ## Completed Milestones
 

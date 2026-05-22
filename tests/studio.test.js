@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { validateExport } from '../src/js/studio/studio-export-validator.js';
 import { getProjectState, setProjectState } from '../src/js/studio/studio-project-state.js';
+import { sanitizeImportedHtml } from '../src/js/studio/studio-import-safety.js';
 
 console.log('▶ Running studio.test.js...');
 
@@ -9,9 +10,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.2.0', 'AnimX version should be 3.2.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.2.0', 'versionInfo should be 3.2.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio Workflow Automation and Project Presets', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.3.0', 'AnimX version should be 3.3.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.3.0', 'versionInfo should be 3.3.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio Import Scanner and Smart Suggestions', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
@@ -25,9 +26,18 @@ export async function run() {
     
     // Check Project State defaults
     const state = getProjectState();
-    assert.strictEqual(state.version, '3.2.0', 'Project state should default to 3.2.0');
+    assert.strictEqual(state.version, '3.3.0', 'Project state should default to 3.3.0');
     assert.strictEqual(state.motionStyle, 'smooth-professional', 'Default motion style should be smooth-professional');
     assert.strictEqual(state.sections.length, 0, 'Should start with no sections');
+    
+    // Check HTML Sanitizer
+    const dirtyHtml = '<div onclick="alert(1)">Hello<script>malicious()</script><a href="javascript:foo()">link</a></div>';
+    const safeHtmlObj = sanitizeImportedHtml(dirtyHtml);
+    assert.strictEqual(safeHtmlObj.ok, true, 'Sanitization should complete successfully');
+    assert.strictEqual(safeHtmlObj.cleanHtml.includes('script'), false, 'Script tag should be removed');
+    assert.strictEqual(safeHtmlObj.cleanHtml.includes('onclick'), false, 'onclick attribute should be removed');
+    assert.strictEqual(safeHtmlObj.cleanHtml.includes('javascript:'), false, 'javascript protocol should be removed');
+    assert.strictEqual(safeHtmlObj.warnings.length, 3, 'Should generate exactly 3 warnings');
     
     console.log('✅ studio.test.js passed.');
   } catch (error) {

@@ -6,6 +6,10 @@ import { runPreview } from './studio-preview.js';
 import { initAudit } from './studio-audit.js';
 import { exportStudioJson, importStudioJson } from './studio-template-json.js';
 import { initStudioProjects } from './studio-projects.js';
+import { sanitizeImportedHtml } from './studio-import-safety.js';
+import { scanDomStructure } from './studio-dom-scanner.js';
+import { generateSmartSuggestions } from './studio-smart-suggestions.js';
+import { generateScanReport } from './studio-scan-report.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -18,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Init Project System
   initStudioProjects();
+  
+  // Expose Scanner APIs for UI
+  window.AnimXStudio.sanitizeImportedHtml = sanitizeImportedHtml;
+  window.AnimXStudio.scanDomStructure = scanDomStructure;
+  window.AnimXStudio.generateSmartSuggestions = generateSmartSuggestions;
+  window.AnimXStudio.generateScanReport = generateScanReport;
   
   // Load state from localStorage
   const state = loadState();
