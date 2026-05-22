@@ -131,6 +131,38 @@ export function initData(forceScan = false) {
     const advancedEls = document.querySelectorAll('[data-ax-scroll-progress], [data-ax-parallax], [data-ax-pin], [data-ax-scene], [data-ax-reading-progress]');
     advancedEls.forEach(el => processAdvancedScrollElement(el));
   }
+  
+  // Layout scanning
+  const layoutEls = document.querySelectorAll('[data-ax-layout], [data-ax-toggle], [data-ax-shared], [data-ax-swap]');
+  layoutEls.forEach(el => processLayoutElement(el));
+}
+
+function processLayoutElement(element) {
+  if (!animxInstance) return;
+  const parsed = parseDataAttributes(element);
+  if (parsed && parsed.isLayout) {
+    // Only init if not manual
+    if (parsed.layoutOptions.on === 'manual') return;
+
+    if (parsed.layoutOptions.toggle) {
+      if (!element._axToggleBound) {
+        element.addEventListener('click', (e) => {
+          e.preventDefault();
+          animxInstance.toggleExpand(parsed.layoutOptions.toggle, parsed.layoutOptions);
+        });
+        element._axToggleBound = true;
+      }
+    } else if (parsed.layoutOptions.type) {
+      // Don't auto-run 'reorder' unless explicitly requested, mostly they are helpers
+      if (parsed.layoutOptions.on === 'load') {
+         animxInstance.layout(element, parsed.layoutOptions);
+      } else if (parsed.layoutOptions.type === 'expand') {
+         animxInstance.layout(element, parsed.layoutOptions); // initialize the state
+      }
+    } else if (parsed.layoutOptions.shared && parsed.layoutOptions.sharedTarget && parsed.layoutOptions.on === 'load') {
+      animxInstance.sharedElement(element, parsed.layoutOptions.sharedTarget, parsed.layoutOptions);
+    }
+  }
 }
 
 function processComponentElement(element) {
@@ -192,6 +224,9 @@ export function refreshData(root = document) {
     const advancedEls = root.querySelectorAll('[data-ax-scroll-progress], [data-ax-parallax], [data-ax-pin], [data-ax-scene], [data-ax-reading-progress]');
     advancedEls.forEach(el => processAdvancedScrollElement(el));
   }
+  
+  const layoutEls = root.querySelectorAll('[data-ax-layout], [data-ax-toggle], [data-ax-shared], [data-ax-swap]');
+  layoutEls.forEach(el => processLayoutElement(el));
 }
 
 export function runData(target) {

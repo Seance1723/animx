@@ -1,0 +1,25 @@
+.ax-layout-clone {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  margin: 0;
+  transform-origin: top left;
+}
+
+.ax-layout-collapsed {
+  overflow: hidden;
+}
+
+.ax-layout-measuring {
+  pointer-events: none;
+}
+
+.ax-layout-expanded {
+  /* Marker class */
+}
+
+.ax-layout-ready,
+.ax-layout-running,
+.ax-layout-complete {
+  /* Lifecycle markers */
+}

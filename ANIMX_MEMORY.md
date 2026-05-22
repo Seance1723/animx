@@ -35,6 +35,8 @@
   - Automated export of `dist/animx.preset-data.json`.
 - **v2.2.0** - Playground and Live Builder Upgrade
   - Added `dist/animx.playground.html` for live interactive building of preset, stagger, text, and SVG engines with snippet exporting.
+- **v2.3.0** - Layout Motion System
+  - Added FLIP reordering, expand/collapse, morphing, and DOM swapping with data attributes.
 
 ## Completed Milestones
 
@@ -50,11 +52,12 @@
 - **v2.0.0**: Hero Release (Polished demo, docs, CDN-ready output, production finish)
 - **v2.1.0**: Documentation Site / Gallery Upgrade (Comprehensive local browsing, preset JSON export)
 - **v2.2.0**: Playground and Live Builder Upgrade (Live interactive snippet building)
+- **v2.3.0**: Layout Motion System (FLIP, morphing, layout swap)
 
 ## Current Objective
 
-**AnimX v2.2.0 is Complete.**
-Next Planned Version: **v2.5.0 Layout Motion**
+**AnimX v2.3.0 is Complete.**
+Next Planned Version: **v2.4.0 Gesture and Drag Physics**
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.

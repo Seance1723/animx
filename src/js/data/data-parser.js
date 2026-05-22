@@ -72,7 +72,7 @@ export function parseDataAttributes(element) {
       type: ds.axTextType || 'split',
       split: ds.axText || 'chars',
       animation,
-      text: ds.axTextValue || null,
+      text: ds.axValue || null,
       mask: ds.axMask === 'true' ? true : (ds.axMask === 'lines' ? 'lines' : false),
       speed: parseInt(ds.axSpeed, 10) || parseInt(ds.axTypewriterSpeed, 10) || 45,
       from: parseFloat(ds.axFrom) || 0,
@@ -117,6 +117,19 @@ export function parseDataAttributes(element) {
     textOptions,
     isSvg,
     svgOptions,
+    isLayout: ds.axLayout !== undefined || ds.axToggle !== undefined || ds.axShared !== undefined || ds.axSwap !== undefined,
+    layoutOptions: {
+      type: ds.axLayout,
+      items: ds.axLayoutItems,
+      toggle: ds.axToggle,
+      shared: ds.axShared,
+      sharedTarget: ds.axSharedTarget,
+      swap: ds.axSwap,
+      scale: ds.axLayoutScale !== 'false',
+      duration: parseInt(ds.axLayoutDuration, 10) || undefined,
+      ease: ds.axLayoutEase || undefined,
+      on: ds.axLayoutOn || undefined
+    },
     options: {
       duration,
       delay,

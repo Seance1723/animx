@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '2.2.0',
-    release: 'Playground and Live Builder Upgrade',
+    version: '2.3.0',
+    release: 'Layout Motion System',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
     jsLoaded: true,
@@ -65,8 +65,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: "AnimX",
-    version: "2.2.0",
-    release: "Playground and Live Builder Upgrade",
+    version: "2.3.0",
+    release: "Layout Motion System",
     dependency: "zero-runtime-dependency"
   };
 }

@@ -18,6 +18,34 @@
 - **`AnimX.splitText(targets, options)`**: Splits text manually into characters, words, and lines.
 - **`AnimX.revertText(targets)`**: Restores original text HTML structure and cleans up split accessibility attributes.
 
+## Layout APIs
+
+```javascript
+// Run a mutation and FLIP animate the result
+AnimX.flip('.card', () => { grid.shuffle(); }, { duration: 500 });
+
+// Expand an element to auto-height
+AnimX.expand('.faq-content', { duration: 400 });
+
+// Collapse an element to 0 height
+AnimX.collapse('.faq-content', { duration: 400 });
+
+// Toggle between expand and collapse
+AnimX.toggleExpand('.faq-content', { ease: 'snappy' });
+
+// Animate a shared element from A to B
+AnimX.sharedElement('.thumbnail', '.hero-img', { duration: 600 });
+
+// Swap content with a crossfade
+AnimX.swap('.container', '<p>New</p>', { animation: 'fade-slide' });
+
+// Manual FLIP measuring
+const first = AnimX.measureLayout('.card');
+mutateDOM();
+const last = AnimX.measureLayout('.card');
+AnimX.animateLayout(first, last, { duration: 500 });
+```
+
 ## Scroll
 - **`AnimX.scroll(targets, options)`**: Manually registers elements to trigger when they enter the viewport.
 - **`AnimX.refreshScroll()`**: Forces IntersectionObserver to rescan elements.

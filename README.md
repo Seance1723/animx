@@ -1,8 +1,8 @@
 # AnimX
 
-**AnimX v2.2.0 — Playground and Live Builder Upgrade**
+**AnimX v2.3.0 — Layout Motion System**
 
-AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Text, SVG, and Interaction engines. 
+AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Layout, Text, SVG, and Interaction engines. 
 
 AnimX achieves GSAP-like declarative power with absolute minimal footprint: exactly one CSS file and one JS file. 
 

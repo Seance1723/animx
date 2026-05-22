@@ -25,6 +25,6 @@ import AnimX from '../src/js/animx.js';
       if (fs.existsSync(path.join(distPath, 'animx.playground.html'))) assert.ok(true);
       
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('2.2.0'));
+      assert.ok(jsContent.includes('2.3.0'));
     }
   

@@ -1,5 +1,10 @@
 # Release Notes
 
+## v2.3.0 — Layout Motion System
+- **Layout Engines:** Added `AnimX.flip()`, `AnimX.layout()`, `AnimX.expand()`, `AnimX.collapse()`, `AnimX.sharedElement()`, and `AnimX.swap()`.
+- **Zero Dependencies:** All layout motion is achieved with native DOM measurements, WAAPI, and requestAnimationFrame.
+- **Data Attributes:** Added `data-ax-layout="reorder|expand|swap"`, `data-ax-toggle`, and `data-ax-shared` for no-code layout integration.
+
 ## v2.2.0 — Playground and Live Builder Upgrade
 - **Live Playground:** Added `dist/animx.playground.html` offering a zero-dependency interactive visual builder for Presets, Text, Stagger, and SVG animations.
 - **Export Snippets:** The playground automatically generates copy-paste HTML, Data Attribute, and JS API snippets.

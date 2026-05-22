@@ -317,6 +317,64 @@
       </div>
     </section>
 
+    <!-- Text Pack Example -->
+    <section class="demo-section">
+      <h3>Text Reveal Pack</h3>
+      <p>Target individual characters, words, or lines for sophisticated reveals.</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <div class="card-preview">
+            <div id="text1" style="font-size: 1.5rem; font-weight: bold;">Characters split</div>
+          </div>
+          <div class="card-code">AnimX.text('#text1', { type: 'split', splitType: 'chars', animation: 'text-rise' });</div>
+          <button class="btn" onclick="AnimX.text('#text1', { type: 'split', splitType: 'chars', animation: 'text-rise' })">Run</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layout Motion Example -->
+    <section class="demo-section">
+      <h3>Layout Motion System</h3>
+      <p>Zero-dependency FLIP-based layout transitions.</p>
+      
+      <div class="demo-grid">
+        <div class="demo-card">
+          <div class="card-preview" style="align-items: flex-start; justify-content: flex-start;">
+            <div class="layout-grid" id="flipGrid" style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <div class="layout-card" style="width: 50px; height: 50px; background: #6366f1;">1</div>
+              <div class="layout-card" style="width: 50px; height: 50px; background: #8b5cf6;">2</div>
+              <div class="layout-card" style="width: 50px; height: 50px; background: #ec4899;">3</div>
+              <div class="layout-card" style="width: 50px; height: 50px; background: #f43f5e;">4</div>
+            </div>
+          </div>
+          <div class="card-code">AnimX.flip('.layout-card', () => { /* shuffle logic */ });</div>
+          <button class="btn" onclick="AnimX.flip('.layout-card', () => { const g=document.getElementById('flipGrid'); for(let i=g.children.length; i>=0; i--){ g.appendChild(g.children[Math.random()*i|0]); } })">Shuffle Layout</button>
+        </div>
+
+        <div class="demo-card">
+          <div class="card-preview" style="align-items: flex-start;">
+            <div style="background: #1e293b; width: 100%; border-radius: 6px;">
+              <div style="padding: 10px; cursor: pointer;" onclick="AnimX.toggleExpand('#faqTarget')">Toggle Accordion</div>
+              <div id="faqTarget" style="height: 0; overflow: hidden; background: #0f172a;">
+                <div style="padding: 10px;">Expanded content area!</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-code">AnimX.toggleExpand('#faqTarget');</div>
+          <button class="btn" onclick="AnimX.toggleExpand('#faqTarget')">Toggle</button>
+        </div>
+        
+        <div class="demo-card">
+          <div class="card-preview">
+            <div id="swapTarget" style="font-size: 1.2rem; font-weight: bold;">Original Content</div>
+          </div>
+          <div class="card-code">AnimX.swap('#swapTarget', 'New Content', { animation: 'fade-slide' });</div>
+          <button class="btn" onclick="AnimX.swap('#swapTarget', document.getElementById('swapTarget').innerText === 'Original Content' ? 'New Content' : 'Original Content', { animation: 'fade-slide' })">Swap Content</button>
+        </div>
+      </div>
+    </section>
+
     <!-- 11. Components -->
     <section>
       <h2>UI Components</h2>

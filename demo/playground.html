@@ -236,6 +236,7 @@
       <div class="tab" data-mode="stagger">Stagger</div>
       <div class="tab" data-mode="text">Text</div>
       <div class="tab" data-mode="svg">SVG</div>
+      <div class="tab" data-mode="layout">Layout</div>
     </div>
 
     <!-- PRESET CONTROLS -->
@@ -307,6 +308,18 @@
         <select id="svgType">
           <option value="draw">Draw (Line Animation)</option>
           <option value="undraw">Undraw</option>
+        </select>
+      </div>
+    </div>
+    
+    <!-- LAYOUT CONTROLS -->
+    <div id="controls-layout" class="mode-controls hidden">
+      <div class="section">
+        <label class="label">Layout Engine</label>
+        <select id="layoutType">
+          <option value="reorder">FLIP Reorder</option>
+          <option value="expand">Expand / Collapse</option>
+          <option value="swap">Content Swap</option>
         </select>
       </div>
     </div>
@@ -384,7 +397,8 @@
       ease: 'smooth',
       stagger: { anim: 'zoom-in', delay: 50, from: 'start' },
       text: { type: 'split', split: 'chars', anim: 'text-rise' },
-      svg: { type: 'draw' }
+      svg: { type: 'draw' },
+      layout: { type: 'reorder' }
     };
     
     let activeInstance = null;
@@ -460,6 +474,9 @@
       // SVG
       document.getElementById('svgType').addEventListener('change', (e) => { state.svg.type = e.target.value; renderAndPlay(); });
 
+      // Layout
+      document.getElementById('layoutType').addEventListener('change', (e) => { state.layout.type = e.target.value; renderAndPlay(); });
+
       // Toolbar
       document.getElementById('btnReplay').addEventListener('click', renderAndPlay);
       document.getElementById('btnReset').addEventListener('click', () => {
@@ -511,6 +528,25 @@
         DOM.canvas.innerHTML = `<div class="preview-text" id="textTarget">Zero Dependency Animation Engine</div>`;
       } else if (state.mode === 'svg') {
         DOM.canvas.innerHTML = `<svg class="preview-svg" viewBox="0 0 100 100" id="svgTarget"><path d="M10,50 Q25,25 50,50 T90,50" /></svg>`;
+      } else if (state.mode === 'layout') {
+        if (state.layout.type === 'reorder') {
+          DOM.canvas.innerHTML = `<div class="preview-stagger-grid" id="layoutGrid" style="gap:5px; width:150px;">
+            <div class="stagger-item" style="background:#6366f1;">1</div>
+            <div class="stagger-item" style="background:#8b5cf6;">2</div>
+            <div class="stagger-item" style="background:#ec4899;">3</div>
+            <div class="stagger-item" style="background:#f43f5e;">4</div>
+          </div>`;
+        } else if (state.layout.type === 'expand') {
+          DOM.canvas.innerHTML = `
+            <div style="background:#1e293b; border-radius:8px; width:200px;">
+              <div style="padding:10px; border-bottom:1px solid #334155; font-weight:bold;">Accordion Header</div>
+              <div id="layoutExpand" style="height:0px; overflow:hidden;">
+                <div style="padding:10px; color:#94a3b8; font-size:0.85rem;">This is the hidden content that gets revealed when the accordion expands.</div>
+              </div>
+            </div>`;
+        } else if (state.layout.type === 'swap') {
+          DOM.canvas.innerHTML = `<div id="layoutSwap" class="preview-box" style="font-size:1rem;">Old Content</div>`;
+        }
       }
     }
 
@@ -546,6 +582,23 @@
             AnimX.svgDraw('#svgTarget path', { duration: 0 }).then(() => {
                activeInstance = AnimX.animate('#svgTarget path', 'svg-undraw', opts);
             });
+          }
+        } else if (state.mode === 'layout') {
+          if (state.layout.type === 'reorder') {
+             // Fake a reorder by shuffling DOM
+             const grid = document.getElementById('layoutGrid');
+             const first = AnimX.measureLayout('#layoutGrid .stagger-item');
+             for (let i = grid.children.length; i >= 0; i--) {
+                grid.appendChild(grid.children[Math.random() * i | 0]);
+             }
+             const last = AnimX.measureLayout('#layoutGrid .stagger-item');
+             activeInstance = AnimX.animateLayout(first, last, opts);
+          } else if (state.layout.type === 'expand') {
+             activeInstance = AnimX.toggleExpand('#layoutExpand', opts);
+          } else if (state.layout.type === 'swap') {
+             const target = document.getElementById('layoutSwap');
+             const content = target.innerText === 'Old Content' ? 'New Content' : 'Old Content';
+             activeInstance = AnimX.swap('#layoutSwap', content, { ...opts, animation: 'fade-slide' });
           }
         }
       } catch (e) {

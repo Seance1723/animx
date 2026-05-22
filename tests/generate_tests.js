@@ -16,7 +16,7 @@ ${body}
 
 const files = {
   'core.test.js': `
-    assert.strictEqual(AnimX.version, '2.2.0');
+    assert.strictEqual(AnimX.version, '2.3.0');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));
@@ -138,7 +138,7 @@ const files = {
     assert.ok(AnimX.copyExample);
     
     const diag = AnimX.diagnose();
-    assert.strictEqual(diag.version, '2.2.0');
+    assert.strictEqual(diag.version, '2.3.0');
     
     const feats = AnimX.features();
     assert.ok('waapi' in feats);
@@ -179,7 +179,7 @@ const files = {
       if (fs.existsSync(path.join(distPath, 'animx.playground.html'))) assert.ok(true);
       
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('2.2.0'));
+      assert.ok(jsContent.includes('2.3.0'));
     }
   `
 };

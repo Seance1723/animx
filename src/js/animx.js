@@ -35,11 +35,13 @@ import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
 import { cms, refreshCMS, observeCMS, disconnectCMS, getCMSRecipes, applyRecipe, bindCMSApi } from './cms/cms-api.js';
+import { bindLayoutAnimX } from './layout/layout-api.js';
+import { layoutPresets } from './layout/layout-presets.js';
 
-const VERSION = '2.2.0';
+const VERSION = '2.3.0';
 
 // Pre-register all presets
-[...Object.values(cssPresets), ...componentPresets, ...expandedPresets].forEach(preset => {
+[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets].forEach(preset => {
   registerPreset(preset.name, preset);
 });
 
@@ -58,6 +60,7 @@ class AnimXCore {
     bindScrollSceneAnimX(this);
     bindSvgAnimX(this);
     bindCMSApi(this);
+    bindLayoutAnimX(this);
   }
 
   config(options) {

@@ -132,6 +132,8 @@ export class Timeline {
         step.instance = animxInstance.svg(targetElements, runOptions);
       } else if (targetElements.length > 1 && mergedOptions.stagger) {
         step.instance = animxInstance.stagger(targetElements, animation, runOptions);
+      } else if (mergedOptions.type === 'layout') {
+        step.instance = animxInstance.layout(target, runOptions);
       } else {
         step.instance = animxInstance.animate(target, animation, runOptions);
       }
@@ -171,7 +173,15 @@ export class Timeline {
     
     if (this.groups[this.currentGroupIndex]) {
       this.groups[this.currentGroupIndex].forEach(step => {
-        if (step.instance && typeof step.instance.resume === 'function') {
+        if (step.instance && typeof step.type === 'function') {
+          // Function step
+          step.target();
+        } else if (step.type === 'layout') {
+          // Layout step
+          if (animxInstance && animxInstance.layout) {
+            animxInstance.layout(step.target, { ...step.options });
+          }
+        } else if (step.instance && typeof step.instance.resume === 'function') {
           step.instance.resume();
         } else if (step.instance && typeof step.instance.play === 'function') {
           step.instance.play();
