@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 1.5.0
+**Current Version**: 1.6.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## Version History
@@ -19,21 +19,15 @@
 - **v1.1.0** - Performance and Cleanup Upgrade
 - **v1.2.0** - Advanced Scroll System
 - **v1.3.0** - Advanced Text Pack
-  - Added responsive re-splitting.
-  - Added improved line mask reveal.
-  - Added char/word wave effects.
-  - Added scramble decode presets.
-  - Added text swap, ticker/marquee, gradient motion.
-  - Added advanced counter formatting via `Intl.NumberFormat`.
-  - Final output remains one CSS and one JS file.
-  - Total package size sits at ~29kB gzipped.
 - **v1.4.0** - SVG Animation Pack
 - **v1.5.0** - Preset Expansion
-  - Expanded CSS utility classes using SCSS loops mapped to primitives (Entrance, Exit, Transform, Background).
-  - Metadata registry with 300+ tracked presets.
-  - New preset search API `AnimX.searchPresets()`.
-  - Global modifiers (`ax-infinite`, `ax-delay-300`, `ax-fast`).
-  - Total package size sits at ~35kB gzipped.
+- **v1.6.0** - Developer Experience Upgrade
+  - Added debug helpers (`AnimX.debug()`) and structured error codes.
+  - Added inspect, validate, diagnose, features, versionInfo.
+  - Added preset suggestions and example generators.
+  - Added Demo UI Diagnostics panel.
+  - Runtime dependency remains zero, output remains 1 CSS + 1 JS.
+  - Next planned version: v1.7.0 No-Code / CMS Friendly Layer.
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.

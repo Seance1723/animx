@@ -4,15 +4,20 @@ import { getConfig } from './config.js';
 const warnings = new Set();
 
 export const debug = {
-  warnOnce(id, message, ...args) {
-    if (getConfig().debug && !warnings.has(id)) {
-      console.warn(`[AnimX] ${message}`, ...args);
-      warnings.add(id);
+  warnOnce(code, message, ...args) {
+    if (getConfig().debug && !warnings.has(code)) {
+      console.warn(`AnimX [${code}]: ${message}`, ...args);
+      warnings.add(code);
     }
   },
-  warn(message, ...args) {
+  warn(code, message, ...args) {
     if (getConfig().debug) {
-      console.warn(`[AnimX] ${message}`, ...args);
+      // If code doesn't look like an AX_ code, treat it as just a message
+      if (code && typeof code === 'string' && code.startsWith('AX_')) {
+        console.warn(`AnimX [${code}]: ${message}`, ...args);
+      } else {
+        console.warn(`[AnimX] ${code}`, message, ...args); // Fallback for legacy
+      }
     }
   },
   info(message, ...args) {
@@ -20,9 +25,13 @@ export const debug = {
       console.info(`[AnimX] ${message}`, ...args);
     }
   },
-  error(message, ...args) {
+  error(code, message, ...args) {
     if (getConfig().debug) {
-      console.error(`[AnimX Error] ${message}`, ...args);
+      if (code && typeof code === 'string' && code.startsWith('AX_')) {
+        console.error(`AnimX Error [${code}]: ${message}`, ...args);
+      } else {
+        console.error(`[AnimX Error] ${code}`, message, ...args);
+      }
     }
   },
   clear() {

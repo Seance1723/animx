@@ -30,7 +30,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.5.0', 'Version should be 1.5.0');
+  assert.strictEqual(AnimX.version, '1.6.0', 'Version should be 1.6.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -63,6 +63,40 @@ try {
   const tags = AnimX.getPresetTags();
   assert.ok(tags.includes('entrance') && tags.includes('opacity'), 'Tags extracted correctly');
   console.log('✅ New Preset Search APIs working');
+
+  // 2.6 DX APIs (v1.6.0)
+  assert.strictEqual(typeof AnimX.debug, 'function');
+  assert.strictEqual(typeof AnimX.inspect, 'function');
+  assert.strictEqual(typeof AnimX.validate, 'function');
+  assert.strictEqual(typeof AnimX.diagnose, 'function');
+  assert.strictEqual(typeof AnimX.features, 'function');
+  assert.strictEqual(typeof AnimX.versionInfo, 'function');
+  assert.strictEqual(typeof AnimX.findPreset, 'function');
+  assert.strictEqual(typeof AnimX.suggestPreset, 'function');
+  assert.strictEqual(typeof AnimX.getExamples, 'function');
+  assert.strictEqual(typeof AnimX.copyExample, 'function');
+  
+  assert.strictEqual(AnimX.debug(true), true, 'Debug mode can be toggled on');
+  assert.strictEqual(AnimX.debug(false), false, 'Debug mode can be toggled off');
+  
+  const featuresRes = AnimX.features();
+  assert.ok('waapi' in featuresRes, 'Features returns expected keys');
+  
+  assert.strictEqual(AnimX.versionInfo().version, '1.6.0', 'versionInfo returns correct version');
+  
+  const findRes = AnimX.findPreset('fade-up');
+  assert.ok(findRes.name === 'fade-up', 'findPreset returns exact match');
+  
+  const suggestRes = AnimX.suggestPreset('fadeup');
+  assert.ok(suggestRes.some(p => p.name === 'fade-up'), 'suggestPreset suggests correct match');
+  
+  const examplesRes = AnimX.getExamples('fade-up');
+  assert.ok(examplesRes.html && examplesRes.data && examplesRes.js, 'getExamples returns required keys');
+  
+  const validateRes = AnimX.validate();
+  assert.ok('ok' in validateRes && 'errors' in validateRes, 'validate returns expected object structure');
+  
+  console.log('✅ DX APIs working');
 
   // 3. Config API
   AnimX.config({ debug: true });

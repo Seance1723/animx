@@ -1,6 +1,6 @@
 <div align="center">
   <h1>AnimX</h1>
-  <p><strong>v1.5.0</strong> — Zero-dependency, high-performance browser animation engine.</p>
+  <p><strong>v1.6.0</strong> — Zero-dependency, high-performance browser animation engine.</p>
   
   [![npm version](https://img.shields.io/npm/v/animx.svg?style=flat-square)](https://www.npmjs.com/package/animx)
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -12,15 +12,17 @@ AnimX is a robust, lightweight, zero-dependency animation library built natively
 ## Features
 - **Zero Dependencies:** Pure Vanilla JavaScript & CSS.
 - **Over 300+ Built-in Presets:** Instantly use high-quality animations with classes like `.ax-fade-up-soft`, `.ax-zoom-in`, `.ax-bg-pan`.
+- **Developer Experience Utilities:** Built-in validation, diagnostics, and environment inspection (`AnimX.validate()`, `AnimX.diagnose()`).
 - **Advanced Scroll Engine:** Progress triggers, parallax, pin scenes, reading progress.
 - **Advanced Text Pack:** Split-text decoding, character waves, ticker-tape, gradient sweeps.
 - **SVG Animation Pack:** Stroke draw, fill reveal, dash loops, path follow.
 
-## ✨ What's New in v1.5.0 (Preset Expansion)
-- **300+ Presets**: Vastly expanded built-in CSS presets (entrance, exit, attention, transform, background, skeleton).
-- **Search API**: Built-in methods to query registered presets: `AnimX.searchPresets(query)` and `AnimX.getPresetsByCategory()`.
-- **SCSS Primitive System**: Modular SCSS mixins and base keyframes to effortlessly generate combinations.
-- **Utility Modifiers**: Chain classes like `.ax-infinite`, `.ax-fast`, `.ax-delay-300`, and `.ax-origin-center`.
+## ✨ What's New in v1.6.0 (Developer Experience Upgrade)
+- **AnimX now includes DX helpers** natively with no external dependency.
+- **Debug & Inspect**: `AnimX.debug(true)` enables `AX_*` code warnings. `AnimX.inspect('.card')` returns real-time instance state.
+- **Validate & Diagnose**: `AnimX.validate()` scans the DOM for invalid presets or typos. `AnimX.diagnose()` analyzes browser capability and CSS loading status.
+- **Examples**: `AnimX.getExamples('fade-up')` and `AnimX.copyExample()` output instant copy-pasteable usage examples.
+- **Smart Suggestions**: In debug mode, missing presets (e.g., `fadeup`) will automatically suggest `fade-up`.
 - **Ticker/Marquee**: Zero-dependency seamless scroll text.
 - **Gradient Text**: Advanced `background-clip` gradients with motion.
 - **Advanced Counters**: Animated numbers synced with `Intl.NumberFormat`.
@@ -97,6 +99,33 @@ AnimX.timeline()
   .add('.header', 'fade-down')
   .add('.content', 'fade-up', { duration: 500 })
   .play();
+```
+
+## Documentation & Resources
+- **[Getting Started](docs/getting-started.md)** - Installation, config, and basic usage.
+- **[API Reference](docs/api-reference.md)** - Exhaustive list of all methods and parameters.
+- **[Preset List](docs/preset-list.md)** - Catalog of all included CSS and Component animations.
+- **[Debugging Guide](docs/debugging.md)** - Developer experience and validation tools.
+
+## Developer Experience APIs
+
+AnimX provides lightweight, zero-dependency tools built right into the core library to speed up development.
+
+```javascript
+// 1. Enable structured debug warnings
+AnimX.debug(true);
+
+// 2. Scan the current page for missing presets, typos, and unused attributes
+const validation = AnimX.validate();
+
+// 3. Inspect the environment state (e.g. WAAPI support, reduced motion, loaded CSS)
+const environment = AnimX.diagnose();
+
+// 4. Generate instant copy-pasteable examples for any preset
+AnimX.copyExample('fade-up-soft', 'js'); // Copies `AnimX.animate('.box', 'fade-up-soft');`
+
+// 5. Suggest closest matches for a typo
+AnimX.suggestPreset('btn-lift'); // Returns matching full objects like `button-lift`
 ```
 
 ## Documentation

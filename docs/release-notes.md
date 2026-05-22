@@ -1,5 +1,12 @@
 # Release Notes
 
+## v1.6.0 - Developer Experience Upgrade
+- **DX APIs**: Added `AnimX.debug()`, `AnimX.diagnose()`, `AnimX.validate()`, `AnimX.inspect()`, `AnimX.features()`, `AnimX.versionInfo()`, `AnimX.getExamples()`, `AnimX.copyExample()`.
+- **Smart Suggestions**: Added `AnimX.suggestPreset()` and integrated typo suggestions directly into console warnings.
+- **Improved Logging**: Introduced structured `AX_*` error codes (e.g. `AX_PRESET_MISSING`) and robust `warnOnce` deduplication.
+- **Demo Dashboard**: Integrated an interactive diagnostic and validation panel into `demo/index.html`.
+- **Zero Dependencies**: All DX features remain native to AnimX without third-party tools, keeping the build extremely lightweight.
+
 ## v1.5.0 - Preset Expansion
 - **Expanded Presets**: Added 300+ SCSS generated utility presets (entrance, exit, attention, transform, background, skeleton).
 - **Preset API**: New JavaScript APIs (`AnimX.searchPresets()`, `AnimX.getPresetsByCategory()`) for querying metadata programmatically.

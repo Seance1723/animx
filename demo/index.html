@@ -130,14 +130,50 @@
 
   <div class="container">
     <header>
-      <h1>AnimX v1.5.0</h1>
+      <h1>AnimX v1.6.0</h1>
       <p>Zero-dependency high-performance animation engine</p>
-      <div class="status-badge">Preset Expansion</div>
+      <div class="status-badge">Developer Experience Upgrade</div>
     </header>
+    
+    <div data-ax="not-real-preset" style="display:none;"></div> <!-- Invalid element for validation testing -->
 
     <div class="note">
       <strong>10. Reduced Motion Note:</strong> AnimX respects your OS settings. If <em>prefers-reduced-motion</em> is active, all continuous physics loops and heavy transforms drop to a 1ms instantaneous state automatically to ensure accessibility compliance without hiding content.
     </div>
+
+    <!-- Developer Experience Dashboard -->
+    <section>
+      <h2>Developer Experience (v1.6.0)</h2>
+      <p>Test the new DX APIs directly in the browser.</p>
+      
+      <div style="margin-bottom: 20px;">
+        <h3>1. Diagnostics & Features</h3>
+        <button class="btn" onclick="runDiagnose()">Run Diagnose</button>
+        <button class="btn" onclick="runValidate()">Run Validate</button>
+        <button class="btn" onclick="showFeatures()">Show Features</button>
+        <button class="btn" onclick="showCategories()">Show Categories</button>
+        <div id="dxOutput" class="code-block" style="margin-top: 10px; display: none;"></div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <h3>2. Preset Suggestions</h3>
+        <button class="btn inspect-card" onclick="AnimX.animate('.inspect-card', 'fadeup')" style="background:#f43f5e;">Trigger Invalid Preset ("fadeup")</button>
+        <button class="btn" onclick="runInspect()">Inspect Red Button</button>
+        <p style="font-size: 0.9em; color: #64748b;">(Check console for `AX_PRESET_MISSING` and suggestions)</p>
+      </div>
+
+      <div>
+        <h3>3. Example Generator</h3>
+        <div class="search-box">
+          <input type="text" id="exampleInput" class="search-input" placeholder="Enter preset (e.g., 'fade-up')" value="fade-up">
+          <button class="btn" onclick="generateExample('html')">HTML</button>
+          <button class="btn" onclick="generateExample('data')">Data</button>
+          <button class="btn" onclick="generateExample('js')">JS</button>
+          <button class="btn" onclick="copyExampleStr()" style="background:#10b981;">Copy JS</button>
+        </div>
+        <div id="exampleOutput" class="code-block" style="display: none;"></div>
+      </div>
+    </section>
 
     <!-- Preset Expansion Search -->
     <section>
@@ -720,15 +756,53 @@ AnimX.destroy();
       console.log("AnimX demo check complete");
     };
     document.addEventListener("DOMContentLoaded", () => {
-      // Run checker on load if debug is true.
-      if (AnimX.config && AnimX.config().debug) { // Actually AnimX doesn't expose config object like this. Let's just run it. Wait, the prompt says "Call it after AnimX.init() only when debug is true."
-        // We'll just run it. The root index.html runs AnimX.config({debug:true}); AnimX.init().
-      }
       setTimeout(() => {
-        // Just call it manually for testing.
         if (window.runAnimXDemoCheck) window.runAnimXDemoCheck();
       }, 500);
     });
+
+    // --- DX API Scripts ---
+    function runDiagnose() {
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      out.textContent = JSON.stringify(AnimX.diagnose(), null, 2);
+    }
+    function runValidate() {
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      out.textContent = JSON.stringify(AnimX.validate(), null, 2);
+    }
+    function showFeatures() {
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      out.textContent = JSON.stringify(AnimX.features(), null, 2);
+    }
+    function showCategories() {
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      out.textContent = JSON.stringify(AnimX.getPresetCategories(), null, 2);
+    }
+    function generateExample(type) {
+      const input = document.getElementById('exampleInput').value;
+      const ex = AnimX.getExamples(input);
+      const out = document.getElementById('exampleOutput');
+      out.style.display = 'block';
+      out.textContent = ex[type] || 'Example not found';
+    }
+    function copyExampleStr() {
+      const input = document.getElementById('exampleInput').value;
+      AnimX.copyExample(input, 'js').then(str => {
+        alert("Copied to clipboard!\n" + str);
+      });
+    }
+    function runInspect() {
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      const inspectRes = AnimX.inspect('.inspect-card');
+      // element DOM reference can't be stringified easily, so we map it out
+      if (inspectRes.element) inspectRes.element = inspectRes.element.tagName + '.' + inspectRes.element.className;
+      out.textContent = JSON.stringify(inspectRes, null, 2);
+    }
   </script>
 </body>
 </html>

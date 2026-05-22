@@ -4,7 +4,12 @@ import { debug } from './core/debug.js';
 import { createSafeInstance } from './core/safe-instance.js';
 import { performanceMonitor } from './core/performance-monitor.js';
 import { destroyInstances, clearInstances } from './core/instance-registry.js';
+import { toggleDebug, diagnose, features, versionInfo } from './core/devtools.js';
+import { inspect } from './core/inspector.js';
+import { validate } from './core/validator.js';
+import { getExamples, copyExample } from './core/example-builder.js';
 import { registerPreset, getPreset, getPresets, getComponentPresets, getPresetCategories, getPresetsByCategory, searchPresets, getPresetTags } from './presets/preset-registry.js';
+import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
@@ -30,7 +35,7 @@ import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
 
-const VERSION = '1.5.0';
+const VERSION = '1.6.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets].forEach(preset => {
@@ -93,8 +98,49 @@ class AnimXCore {
     return searchPresets(query);
   }
   
+  findPreset(query) {
+    return findPreset(query);
+  }
+  
+  suggestPreset(query) {
+    return suggestPreset(query);
+  }
+  
   getPresetTags() {
     return getPresetTags();
+  }
+
+  // DX APIs
+  debug(enabled) {
+    return toggleDebug(enabled);
+  }
+  
+  inspect(selector) {
+    return inspect(selector);
+  }
+  
+  validate(scope) {
+    return validate(scope);
+  }
+  
+  diagnose() {
+    return diagnose();
+  }
+  
+  features() {
+    return features();
+  }
+  
+  versionInfo() {
+    return versionInfo();
+  }
+  
+  getExamples(presetName) {
+    return getExamples(presetName);
+  }
+  
+  copyExample(presetName, type) {
+    return copyExample(presetName, type);
   }
 
   refresh(root) {
