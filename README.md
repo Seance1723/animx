@@ -1,11 +1,17 @@
-<h1 align="center">AnimX</h1>
-<p align="center"><strong>v1.3.0</strong> • Zero-Dependency Browser Animation Library</p>
+<div align="center">
+  <h1>AnimX</h1>
+  <p><strong>Zero-Dependency Browser Animation Library</strong></p>
+  <p>v1.4.0</p>
+</div>
 
-<p align="center">
-  AnimX provides a powerful, modular, and extremely lightweight animation engine designed for modern web apps. It features robust CSS hardware acceleration, complex timelines, staggers, intelligent data attributes, component presets, an advanced scroll engine, and the <strong>Advanced Text Pack</strong>, all with zero external dependencies.
-</p>
+AnimX is a robust, lightweight, zero-dependency animation library built natively for modern browsers. It leverages the Web Animations API (WAAPI) with seamless CSS fallbacks, offering high performance without the bloat of traditional animation engines.
 
-## ✨ What's New in v1.3.0 (Advanced Text Pack)
+### Why AnimX?
+- **Zero Dependencies:** No GSAP, no Anime.js, no jQuery.
+- **Single File Output:** Just one `animx.css` and one `animx.js`.
+- **Everything Built-in:** Scroll reveals, stagger, timelines, advanced text, and SVG path animations all included.
+
+## ✨ What's New in v1.4.0 (Advanced Text Pack)
 - **Responsive Text Re-Splitting**: Text safely re-splits dynamically on resize and font load.
 - **Wave & Line Effects**: Premium `ax-text-line-inner` wrapping and character wave keyframes.
 - **Scramble Decode**: Hacker/numeric/glitch text decoders.

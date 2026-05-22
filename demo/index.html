@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.3.0</title>
+  <title>AnimX v1.4.0</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -110,7 +110,7 @@
     <header data-ax-component="hero-fade-sequence">
       <h1 data-ax-component="hero-split-text">AnimX</h1>
       <p>Zero-Dependency Browser Animation Library</p>
-      <div class="status-badge">v1.3.0 Advanced Text Pack</div>
+      <div class="status-badge">v1.4.0 SVG Animation Pack</div>
       <p style="margin-top:1.5rem; opacity:0.8;">Usage: One CSS + One JS File. No external libraries.</p>
     </header>
 
@@ -415,9 +415,120 @@
       </div>
     </section>
 
-    <!-- 12. Performance and Cleanup -->
+    </section>
+
+    <!-- 12. SVG Animation Pack -->
     <section>
-      <h2>12. Performance and Cleanup</h2>
+      <h2>12. SVG Animation Pack</h2>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>1. SVG stroke draw & undraw</h3>
+        <button class="btn" onclick="AnimX.svgDraw('.demo-logo path', { duration: 1200, stagger: 120 })">Run SVG Draw</button>
+        <button class="btn" onclick="AnimX.svgUndraw('.demo-logo path', { duration: 800 })">Run SVG Undraw</button>
+        <div style="margin-top:1rem; width:150px; height:150px;">
+          <svg class="demo-logo" viewBox="0 0 100 100" fill="none" stroke="var(--primary)" stroke-width="4">
+            <path d="M20,80 L50,20 L80,80" />
+            <path d="M35,50 L65,50" />
+          </svg>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>3. SVG icon draw</h3>
+        <div style="display:flex; gap:1rem; margin-top:1rem;">
+          <svg data-ax-svg="draw" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" style="width:50px; height:50px;">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+          <svg data-ax-svg="draw" data-ax-delay="300" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" style="width:50px; height:50px;">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <svg data-ax-svg="draw" data-ax-delay="600" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" style="width:50px; height:50px;">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>4. SVG ring progress</h3>
+        <button class="btn" onclick="AnimX.svgProgress('.demo-ring circle.progress', { value: 75, max: 100, duration: 1000 })">Set to 75%</button>
+        <button class="btn" onclick="AnimX.svgProgress('.demo-ring circle.progress', { value: 100, max: 100, duration: 1000 })">Set to 100%</button>
+        <button class="btn" onclick="AnimX.svgProgress('.demo-ring circle.progress', { value: 0, max: 100, duration: 1000 })">Set to 0%</button>
+        <div style="margin-top:1rem; position:relative; width:120px; height:120px;">
+          <svg class="demo-ring ax-svg-ring-progress" viewBox="0 0 100 100" style="width:120px; height:120px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" stroke-width="8" />
+            <circle class="progress" cx="50" cy="50" r="45" fill="none" stroke="var(--primary)" stroke-width="8" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>5. SVG line graph draw</h3>
+        <button class="btn" onclick="AnimX.svgDraw('.demo-graph polyline', { duration: 1500, ease: 'ease-out' })">Draw Graph</button>
+        <div style="margin-top:1rem;">
+          <svg class="demo-graph" viewBox="0 0 200 100" fill="none" stroke="#ec4899" stroke-width="3" style="width:200px; height:100px; border-bottom:2px solid #ccc; border-left:2px solid #ccc;">
+            <polyline points="0,90 40,60 80,80 120,30 160,50 200,10" />
+          </svg>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>6. SVG path follow</h3>
+        <button class="btn" onclick="AnimX.svgPathFollow('.path-dot', { path: '#demo-motion-path', duration: 3000, rotate: true, loop: false })">Run Path Follow</button>
+        <div style="margin-top:1rem; position:relative; width:300px; height:100px;">
+          <svg viewBox="0 0 300 100" style="position:absolute; top:0; left:0; width:100%; height:100%;">
+            <path id="demo-motion-path" d="M10,50 Q75,10 150,50 T290,50" fill="none" stroke="#ccc" stroke-dasharray="4 4" />
+          </svg>
+          <div class="path-dot ax-svg-path-follow" style="width:20px; height:20px; background:var(--primary); border-radius:4px; margin-left:-10px; margin-top:-10px; display:flex; align-items:center; justify-content:center; color:white; font-size:10px;">▶</div>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>7. Data attribute SVG draw</h3>
+        <svg data-ax-svg="draw" data-ax-duration="1500" viewBox="0 0 100 100" fill="none" stroke="#8b5cf6" stroke-width="4" style="width:100px; height:100px;">
+          <circle cx="50" cy="50" r="40" />
+        </svg>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>8. Scroll SVG animation</h3>
+        <div style="height: 150px; overflow-y: scroll; border: 1px solid #ccc; padding: 1rem; border-radius: 4px;">
+          <div style="height: 300px;">Scroll down...</div>
+          <svg data-ax-svg="logo-build" data-ax-on="scroll" data-ax-stagger="200" viewBox="0 0 100 100" fill="none" stroke="#10b981" stroke-width="4" style="width:100px; height:100px;">
+            <rect x="20" y="20" width="60" height="60" rx="10" />
+            <path d="M35 50 L45 60 L65 40" />
+          </svg>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 2rem;">
+        <h3>9. Timeline SVG animation</h3>
+        <button class="btn" onclick="playSvgTimeline()">Play Timeline</button>
+        <div style="display:flex; align-items:center; gap:1rem; margin-top:1rem;">
+          <svg class="timeline-svg" viewBox="0 0 100 100" fill="none" stroke="var(--primary)" stroke-width="4" style="width:60px; height:60px;">
+            <path d="M20 50 L80 50 M50 20 L50 80" />
+          </svg>
+          <div class="timeline-svg-caption" style="font-weight:bold;">Cross Drawn</div>
+        </div>
+        <script>
+          let svgTl = null;
+          function playSvgTimeline() {
+            if (svgTl) svgTl.destroy();
+            svgTl = AnimX.timeline()
+              .add(".timeline-svg path", { type: "svg", mode: "draw", duration: 800, stagger: 200 })
+              .add(".timeline-svg-caption", "fade-up")
+              .play();
+          }
+        </script>
+      </div>
+
+      <div class="note">
+        <strong>10. Reduced Motion Note:</strong> SVG animations fully respect OS <em>prefers-reduced-motion</em> settings. Drawings will snap to complete, and progress rings will snap to their target values instead of remaining invisible or broken.
+      </div>
+    </section>
+
+    <!-- 13. Performance and Cleanup -->
+    <section>
+      <h2>13. Performance and Cleanup</h2>
       <p>Test dynamic content, robust instance destruction, and memory safety without duplicating event listeners.</p>
       <div style="display:flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
         <button class="btn" onclick="testPerformanceStagger()">Run 100 Card Stagger</button>
@@ -457,9 +568,9 @@
       </script>
     </section>
 
-    <!-- 13. API quick reference -->
+    <!-- 14. API quick reference -->
     <section>
-      <h2>13. API quick reference</h2>
+      <h2>14. API quick reference</h2>
       <pre class="code-block">
 // Setup
 AnimX.config({ debug: false, autoInit: true });

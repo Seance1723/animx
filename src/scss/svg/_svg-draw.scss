@@ -1,0 +1,25 @@
+.ax-svg-draw,
+.ax-svg-undraw,
+.ax-svg-stroke-dash,
+.ax-svg-line-draw {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes ax-svg-pulse-stroke {
+  0%, 100% { stroke-width: 1px; }
+  50% { stroke-width: 4px; }
+}
+
+.ax-svg-pulse-stroke {
+  animation: ax-svg-pulse-stroke var(--ax-duration-slow) var(--ax-ease-smooth) infinite;
+}
+
+@keyframes ax-svg-dash-loop {
+  to { stroke-dashoffset: -100; }
+}
+
+.ax-svg-dash-loop {
+  animation: ax-svg-dash-loop var(--ax-duration-cinematic) linear infinite;
+  stroke-dasharray: 10 20;
+}

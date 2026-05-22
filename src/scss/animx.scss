@@ -38,6 +38,13 @@
 @use 'components/hero';
 
 @use 'scroll/scroll-progress';
+
+@use 'svg/svg-base';
+@use 'svg/svg-draw';
+@use 'svg/svg-progress';
+@use 'svg/svg-fill';
+@use 'svg/svg-logo';
+@use 'svg/svg-path-follow';
 @use 'scroll/parallax';
 @use 'scroll/pin';
 @use 'scroll/scroll-scene';

@@ -37,6 +37,13 @@ const defaultConfig = {
     tickerSpeed: 60,
     swapInterval: 1600
   },
+  svg: {
+    duration: 1000,
+    ease: 'smooth',
+    stagger: 100,
+    drawOnInit: false,
+    reducedMotionSafe: true
+  },
   interactions: {
     enabled: true,
     hover: true,

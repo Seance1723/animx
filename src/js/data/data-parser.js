@@ -1,11 +1,15 @@
+import { parseScrollAttributes } from '../scroll/scroll-parser.js';
+import { parseTextAttributes } from '../text/text-parser.js';
+import { parseSvgAttributes } from '../svg/svg-parser.js';
+
 export function parseDataAttributes(element) {
   if (!element || !element.dataset) return null;
   
   const ds = element.dataset;
-  if (!ds.ax) return null;
+  if (!ds.ax && !ds.axSvg) return null;
   
   // Basic attributes
-  const animation = ds.ax;
+  const animation = ds.ax || 'svg';
   const trigger = ds.axOn || 'load';
   const id = ds.axId || null;
   const disabled = ds.axDisabled === 'true' || ds.axDisabled === '1' || ds.axDisabled === '';
@@ -88,6 +92,12 @@ export function parseDataAttributes(element) {
     };
   }
   
+  const isSvg = ds.axSvg !== undefined;
+  let svgOptions = null;
+  if (isSvg) {
+    svgOptions = parseSvgAttributes(element);
+  }
+  
   return {
     animation,
     trigger,
@@ -100,6 +110,8 @@ export function parseDataAttributes(element) {
     childSelector: ds.axChildSelector || null,
     isText,
     textOptions,
+    isSvg,
+    svgOptions,
     options: {
       duration,
       delay,

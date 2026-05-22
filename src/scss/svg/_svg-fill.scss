@@ -1,0 +1,19 @@
+@keyframes ax-svg-fill-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ax-svg-fill-in,
+.ax-svg-fill-fade {
+  opacity: 0;
+  animation: ax-svg-fill-in var(--ax-duration-normal) var(--ax-ease-smooth) forwards;
+}
+
+@keyframes ax-svg-trace-glow {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--ax-glow-color, rgba(255,255,255,0.5))); }
+  50% { filter: drop-shadow(0 0 12px var(--ax-glow-color, rgba(255,255,255,0.8))); }
+}
+
+.ax-svg-trace-glow {
+  animation: ax-svg-trace-glow var(--ax-duration-slow) ease-in-out infinite;
+}

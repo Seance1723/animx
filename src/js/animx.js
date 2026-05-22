@@ -27,8 +27,9 @@ import { component, bindComponentAnimX } from './components/component-api.js';
 import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdvancedScroll } from './scroll/advanced-scroll-api.js';
 import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
+import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
 
-const VERSION = '1.3.0';
+const VERSION = '1.4.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -54,6 +55,7 @@ class AnimXCore {
     bindInteractionAnimX(this);
     bindComponentAnimX(this);
     bindScrollSceneAnimX(this);
+    bindSvgAnimX(this);
   }
 
   config(options) {
@@ -200,6 +202,26 @@ class AnimXCore {
     return component(targets, presetName, options);
   }
 
+  svg(targets, options) {
+    return svg(targets, options);
+  }
+
+  svgDraw(targets, options) {
+    return svgDraw(targets, options);
+  }
+
+  svgUndraw(targets, options) {
+    return svgUndraw(targets, options);
+  }
+
+  svgProgress(targets, options) {
+    return svgProgress(targets, options);
+  }
+
+  svgPathFollow(targets, options) {
+    return svgPathFollow(targets, options);
+  }
+
   getComponentPresets() {
     return getComponentPresets();
   }
@@ -307,11 +329,13 @@ class AnimXCore {
       });
       destroyInteractions(selector);
       destroyAdvancedScroll(selector);
+      destroySvg(selector);
     } else {
       this._instances.forEach(instance => instance.stop());
       this._instances.clear();
       destroyInteractions(document.body);
       destroyAdvancedScroll(document.body);
+      destroySvg(document.body);
       clearScrollTicker();
     }
   }

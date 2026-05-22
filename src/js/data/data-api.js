@@ -87,6 +87,8 @@ function processElement(element, forceRun = false) {
 
     if (parsed.isText) {
       animxInstance.text(element, { ...parsed.textOptions, ...runOptions });
+    } else if (parsed.isSvg) {
+      animxInstance.svg(element, { ...parsed.svgOptions, ...runOptions });
     } else if (parsed.isGroup) {
       const children = parsed.childSelector 
         ? Array.from(element.querySelectorAll(parsed.childSelector))
@@ -110,7 +112,7 @@ export function initData(forceScan = false) {
   
   // Normal animx scanning
   if (config.dataApi) {
-    const elements = document.querySelectorAll('[data-ax]');
+    const elements = document.querySelectorAll('[data-ax], [data-ax-svg]');
     elements.forEach(el => processElement(el, forceScan));
   }
   
@@ -174,7 +176,7 @@ export function refreshData(root = document) {
   if (!root || typeof root.querySelectorAll !== 'function') return;
   
   if (config.dataApi) {
-    const elements = root.querySelectorAll('[data-ax]');
+    const elements = root.querySelectorAll('[data-ax], [data-ax-svg]');
     elements.forEach(el => processElement(el, false));
   }
   

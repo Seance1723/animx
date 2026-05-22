@@ -1,0 +1,6 @@
+.ax-svg-path-follow {
+  will-change: transform;
+  position: absolute; /* typically expected for path followers to absolute position at 0,0 relative to SVG wrapper */
+  top: 0;
+  left: 0;
+}

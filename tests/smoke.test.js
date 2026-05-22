@@ -30,7 +30,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.3.0', 'Version should be 1.3.0');
+  assert.strictEqual(AnimX.version, '1.4.0', 'Version should be 1.4.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -233,8 +233,42 @@ try {
   assert.strictEqual(typeof AnimX.counter, 'function', 'counter() should exist');
   console.log('✅ New Text Engine features exposed');
 
+  // SVG Pack
+  assert.strictEqual(typeof AnimX.svg, 'function', 'svg() should exist');
+  assert.strictEqual(typeof AnimX.svgDraw, 'function', 'svgDraw() should exist');
+  assert.strictEqual(typeof AnimX.svgUndraw, 'function', 'svgUndraw() should exist');
+  assert.strictEqual(typeof AnimX.svgProgress, 'function', 'svgProgress() should exist');
+  assert.strictEqual(typeof AnimX.svgPathFollow, 'function', 'svgPathFollow() should exist');
+  console.log('✅ SVG APIs exposed');
+  
+  // SVG Missing Node Crash Test
+  const emptySvgDraw = AnimX.svgDraw('.missing-svg');
+  assert.ok(emptySvgDraw, 'Missing SVG does not crash');
+  assert.strictEqual(typeof emptySvgDraw.destroy, 'function');
+  
+  const emptySvgProg = AnimX.svgProgress('.missing-svg-prog');
+  assert.ok(emptySvgProg, 'Missing SVG progress does not crash');
+  assert.strictEqual(typeof emptySvgProg.destroy, 'function');
+  
+  const emptySvgPath = AnimX.svgPathFollow('.missing-svg-path', { path: '#missing-id' });
+  assert.ok(emptySvgPath, 'Missing SVG path-follow does not crash');
+  assert.strictEqual(typeof emptySvgPath.destroy, 'function');
+  console.log('✅ SVG APIs handle missing targets gracefully');
+
+  // SVG Data Parser Check
+  const mockSvgEl = {
+    dataset: { axSvg: 'draw', axDuration: '1000' },
+    hasAttribute: (n) => false,
+    getAttribute: (n) => n === 'data-ax-svg' ? 'draw' : (n === 'data-ax-duration' ? '1000' : null)
+  };
+  const parsedSvg = parseDataAttributes(mockSvgEl);
+  assert.strictEqual(parsedSvg.isSvg, true);
+  assert.strictEqual(parsedSvg.svgOptions.type, 'draw');
+  assert.strictEqual(parsedSvg.svgOptions.duration, 1000);
+  console.log('✅ Data parser successfully parses SVG attributes');
+
   AnimX.destroy(); // Ensure deep cleanup works without crashing
-  console.log('✅ Advanced Scroll System safely initializes and destroys');
+  console.log('✅ Safe Initialization and Teardown achieved');
 
   console.log('--- All tests passed ---');
 } catch (error) {

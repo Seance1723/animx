@@ -98,6 +98,7 @@ export class Timeline {
       }
       
       const isText = mergedOptions.type === 'text' || mergedOptions.type === 'typewriter' || mergedOptions.type === 'scramble' || mergedOptions.type === 'counter';
+      const isSvg = mergedOptions.type === 'svg';
 
       step.status = 'running';
       if (this.options.onStepStart) this.options.onStepStart(step, this);
@@ -127,6 +128,8 @@ export class Timeline {
 
       if (isText) {
         step.instance = animxInstance.text(targetElements, runOptions);
+      } else if (isSvg) {
+        step.instance = animxInstance.svg(targetElements, runOptions);
       } else if (targetElements.length > 1 && mergedOptions.stagger) {
         step.instance = animxInstance.stagger(targetElements, animation, runOptions);
       } else {
