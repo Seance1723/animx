@@ -7,7 +7,9 @@ import { isElementInitialized, setElementState, getElementState } from './data-s
 import { dispatchAnimEvent } from './data-events.js';
 import { parseInteractionAttributes } from '../interactions/interaction-parser.js';
 import { parseComponentAttributes } from '../components/component-parser.js';
+import { parseAdvancedScrollAttributes } from '../scroll/advanced-scroll-parser.js';
 import { hasInstances } from '../core/instance-registry.js';
+import { getScrollInstances } from '../scroll/scroll-state.js';
 import { debug } from '../core/debug.js';
 
 // We import AnimX dynamically or via a wrapper if needed, but to avoid circular deps we pass the animate function or resolve it from window.
@@ -121,6 +123,12 @@ export function initData(forceScan = false) {
     const interactionEls = document.querySelectorAll('[data-ax-hover], [data-ax-press], [data-ax-focus], [data-ax-magnetic], [data-ax-ripple], [data-ax-tilt], [data-ax-feedback]');
     interactionEls.forEach(el => processInteractionElement(el));
   }
+  
+  // Advanced Scroll scanning
+  if (config.advancedScroll && config.advancedScroll.enabled) {
+    const advancedEls = document.querySelectorAll('[data-ax-scroll-progress], [data-ax-parallax], [data-ax-pin], [data-ax-scene], [data-ax-reading-progress]');
+    advancedEls.forEach(el => processAdvancedScrollElement(el));
+  }
 }
 
 function processComponentElement(element) {
@@ -144,6 +152,22 @@ function processInteractionElement(element) {
   }
 }
 
+function processAdvancedScrollElement(element) {
+  if (!animxInstance) return;
+  // Use getScrollInstances to avoid duplicate initialization
+  const existing = getScrollInstances(element);
+  if (existing && Object.keys(existing).length > 0) return;
+  
+  const advanced = parseAdvancedScrollAttributes(element);
+  if (advanced) {
+    if (advanced.scrollProgress) animxInstance.scrollProgress(element, advanced.scrollProgress);
+    if (advanced.parallax) animxInstance.parallax(element, advanced.parallax);
+    if (advanced.pin) animxInstance.pin(element, advanced.pin);
+    if (advanced.scene) animxInstance.scrollScene(element, advanced.scene);
+    if (advanced.readingProgress) animxInstance.readingProgress(element, advanced.readingProgress);
+  }
+}
+
 export function refreshData(root = document) {
   const config = getConfig();
   
@@ -160,6 +184,11 @@ export function refreshData(root = document) {
   if (config.interactions && config.interactions.enabled) {
     const interactionEls = root.querySelectorAll('[data-ax-hover], [data-ax-press], [data-ax-focus], [data-ax-magnetic], [data-ax-ripple], [data-ax-tilt], [data-ax-feedback]');
     interactionEls.forEach(el => processInteractionElement(el));
+  }
+  
+  if (config.advancedScroll && config.advancedScroll.enabled) {
+    const advancedEls = root.querySelectorAll('[data-ax-scroll-progress], [data-ax-parallax], [data-ax-pin], [data-ax-scene], [data-ax-reading-progress]');
+    advancedEls.forEach(el => processAdvancedScrollElement(el));
   }
 }
 

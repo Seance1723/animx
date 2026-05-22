@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.1.0</title>
+  <title>AnimX v1.2.0</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -94,15 +94,23 @@
     }
     .skeleton { height: 80px; background: #e2e8f0; border-radius: 8px; }
     .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin-bottom: 1rem; }
+    .reading-bar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 6px;
+      background: var(--primary);
+      z-index: 100;
+    }
   </style>
 </head>
 <body>
+  <div class="reading-bar" data-ax-reading-progress></div>
 
   <div class="container">
     <header data-ax-component="hero-fade-sequence">
       <h1 data-ax-component="hero-split-text">AnimX</h1>
       <p>Zero-Dependency Browser Animation Library</p>
-      <div class="status-badge">v1.1.0 Performance and Cleanup Upgrade</div>
+      <div class="status-badge">v1.2.0 Advanced Scroll System Upgrade</div>
       <p style="margin-top:1.5rem; opacity:0.8;">Usage: One CSS + One JS File. No external libraries.</p>
     </header>
 
@@ -263,9 +271,61 @@
       </div>
     </section>
 
-    <!-- 10. Performance and Cleanup -->
+    <!-- 10. Advanced Scroll System -->
     <section>
-      <h2>10. Performance and Cleanup</h2>
+      <h2>10. Advanced Scroll System</h2>
+      <p>Data-driven scroll progress, parallax, and scroll scenes with zero dependencies.</p>
+      
+      <!-- Scroll progress & CSS Variables -->
+      <h3 style="margin-top: 2rem;">Scroll Progress & CSS Variables</h3>
+      <div style="height: 300px; display:flex; gap:20px; align-items:center; justify-content:center; border: 1px dashed #ccc; border-radius: 8px; margin-bottom: 2rem; overflow: hidden; position: relative;">
+        <div class="box hero-progress-image" style="width: 120px; height: 120px; background: #ec4899; transform-origin: center;">Transform</div>
+        
+        <div class="box progress-var-box" data-ax-scroll-progress data-ax-progress-var="--box-progress" style="width: 120px; height: 120px; background: #f59e0b; transform: rotate(calc(var(--box-progress, 0) * 180deg));">CSS Var</div>
+      </div>
+      
+      <!-- Parallax -->
+      <h3>Parallax</h3>
+      <div style="position:relative; height:400px; overflow:hidden; background:#1e293b; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom: 2rem;">
+        <div data-ax-parallax data-ax-parallax-y="-80,80" style="position:absolute; width:150px; height:150px; background:rgba(255,255,255,0.1); border-radius:50%; top:20%; left:20%;">Layer 1</div>
+        <div data-ax-parallax data-ax-parallax-y="-40,40" style="position:absolute; width:200px; height:200px; background:rgba(255,255,255,0.05); border-radius:50%; bottom:10%; right:15%;">Layer 2</div>
+        <h2 style="color:white; z-index:10; position:relative; margin:0; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">Parallax Depth</h2>
+      </div>
+
+      <!-- Sticky Pin -->
+      <h3>Sticky Pin</h3>
+      <section data-ax-pin data-ax-pin-target=".pin-content" data-ax-pin-end="+=700" style="background:#f1f5f9; border-radius:8px; border:1px solid #ccc; margin-bottom:2rem;">
+        <div class="pin-content" style="height:100px; display:flex; align-items:center; justify-content:center; background:#4f46e5; color:white; font-weight:bold; border-radius:8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">Pinned content (scroll down)</div>
+      </section>
+
+      <!-- Scroll Scene -->
+      <h3>Scroll Scene</h3>
+      <section data-ax-scene data-ax-enter="fade-up" data-ax-leave="fade-out" data-ax-once="false" style="padding:4rem 2rem; background:#fffbeb; border:1px solid #f59e0b; border-radius:8px; text-align:center;">
+        <h2 style="margin:0; color:#b45309;">Scene Content</h2>
+        <p style="color:#92400e;">Re-animates when entering/leaving viewport.</p>
+      </section>
+
+      <div style="margin-top: 2rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+        <button class="btn" onclick="AnimX.refreshScroll()">Refresh Scroll Metrics</button>
+        <button class="btn" style="background:#ef4444;" onclick="AnimX.destroy('.hero-progress-image')">Destroy JS Demo</button>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(() => {
+            AnimX.scrollProgress(".hero-progress-image", {
+              y: [-80, 80],
+              scale: [1, 1.08],
+              opacity: [1, 0.5]
+            });
+          }, 100);
+        });
+      </script>
+    </section>
+
+    <!-- 11. Performance and Cleanup -->
+    <section>
+      <h2>11. Performance and Cleanup</h2>
       <p>Test dynamic content, robust instance destruction, and memory safety without duplicating event listeners.</p>
       <div style="display:flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
         <button class="btn" onclick="testPerformanceStagger()">Run 100 Card Stagger</button>
@@ -305,9 +365,9 @@
       </script>
     </section>
 
-    <!-- 11. API quick reference -->
+    <!-- 12. API quick reference -->
     <section>
-      <h2>11. API quick reference</h2>
+      <h2>12. API quick reference</h2>
       <pre class="code-block">
 // Setup
 AnimX.config({ debug: false, autoInit: true });

@@ -37,6 +37,11 @@
 @use 'components/toast';
 @use 'components/hero';
 
+@use 'scroll/scroll-progress';
+@use 'scroll/parallax';
+@use 'scroll/pin';
+@use 'scroll/scroll-scene';
+
 @use 'text/text-base';
 @use 'text/text-cursor';
 @use 'text/text-reveal';

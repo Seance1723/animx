@@ -1,0 +1,8 @@
+.ax-pin-section {
+  position: relative;
+}
+
+.ax-pin-content {
+  position: sticky;
+  top: var(--ax-pin-top, 0px);
+}

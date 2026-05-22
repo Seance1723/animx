@@ -24,8 +24,11 @@ import { stagger, bindStaggerAnimX } from './stagger/stagger.js';
 import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
 import { interact, hover, press, focus, magnetic, ripple, tilt, feedback, bindInteractionAnimX, destroyInteractions } from './interactions/interaction-api.js';
 import { component, bindComponentAnimX } from './components/component-api.js';
+import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdvancedScroll } from './scroll/advanced-scroll-api.js';
+import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
+import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 
 // Pre-register core CSS presets
 Object.entries(cssPresets).forEach(([name, preset]) => {
@@ -50,6 +53,7 @@ class AnimXCore {
     bindTextAnimX(this);
     bindInteractionAnimX(this);
     bindComponentAnimX(this);
+    bindScrollSceneAnimX(this);
   }
 
   config(options) {
@@ -92,6 +96,7 @@ class AnimXCore {
   
   refreshScroll(root) {
     refreshScroll(root);
+    refreshScrollMetrics();
   }
 
   run(target) {
@@ -100,6 +105,26 @@ class AnimXCore {
   
   scroll(target, options) {
     observeScroll(target, options);
+  }
+  
+  scrollProgress(target, options) {
+    return scrollProgress(target, options);
+  }
+  
+  parallax(target, options) {
+    return parallax(target, options);
+  }
+  
+  pin(target, options) {
+    return pin(target, options);
+  }
+  
+  scrollScene(target, options) {
+    return scrollScene(target, options);
+  }
+  
+  readingProgress(target, options) {
+    return readingProgress(target, options);
   }
   
   unobserve(target) {
@@ -268,10 +293,13 @@ class AnimXCore {
         });
       });
       destroyInteractions(selector);
+      destroyAdvancedScroll(selector);
     } else {
       this._instances.forEach(instance => instance.stop());
       this._instances.clear();
       destroyInteractions(document.body);
+      destroyAdvancedScroll(document.body);
+      clearScrollTicker();
     }
   }
 

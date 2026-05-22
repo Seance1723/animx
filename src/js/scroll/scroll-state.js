@@ -25,3 +25,23 @@ export function markScrollExited(element, exitClass) {
 export function unmarkScrollObserved(element) {
   scrollObservedMap.delete(element);
 }
+
+const advancedScrollMap = new WeakMap();
+
+export function saveScrollInstance(element, type, instance) {
+  if (!advancedScrollMap.has(element)) {
+    advancedScrollMap.set(element, {});
+  }
+  advancedScrollMap.get(element)[type] = instance;
+}
+
+export function getScrollInstances(element) {
+  return advancedScrollMap.get(element) || null;
+}
+
+export function removeScrollInstance(element, type) {
+  const instances = advancedScrollMap.get(element);
+  if (instances) {
+    delete instances[type];
+  }
+}

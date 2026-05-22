@@ -4,12 +4,13 @@
 
 AnimX is a lightweight, zero-dependency animation engine designed for performance, accessibility, and developer experience. It bridges the gap between hardware-accelerated CSS animations and powerful Javascript sequencing (like Timelines, Stagger, and Text Splitting) without the heavy payload of traditional animation frameworks.
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Version](https://img.shields.io/badge/version-1.2.0-blue)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-success)
-![Size](https://img.shields.io/badge/size-24kb_gzipped-success)
+![Size](https://img.shields.io/badge/size-28kb_gzipped-success)
 
 ## Features
-- **Zero Dependencies**: No GSAP, Anime.js, Motion, or jQuery.
+- **Zero Dependencies**: No GSAP, ScrollTrigger, Anime.js, Motion, or jQuery.
+- **Advanced Scroll System**: Scroll progress, parallax, sticky pins, and scroll scenes powered by a single shared RAF ticker.
 - **Hardware Accelerated**: Prioritizes `transform` and `opacity` via the Web Animations API (WAAPI) and CSS Keyframes.
 - **Declarative & Imperative**: Use `data-ax` attributes in HTML or `AnimX.animate()` in JS.
 - **Scroll Reveal**: Native `IntersectionObserver` integration for seamless scroll-triggered animations.

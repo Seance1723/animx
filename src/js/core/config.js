@@ -10,6 +10,14 @@ const defaultConfig = {
     rootMargin: '0px 0px -10% 0px',
     once: true
   },
+  advancedScroll: {
+    enabled: true,
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: true,
+    reducedMotionSafe: true,
+    passive: true
+  },
   stagger: {
     each: 100,
     from: 'start',

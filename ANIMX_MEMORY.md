@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 1.1.0
+**Current Version**: 1.2.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## v0.0.1 - Foundation (Completed)
@@ -82,6 +82,15 @@
 - Implemented `debug.js` with `warnOnce` functionality to prevent console spam.
 - Integrated `AnimX.destroy()` cascading to clear timelines, staggers, interactions, and data trackers cleanly.
 
+## v1.2.0 - Advanced Scroll System (Completed)
+- Added `AnimX.scrollProgress()`, `AnimX.parallax()`, `AnimX.pin()`, `AnimX.scrollScene()`, `AnimX.readingProgress()`.
+- Added advanced scroll data attributes (`data-ax-scroll-progress`, `data-ax-parallax`, etc.).
+- Uses shared scroll ticker and RAF batching to prevent layout thrashing.
+- Runtime dependency remains zero. Final output remains one CSS and one JS file.
+- Advanced layout/FLIP is still not implemented.
+- Drag/gesture physics is still not implemented.
+- Next planned version: v1.3.0 Advanced Text Pack.
+
 ## Technical Constraints (CRITICAL)
 - No GSAP, Anime.js, Motion, or jQuery.
 - Use only native browser APIs (`requestAnimationFrame`, `Element.animate`, `IntersectionObserver`, CSS).
@@ -109,6 +118,37 @@ AnimX.ready()
 AnimX.registerPreset()
 AnimX.getPreset()
 AnimX.getPresets()
+AnimX.getComponentPresets()
+AnimX.getPresetCategories()
+AnimX.animate()
+AnimX.replay()
+AnimX.reset()
+AnimX.stop()
+AnimX.destroy()
+AnimX.refresh()
+AnimX.run()
+AnimX.scroll()
+AnimX.refreshScroll()
+AnimX.unobserve()
+AnimX.timeline()
+AnimX.stagger()
+AnimX.text()
+AnimX.splitText()
+AnimX.revertText()
+AnimX.interact()
+AnimX.hover()
+AnimX.press()
+AnimX.focus()
+AnimX.magnetic()
+AnimX.ripple()
+AnimX.tilt()
+AnimX.feedback()
+AnimX.component()
+AnimX.scrollProgress()
+AnimX.parallax()
+AnimX.pin()
+AnimX.scrollScene()
+AnimX.readingProgress()
 
 ## Development Rules
 - Keep code clean and modular internally.

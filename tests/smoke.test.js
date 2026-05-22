@@ -4,7 +4,8 @@ import assert from 'assert';
 // Note: Some DOM APIs won't exist in Node, so we mock basic global variables for the test to import successfully.
 global.window = {
   matchMedia: () => ({ matches: false }),
-  addEventListener: () => {}
+  addEventListener: () => {},
+  removeEventListener: () => {}
 };
 global.document = {
   readyState: 'complete',
@@ -12,8 +13,12 @@ global.document = {
   dispatchEvent: () => {},
   createElement: () => ({ classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left: 0, top: 0, width: 0, height: 0}), setAttribute: () => {}, appendChild: () => {}, textContent: '' }),
   createDocumentFragment: () => ({ appendChild: () => {} }),
-  createTextNode: () => ({ nodeValue: '' })
+  createTextNode: () => ({ nodeValue: '' }),
+  body: { scrollHeight: 1000, offsetHeight: 1000, clientHeight: 1000 },
+  documentElement: { scrollHeight: 1000, offsetHeight: 1000, clientHeight: 1000 }
 };
+global.requestAnimationFrame = (cb) => setTimeout(cb, 16);
+global.cancelAnimationFrame = (id) => clearTimeout(id);
 
 // Now safe to import
 import AnimX from '../src/js/animx.js';
@@ -25,7 +30,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.1.0', 'Version should be 1.1.0');
+  assert.strictEqual(AnimX.version, '1.2.0', 'Version should be 1.2.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -78,6 +83,11 @@ try {
   assert.strictEqual(typeof AnimX.text, 'function', 'AnimX.text should be exposed');
   assert.strictEqual(typeof AnimX.splitText, 'function', 'AnimX.splitText should be exposed');
   assert.strictEqual(typeof AnimX.revertText, 'function', 'AnimX.revertText should be exposed');
+  assert.strictEqual(typeof AnimX.scrollProgress, 'function');
+  assert.strictEqual(typeof AnimX.parallax, 'function');
+  assert.strictEqual(typeof AnimX.pin, 'function');
+  assert.strictEqual(typeof AnimX.scrollScene, 'function');
+  assert.strictEqual(typeof AnimX.readingProgress, 'function');
   console.log('✅ Global API exposed');
   
   // 7. Timeline API Check
@@ -193,6 +203,32 @@ try {
   assert.strictEqual(typeof AnimX.revertText, 'function', 'AnimX.revertText parses gracefully');
   AnimX.revertText([fakeTextNode]);
   console.log('✅ Text Engine and WeakMap revert gracefully handles mocks');
+
+  // 11. Advanced Scroll API Checks
+  const fakeScrollNode = { 
+    nodeType: 1, 
+    classList: { add: () => {}, remove: () => {} },
+    style: { setProperty: () => {}, removeProperty: () => {} },
+    getBoundingClientRect: () => ({ left: 0, top: 0, height: 100, width: 100 })
+  };
+  
+  const spInstance = AnimX.scrollProgress(fakeScrollNode, { y: [-100, 100] });
+  assert.ok(spInstance, 'scrollProgress safely initializes');
+  
+  const pxInstance = AnimX.parallax(fakeScrollNode, { speed: 0.5 });
+  assert.ok(pxInstance, 'parallax safely initializes');
+  
+  const pinInstance = AnimX.pin(fakeScrollNode, { end: '+=500' });
+  assert.ok(pinInstance, 'pin safely initializes');
+  
+  const sceneInstance = AnimX.scrollScene(fakeScrollNode, { enter: 'fade-up' });
+  assert.ok(sceneInstance, 'scrollScene safely initializes');
+  
+  const rpInstance = AnimX.readingProgress(fakeScrollNode);
+  assert.ok(rpInstance, 'readingProgress safely initializes');
+  
+  AnimX.destroy(); // Ensure deep cleanup works without crashing
+  console.log('✅ Advanced Scroll System safely initializes and destroys');
 
   console.log('--- All tests passed ---');
 } catch (error) {
