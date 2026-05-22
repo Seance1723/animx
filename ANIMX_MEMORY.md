@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 2.7.0
+**Current Version**: 2.8.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## Version History
@@ -38,6 +38,10 @@
 - **v2.3.0** - Layout Motion System
   - Added FLIP reordering, expand/collapse, morphing, and DOM swapping with data attributes.
 - **v2.4.0** - Gesture and Drag Physics
+- **v2.7.0** - Production Optimization
+  - Introduced modular `core` vs `full` bundles via Vite, bundle report generation, and internal `productionCheck()` APIs.
+- **v2.8.0** - Accessibility and Compliance Hardening
+  - Added `AnimX.accessibility()`, `auditAccessibility()`, `motionSafe()`, `focusSafe()`, `announce()`, and `setReducedMotion()`.
 
 ## Completed Milestones
 

@@ -35,9 +35,10 @@ function processTextNode(node, options, arrays) {
       const chars = segmentChars(wordText);
       chars.forEach(char => {
         const charWrapper = createWrapper('span', 'ax-text-char', char);
-        if (!doWords && options.preserveAccessibility) applyAriaHidden(charWrapper);
+        if (options.preserveAccessibility) applyAriaHidden(charWrapper);
         if (options.mask && options.mask !== 'lines') {
           const mask = createWrapper('span', 'ax-text-mask');
+          if (options.preserveAccessibility) applyAriaHidden(mask);
           mask.appendChild(charWrapper);
           wordWrapper.appendChild(mask);
         } else {
@@ -52,6 +53,7 @@ function processTextNode(node, options, arrays) {
     if (doWords) {
       if (options.mask && options.mask !== 'lines' && !doChars) {
         const mask = createWrapper('span', 'ax-text-mask');
+        if (options.preserveAccessibility) applyAriaHidden(mask);
         mask.appendChild(wordWrapper);
         fragment.appendChild(mask);
       } else {
@@ -126,6 +128,7 @@ function detectLines(element, wordElements, options, arrays) {
 
     if (options.mask && (options.mask === true || options.mask === 'lines')) {
       const mask = createWrapper('span', 'ax-text-mask');
+      if (options.preserveAccessibility) applyAriaHidden(mask);
       lineWrapper.parentNode.insertBefore(mask, lineWrapper);
       mask.appendChild(lineWrapper);
     }

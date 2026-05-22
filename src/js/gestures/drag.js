@@ -7,7 +7,7 @@ import { resolveBounds, applyConstraints } from './drag-constraints.js';
 import { PhysicsSimulation } from './drag-physics.js';
 import { addGestureInstance, removeGestureInstance } from './gesture-state.js';
 import { getConfig } from '../core/config.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function drag(target, options = {}) {
   const elements = normalizeSelector(target);

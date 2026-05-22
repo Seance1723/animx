@@ -1,6 +1,6 @@
 import { saveTextState } from './text-state.js';
 import { dispatchTextEvent } from './text-utils.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function runSwap(element, options, coreInstance) {
   const originalHTML = element.innerHTML;

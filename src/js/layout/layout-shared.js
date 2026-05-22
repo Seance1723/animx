@@ -1,6 +1,6 @@
 import { normalizeSelector } from '../core/selector.js';
 import { getLayoutConfig, LayoutInstance, dispatchLayoutEvent } from './layout-utils.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function sharedElement(sourceSelector, targetSelector, options = {}) {
   const sourceElements = normalizeSelector(sourceSelector);

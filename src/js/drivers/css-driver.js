@@ -1,4 +1,5 @@
 import { log } from '../core/utils.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function createCSSDriver(element, preset, options, instance) {
   const className = preset.className;
@@ -39,9 +40,13 @@ export function createCSSDriver(element, preset, options, instance) {
       element.classList.remove('ax-paused');
       element.classList.add('ax-running');
       
+      const isReduced = isReducedMotion();
+      const duration = isReduced ? 1 : options.duration;
+      const delay = isReduced ? 0 : options.delay;
+      
       // Apply inline overrides if custom options were passed (and not defaults)
-      if (options.duration !== 420) element.style.animationDuration = `${options.duration}ms`;
-      if (options.delay !== 0) element.style.animationDelay = `${options.delay}ms`;
+      if (duration !== 420 || isReduced) element.style.animationDuration = `${duration}ms`;
+      if (delay !== 0 || isReduced) element.style.animationDelay = `${delay}ms`;
       if (options.ease !== 'cubic-bezier(0.22, 1, 0.36, 1)') element.style.animationTimingFunction = options.ease;
       
       element.addEventListener('animationend', handleAnimationEnd);

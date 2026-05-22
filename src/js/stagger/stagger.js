@@ -1,5 +1,5 @@
 import { normalizeSelector } from '../core/selector.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 import { parseStaggerOptions } from './stagger-parser.js';
 import { calculateStaggerDelays } from './stagger-calculator.js';
 import { StaggerGroup } from './stagger-group.js';

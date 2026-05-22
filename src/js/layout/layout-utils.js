@@ -1,5 +1,5 @@
 import { getConfig } from '../core/config.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export const layoutInstances = new WeakMap();
 

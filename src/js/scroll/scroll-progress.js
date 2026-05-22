@@ -1,5 +1,5 @@
 import { getConfig } from '../core/config.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 import { calculateScrollPositions, calculateProgress, getScrollY } from './scroll-metrics.js';
 import { registerScrollInstance, unregisterScrollInstance } from './scroll-ticker.js';
 import { scheduler } from '../core/scheduler.js';

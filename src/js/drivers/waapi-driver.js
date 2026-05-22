@@ -1,3 +1,5 @@
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
+
 export function createWAAPIDriver(element, keyframes, options, instance) {
   let animation = null;
   let hasStarted = false;
@@ -8,9 +10,13 @@ export function createWAAPIDriver(element, keyframes, options, instance) {
         if (options.onStart) options.onStart(element);
         hasStarted = true;
         
+        const isReduced = isReducedMotion();
+        const duration = isReduced ? 1 : options.duration;
+        const delay = isReduced ? 0 : options.delay;
+        
         animation = element.animate(keyframes, {
-          duration: options.duration,
-          delay: options.delay,
+          duration: duration,
+          delay: delay,
           easing: options.ease,
           fill: options.fill,
           iterations: options.iterations,

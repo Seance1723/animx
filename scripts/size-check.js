@@ -11,9 +11,13 @@ if (!fs.existsSync(reportPath)) {
   process.exit(1);
 }
 
+const buildPost = require('../build-post.js');
+
+const VERSION = '2.8.0';
+
 const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
 
-console.log(`\n--- AnimX v${report.version} Size Report ---`);
+console.log(`\n--- AnimX v${VERSION} Size Report ---`);
 
 const maxFileLen = Math.max(...report.files.map(f => f.file.length));
 

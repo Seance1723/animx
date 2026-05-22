@@ -2,11 +2,14 @@
   .ax,
   [class*="ax-"],
   [data-ax],
-  [data-ax-component] {
+  [data-ax-component],
+  [data-ax-svg],
+  [data-ax-layout],
+  [data-ax-drag],
+  [data-ax-recipe] {
     animation-duration: 1ms !important;
     animation-delay: 0ms !important;
     transition-duration: 1ms !important;
-    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
 }

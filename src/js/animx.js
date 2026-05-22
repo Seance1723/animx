@@ -14,7 +14,12 @@ import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
 
-import { isReducedMotion } from './core/reduced-motion.js';
+import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
+import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
+import { focusSafe } from './accessibility/focus-safety.js';
+import { announce, createLiveRegion } from './accessibility/live-region.js';
+import { auditAccessibility } from './accessibility/accessibility-audit.js';
+
 import { normalizeOptions } from './core/animation-normalizer.js';
 import { buildTransformAndFilter } from './core/transform-builder.js';
 import { AnimationInstance } from './core/animation-instance.js';
@@ -40,7 +45,7 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.7.0';
+const VERSION = '2.8.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
@@ -67,7 +72,47 @@ class AnimXCore {
   }
 
   config(options) {
-    setConfig(options);
+    if (options) {
+      setConfig(options);
+    }
+    return getConfig();
+  }
+
+  // Accessibility APIs
+  accessibility(options) {
+    return accessibility(options);
+  }
+  
+  a11y(options) {
+    return accessibility(options);
+  }
+  
+  auditAccessibility() {
+    return auditAccessibility();
+  }
+  
+  motionSafe(onSafe, onReduced) {
+    return motionSafe(onSafe, onReduced);
+  }
+  
+  setReducedMotion(mode) {
+    return setReducedMotion(mode);
+  }
+  
+  getReducedMotion() {
+    return getReducedMotion();
+  }
+  
+  focusSafe(selector, options) {
+    return focusSafe(selector, options);
+  }
+  
+  announce(message, options) {
+    return announce(message, options);
+  }
+  
+  createLiveRegion(options) {
+    return createLiveRegion(options);
   }
 
   init() {

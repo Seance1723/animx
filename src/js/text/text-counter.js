@@ -1,6 +1,6 @@
 import { saveTextState, textStateMap } from './text-state.js';
 import { clearElementSafely } from './text-utils.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function runCounter(element, options) {
   const originalHTML = element.innerHTML;

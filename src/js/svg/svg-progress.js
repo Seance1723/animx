@@ -1,6 +1,6 @@
 import { normalizeSelector } from '../core/selector.js';
 import { getConfig } from '../core/config.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 import { getSvgLength, cleanInlineStyles } from './svg-utils.js';
 import { saveSvgState, deleteSvgState } from './svg-state.js';
 

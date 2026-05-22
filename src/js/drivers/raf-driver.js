@@ -1,3 +1,5 @@
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
+
 export function createRAFDriver(element, keyframes, options, instance) {
   let rafId = null;
   let startTime = null;
@@ -26,7 +28,8 @@ export function createRAFDriver(element, keyframes, options, instance) {
   function loop(timestamp) {
     if (!startTime) startTime = timestamp;
     const elapsed = timestamp - startTime;
-    let progress = Math.min(Math.max(elapsed / options.duration, 0), 1);
+    const duration = isReducedMotion() ? 1 : options.duration;
+    let progress = Math.min(Math.max(elapsed / duration, 0), 1);
     
     applyFrame(progress);
 

@@ -1,4 +1,4 @@
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function dispatchInteractionEvent(element, name, detail) {
   if (typeof document !== 'undefined') {

@@ -1,6 +1,6 @@
 import { saveTextState, textStateMap } from './text-state.js';
 import { clearElementSafely, getRawTextContent } from './text-utils.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function runScramble(element, options) {
   const originalHTML = element.innerHTML;

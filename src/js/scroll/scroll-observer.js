@@ -1,4 +1,4 @@
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 import { log } from '../core/utils.js';
 import { dispatchAnimEvent } from '../data/data-events.js';
 import { markScrollEntered, markScrollExited, scrollObservedMap, unmarkScrollObserved } from './scroll-state.js';

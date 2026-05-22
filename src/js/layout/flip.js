@@ -1,6 +1,6 @@
 import { measureLayout } from './layout-measure.js';
 import { getLayoutConfig, LayoutInstance, cleanInlineTransforms, dispatchLayoutEvent } from './layout-utils.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 export function animateLayout(firstSnapshot, lastSnapshot, options = {}) {
   const config = { ...getLayoutConfig(), ...options };

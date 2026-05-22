@@ -9,7 +9,7 @@ import { validate } from '../core/validator.js';
 import { registerPreset, getPreset, getPresets, getPresetsByCategory, searchPresets, getPresetTags } from '../presets/preset-registry.js';
 import { findPreset, suggestPreset } from '../presets/preset-search-index.js';
 import { cssPresets } from '../presets/css-presets.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 import { normalizeOptions } from '../core/animation-normalizer.js';
 import { buildTransformAndFilter } from '../core/transform-builder.js';
 import { AnimationInstance } from '../core/animation-instance.js';

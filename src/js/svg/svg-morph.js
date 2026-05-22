@@ -7,7 +7,7 @@ import { buildPathString } from './svg-path-parser.js';
 import { shapeToPathData } from './svg-path-normalizer.js';
 import { getIconPath } from './svg-morph-icon.js';
 import { getConfig } from '../core/config.js';
-import { isReducedMotion } from '../core/reduced-motion.js';
+import { isReducedMotion } from '../accessibility/accessibility-state.js';
 
 const activeMorphs = new WeakMap();
 

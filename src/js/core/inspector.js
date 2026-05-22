@@ -7,7 +7,7 @@ export function inspect(selector) {
   if (!selector) {
     // Global inspection
     return {
-      version: '2.7.0',
+      version: '2.8.0',
       activeAnimations: Object.keys(data).length,
       presetCount: getPresets().length,
       categories: getPresetCategories(),
@@ -23,7 +23,7 @@ export function inspect(selector) {
   // Element-level inspection
   const elements = normalizeSelector(selector);
   const logPrefix = '[AnimX Inspector]';
-  console.group(`%c${logPrefix} Inspecting \`${selector}\` (v2.7.0)`, 'color: #3b82f6; font-weight: bold;');
+  console.group(`%c${logPrefix} Inspecting \`${selector}\` (v2.8.0)`, 'color: #3b82f6; font-weight: bold;');
   if (elements.length === 0) {
     return { error: `No elements found for selector: ${selector}` };
   }
