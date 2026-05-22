@@ -1,0 +1,16 @@
+@media (max-width: 900px) {
+  .ax-studio-layout {
+    flex-direction: column;
+    overflow: auto;
+  }
+  
+  .ax-studio-sidebar, .ax-studio-inspector {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--studio-border);
+  }
+  
+  .ax-studio-canvas-area {
+    min-height: 500px;
+  }
+}

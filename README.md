@@ -1,11 +1,16 @@
 <div align="center">
-  <h1>🚀 AnimX</h1>
-  <p><strong>v2.9.0</strong> — The zero-dependency, ultra-lightweight, high-performance animation engine for the modern web.</p>
+  <h3>The Zero-Dependency UI Animation Engine (v3.0.0)</h3>
+  <p>Production-ready, accessible, and fast.</p>
 </div>
 
-<br>
+---
 
-## Releases
+## ⚡ What's New in v3.0.0
+
+- **AnimX Studio**: A built-in, local visual builder to preview presets, tweak settings, and export clean snippets.
+- **Zero Dependencies**: Studio is completely optional and doesn't pollute the core library.
+
+## ✨ Features
 - **v2.9.0**: Security and Defensive Runtime Hardening
 - **v2.8.0**: Accessibility and Compliance Hardening
 - **v2.7.0**: Production Optimization and Bundle Control

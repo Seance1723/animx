@@ -1,10 +1,9 @@
-
 import assert from 'assert';
 import './setup.js';
 import AnimX from '../src/js/animx.js';
 
 
-    assert.strictEqual(AnimX.version, '2.9.0');
+    assert.strictEqual(AnimX.build.version, '3.0.0', 'Version should match package');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));

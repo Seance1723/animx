@@ -1,0 +1,65 @@
+.ax-studio-inspector {
+  padding: 20px;
+}
+
+.ax-studio-inspector h3 {
+  margin: 0 0 20px 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--studio-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.ax-studio-control-group {
+  margin-bottom: 15px;
+}
+
+.ax-studio-control-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--studio-text-muted);
+  margin-bottom: 5px;
+}
+
+.ax-studio-control-group input[type="text"],
+.ax-studio-control-group input[type="number"],
+.ax-studio-control-group select {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--studio-bg);
+  border: 1px solid var(--studio-border);
+  border-radius: var(--studio-radius);
+  color: var(--studio-text);
+  box-sizing: border-box;
+}
+
+.ax-studio-control-group input:read-only {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ax-studio-btn {
+  width: 100%;
+  padding: 10px;
+  background: var(--studio-surface-hover);
+  border: 1px solid var(--studio-border);
+  color: var(--studio-text);
+  border-radius: var(--studio-radius);
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 10px;
+  transition: background 0.2s;
+}
+
+.ax-studio-btn:hover {
+  background: #475569;
+}
+
+.ax-studio-btn-primary {
+  background: var(--studio-primary);
+  border-color: var(--studio-primary);
+}
+
+.ax-studio-btn-primary:hover {
+  background: var(--studio-primary-hover);
+}

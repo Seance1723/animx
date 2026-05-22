@@ -52,7 +52,7 @@ async function run() {
   }
 
   // 3. Copy HTML Pages
-  const pages = ['index.html', 'gallery.html', 'examples.html', 'docs.html', 'playground.html'];
+  const pages = ['index.html', 'gallery.html', 'examples.html', 'docs.html', 'playground.html', 'studio.html'];
   pages.forEach(page => {
     const srcPath = path.resolve(__dirname, `demo/${page}`);
     const destName = page === 'index.html' ? 'animx.demo.html' : `animx.${page}`;
@@ -64,6 +64,8 @@ async function run() {
       html = html.replace(/<script type="module" src="\/src\/js\/animx\.js"><\/script>/g, '<script src="animx.js"></script>');
       html = html.replace(/<link rel="stylesheet" href="\.\.\/dist\/animx\.min\.css">/g, '<link rel="stylesheet" href="animx.css">');
       html = html.replace(/<script src="\.\.\/dist\/animx\.min\.js"><\/script>/g, '<script src="animx.js"></script>');
+      html = html.replace(/\/src\/scss\/studio\/animx-studio\.scss/g, 'studio/animx-studio.css');
+      html = html.replace(/<script type="module" src="\/src\/js\/studio\/studio-core\.js"><\/script>/g, '<script src="studio/animx-studio.js"></script>');
       fs.writeFileSync(destPath, html);
       console.log(`Generated ${destName}`);
     }
@@ -73,8 +75,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '2.7.0',
-    release: 'Production Optimization and Bundle Control',
+    version: '3.0.0',
+    release: 'AnimX Studio / Visual Builder',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',

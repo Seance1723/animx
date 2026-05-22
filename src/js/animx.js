@@ -51,7 +51,21 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.9.0';
+const VERSION = '3.0.0';
+
+// Optional Studio shortcut
+export function studio() {
+  if (typeof window !== 'undefined') {
+    if (window.location.pathname.includes('animx.studio.html')) {
+      console.log('[AnimX] Studio is already running.');
+      return;
+    }
+    const currentUrl = window.location.href;
+    const basePath = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+    console.log('[AnimX] Launching AnimX Studio...');
+    window.location.href = `${basePath}/animx.studio.html`;
+  }
+}
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
@@ -566,9 +580,16 @@ class AnimXCore {
 }
 
 const AnimX = new AnimXCore();
+AnimX.studio = studio;
 AnimX.build = {
   name: 'full',
   version: VERSION,
+  versionInfo: () => ({
+      name: "AnimX",
+      version: "3.0.0",
+      release: "AnimX Studio / Visual Builder",
+      dependency: "zero-runtime-dependency"
+    }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
 };
 

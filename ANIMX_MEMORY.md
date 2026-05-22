@@ -44,6 +44,9 @@
   - Added `AnimX.accessibility()`, `auditAccessibility()`, `motionSafe()`, `focusSafe()`, `announce()`, and `setReducedMotion()`.
 - **v2.9.0** - Security and Defensive Runtime Hardening
   - Added security API, safeHTML, safeSelector, and safe object merging against prototype pollution. Blocked unsafe HTML insertion by default.
+- **v3.0.0** - AnimX Studio / Visual Builder
+  - Release Name: AnimX Studio / Visual Builder
+  - Goal: Zero-dependency, performant, accessible animation framework.
 
 ## Completed Milestones
 

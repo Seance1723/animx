@@ -1,0 +1,28 @@
+:root {
+  --studio-bg: #0f172a;
+  --studio-surface: #1e293b;
+  --studio-surface-hover: #334155;
+  --studio-border: #334155;
+  --studio-text: #f8fafc;
+  --studio-text-muted: #94a3b8;
+  --studio-primary: #6366f1;
+  --studio-primary-hover: #4f46e5;
+  --studio-accent: #c084fc;
+  --studio-success: #10b981;
+  --studio-warning: #f59e0b;
+  --studio-error: #ef4444;
+  --studio-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --studio-radius: 6px;
+}
+
+body.ax-studio {
+  margin: 0;
+  padding: 0;
+  background: var(--studio-bg);
+  color: var(--studio-text);
+  font-family: var(--studio-font);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

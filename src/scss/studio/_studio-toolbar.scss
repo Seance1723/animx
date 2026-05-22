@@ -1,0 +1,78 @@
+.ax-studio-toolbar {
+  height: 60px;
+  background: var(--studio-surface);
+  border-bottom: 1px solid var(--studio-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.ax-studio-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ax-studio-title h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--studio-text);
+}
+
+.ax-studio-title h1 span {
+  color: var(--studio-primary);
+}
+
+.ax-studio-version {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ax-studio-modes {
+  display: flex;
+  gap: 5px;
+}
+
+.ax-studio-mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--studio-text-muted);
+  padding: 8px 12px;
+  border-radius: var(--studio-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.ax-studio-mode-btn:hover {
+  background: var(--studio-surface-hover);
+  color: var(--studio-text);
+}
+
+.ax-studio-mode-btn.active {
+  background: var(--studio-primary);
+  color: white;
+}
+
+.ax-studio-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ax-studio-actions button {
+  background: var(--studio-bg);
+  border: 1px solid var(--studio-border);
+  color: var(--studio-text);
+  padding: 6px 12px;
+  border-radius: var(--studio-radius);
+  cursor: pointer;
+}
+
+.ax-studio-actions button:hover {
+  background: var(--studio-surface-hover);
+}

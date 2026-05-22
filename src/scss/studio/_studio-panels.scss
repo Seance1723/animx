@@ -1,0 +1,20 @@
+/* Catch-all for extra panels */
+.ax-studio-panel {
+  padding: 15px;
+  background: var(--studio-surface);
+  border-radius: var(--studio-radius);
+  border: 1px solid var(--studio-border);
+  margin-bottom: 15px;
+}
+
+.ax-studio-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+}
+
+.ax-studio-success {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}

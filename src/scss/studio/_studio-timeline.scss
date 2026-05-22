@@ -1,0 +1,20 @@
+/* For timeline builder if added */
+.ax-studio-timeline-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--studio-bg);
+  border: 1px solid var(--studio-border);
+  border-radius: var(--studio-radius);
+  margin-bottom: 10px;
+}
+
+.ax-studio-timeline-step select,
+.ax-studio-timeline-step input {
+  padding: 5px;
+  background: var(--studio-surface);
+  border: 1px solid var(--studio-border);
+  color: var(--studio-text);
+  border-radius: 4px;
+}

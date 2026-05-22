@@ -1,0 +1,41 @@
+.ax-studio-bottom-panel {
+  height: 200px;
+  background: var(--studio-surface);
+  border-top: 1px solid var(--studio-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.ax-studio-code-tabs {
+  display: flex;
+  background: var(--studio-bg);
+  border-bottom: 1px solid var(--studio-border);
+}
+
+.ax-studio-code-tabs button {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  color: var(--studio-text-muted);
+  cursor: pointer;
+  border-right: 1px solid var(--studio-border);
+  font-size: 0.85rem;
+}
+
+.ax-studio-code-tabs button.active {
+  background: var(--studio-surface);
+  color: var(--studio-text);
+  font-weight: bold;
+}
+
+.ax-studio-code {
+  flex: 1;
+  margin: 0;
+  padding: 15px;
+  background: #020617; /* Very dark for code */
+  color: #34d399; /* Mint green code */
+  font-family: monospace;
+  overflow: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

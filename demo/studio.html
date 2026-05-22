@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX Studio</title>
+  <link rel="stylesheet" href="/src/scss/animx.scss">
+  <link rel="stylesheet" href="/src/scss/studio/animx-studio.scss">
+</head>
+<body class="ax-studio">
+  
+  <div class="ax-studio-toolbar">
+    <div class="ax-studio-title">
+      <h1>AnimX <span>Studio</span></h1>
+      <span class="ax-studio-version">v3.0.0</span>
+    </div>
+    <div class="ax-studio-modes">
+      <button class="ax-studio-mode-btn active" data-mode="preset">Presets</button>
+      <button class="ax-studio-mode-btn" data-mode="timeline">Timeline</button>
+      <button class="ax-studio-mode-btn" data-mode="stagger">Stagger</button>
+      <button class="ax-studio-mode-btn" data-mode="text">Text</button>
+      <button class="ax-studio-mode-btn" data-mode="svg">SVG</button>
+      <button class="ax-studio-mode-btn" data-mode="layout">Layout</button>
+      <button class="ax-studio-mode-btn" data-mode="gesture">Gestures</button>
+      <button class="ax-studio-mode-btn" data-mode="cms">CMS/No-Code</button>
+    </div>
+    <div class="ax-studio-actions">
+      <button id="btn-device-desktop">💻</button>
+      <button id="btn-device-tablet">📱</button>
+      <button id="btn-device-mobile">📱</button>
+      <button id="btn-reduced-motion">RM</button>
+      <button id="btn-audit">Audit</button>
+    </div>
+  </div>
+
+  <div class="ax-studio-layout">
+    
+    <div class="ax-studio-sidebar" id="studio-sidebar">
+      <h3>Templates</h3>
+      <div id="template-list"></div>
+      
+      <h3 style="margin-top: 20px;">Presets</h3>
+      <input type="text" id="preset-search" placeholder="Search presets...">
+      <div id="preset-list"></div>
+    </div>
+    
+    <div class="ax-studio-canvas-area">
+      <div class="ax-studio-canvas" id="studio-canvas">
+        <!-- Templates loaded here -->
+        <div class="ax-studio-canvas-content">
+          <div style="padding: 50px; text-align: center;">
+            <h1 data-ax="fade-up">Select a template to begin</h1>
+          </div>
+        </div>
+      </div>
+      
+      <div class="ax-studio-bottom-panel">
+        <div class="ax-studio-code-tabs">
+          <button class="active" data-code="html">HTML</button>
+          <button data-code="data">Data Attributes</button>
+          <button data-code="js">JavaScript</button>
+        </div>
+        <pre class="ax-studio-code" id="code-output"></pre>
+      </div>
+    </div>
+    
+    <div class="ax-studio-inspector" id="studio-inspector">
+      <h3>Configuration</h3>
+      
+      <div class="ax-studio-control-group">
+        <label>Selected Target</label>
+        <input type="text" id="ctrl-target" readonly value="None">
+      </div>
+      
+      <div class="ax-studio-control-group">
+        <label>Animation</label>
+        <input type="text" id="ctrl-animation" value="fade-up">
+      </div>
+      
+      <div class="ax-studio-control-group">
+        <label>Duration (ms)</label>
+        <input type="number" id="ctrl-duration" step="100" min="0">
+      </div>
+      
+      <div class="ax-studio-control-group">
+        <label>Delay (ms)</label>
+        <input type="number" id="ctrl-delay" step="50" min="0">
+      </div>
+      
+      <div class="ax-studio-control-group">
+        <label>Easing</label>
+        <select id="ctrl-ease">
+          <option value="">Default</option>
+          <option value="ease">ease</option>
+          <option value="ease-in">ease-in</option>
+          <option value="ease-out">ease-out</option>
+          <option value="ease-in-out">ease-in-out</option>
+          <option value="linear">linear</option>
+          <option value="spring">spring (native)</option>
+        </select>
+      </div>
+      
+      <div class="ax-studio-control-group">
+        <label>Trigger</label>
+        <select id="ctrl-trigger">
+          <option value="">Immediate</option>
+          <option value="scroll">Scroll</option>
+          <option value="click">Click</option>
+          <option value="hover">Hover</option>
+        </select>
+      </div>
+      
+      <button class="ax-studio-btn ax-studio-btn-primary" id="btn-play">Replay Animation</button>
+      <button class="ax-studio-btn" id="btn-reset">Reset Elements</button>
+    </div>
+    
+  </div>
+
+  <script type="module" src="/src/js/animx.js"></script>
+  <script type="module" src="/src/js/studio/studio-core.js"></script>
+</body>
+</html>

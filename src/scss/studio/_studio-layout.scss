@@ -1,0 +1,27 @@
+.ax-studio-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ax-studio-sidebar, .ax-studio-inspector {
+  width: 300px;
+  background: var(--studio-surface);
+  border-right: 1px solid var(--studio-border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.ax-studio-inspector {
+  border-right: none;
+  border-left: 1px solid var(--studio-border);
+}
+
+.ax-studio-canvas-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--studio-bg);
+  overflow: hidden;
+}
