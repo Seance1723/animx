@@ -10,7 +10,8 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '2.3.0', 'Version should be 2.3.0');
+  const dxVersion = AnimX.versionInfo();
+  assert.strictEqual(dxVersion.version, '2.5.0', 'versionInfo returns correct version');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -62,9 +63,11 @@ try {
   const featuresRes = AnimX.features();
   assert.ok('waapi' in featuresRes, 'Features returns expected keys');
   
-  const dxVersion = AnimX.versionInfo();
-  assert.strictEqual(dxVersion.version, '2.4.0', 'versionInfo returns correct version');
-  
+  // Version Check
+  const version = AnimX.version;
+  if (version !== '2.5.0') {
+    throw new Error(`Expected version 2.5.0 but got ${version}`);
+  }
   const findRes = AnimX.findPreset('fade-up');
   assert.ok(findRes.name === 'fade-up', 'findPreset returns exact match');
   

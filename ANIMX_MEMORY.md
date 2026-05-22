@@ -54,6 +54,8 @@
 - **v2.1.0**: Documentation Site / Gallery Upgrade (Comprehensive local browsing, preset JSON export)
 - **v2.2.0**: Playground and Live Builder Upgrade (Live interactive snippet building)
 - **v2.3.0**: Layout Motion System (FLIP, morphing, layout swap)
+- **v2.4.0**: Gesture and Drag Physics
+- **v2.5.0**: Advanced SVG Morphing
 
 ## Current Objective
 

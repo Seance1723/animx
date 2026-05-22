@@ -65,8 +65,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '2.4.0',
-    release: 'Gesture and Drag Physics',
+    version: '2.5.0',
+    release: 'Advanced SVG Morphing',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

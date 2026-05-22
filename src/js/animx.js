@@ -40,7 +40,7 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '2.4.0';
+const VERSION = '2.5.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
@@ -148,6 +148,26 @@ class AnimXCore {
   versionInfo() {
     return versionInfo();
   }
+
+  // --- Core API Bindings ---
+  
+  // Expose SVG Morph
+  svgMorph(target, options) { return this._svgMorph(target, options); }
+  morphPath(target, toPathSelector, options) { return this._morphPath(target, toPathSelector, options); }
+  morphShape(target, toTarget, options) { return this._morphShape(target, toTarget, options); }
+  morphIcon(target, options) { return this._morphIcon(target, options); }
+  validateMorph(fromStr, toStr) { return this._validateMorph(fromStr, toStr); }
+  normalizePath(pathStr) { return this._normalizePath(pathStr); }
+  refreshMorphs(target) { return this._refreshMorphs(target); }
+  destroyMorphs(target) { return this._destroyMorphs(target); }
+  svgMorph(target, options) { return this._svgMorph(target, options); }
+  morphPath(target, toPathSelector, options) { return this._morphPath(target, toPathSelector, options); }
+  morphShape(target, toTarget, options) { return this._morphShape(target, toTarget, options); }
+  morphIcon(target, options) { return this._morphIcon(target, options); }
+  validateMorph(fromStr, toStr) { return this._validateMorph(fromStr, toStr); }
+  normalizePath(pathStr) { return this._normalizePath(pathStr); }
+  refreshMorphs(target) { return this._refreshMorphs(target); }
+  destroyMorphs(target) { return this._destroyMorphs(target); }
   
   getExamples(presetName) {
     return getExamples(presetName);

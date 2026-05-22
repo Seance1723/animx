@@ -88,7 +88,15 @@ function processElement(element, forceRun = false) {
     if (parsed.isText) {
       animxInstance.text(element, { ...parsed.textOptions, ...runOptions });
     } else if (parsed.isSvg) {
-      animxInstance.svg(element, { ...parsed.svgOptions, ...runOptions });
+      if (parsed.svgOptions && parsed.svgOptions.type === 'morph') {
+        if (parsed.svgOptions.icon) {
+          animxInstance.morphIcon(element, { ...parsed.svgOptions, ...runOptions, from: parsed.svgOptions.from || parsed.svgOptions.icon.split('-')[0], to: parsed.svgOptions.to || parsed.svgOptions.icon.split('-')[1] });
+        } else {
+          animxInstance.svgMorph(element, { ...parsed.svgOptions, ...runOptions });
+        }
+      } else {
+        animxInstance.svg(element, { ...parsed.svgOptions, ...runOptions });
+      }
     } else if (parsed.isGroup) {
       const children = parsed.childSelector 
         ? Array.from(element.querySelectorAll(parsed.childSelector))
@@ -112,7 +120,7 @@ export function initData(forceScan = false) {
   
   // Normal animx scanning
   if (config.dataApi) {
-    const elements = document.querySelectorAll('[data-ax], [data-ax-svg]');
+    const elements = document.querySelectorAll('[data-ax], [data-ax-svg], [data-ax-svg-morph], [data-ax-morph-icon]');
     elements.forEach(el => processElement(el, forceScan));
   }
   
@@ -228,7 +236,7 @@ export function refreshData(root = document) {
   if (!root || typeof root.querySelectorAll !== 'function') return;
   
   if (config.dataApi) {
-    const elements = root.querySelectorAll('[data-ax], [data-ax-svg]');
+    const elements = root.querySelectorAll('[data-ax], [data-ax-svg], [data-ax-svg-morph], [data-ax-morph-icon]');
     elements.forEach(el => processElement(el, false));
   }
   

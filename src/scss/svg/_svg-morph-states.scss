@@ -1,0 +1,6 @@
+// _svg-morph-states.scss
+// State tracking
+
+.ax-svg-morph-running {
+  will-change: d; // Helps in some browsers to avoid full layout thrash, though SVG path changes can still be expensive
+}

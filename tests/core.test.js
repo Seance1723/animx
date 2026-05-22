@@ -3,7 +3,7 @@ import assert from 'assert';
 import AnimX from '../src/js/animx.js';
 
 
-    assert.strictEqual(AnimX.version, '2.4.0');
+    assert.strictEqual(AnimX.version, '2.5.0');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));

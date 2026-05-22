@@ -1,6 +1,7 @@
 import { parseScrollAttributes } from '../scroll/scroll-parser.js';
 import { parseTextAttributes } from '../text/text-parser.js';
 import { parseSvgAttributes } from '../svg/svg-parser.js';
+import { parseGestureAttributes } from '../gestures/gesture-parser.js';
 
 export function parseDataAttributes(element) {
   if (!element || !element.dataset) return null;
@@ -97,10 +98,22 @@ export function parseDataAttributes(element) {
     };
   }
   
-  const isSvg = ds.axSvg !== undefined;
+  const isSvg = ds.axSvg !== undefined || ds.axSvgMorph !== undefined || ds.axMorphIcon !== undefined;
   let svgOptions = null;
   if (isSvg) {
-    svgOptions = parseSvgAttributes(element);
+    if (ds.axSvgMorph !== undefined || ds.axMorphIcon !== undefined) {
+      svgOptions = {
+        type: 'morph',
+        to: ds.axMorphTo || (ds.axSvgMorph !== '' && ds.axSvgMorph !== 'true' ? ds.axSvgMorph : null),
+        from: ds.axMorphFrom,
+        icon: ds.axMorphIcon,
+        fallback: ds.axMorphFallback,
+        loop: ds.axMorphLoop === 'true',
+        yoyo: ds.axMorphYoyo === 'true'
+      };
+    } else {
+      svgOptions = parseSvgAttributes(element);
+    }
   }
   
   const gestures = parseGestureAttributes(element);

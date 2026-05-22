@@ -14,7 +14,7 @@ import AnimX from '../src/js/animx.js';
 ${body}
 `;
 
-const VERSION = '2.4.0';
+const VERSION = '2.5.0';
 const files = {
   'core.test.js': `
     assert.strictEqual(AnimX.version, '${VERSION}');

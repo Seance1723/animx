@@ -79,6 +79,13 @@ const defaultConfig = {
     pointerCapture: true,
     defaultAxis: 'both'
   },
+  morph: {
+    duration: 700,
+    ease: "smooth",
+    fallback: "fade",
+    reducedMotionSafe: true,
+    maxPointsWarning: 250
+  },
   cms: {
     enabled: true,
     autoScan: true,

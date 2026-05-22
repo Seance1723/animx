@@ -1,5 +1,11 @@
 # Release Notes
 
+## v2.5.0 — Advanced SVG Morphing
+- **Path Interpolation Engine:** Added `AnimX.svgMorph()` utilizing native requestAnimationFrame math.
+- **Icon State Morphs:** Added built-in compatible presets for `menu-close`, `plus-minus`, and `play-pause`.
+- **Validation Engine:** Added `AnimX.validateMorph()` to ensure path interpolation is safe before running.
+- **Normalizer:** Added `AnimX.normalizePath()` for absolute conversion.
+- **Zero Dependencies:** Maintained 0 external math libraries. Safe fallbacks (`fade`/`jump`) prevent crashes on incompatible geometry.
 ## v2.4.0 — Gesture and Drag Physics
 - **Pointer Events Engine:** Added a zero-dependency gesture tracking system natively handling Pointer Events.
 - **Interactions:** Added `AnimX.drag()`, `AnimX.swipe()`, `AnimX.pan()`, `AnimX.pinch()`, `AnimX.longPress()`.
