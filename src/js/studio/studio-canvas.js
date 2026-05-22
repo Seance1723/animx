@@ -1,22 +1,34 @@
 import { updateState } from './studio-state.js';
-import { templates } from './studio-templates.js';
+import { getTemplates, getTemplateById, getCategories } from './studio-template-registry.js';
 
 export function initCanvas(state) {
   const sidebar = document.getElementById('template-list');
   const canvasContent = document.querySelector('.ax-studio-canvas-content');
   
-  // Render template list
+  const templates = getTemplates();
+  const categories = getCategories();
+  
+  // Render template list with categories
   sidebar.innerHTML = '';
-  Object.keys(templates).forEach(key => {
-    const el = document.createElement('div');
-    el.className = `ax-studio-list-item ${state.template === key ? 'selected' : ''}`;
-    el.textContent = templates[key].name;
-    el.onclick = () => {
-      document.querySelectorAll('#template-list .ax-studio-list-item').forEach(n => n.classList.remove('selected'));
-      el.classList.add('selected');
-      loadTemplate(key);
-    };
-    sidebar.appendChild(el);
+  categories.forEach(cat => {
+    const title = document.createElement('h4');
+    title.style.color = '#94a3b8';
+    title.style.marginTop = '15px';
+    title.style.marginBottom = '5px';
+    title.textContent = cat;
+    sidebar.appendChild(title);
+    
+    templates.filter(t => t.category === cat).forEach(t => {
+      const el = document.createElement('div');
+      el.className = `ax-studio-list-item ${state.template === t.id ? 'selected' : ''}`;
+      el.textContent = t.name;
+      el.onclick = () => {
+        document.querySelectorAll('#template-list .ax-studio-list-item').forEach(n => n.classList.remove('selected'));
+        el.classList.add('selected');
+        loadTemplate(t.id);
+      };
+      sidebar.appendChild(el);
+    });
   });
   
   // Device toggle buttons
@@ -27,9 +39,11 @@ export function initCanvas(state) {
     };
   });
 
-  function loadTemplate(key) {
-    if (!templates[key]) key = 'hero';
-    canvasContent.innerHTML = templates[key].html;
+  function loadTemplate(id) {
+    let tpl = getTemplateById(id);
+    if (!tpl) tpl = templates[0];
+    const key = tpl.id;
+    canvasContent.innerHTML = tpl.template.html;
     
     // Bind selection
     const selectables = canvasContent.querySelectorAll('.ax-studio-selectable');

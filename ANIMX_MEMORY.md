@@ -47,6 +47,9 @@
 - **v3.0.0** - AnimX Studio / Visual Builder
   - Release Name: AnimX Studio / Visual Builder
   - Goal: Zero-dependency, performant, accessible animation framework.
+- **v3.1.0** - Studio Template Expansion and Export Packs
+  - Release Name: Studio Template Expansion and Export Packs
+  - Goal: Zero-dependency, performant, accessible animation framework.
 
 ## Completed Milestones
 

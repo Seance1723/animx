@@ -1,40 +1,26 @@
+import { generateExportCode } from './studio-export-packs.js';
+
 export function updateExportCode(state) {
   const codeOutput = document.getElementById('code-output');
-  const activeTab = document.querySelector('.ax-studio-code-tabs button.active').dataset.code;
+  const warningsOutput = document.getElementById('export-warnings');
   
-  const target = state.selectedElementId ? '#' + state.selectedElementId : '.my-element';
-  const anim = state.animation;
-  const dur = state.duration;
-  const del = state.delay;
-  const ease = state.ease;
-  const trig = state.trigger;
+  const activeTabBtn = document.querySelector('.ax-studio-code-tabs button.active');
+  const activePack = activeTabBtn ? activeTabBtn.dataset.pack : 'html';
   
-  if (activeTab === 'html') {
-    codeOutput.textContent = `<div class="ax-${anim}">\n  Content\n</div>`;
-  } 
-  else if (activeTab === 'data') {
-    let html = `<div data-ax="${anim}"`;
-    if (dur && dur !== 700) html += `\n     data-ax-duration="${dur}"`;
-    if (del > 0) html += `\n     data-ax-delay="${del}"`;
-    if (ease) html += `\n     data-ax-ease="${ease}"`;
-    if (trig) html += `\n     data-ax-trigger="${trig}"`;
-    html += `>\n  Content\n</div>`;
-    codeOutput.textContent = html;
-  } 
-  else if (activeTab === 'js') {
-    let js = `AnimX.animate("${target}", "${anim}"`;
-    
-    const opts = [];
-    if (dur && dur !== 700) opts.push(`  duration: ${dur}`);
-    if (del > 0) opts.push(`  delay: ${del}`);
-    if (ease) opts.push(`  ease: "${ease}"`);
-    if (trig) opts.push(`  trigger: "${trig}"`);
-    
-    if (opts.length > 0) {
-      js += `, {\n${opts.join(',\n')}\n}`;
-    }
-    js += `);`;
-    codeOutput.textContent = js;
+  const result = generateExportCode(activePack, state);
+  
+  let finalString = '';
+  if (result.info) finalString += result.info + '\n\n';
+  if (result.html) finalString += result.html + '\n';
+  if (result.js) finalString += '\n' + result.js;
+  
+  codeOutput.textContent = finalString.trim();
+  
+  if (result.validation && !result.validation.ok) {
+    warningsOutput.style.display = 'block';
+    warningsOutput.innerHTML = `<strong>⚠️ Export Warnings:</strong><ul><li>${result.validation.warnings.join('</li><li>')}</li></ul>`;
+  } else {
+    warningsOutput.style.display = 'none';
   }
 }
 

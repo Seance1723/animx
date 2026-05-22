@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.0.0',
-    release: 'AnimX Studio / Visual Builder',
+    version: '3.1.0',
+    release: 'Studio Template Expansion and Export Packs',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.0.0',
-    release: 'AnimX Studio / Visual Builder',
+    version: '3.1.0',
+    release: 'Studio Template Expansion and Export Packs',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

@@ -5,6 +5,7 @@ import { initControls } from './studio-controls.js';
 import { runPreview } from './studio-preview.js';
 import { initExport, updateExportCode } from './studio-export.js';
 import { initAudit } from './studio-audit.js';
+import { exportStudioJson, importStudioJson } from './studio-template-json.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
   
-  console.log('[AnimX Studio] Initializing v3.0.0 Visual Builder...');
+  console.log('[AnimX Studio] Initializing v3.1.0 Visual Builder...');
   
   // Load state from localStorage
   const state = loadState();
@@ -46,6 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.style.background = '#ef4444';
       btn.style.color = 'white';
     }
+  };
+  
+  // JSON Import / Export
+  document.getElementById('btn-export-json').onclick = () => {
+    exportStudioJson(window._studioCurrentState);
+  };
+  
+  document.getElementById('btn-import-json').onclick = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (re) => importStudioJson(re.target.result);
+      reader.readAsText(file);
+    };
+    input.click();
   };
   
   // State changes

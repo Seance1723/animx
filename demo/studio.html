@@ -25,11 +25,13 @@
       <button class="ax-studio-mode-btn" data-mode="cms">CMS/No-Code</button>
     </div>
     <div class="ax-studio-actions">
-      <button id="btn-device-desktop">💻</button>
-      <button id="btn-device-tablet">📱</button>
-      <button id="btn-device-mobile">📱</button>
-      <button id="btn-reduced-motion">RM</button>
-      <button id="btn-audit">Audit</button>
+      <button id="btn-device-desktop" title="Desktop View">💻</button>
+      <button id="btn-device-tablet" title="Tablet View">📱</button>
+      <button id="btn-device-mobile" title="Mobile View">📱</button>
+      <button id="btn-reduced-motion" title="Toggle Reduced Motion">RM</button>
+      <button id="btn-audit" title="Run Audit">Audit</button>
+      <button id="btn-export-json" title="Export as JSON">⬇️ JSON</button>
+      <button id="btn-import-json" title="Import JSON">⬆️ JSON</button>
     </div>
   </div>
 
@@ -55,11 +57,17 @@
       </div>
       
       <div class="ax-studio-bottom-panel">
-        <div class="ax-studio-code-tabs">
-          <button class="active" data-code="html">HTML</button>
-          <button data-code="data">Data Attributes</button>
-          <button data-code="js">JavaScript</button>
+        <div class="ax-studio-code-tabs" id="export-packs">
+          <button class="active" data-pack="html">HTML Class</button>
+          <button data-pack="data">Data Attribute</button>
+          <button data-pack="js">JavaScript API</button>
+          <button data-pack="cms">CMS/No-Code</button>
+          <button data-pack="wordpress">WordPress</button>
+          <button data-pack="webflow">Webflow</button>
+          <button data-pack="react">React</button>
+          <button data-pack="vue">Vue</button>
         </div>
+        <div id="export-warnings" style="display:none; padding: 10px; background: #fffbeb; color: #b45309; border-bottom: 1px solid #fde68a; font-size: 0.85rem;"></div>
         <pre class="ax-studio-code" id="code-output"></pre>
       </div>
     </div>

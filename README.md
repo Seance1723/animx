@@ -1,14 +1,14 @@
 <div align="center">
-  <h3>The Zero-Dependency UI Animation Engine (v3.0.0)</h3>
+  <h3>The Zero-Dependency UI Animation Engine (v3.1.0)</h3>
   <p>Production-ready, accessible, and fast.</p>
 </div>
 
 ---
 
-## ⚡ What's New in v3.0.0
+## ⚡ What's New in v3.1.0
 
-- **AnimX Studio**: A built-in, local visual builder to preview presets, tweak settings, and export clean snippets.
-- **Zero Dependencies**: Studio is completely optional and doesn't pollute the core library.
+- **Studio Template Expansion**: Dozens of new templates for Heros, Pricing, Features, and more inside the AnimX Studio.
+- **Export Packs**: Export snippets tailored for React, Vue, WordPress, Webflow, HTML, and Data Attributes directly from the Studio.
 
 ## ✨ Features
 - **v2.9.0**: Security and Defensive Runtime Hardening
