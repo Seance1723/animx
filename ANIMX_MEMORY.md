@@ -27,6 +27,8 @@
   - Added preset suggestions and example generators.
   - Added Demo UI Diagnostics panel.
   - Runtime dependency remains zero, output remains 1 CSS + 1 JS.
+- **v1.7.0** - No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
+- **v1.8.0** - Testing and Stability Release (100% Core coverage, strict target safety, zero-dependency test runner, QA demo section)
 
 ## Completed Milestones
 
@@ -38,10 +40,11 @@
 - **v1.5.0**: Preset Expansion (>300 Utility & UI combinations)
 - **v1.6.0**: Developer Experience Upgrade (Debug, Inspect, DX tools)
 - **v1.7.0**: No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
+- **v1.8.0**: Testing and Stability Release (100% Core coverage, strict target safety, zero-dependency test runner, QA demo section)
 
 ## Current Objective
 
-**AnimX v1.8.0**
+**AnimX v1.9.0**
 *(Pending Requirements)*
 
 ## v0.0.1 - Foundation (Completed)

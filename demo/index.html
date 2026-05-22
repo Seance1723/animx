@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v1.7.0 CMS Demo</title>
+  <title>AnimX v1.8.0 - Testing and Stability Release</title>
   <link rel="stylesheet" href="/src/scss/animx.scss">
   <style>
     :root {
@@ -826,6 +826,19 @@ AnimX.destroy();
     </div>
   </section>
 
+  <section id="qa-stability" style="border: 2px solid #ef4444;">
+    <h2 style="color: #ef4444;">25. QA / Stability Check</h2>
+    <p>Use these tools to manually verify AnimX stability and performance in the browser.</p>
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 1rem;">
+      <button onclick="runDiagnose()">Run AnimX.diagnose()</button>
+      <button onclick="runValidate()">Run AnimX.validate()</button>
+      <button onclick="runStressTest()" style="background: #ef4444; color: white;">Run Stress Test</button>
+      <button onclick="runDestroyAll()" style="background: #1e293b; color: white;">Destroy All Animations</button>
+    </div>
+    <pre id="dxOutput" style="display: none; background: #1e293b; color: #a5b4fc; padding: 1rem; border-radius: 8px; overflow: auto; max-height: 300px; font-size: 0.85rem;"></pre>
+    <div id="stressContainer" style="display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px;"></div>
+  </section>
+
 </div>
 
   <script type="module" src="/src/js/animx.js"></script>
@@ -852,6 +865,37 @@ AnimX.destroy();
         if (window.runAnimXDemoCheck) window.runAnimXDemoCheck();
       }, 500);
     });
+
+    // --- QA API Scripts ---
+    function runStressTest() {
+      const container = document.getElementById('stressContainer');
+      container.innerHTML = '';
+      const elements = [];
+      for(let i=0; i<50; i++) {
+        const div = document.createElement('div');
+        div.style.width = '20px';
+        div.style.height = '20px';
+        div.style.background = '#4f46e5';
+        div.style.borderRadius = '4px';
+        container.appendChild(div);
+        elements.push(div);
+      }
+      
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      out.textContent = "Stress test running... 50 items animating.";
+      
+      AnimX.stagger(elements, 'fade-up', { stagger: 20 });
+    }
+    
+    function runDestroyAll() {
+      // Very blunt global destroy for the sake of QA
+      const all = document.querySelectorAll('*');
+      AnimX.destroy(all);
+      const out = document.getElementById('dxOutput');
+      out.style.display = 'block';
+      out.textContent = "All AnimX instances destroyed safely.";
+    }
 
     // --- DX API Scripts ---
     function runDiagnose() {

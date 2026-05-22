@@ -19,6 +19,8 @@ export function bindTextAnimX(instance) {
 
 export function splitText(selector, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return [];
+  
   const normOptions = normalizeTextOptions({ ...options, type: 'split' });
   
   const results = elements.map(el => {
@@ -60,6 +62,9 @@ export function revertText(selector) {
 
 export function text(selector, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) {
+    return { play: () => {}, stop: () => {}, reset: () => {}, revert: () => {}, destroy: () => {} };
+  }
   const normOptions = normalizeTextOptions(options);
   
   const instances = elements.map(el => {

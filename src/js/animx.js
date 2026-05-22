@@ -36,7 +36,7 @@ import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
 import { cms, refreshCMS, observeCMS, disconnectCMS, getCMSRecipes, applyRecipe, bindCMSApi } from './cms/cms-api.js';
 
-const VERSION = '1.7.0';
+const VERSION = '1.8.0';
 
 // Pre-register all presets
 [...Object.values(cssPresets), ...componentPresets, ...expandedPresets].forEach(preset => {
@@ -193,7 +193,7 @@ class AnimXCore {
   }
   
   scroll(target, options) {
-    observeScroll(target, options);
+    return observeScroll(target, options);
   }
   
   scrollProgress(target, options) {

@@ -14,8 +14,13 @@ export function bindInteractionAnimX(instance) {
   coreInstance = instance;
 }
 
+function safeEmpty() {
+  return { enable: () => {}, disable: () => {}, destroy: () => {} };
+}
+
 export function interact(selector, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   const instances = elements.map(el => {
     const group = {};
     if (options.hover) group.hover = hover(el, options.hover, options);
@@ -31,6 +36,7 @@ export function interact(selector, options = {}) {
 
 export function hover(selector, animationOrOptions, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   let opts = typeof animationOrOptions === 'object' ? animationOrOptions : { enter: animationOrOptions, ...options };
   const instances = elements.map(el => runHover(el, opts, coreInstance)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
@@ -38,13 +44,15 @@ export function hover(selector, animationOrOptions, options = {}) {
 
 export function press(selector, animationOrOptions, options = {}) {
   const elements = normalizeSelector(selector);
-  let opts = typeof animationOrOptions === 'object' ? animationOrOptions : { down: animationOrOptions, ...options };
+  if (elements.length === 0) return safeEmpty();
+  let opts = typeof animationOrOptions === 'object' ? animationOrOptions : { press: animationOrOptions, ...options };
   const instances = elements.map(el => runPress(el, opts, coreInstance)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
 }
 
 export function focus(selector, animationOrOptions, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   let opts = typeof animationOrOptions === 'object' ? animationOrOptions : { focus: animationOrOptions, ...options };
   const instances = elements.map(el => runFocus(el, opts, coreInstance)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
@@ -52,29 +60,34 @@ export function focus(selector, animationOrOptions, options = {}) {
 
 export function magnetic(selector, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   const instances = elements.map(el => runMagnetic(el, options)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
 }
 
 export function ripple(selector, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   const instances = elements.map(el => runRipple(el, options)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
 }
 
 export function tilt(selector, options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   const instances = elements.map(el => runTilt(el, options)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
 }
 
-export function feedback(selector, type, options = {}) {
+export function feedback(selector, type = 'success', options = {}) {
   const elements = normalizeSelector(selector);
+  if (elements.length === 0) return safeEmpty();
   const instances = elements.map(el => runFeedback(el, type, options, coreInstance)).filter(Boolean);
   return instances.length === 1 ? instances[0] : instances;
 }
 
 export function destroyInteractions(selector) {
+  if (!selector) return;
   const elements = normalizeSelector(selector);
   elements.forEach(el => {
     const active = getAllInteractions(el);

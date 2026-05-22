@@ -50,6 +50,11 @@ export function observeScroll(target, options = {}) {
     
     observeElement(element, finalConfig);
   });
+  
+  return {
+    elements,
+    destroy: () => unobserveScroll(target)
+  };
 }
 
 export function refreshScroll(root = document) {

@@ -1,26 +1,6 @@
 import assert from 'assert';
 
-// We import the unminified JS build or src to test exports without a browser.
-// Note: Some DOM APIs won't exist in Node, so we mock basic global variables for the test to import successfully.
-global.window = {
-  matchMedia: () => ({ matches: false }),
-  addEventListener: () => {},
-  removeEventListener: () => {}
-};
-global.document = {
-  readyState: 'complete',
-  querySelectorAll: () => [],
-  dispatchEvent: () => {},
-  createElement: () => ({ classList: { add: () => {}, remove: () => {} }, getBoundingClientRect: () => ({left: 0, top: 0, width: 0, height: 0}), setAttribute: () => {}, appendChild: () => {}, textContent: '' }),
-  createDocumentFragment: () => ({ appendChild: () => {} }),
-  createTextNode: () => ({ nodeValue: '' }),
-  body: { scrollHeight: 1000, offsetHeight: 1000, clientHeight: 1000 },
-  documentElement: { scrollHeight: 1000, offsetHeight: 1000, clientHeight: 1000 }
-};
-global.requestAnimationFrame = (cb) => setTimeout(cb, 16);
-global.cancelAnimationFrame = (id) => clearTimeout(id);
-
-// Now safe to import
+import './setup.js';
 import AnimX from '../src/js/animx.js';
 import { normalizeSelector } from '../src/js/core/selector.js';
 import { parseDataAttributes } from '../src/js/data/data-parser.js';
@@ -30,7 +10,7 @@ console.log('--- Running Smoke Test ---');
 
 try {
   // 1. Basic API Presence & Version
-  assert.strictEqual(AnimX.version, '1.7.0', 'Version should be 1.7.0');
+  assert.strictEqual(AnimX.version, '1.8.0', 'Version should be 1.8.0');
   console.log('✅ Version is correct');
 
   // 2. Preset API
@@ -82,7 +62,8 @@ try {
   const featuresRes = AnimX.features();
   assert.ok('waapi' in featuresRes, 'Features returns expected keys');
   
-  assert.strictEqual(AnimX.versionInfo().version, '1.7.0', 'versionInfo returns correct version');
+  const dxVersion = AnimX.versionInfo();
+  assert.strictEqual(dxVersion.version, '1.8.0', 'versionInfo returns correct version');
   
   const findRes = AnimX.findPreset('fade-up');
   assert.ok(findRes.name === 'fade-up', 'findPreset returns exact match');
@@ -234,14 +215,16 @@ try {
   // Test Interactions System
   const testInteractions = () => {
     try {
-      const hover = AnimX.hover('.fake-btn', 'ax-button-lift');
-      if (hover && hover.length !== 0) throw new Error('Hover returned instances for fake selector');
+      const hover = AnimX.hover('.fake-btn', 'fade-up');
+      if (!hover || typeof hover.destroy !== 'function') throw new Error('Hover returned invalid empty instance');
       
       const magnetic = AnimX.magnetic('.fake-btn');
-      if (magnetic && magnetic.length !== 0) throw new Error('Magnetic returned instances for fake selector');
+      if (!magnetic || typeof magnetic.destroy !== 'function') throw new Error('Magnetic returned invalid empty instance');
       
       const feedback = AnimX.feedback('.fake-btn', 'error');
-      if (feedback && feedback.length !== 0) throw new Error('Feedback returned instances for fake selector');
+      if (!feedback || typeof feedback.destroy !== 'function') throw new Error('Feedback returned invalid empty instance');
+      
+      console.log('✅ Interactions initialize safely on missing targets');
 
       // Test Component System
       const presets = AnimX.getComponentPresets();
