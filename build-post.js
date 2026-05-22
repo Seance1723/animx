@@ -52,8 +52,9 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '1.0.0',
-    type: 'zero-dependency browser animation library'
+    version: '2.0.0',
+    release: 'Hero Release',
+    dependency: 'zero-runtime-dependency'
   };
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));
   console.log('Generated animx.version.json');

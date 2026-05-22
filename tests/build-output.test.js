@@ -17,6 +17,6 @@ import AnimX from '../src/js/animx.js';
       assert.ok(fs.existsSync(path.join(distPath, 'animx.min.js')));
       
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('1.8.0'));
+      assert.ok(jsContent.includes('2.0.0'));
     }
   

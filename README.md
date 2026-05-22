@@ -1,151 +1,153 @@
-<div align="center">
-  <h1>AnimX</h1>
-  <p><strong>v1.7.0</strong> — Zero-dependency, high-performance browser animation engine.</p>
-  
-  ![AnimX Size](https://img.shields.io/badge/size-9kb_gzipped-brightgreen)
-  ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-blue)
-  ![Waapi Powered](https://img.shields.io/badge/engine-WAAPI-orange)
-</div>
+# AnimX
 
-AnimX is a comprehensive animation library built directly on top of the native Web Animations API (WAAPI). It provides the power of GSAP or Framer Motion without the massive bundle size or external dependencies.
+**AnimX v2.0.0 — Hero Release**
 
-## Key Features
-- **Zero Dependencies**: 100% native WAAPI and Vanilla JS.
-- **Micro-Bundle**: ~9kb gzipped.
-- **Scroll Engine**: Built-in IntersectionObserver for scroll-triggered animations.
-- **Timeline & Stagger**: Robust sequential and batch animations.
-- **Text & SVG Packs**: Advanced character/word splitting and SVG path drawing.
-- **No-Code & CMS Friendly**: Complete data-attribute mapping, recipes, and MutationObservers for WordPress/Webflow.
-- **Accessibility First**: Built-in `prefers-reduced-motion` detection.
-- **Developer Experience Utilities:** Built-in validation, diagnostics, and environment inspection (`AnimX.validate()`, `AnimX.diagnose()`).
+AnimX is a production-ready, zero-dependency browser animation library built directly on top of the native **Web Animations API (WAAPI)**. It provides a massive suite of over 300 highly tuned, GPU-accelerated presets, combined with powerful Scroll, Timeline, Text, SVG, and Interaction engines. 
 
-## ✨ What's New in v1.6.0 (Developer Experience Upgrade)
-- **AnimX now includes DX helpers** natively with no external dependency.
-- **Debug & Inspect**: `AnimX.debug(true)` enables `AX_*` code warnings. `AnimX.inspect('.card')` returns real-time instance state.
-- **Validate & Diagnose**: `AnimX.validate()` scans the DOM for invalid presets or typos. `AnimX.diagnose()` analyzes browser capability and CSS loading status.
-- **Examples**: `AnimX.getExamples('fade-up')` and `AnimX.copyExample()` output instant copy-pasteable usage examples.
-- **Smart Suggestions**: In debug mode, missing presets (e.g., `fadeup`) will automatically suggest `fade-up`.
-- **Ticker/Marquee**: Zero-dependency seamless scroll text.
-- **Gradient Text**: Advanced `background-clip` gradients with motion.
-- **Advanced Counters**: Animated numbers synced with `Intl.NumberFormat`.
-- **Accessibility Guaranteed**: Reduced motion halts loops automatically.
-- **Text Animation**: Accessible character, word, and line splitting.
-- **Interaction Engine**: Magnetic, Tilt, Hover, Press, Focus, Ripple, and UI feedback without Physics loops draining battery.
-- **Component Presets**: 100+ native recipes for Cards, Buttons, Modals, Loaders, and Forms.
-- **Accessibility First**: Deeply integrates with `prefers-reduced-motion` and manages ARIA attributes automatically for text splits.
+AnimX achieves GSAP-like declarative power with absolute minimal footprint: exactly one CSS file and one JS file. 
 
-## Features
-- **Zero Dependencies**: No GSAP, ScrollTrigger, Anime.js, Motion, or jQuery.
-- **Advanced Scroll System**: Scroll progress, parallax, sticky pins, and scroll scenes powered by a single shared RAF ticker.
-- **Hardware Accelerated**: Prioritizes `transform` and `opacity` via the Web Animations API (WAAPI) and CSS Keyframes.
-- **Declarative & Imperative**: Use `data-ax` attributes in HTML or `AnimX.animate()` in JS.
-- **Scroll Reveal**: Native `IntersectionObserver` integration for seamless scroll-triggered animations.
-- **Timelines & Stagger**: Sequence complex animations with ease.
+## 1. What AnimX Is
+AnimX bridges the gap between simple CSS animations and heavy JavaScript animation frameworks. It exposes a clean, intuitive API for creating complex timelines, scroll-linked animations, and staggered sequences while relying entirely on native browser features.
 
-## Quick Start
+## 2. Why AnimX Exists
+Modern browsers have incredibly powerful native animation engines (WAAPI, IntersectionObserver, ResizeObserver). Yet, developers still load hundreds of kilobytes of external libraries to achieve basic scroll reveals or timelines. AnimX exists to unlock the full power of modern browsers without the bloat.
 
-Include the minified files in your HTML:
+## 3. The Zero-Dependency Rule
+AnimX has exactly **zero** runtime dependencies. No jQuery, no Lodash, no GSAP, no Anime.js. It runs purely on vanilla JavaScript and CSS.
 
+## 4. Final Output Files
+AnimX is distributed as two minified files:
+- `dist/animx.min.css` (Base CSS utility definitions and Reduced Motion fallbacks)
+- `dist/animx.min.js` (The core JS engine)
+
+## 5. Quick Start
+Link the files from a CDN or your local directory:
 ```html
-<link rel="stylesheet" href="dist/animx.min.css">
-<script src="dist/animx.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/animx@2.0.0/dist/animx.min.css">
+<script src="https://unpkg.com/animx@2.0.0/dist/animx.min.js"></script>
+
+<!-- Animate via Data Attributes instantly -->
+<div data-ax="fade-up" data-ax-duration="1000">I fade up!</div>
 ```
 
-## Run Locally
-
-```bash
-npm install
-npm run dev
-```
-Open: `http://localhost:5173`
-
-For preview:
-```bash
-npm run build
-npm run preview
-```
-Open: `http://localhost:4173`
-
-### Declarative Usage
-
-No Javascript required. Just add data attributes to your elements:
-
+## 6. CSS Class Usage
+If you prefer pure CSS (no JS intersection observing required), apply the classes directly:
 ```html
-<!-- Animate on load -->
-<div data-ax="fade-up" data-ax-duration="800">Hello World</div>
-
-<!-- Animate on scroll -->
-<div data-ax="slide-left" data-ax-on="scroll">I appear when scrolled</div>
-
-<!-- Interactive component -->
-<button data-ax-component="button-ripple">Click Me</button>
+<div class="ax-fade-up">Fades up on load</div>
 ```
 
-### Imperative Usage
+## 7. Data Attribute Usage
+AnimX will automatically parse data attributes on any element containing `data-ax` or `data-ax-scroll`.
+- `data-ax="preset-name"`
+- `data-ax-duration="1000"`
+- `data-ax-delay="200"`
+- `data-ax-ease="ease-out"`
 
-```javascript
-// Basic animation
-AnimX.animate('.box', 'bounce');
+## 8. JavaScript API Usage
+Trigger animations programmatically:
+```js
+AnimX.animate('.box', 'zoom-in', { duration: 500, delay: 100 });
+```
 
-// Custom keyframes
-AnimX.animate('.box', 
-  { from: { opacity: 0, y: 50 }, to: { opacity: 1, y: 0 } }, 
-  { duration: 600, ease: 'smooth' }
-);
+## 9. Scroll Usage
+Automatically trigger animations when elements enter the viewport:
+```html
+<div data-ax-scroll="fade-up" data-ax-threshold="0.5">Reveals at 50% visibility</div>
+```
 
-// Stagger a list of items
-AnimX.stagger('.list-item', 'zoom-in', { stagger: { each: 50 } });
-
-// Timeline sequence
-AnimX.timeline()
-  .add('.header', 'fade-down')
-  .add('.content', 'fade-up', { duration: 500 })
+## 10. Timeline Usage
+Chain animations sequentially:
+```js
+const tl = AnimX.timeline();
+tl.add('.box1', 'fade-right')
+  .add('.box2', 'zoom-in', {}, '-=200') // Overlap by 200ms
   .play();
 ```
 
-## Documentation & Resources
-- **[Getting Started](docs/getting-started.md)** - Installation, config, and basic usage.
-- **[API Reference](docs/api-reference.md)** - Exhaustive list of all methods and parameters.
-- **[Preset List](docs/preset-list.md)** - Catalog of all included CSS and Component animations.
-- **[Debugging Guide](docs/debugging.md)** - Developer experience and validation tools.
-
-## Developer Experience APIs
-
-AnimX provides lightweight, zero-dependency tools built right into the core library to speed up development.
-
-```javascript
-// 1. Enable structured debug warnings
-AnimX.debug(true);
-
-// 2. Scan the current page for missing presets, typos, and unused attributes
-const validation = AnimX.validate();
-
-// 3. Inspect the environment state (e.g. WAAPI support, reduced motion, loaded CSS)
-const environment = AnimX.diagnose();
-
-// 4. Generate instant copy-pasteable examples for any preset
-AnimX.copyExample('fade-up-soft', 'js'); // Copies `AnimX.animate('.box', 'fade-up-soft');`
-
-// 5. Suggest closest matches for a typo
-AnimX.suggestPreset('btn-lift'); // Returns matching full objects like `button-lift`
+## 11. Stagger Usage
+Animate multiple items intelligently:
+```js
+AnimX.stagger('.grid-items', 'fade-up', { stagger: 50, direction: 'center' });
 ```
 
-## Documentation
+## 12. Text Usage
+Split and animate text accessibly:
+```js
+AnimX.text('.title', { type: 'split', splitType: 'words', animation: 'fade-up' });
+AnimX.ticker('.scrolling-news');
+AnimX.counter('.stats', { to: 1000 });
+```
 
-For full API references, available presets, and advanced configuration, see the `docs/` folder:
+## 13. Interaction Usage
+Add physics-based interactions:
+```js
+AnimX.hover('.btn', 'ax-button-lift');
+AnimX.magnetic('.magnetic-target');
+```
 
-- [API Reference](docs/api-reference.md)
-- [Preset List](docs/preset-list.md)
-- [Data Attributes](docs/data-attributes.md)
-- [Accessibility](docs/accessibility.md)
-- [Reduced Motion](docs/reduced-motion.md)
-- [Performance](docs/performance.md)
-- [Release Notes](docs/release-notes.md)
+## 14. Component Usage
+Use predefined complex UI behaviors:
+```js
+AnimX.component('.loader', 'loader-spin');
+AnimX.component('.skeleton', 'skeleton-shimmer');
+```
 
-## Current Limitations
-- **No Advanced FLIP Layouts**: Not designed for complex flex/grid layout transitions yet.
-- **No Drag/Gesture Physics**: Does not include touch-drag or throwing physics.
-- **No Pinned Scroll Scenes**: Scroll reveals work flawlessly, but pinned/scrubbed scroll timelines are not supported.
+## 15. SVG Usage
+Draw strokes, dash arrays, and paths:
+```js
+AnimX.svgDraw('circle');
+AnimX.svgPathFollow('path');
+```
 
-## License
-MIT
+## 16. CMS / No-Code Usage
+AnimX is fully compatible with WordPress, Webflow, and generic static sites via data attributes. Use `AnimX.observeCMS()` to dynamically watch for new DOM injections (e.g. AJAX pagination).
+
+## 17. Debug & Diagnostics
+To ensure everything is working:
+```js
+console.log(AnimX.diagnose());
+console.log(AnimX.validate()); // Checks for missing targets or typos
+```
+
+## 18. Preset Search Usage
+Not sure what a preset is called?
+```js
+console.log(AnimX.searchPresets('fade'));
+```
+
+## 19. Reduced Motion Support
+AnimX deeply respects the user's OS-level accessibility preferences. If `prefers-reduced-motion: reduce` is detected, AnimX strips out transforms, delays, and heavy motion, resolving elements to their final visual state instantly. 
+
+## 20. Accessibility Notes
+AnimX prioritizes A11Y. Our Text Engine preserves `aria-label` screen reader legibility. Our Scroll Engine guarantees no element remains permanently `opacity: 0` if JS fails or reduced motion is active.
+
+## 21. Performance Notes
+Built using the Web Animations API (WAAPI), AnimX offloads animation rendering to the compositor thread (GPU) where possible, ensuring smooth 60fps animations without Main Thread jank.
+
+## 22. Browser Support Note
+AnimX supports all modern browsers (Chrome, Firefox, Safari, Edge). Older browsers (IE11) lacking full WAAPI support will either gracefully ignore the animations or instantly fallback to final states.
+
+## 23. Current Limitations
+- No advanced SVG Morphing (yet).
+- No advanced FLIP/Layout transitions (planned).
+- No visual GUI editor.
+
+## 24. How to Build Locally
+```bash
+npm install
+npm run build
+```
+
+## 25. How to Run Demo
+```bash
+npm run dev
+```
+
+## 26. How to Test
+AnimX features a fully headless, zero-dependency Node.js test runner.
+```bash
+npm test
+```
+
+## 27. Release Status
+**v2.0.0 (Hero Release)** is actively stable and recommended for production use.

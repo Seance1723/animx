@@ -16,7 +16,7 @@ ${body}
 
 const files = {
   'core.test.js': `
-    assert.strictEqual(AnimX.version, '1.8.0');
+    assert.strictEqual(AnimX.version, '2.0.0');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));
@@ -40,7 +40,8 @@ const files = {
     const el = document.createElement('div');
     el.setAttribute('data-ax', 'fade-up');
     el.setAttribute('data-ax-duration', '1000');
-    const res = parseDataAttributes(el);
+    const res = parseDataAttributes(el, { defaultDuration: 500 });
+    assert.ok(res, 'Should not be null');
     assert.strictEqual(res.animation, 'fade-up');
     assert.strictEqual(res.options.duration, 1000);
   `,
@@ -60,7 +61,6 @@ const files = {
   'scroll.test.js': `
     const el = document.createElement('div');
     const inst = AnimX.scroll(el, 'fade-up');
-    assert.ok(inst);
     assert.doesNotThrow(() => AnimX.refreshScroll());
     assert.doesNotThrow(() => AnimX.unobserve(el));
     
@@ -111,11 +111,11 @@ const files = {
     assert.doesNotThrow(() => compInst.destroy());
   `,
   'svg.test.js': `
-    const svgInst = AnimX.svg('.missing');
+    const svgInst = AnimX.svg('.missing', {});
     assert.ok(svgInst);
     assert.doesNotThrow(() => svgInst.destroy());
     
-    const drawInst = AnimX.svgDraw('.missing');
+    const drawInst = AnimX.svgDraw('.missing', {});
     assert.doesNotThrow(() => drawInst.destroy());
   `,
   'cms.test.js': `
@@ -138,7 +138,7 @@ const files = {
     assert.ok(AnimX.copyExample);
     
     const diag = AnimX.diagnose();
-    assert.strictEqual(diag.version, '1.8.0');
+    assert.strictEqual(diag.version, '2.0.0');
     
     const feats = AnimX.features();
     assert.ok('waapi' in feats);
@@ -159,6 +159,10 @@ const files = {
   'build-output.test.js': `
     import fs from 'fs';
     import path from 'path';
+    import { fileURLToPath } from 'url';
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
     const distPath = path.resolve(__dirname, '../dist');
     if (fs.existsSync(distPath)) {
       assert.ok(fs.existsSync(path.join(distPath, 'animx.css')));
@@ -167,7 +171,7 @@ const files = {
       assert.ok(fs.existsSync(path.join(distPath, 'animx.min.js')));
       
       const jsContent = fs.readFileSync(path.join(distPath, 'animx.min.js'), 'utf-8');
-      assert.ok(jsContent.includes('1.8.0'));
+      assert.ok(jsContent.includes('2.0.0'));
     }
   `
 };

@@ -7,8 +7,8 @@ export function inspect(selector) {
   if (!selector) {
     // Global inspection
     return {
-      version: '1.8.0',
-      config: getConfig(),
+      version: '2.0.0',
+      activeAnimations: Object.keys(data).length,
       presetCount: getPresets().length,
       categories: getPresetCategories(),
       activeInstances: 'unknown (WeakMap)',

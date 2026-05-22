@@ -29,23 +29,25 @@
   - Runtime dependency remains zero, output remains 1 CSS + 1 JS.
 - **v1.7.0** - No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
 - **v1.8.0** - Testing and Stability Release (100% Core coverage, strict target safety, zero-dependency test runner, QA demo section)
+- **v2.0.0** - Hero Release (Production-ready distribution, professional demo, polished docs, clean QA)
 
 ## Completed Milestones
 
-- **v1.0.0**: Stable Public Release (Core Engine)
-- **v1.1.0**: Performance & Cleanup (WAAPI standardization)
-- **v1.2.0**: Advanced Scroll System (Parallax, Progress, Scenes)
-- **v1.3.0**: Advanced Text Pack (Re-splitting, Scramble, Typing)
-- **v1.4.0**: SVG Animation Pack (Strokes, Undraw, Progress)
+- **v1.0.0**: Stable Core (WAAPI Engine, CSS Registry)
+- **v1.1.0**: Performance (WeakMap, garbage collection, memory leak fix)
+- **v1.2.0**: Advanced Scroll (Linked progress, Parallax, Scene)
+- **v1.3.0**: Advanced Text (Split logic, Ticker, Counter, Revert)
+- **v1.4.0**: SVG Pack (Draw, Path follow, Timeline sync)
 - **v1.5.0**: Preset Expansion (>300 Utility & UI combinations)
 - **v1.6.0**: Developer Experience Upgrade (Debug, Inspect, DX tools)
 - **v1.7.0**: No-Code / CMS Friendly Layer (Recipes, Observers, Aliases)
-- **v1.8.0**: Testing and Stability Release (100% Core coverage, strict target safety, zero-dependency test runner, QA demo section)
+- **v1.8.0**: Testing and Stability Release (100% Core coverage, strict target safety, QA)
+- **v2.0.0**: Hero Release (Polished demo, docs, CDN-ready output, production finish)
 
 ## Current Objective
 
-**AnimX v1.9.0**
-*(Pending Requirements)*
+**AnimX v2.0.0 is Complete.**
+Next Planned Version: **v2.1.0 Documentation Site / Gallery Upgrade** or **v2.5.0 Layout Motion**
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.
