@@ -5,8 +5,8 @@ const reportsDir = path.resolve(process.cwd(), 'dist/reports');
 if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
 const reportData = {
-  "version": "3.39.0",
-  "nextVersion": "3.40.0",
+  "version": "3.40.0",
+  "nextVersion": "3.41.0",
   "signoffReadiness": "ready",
   "readyForSignoff": true,
   "blockers": [],

@@ -91,8 +91,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.32.0',
-    release: 'Cross-Browser Compatibility, Fallback System, and Legacy Safety',
+    version: '3.40.0',
+    release: 'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',
@@ -112,7 +112,7 @@ async function run() {
     const categories = AnimX.getPresetCategories();
     
     const presetData = {
-      version: '3.32.0',
+      version: '3.40.0',
       total: presets.length,
       categories: categories,
       presets: presets
@@ -164,7 +164,7 @@ async function run() {
   const bundleReportPath = path.join(distDir, 'animx.bundle-report.json');
   const bundleReport = {
     name: "AnimX",
-    version: "3.32.0",
+    version: "3.40.0",
     generatedAt: new Date().toISOString(),
     files: reportFiles,
     builds: {

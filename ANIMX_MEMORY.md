@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 2.8.0
+**Current Version**: 3.40.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## Version History
@@ -74,7 +74,8 @@
 - **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.27.0** - Advanced Page Transitions, Section Transitions, and Route Motion Packs. Opt-in routing, secure external link skipping, shared element FLIP measurement, and native View Transition API enhancements.
 - **v3.39.0** - Cross-Browser Compatibility, Fallback System, and Legacy Safety. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
-- **Next planned version:** v3.39.0 Cross-Browser Compatibility, Fallback System, and Legacy SafetyRegistry)
+- **v3.40.0** - Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate. Passed GO decision with all P0/P1 criteria met. Added signoff API (`AnimX.signoff()`), 9 final sign-off JSON reports, public API freeze confirmation, security/accessibility/reduced-motion final confirmation, known issues lock, v4 launch gate, and v3.41 next-step report. No new animation features. Core remains zero-dependency.
+- **Next planned version:** v3.41.0 Final Launch Buffer and Public Release Packaging Guard
 
 ## Completed Milestones
 
@@ -95,8 +96,8 @@
 
 ## Current Objective
 
-**AnimX v2.3.0 is Complete.**
-Next Planned Version: **v2.4.0 Gesture and Drag Physics**
+**AnimX v3.40.0 is Complete.**
+Next Planned Version: **v3.41.0 Final Launch Buffer and Public Release Packaging Guard**
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.
@@ -259,6 +260,13 @@ AnimX.readingProgress()
 - Validated package `sideEffects` mapping to permit proper tree-shaking of Named Exports.
 - Generated comprehensive build and size health artifacts during CI testing.
 - Kept zero-dependency architecture with legacy script fallbacks unaffected.
+
+## Token-Saving Rule for v3.40.0 Final Stable Release Sign-Off
+- Added `AnimX.signoff()` API returning full sign-off, go/no-go, artifacts, API freeze, security/accessibility, known issues, release readiness, v4 gate, and next-step reports.
+- Generated 9 JSON sign-off reports in `dist/reports/`.
+- All P0/P1 criteria passed. GO decision issued.
+- v4.0.0 preparation can begin after v3.41.0 launch buffer.
+- No new animation features added. Core remains zero-dependency.
 
 ## Future Roadmaps
 When generating future implementation prompts, do not repeat the entire project history.

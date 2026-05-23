@@ -6,14 +6,14 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.39.0 Final Package Dry Run, Distribution Audit, and Release Notes Lock checks...');
+    console.log('[Tests] Running AnimX v3.40.0 Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate checks...');
 
     // 1. Version checks
-    assert.strictEqual(AnimX.version, '3.39.0', 'AnimX.version should be 3.39.0');
+    assert.strictEqual(AnimX.version, '3.40.0', 'AnimX.version should be 3.40.0');
     
     const info = AnimX.versionInfo();
-    assert.strictEqual(info.version, '3.39.0', 'versionInfo version should match');
-    assert.ok(info.release.includes('Final Package Dry Run, Distribution Audit, and Release Notes Lock'), 'versionInfo release string should contain Final Package Dry Run, Distribution Audit, and Release Notes Lock');
+    assert.strictEqual(info.version, '3.40.0', 'versionInfo version should match');
+    assert.ok(info.release.includes('Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate'), 'versionInfo release string should contain Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate');
 
     // 2. Demo existence checks
     const demoPath = path.resolve(process.cwd(), 'demo');

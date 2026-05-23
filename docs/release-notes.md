@@ -1,5 +1,16 @@
 # Release Notes
 
+## v3.40.0 — Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate
+- **Final Sign-Off:** Passed final stable release sign-off with GO decision.
+- **Go/No-Go:** All P0/P1 criteria pass. One P3 waiver granted (Safari 3D sub-pixel cosmetic issue).
+- **Artifact Verification:** All required dist files verified present and non-empty.
+- **Public API Freeze:** All v3.x public APIs frozen and backward-compatible.
+- **Security/Accessibility:** No eval, no prototype pollution, reduced motion respected, content readable.
+- **Known Issues Lock:** No P0/P1/P2 issues remain. Three P3 items documented and deferred.
+- **v4 Launch Gate:** v4 preparation can begin after v3.41.0 launch buffer.
+- **Next Version:** v3.41.0 Final Launch Buffer and Public Release Packaging Guard.
+- **Sign-Off Reports:** Generated 9 final sign-off JSON reports in `dist/reports/`.
+
 ## v2.5.0 — Advanced SVG Morphing
 - **Path Interpolation Engine:** Added `AnimX.svgMorph()` utilizing native requestAnimationFrame math.
 - **Icon State Morphs:** Added built-in compatible presets for `menu-close`, `plus-minus`, and `play-pause`.

@@ -6,7 +6,7 @@ if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
 const reportData = {
   "version": "3.38.0",
-  "nextVersion": "3.39.0",
+  "nextVersion": "3.40.0",
   "packageReadiness": "ready",
   "readyForDryRun": true,
   "blockers": [],
@@ -15,7 +15,7 @@ const reportData = {
     "Safari 3D perspective sub-pixel shifts"
   ],
   "recommendations": [
-    "Proceed to v3.39.0 Final Package Dry Run, Distribution Audit, and Release Notes Lock"
+    "Proceed to v3.40.0 Final Package Dry Run, Distribution Audit, and Release Notes Lock"
   ],
   "generatedAt": new Date().toISOString()
 };

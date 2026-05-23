@@ -1,6 +1,6 @@
-# AnimX QA Checklist (v3.13.0)
+# AnimX QA Checklist (v3.40.0)
 
-**Target Version:** 3.13.0
+**Target Version:** 3.40.0
 
 ## 1. Build & Serve
 - [ ] Run `npm run build` - verify it completes without errors.
@@ -84,3 +84,20 @@
 ## 12. Cleanup & Memory
 - [ ] Verify `AnimX.destroy()` safely removes active observers and resets inline CSS.
 - [ ] Confirm repetitive calls to `init()` or `refresh()` don't multiply bindings.
+
+### 3.40.0 Final Stable Sign-Off Verification
+- [x] `AnimX.version` returns `3.40.0`.
+- [x] `AnimX.versionInfo()` returns correct release metadata.
+- [x] `AnimX.signoff()` returns full sign-off structure.
+- [x] Go/no-go decision is `go`.
+- [x] `canReleaseV4` is `false` (v3.41.0 buffer required first).
+- [x] `nextVersion` is `3.41.0`.
+- [x] No P0/P1 blockers remain.
+- [x] Known issues lock has no release blockers.
+- [x] Package.json version is `3.40.0`.
+- [x] README references `3.40.0`.
+- [x] Release notes reference `3.40.0`.
+- [x] All required dist files exist.
+- [x] No `eval()` or `new Function()` in codebase.
+- [x] No external runtime dependencies.
+- [x] Sign-off reports generated as valid JSON.

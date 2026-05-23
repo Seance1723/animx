@@ -5,12 +5,12 @@ const reportsDir = path.resolve(process.cwd(), 'dist/reports');
 if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
 const reportData = {
-  "version": "3.39.0",
+  "version": "3.40.0",
   "tests": [
     {
       "name": "browser-script-tag",
       "status": "pass",
-      "details": "window.AnimX exposed, version 3.39.0"
+      "details": "window.AnimX exposed, version 3.40.0"
     },
     {
       "name": "css-link-tag",

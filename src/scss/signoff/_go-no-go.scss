@@ -1,0 +1,11 @@
+.ax-go-no-go-panel {
+  border-left: 4px solid #22c55e;
+}
+
+.ax-go-no-go-panel[data-decision="no-go"] {
+  border-left-color: #ef4444;
+}
+
+.ax-go-no-go-panel[data-decision="needs-review"] {
+  border-left-color: #eab308;
+}

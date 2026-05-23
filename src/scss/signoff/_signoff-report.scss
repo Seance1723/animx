@@ -1,0 +1,29 @@
+.ax-signoff-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.ax-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.ax-badge-ready, .ax-badge-go {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.ax-badge-needs-review {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.ax-badge-blocked, .ax-badge-no-go {
+  background: #fecaca;
+  color: #991b1b;
+}

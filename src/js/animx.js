@@ -116,7 +116,10 @@ import { finalAudit } from './audit/one-stop-qa-report.js';
 import { compatApi } from './compat/compat-api.js';
 import { Hardening } from './hardening/hardening-api.js';
 
-const VERSION = '3.39.0';
+// v3.40.0 Final Stable Release Sign-Off
+import { signoff } from './signoff/signoff-api.js';
+
+const VERSION = '3.40.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -553,6 +556,9 @@ class AnimXCore {
   
   // Final Animation Catalog Audit (v3.39.0)
   finalAudit() { return finalAudit(); }
+
+  // Final Stable Release Sign-Off (v3.40.0)
+  signoff() { return signoff(); }
   
   // Compat System (v3.39.0)
   supports(feature) { return compatApi.supports(feature); }
@@ -1012,13 +1018,14 @@ AnimX.build = {
   checkPackCompatibility,
   destroyPacks,
   finalAudit,
+  signoff,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.39.0",
-      release: "Final Package Dry Run, Distribution Audit, and Release Notes Lock",
+      version: "3.40.0",
+      release: "Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate",
       dependency: "zero-runtime-dependency"
     }),
-  modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures', 'packs']
+  modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures', 'packs', 'signoff']
 };
 
 if (typeof window !== 'undefined') {
