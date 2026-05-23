@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.25.0',
-    release: 'Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs',
+    version: '3.26.0',
+    release: 'Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.25.0',
-    release: 'Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs',
+    version: '3.26.0',
+    release: 'Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

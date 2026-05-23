@@ -1,5 +1,5 @@
 /**
- * AnimX Advanced Background Motion API (v3.25.0)
+ * AnimX Advanced Background Motion API (v3.26.0)
  */
 
 import { initMeshGradient } from './mesh-gradient-engine.js';

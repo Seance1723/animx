@@ -1,5 +1,5 @@
 /**
- * AnimX LTS Release API Audit (v3.25.0)
+ * AnimX LTS Release API Audit (v3.26.0)
  * Deep validation of the 100+ public functions added since v1.0.0.
  */
 

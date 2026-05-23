@@ -1,5 +1,5 @@
 /**
- * AnimX Advanced UI Feedback Motion API (v3.25.0)
+ * AnimX Advanced UI Feedback Motion API (v3.26.0)
  */
 
 import { initForm } from './form-motion-engine.js';

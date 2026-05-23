@@ -1,5 +1,5 @@
 /**
- * AnimX Runtime Performance Audit (v3.25.0)
+ * AnimX Runtime Performance Audit (v3.26.0)
  * Scans the DOM for active animations and observers.
  */
 
@@ -29,7 +29,7 @@ export function runPerformanceAudit() {
   }
 
   return {
-    version: "3.25.0",
+    version: "3.26.0",
     ok: warnings.length === 0,
     metrics,
     warnings

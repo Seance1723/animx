@@ -71,6 +71,7 @@
 - **v3.23.0** - Advanced Card, Grid, List, Table, and Dashboard Motion Packs. Added table row animations preserving native ARIA semantics, dashboard KPI updates, chart reveals, and masonry grid staggering.
 - **v3.24.0** - Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion. Added input validation choreographies, auto-generating toast stacks, modal motion, and tooltip pops without relying on heavy external popover or modal dependencies.
 - **v3.25.0** - Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs. Added atmospheric background generators (particles, waves, gradients), decorative CSS-only UI ornaments, and scene-wide ambient motion controls.
+- **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 
 ## Completed Milestones
 

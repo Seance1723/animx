@@ -11,6 +11,7 @@
 - **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
+- **v3.26.0**: Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.25.0**: Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs.
 - **v3.24.0**: Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion.
 - **v3.7.0**: Studio Handoff Documentation and Client Delivery Kits.
