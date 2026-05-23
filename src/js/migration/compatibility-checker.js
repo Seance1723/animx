@@ -1,5 +1,5 @@
 /**
- * AnimX Compatibility Checker (v3.22.0)
+ * AnimX Compatibility Checker (v3.23.0)
  * Evaluates core features to guarantee forward compatibility.
  */
 
@@ -7,7 +7,7 @@ export function checkCompatibility() {
   const isOk = !!window.AnimX && !!window.AnimX.version;
   
   return {
-    version: "3.22.0",
+    version: "3.23.0",
     ok: isOk,
     warnings: [],
     errors: isOk ? [] : ["window.AnimX is not defined."],

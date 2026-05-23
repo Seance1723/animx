@@ -1,5 +1,5 @@
 /**
- * AnimX 3D API Export Bundle (v3.22.0)
+ * AnimX 3D API Export Bundle (v3.23.0)
  */
 
 export function threeD(target, config) {

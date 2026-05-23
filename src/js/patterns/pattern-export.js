@@ -1,5 +1,5 @@
 /**
- * AnimX Pattern Export (v3.22.0)
+ * AnimX Pattern Export (v3.23.0)
  * Generates copyable snippets for patterns.
  */
 

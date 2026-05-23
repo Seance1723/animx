@@ -1,5 +1,5 @@
 /**
- * AnimX Scroll Story Runner (v3.22.0)
+ * AnimX Scroll Story Runner (v3.23.0)
  * Uses IntersectionObserver to detect when a story section enters the viewport,
  * and mounts a requestAnimationFrame loop to scrub children safely.
  */

@@ -1,5 +1,5 @@
 /**
- * AnimX Spatial API (v3.22.0)
+ * AnimX Spatial API (v3.23.0)
  * Exports depth and pointer tracking tools.
  */
 import { trackPointerDepth, destroyPointerDepth } from './pointer-depth.js';

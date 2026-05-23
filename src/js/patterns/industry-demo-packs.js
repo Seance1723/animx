@@ -1,5 +1,5 @@
 /**
- * AnimX Industry Demo Packs (v3.22.0)
+ * AnimX Industry Demo Packs (v3.23.0)
  * Page-level flows combining multiple section patterns.
  */
 

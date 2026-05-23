@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.22.0
+import { elementPresets } from './presets/element-presets.js'; // v3.23.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,17 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.22.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.23.0
 
-// v3.22.0 Migration APIs
+// v3.23.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.22.0 Runtime Validation APIs
+// v3.23.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.22.0 Composer
+// v3.23.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -90,7 +90,10 @@ import { media, imageReveal, imageMask, imageClip, mediaHover, mediaParallax, vi
 // v3.22.0 Advanced Button, Link, Navigation, and Micro-Interaction Packs
 import { button, link, nav, menu, dropdown, mobileMenu, micro, buttonState, navState, tabIndicator, validateInteractionEffect, getInteractionEffects } from './interactions/advanced-interaction-api.js';
 
-const VERSION = '3.22.0';
+// v3.23.0 Advanced Card, Grid, List, Table, and Dashboard Motion Packs
+import { card, grid, list, table, dashboard, kpi, chartReveal, feed, kanban, filterSort, dataState, validateDataUIEffect, getDataUIEffects, destroyDataUI } from './data-ui/data-ui-api.js';
+
+const VERSION = '3.23.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -291,7 +294,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.22.0 Migration APIs
+  // v3.23.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -304,7 +307,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.22.0 Runtime Validation APIs
+  // v3.23.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -359,7 +362,7 @@ class AnimXCore {
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
 
-  // Physics & Easing APIs (v3.22.0)
+  // Physics & Easing APIs (v3.23.0)
   easing(target, config) { return easing(target, config); }
   registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
   getEase(name) { return getEase(name); }
@@ -374,7 +377,7 @@ class AnimXCore {
   validatePhysics(config) { return validatePhysics(config); }
   destroyPhysics() { return destroyPhysics(); }
 
-  // Advanced Text APIs (v3.22.0)
+  // Advanced Text APIs (v3.23.0)
   rollText(target, config) { return rollText(target, config); }
   slotText(target, config) { return slotText(target, config); }
   scrambleText(target, config) { return scrambleText(target, config); }
@@ -386,7 +389,7 @@ class AnimXCore {
   validateTextEffect(config) { return validateTextEffect(config); }
   destroyTextEffects() { return destroyTextEffects(); }
 
-  // Advanced Media APIs (v3.22.0)
+  // Advanced Media APIs (v3.23.0)
   media(target, config) { return media(target, config); }
   imageReveal(target, config) { return imageReveal(target, config); }
   imageMask(target, config) { return imageMask(target, config); }
@@ -401,7 +404,7 @@ class AnimXCore {
   getMediaEffects() { return getMediaEffects(); }
   destroyMediaEffects() { return destroyMediaEffects(); }
 
-  // Advanced Interaction APIs (v3.22.0)
+  // Advanced Interaction APIs (v3.23.0)
   button(target, config) { return button(target, config); }
   link(target, config) { return link(target, config); }
   nav(target, config) { return nav(target, config); }
@@ -414,6 +417,22 @@ class AnimXCore {
   tabIndicator(target, config) { return tabIndicator(target, config); }
   validateInteractionEffect(config) { return validateInteractionEffect(config); }
   getInteractionEffects() { return getInteractionEffects(); }
+
+  // Advanced Data UI APIs (v3.23.0)
+  card(target, config) { return card(target, config); }
+  grid(target, config) { return grid(target, config); }
+  list(target, config) { return list(target, config); }
+  table(target, config) { return table(target, config); }
+  dashboard(target, config) { return dashboard(target, config); }
+  kpi(target, config) { return kpi(target, config); }
+  chartReveal(target, config) { return chartReveal(target, config); }
+  feed(target, config) { return feed(target, config); }
+  kanban(target, config) { return kanban(target, config); }
+  filterSort(target, config) { return filterSort(target, config); }
+  dataState(target, config) { return dataState(target, config); }
+  validateDataUIEffect(config) { return validateDataUIEffect(config); }
+  getDataUIEffects() { return getDataUIEffects(); }
+  destroyDataUI() { return destroyDataUI(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -783,10 +802,24 @@ AnimX.build = {
   tabIndicator,
   validateInteractionEffect,
   getInteractionEffects,
+  card,
+  grid,
+  list,
+  table,
+  dashboard,
+  kpi,
+  chartReveal,
+  feed,
+  kanban,
+  filterSort,
+  dataState,
+  validateDataUIEffect,
+  getDataUIEffects,
+  destroyDataUI,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.22.0",
-      release: "Advanced Button, Link, Navigation, and Micro-Interaction Packs",
+      version: "3.23.0",
+      release: "Advanced Card, Grid, List, Table, and Dashboard Motion Packs",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']

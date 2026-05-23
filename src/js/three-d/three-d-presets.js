@@ -1,5 +1,5 @@
 /**
- * AnimX 3D Presets Metadata (v3.22.0)
+ * AnimX 3D Presets Metadata (v3.23.0)
  */
 
 export const THREE_D_PRESETS = {

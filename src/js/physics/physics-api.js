@@ -1,5 +1,5 @@
 /**
- * AnimX Physics API Bundle (v3.22.0)
+ * AnimX Physics API Bundle (v3.23.0)
  */
 import { startSpring, stopPhysics } from './spring-engine.js';
 
