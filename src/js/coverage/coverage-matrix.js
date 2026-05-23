@@ -1,5 +1,5 @@
 /**
- * AnimX Animation Coverage Matrix (v3.14.0)
+ * AnimX Animation Coverage Matrix (v3.15.0)
  * Evaluates the preset registry against all required UI element types.
  */
 
@@ -54,7 +54,7 @@ export function generateCoverageMatrix() {
   });
 
   return {
-    version: "3.14.0",
+    version: "3.15.0",
     generatedAt: new Date().toISOString(),
     totalPresets: presets.length,
     elements: Object.values(matrix)

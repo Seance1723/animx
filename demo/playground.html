@@ -245,9 +245,9 @@
       <button class="filter-btn" data-filter="data">Data & Tables</button>
     </div>
 
-    <!-- NEW V3.14.0 CATEGORIES -->
+    <!-- NEW V3.15.0 CATEGORIES -->
     <section class="category-section" data-category="nav">
-      <h2>Nav & Tabs (v3.14.0)</h2>
+      <h2>Nav & Tabs (v3.15.0)</h2>
       <div class="playground-grid">
         <div class="demo-card">
           <a href="#" class="ax-nav-link-underline-slide" style="font-size: 1.2rem; color: #000; font-weight: 500;">Hover Me</a>
@@ -261,7 +261,7 @@
     </section>
 
     <section class="category-section" data-category="data">
-      <h2>Tables, Lists & KPI (v3.14.0)</h2>
+      <h2>Tables, Lists & KPI (v3.15.0)</h2>
       <div class="playground-grid">
         <div class="demo-card" data-ax="list-row-reveal">
           <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 1</div>
@@ -421,9 +421,9 @@
       
     </div>
 
-    <!-- v3.14.0 INDUSTRY DEMO PACKS -->
+    <!-- v3.15.0 INDUSTRY DEMO PACKS -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Industry Demo Packs (v3.14.0)</h2>
+      <h2>Industry Demo Packs (v3.15.0)</h2>
       <p>Combine multiple patterns into vertical scrolling experiences.</p>
       <div class="playground-grid">
         <div class="demo-card" style="background: #f8fafc;">
@@ -439,9 +439,34 @@
       </div>
     </section>
 
+    <!-- v3.15.0 ANIMATION COMPOSER PLAYGROUND -->
+    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
+      <h2>Animation Composer Playground (v3.15.0)</h2>
+      <p>Test composed combinations of effects on a single element.</p>
+      
+      <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
+        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>Target</h3>
+          <div class="composer-target" data-ax-variant="premium-card-hover" style="height: 150px; background: linear-gradient(135deg, #6366f1, #a855f7); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+            Hover Me (Premium Card Variant)
+          </div>
+        </div>
+        
+        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>Composed Chain</h3>
+          <ul style="font-size: 0.9rem; color: #475569; padding-left: 20px;">
+            <li>1. Entrance: <code>fade-up</code></li>
+            <li>2. Hover: <code>card-lift</code></li>
+            <li>3. Hover: <code>card-spotlight-hover</code></li>
+          </ul>
+          <button class="ax-btn ax-btn-sm" style="margin-top: 10px;" onclick="AnimX.compose('.composer-target', 'premium-card-hover')">Replay Composition</button>
+        </div>
+      </div>
+    </section>
+
     <!-- v3.13.0 HEALTH CHECK UTILITY -->
     <div style="margin-top: 40px; padding: 20px; background: #fffbeb; border: 1px solid #fef08a; border-radius: 8px;">
-      <h3>Playground Active Verification (v3.14.0)</h3>
+      <h3>Playground Active Verification (v3.15.0)</h3>
       <p>Ensure current DOM is safe and not leaking listeners.</p>
       <button class="ax-btn ax-btn-sm" onclick="console.log(window.AnimX.validateRuntime()); alert('Checked! See console for details.');">Validate Active Runtime</button>
     </div>

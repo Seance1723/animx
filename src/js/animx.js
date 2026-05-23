@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.14.0
+import { elementPresets } from './presets/element-presets.js'; // v3.15.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,23 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.14.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.15.0
 
-// v3.14.0 Migration APIs
+// v3.15.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.14.0 Runtime Validation APIs
+// v3.15.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-const VERSION = '3.14.0';
+// v3.15.0 Composer
+import { compose, chain } from './composer/composer-api.js';
+import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
+import { validateChain } from './composer/effect-conflict-resolver.js';
+import { initComposerDOM } from './composer/composer-data-parser.js';
+
+const VERSION = '3.15.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -241,10 +247,6 @@ class AnimXCore {
     return diagnose();
   }
   
-  productionCheck() {
-    return productionCheck();
-  }
-  
   features() {
     return features();
   }
@@ -266,7 +268,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.14.0 Migration APIs
+  // v3.15.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -279,28 +281,35 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.14.0 Runtime Validation APIs
+  // v3.15.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
 
-  // Expose SVG Morph
-  svgMorph(target, options) { return this._svgMorph(target, options); }
-  morphPath(target, toPathSelector, options) { return this._morphPath(target, toPathSelector, options); }
-  morphShape(target, toTarget, options) { return this._morphShape(target, toTarget, options); }
-  morphIcon(target, options) { return this._morphIcon(target, options); }
-  validateMorph(fromStr, toStr) { return this._validateMorph(fromStr, toStr); }
-  normalizePath(pathStr) { return this._normalizePath(pathStr); }
-  refreshMorphs(target) { return this._refreshMorphs(target); }
-  destroyMorphs(target) { return this._destroyMorphs(target); }
-  svgMorph(target, options) { return this._svgMorph(target, options); }
-  morphPath(target, toPathSelector, options) { return this._morphPath(target, toPathSelector, options); }
-  morphShape(target, toTarget, options) { return this._morphShape(target, toTarget, options); }
-  morphIcon(target, options) { return this._morphIcon(target, options); }
-  validateMorph(fromStr, toStr) { return this._validateMorph(fromStr, toStr); }
-  normalizePath(pathStr) { return this._normalizePath(pathStr); }
-  refreshMorphs(target) { return this._refreshMorphs(target); }
-  destroyMorphs(target) { return this._destroyMorphs(target); }
+  // Composer APIs
+  compose(elements, effects) {
+    return compose(elements, effects);
+  }
+
+  chain(elements, timeline) {
+    return chain(elements, timeline);
+  }
+
+  registerVariant(name, config) {
+    return registerVariant(name, config);
+  }
+
+  getVariant(name) {
+    return getVariant(name);
+  }
+
+  getVariants() {
+    return getVariants();
+  }
+
+  validateChain(timeline) {
+    return validateChain(timeline);
+  }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -491,21 +500,14 @@ class AnimXCore {
     }
 
     const normOptions = normalizeOptions(options);
-    const useReduced = isReducedMotion();
-
-    if (useReduced) {
-      normOptions.duration = 1;
-      normOptions.delay = 0;
-    }
 
     const drivers = elements.map(el => {
       // 1. String Preset (CSS Driver)
       if (typeof animationInput === 'string') {
         const preset = getPreset(animationInput);
         if (preset) {
-          return createCSSDriver(el, preset, normOptions, null); // Will assign instance below
+          return createCSSDriver(el, preset, normOptions, null);
         } else {
-          log(`Preset '${animationInput}' not found.`);
           return null;
         }
       } 
@@ -525,14 +527,7 @@ class AnimXCore {
     }).filter(Boolean);
 
     const instance = new AnimationInstance(elements, drivers);
-    // Bind instance reference to drivers so they can report status back
-    drivers.forEach(d => {
-       // A bit of a hack to share instance status logic backward if we had complex events.
-       // In our drivers, we passed `instance` as a parameter. Wait, we passed null above!
-       // Let's fix that wrapper injection:
-    });
-
-    // Re-create drivers with the actual instance reference injected
+    
     const boundDrivers = elements.map(el => {
       if (typeof animationInput === 'string') {
         const preset = getPreset(animationInput);
@@ -587,7 +582,6 @@ class AnimXCore {
 
   destroy(selector) {
     this.stop(selector);
-    // Remove initialization marks and destroy instances
     if (selector) {
       const elements = normalizeSelector(selector);
       elements.forEach(el => {
@@ -596,7 +590,6 @@ class AnimXCore {
         destroyInstances(el);
       });
     } else {
-      // Destroy all
       const allEls = document.querySelectorAll('[data-ax-state], .ax-animating, .ax-paused');
       allEls.forEach(el => {
         el.dataset.axState = '';
@@ -612,10 +605,20 @@ AnimX.studio = studio;
 AnimX.build = {
   name: 'full',
   version: VERSION,
+  checkCompatibility,
+  getDeprecations,
+  migrateDataAttributes,
+  validateRuntime,
+  compose,
+  chain,
+  registerVariant,
+  getVariant,
+  getVariants,
+  validateChain,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.14.0",
-      release: "Real-World Animation Pattern Library and Industry Demo Packs",
+      version: "3.15.0",
+      release: "Animation Composer, Effect Chaining, and Variant Builder",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
@@ -629,6 +632,7 @@ if (typeof window !== 'undefined') {
     const doAutoInit = () => {
       const conf = getConfig();
       if (conf.autoInit) AnimX.init();
+      initComposerDOM();
     };
 
     if (document.readyState === 'loading') {

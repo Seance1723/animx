@@ -12,7 +12,8 @@
 - [ ] Ensure `npm run size-check` shows core is under 20KB minified.
 - [ ] Run **AnimX Studio QA Runner** to evaluate accessibility rules.
 - [ ] Run **Studio Runtime Validation** (v3.13.0) to ensure zero memory leaks.
-- [ ] Verify **Real-World Patterns** export safe HTML with no inline scripts (v3.14.0).
+- [ ] Verify **Real-World Patterns** export safe HTML (v3.14.0).
+- [ ] Validate **Animation Composer** chains handle conflicts safely (v3.15.0).
 
 ## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.

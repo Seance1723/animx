@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Preset Pack Manager (v3.14.0)
+ * AnimX Studio Preset Pack Manager (v3.15.0)
  * Handles CRUD, validation, import/export for local custom preset packs.
  * Local-only, zero-dependency.
  */
@@ -10,7 +10,7 @@ const DEFAULT_PACKS = [
   {
     schema: "animx-preset-pack",
     schemaVersion: "1.0",
-    animxVersion: "3.14.0",
+    animxVersion: "3.15.0",
     packId: "premium-saas-pack",
     name: "Premium SaaS Motion Pack",
     description: "Reusable polished motion presets for SaaS landing pages",

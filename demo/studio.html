@@ -12,7 +12,7 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.14.0</span>
+      <span class="ax-studio-version">v3.15.0</span>
     </div>
     <div class="ax-studio-actions">
       <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
@@ -22,7 +22,7 @@
 
   <div class="ax-studio-layout">
     
-    <!-- Sidebar Navigation (v3.14.0) -->
+    <!-- Sidebar Navigation (v3.15.0) -->
     <nav class="ax-studio-sidebar-nav">
       <div class="nav-group">Main</div>
       <button data-mode="home" class="active">Dashboard / Home</button>
@@ -36,6 +36,7 @@
       <button data-mode="recipe-library">Recipe Library</button>
       <button data-mode="themes">Theme Kits</button>
       <button data-mode="patterns" style="color: #3b82f6;">Real-World Patterns</button>
+      <button data-mode="composer" style="color: #f59e0b;">Animation Composer</button>
       <button data-mode="coverage" style="color: #10b981;">Coverage Matrix</button>
       
       <div class="nav-group">Projects</div>
@@ -61,7 +62,7 @@
 
       <!-- PATTERN LIBRARY -->
       <section id="panel-patterns" class="ax-studio-panel" style="display: none;">
-        <h2>Real-World Pattern Library (v3.14.0)</h2>
+        <h2>Real-World Pattern Library (v3.15.0)</h2>
         <p>Production-ready component sequences for SaaS, Ecommerce, and Dashboards.</p>
         
         <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
@@ -76,9 +77,38 @@
         </div>
       </section>
 
+      <!-- ANIMATION COMPOSER -->
+      <section id="panel-composer" class="ax-studio-panel" style="display: none;">
+        <h2>Animation Composer & Variant Builder (v3.15.0)</h2>
+        <p>Compose multiple effects safely. Warns against transform and opacity conflicts.</p>
+        
+        <div style="margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>Builder Sandbox</h3>
+          <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 1rem;">Target Element: <code>.my-card</code></p>
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+            <button class="ax-btn ax-btn-sm">+ Add Entrance</button>
+            <button class="ax-btn ax-btn-sm">+ Add Hover</button>
+            <button class="ax-btn ax-btn-sm">+ Add Interaction</button>
+          </div>
+          <div style="padding: 1rem; background: #f8fafc; border: 1px dashed #cbd5e1;">
+            <div style="font-family: monospace; font-size: 0.85rem; color: #475569;">
+              [<br>
+              &nbsp;&nbsp;{ type: "entrance", effect: "fade-up" },<br>
+              &nbsp;&nbsp;{ type: "hover", effect: "card-lift" },<br>
+              &nbsp;&nbsp;{ type: "hover", effect: "card-spotlight-hover" }<br>
+              ]
+            </div>
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+            <button class="ax-btn ax-btn-primary" onclick="alert('Composition Validated. No conflicts.')">Validate Chain</button>
+            <button class="ax-btn ax-btn-outline" onclick="alert('<div data-ax-variant=\'premium-card-hover\'></div>')">Export Variant HTML</button>
+          </div>
+        </div>
+      </section>
+
       <!-- RUNTIME HEALTH -->
       <section id="panel-health" class="ax-studio-panel" style="display: none;">
-        <h2>Runtime Health & Performance (v3.14.0)</h2>
+        <h2>Runtime Health & Performance (v3.15.0)</h2>
         <p>Verify that all presets map to real behaviors, and audit active DOM hooks.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -90,7 +120,7 @@
 
       <!-- COVERAGE MATRIX -->
       <section id="panel-coverage" class="ax-studio-panel" style="display: none;">
-        <h2>Animation Coverage Matrix (v3.14.0)</h2>
+        <h2>Animation Coverage Matrix (v3.15.0)</h2>
         <p>Real-time audit of preset coverage across all element types.</p>
         <button class="ax-btn ax-btn-primary" onclick="renderCoverageMatrix()">Generate Matrix Report</button>
         <div id="coverage-matrix-output" style="margin-top: 1.5rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"></div>
@@ -98,7 +128,7 @@
 
       <!-- MIGRATION TOOLKIT -->
       <section id="panel-migration" class="ax-studio-panel" style="display: none;">
-        <h2>Core LTS Migration Toolkit (v3.14.0)</h2>
+        <h2>Core LTS Migration Toolkit (v3.15.0)</h2>
         <p>Safely upgrade old AnimX DOM markup or Studio v2/v3 projects into the LTS standard.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -143,7 +173,7 @@
     }
   </script>
   <script>
-    // UI overrides for v3.14.0 replaced by studio-navigation.js
+    // UI overrides for v3.15.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;

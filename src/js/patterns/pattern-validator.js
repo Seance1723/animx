@@ -1,5 +1,5 @@
 /**
- * AnimX Pattern Validator (v3.14.0)
+ * AnimX Pattern Validator (v3.15.0)
  * Validates patterns against runtime presets and security rules.
  */
 

@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Scene Schema and Templates (v3.14.0)
+ * AnimX Studio Scene Schema and Templates (v3.15.0)
  * Provides the base data model and templates for Advanced Timeline Scenes.
  */
 
@@ -10,7 +10,7 @@ export const DEFAULT_SCENE_TEMPLATES = [
   {
     schema: SCENE_SCHEMA_ID,
     schemaVersion: SCENE_SCHEMA_VERSION,
-    animxVersion: "3.14.0",
+    animxVersion: "3.15.0",
     sceneId: "hero-intro-scene",
     name: "Hero Intro Scene",
     description: "Standard Hero title, copy, and CTA timeline sequence",
@@ -80,7 +80,7 @@ export const DEFAULT_SCENE_TEMPLATES = [
   {
     schema: SCENE_SCHEMA_ID,
     schemaVersion: SCENE_SCHEMA_VERSION,
-    animxVersion: "3.14.0",
+    animxVersion: "3.15.0",
     sceneId: "scroll-story-scene",
     name: "Scroll Story Scene",
     description: "A sequence triggered by scrolling",
@@ -120,7 +120,7 @@ export function createEmptyScene() {
   return {
     schema: SCENE_SCHEMA_ID,
     schemaVersion: SCENE_SCHEMA_VERSION,
-    animxVersion: "3.14.0",
+    animxVersion: "3.15.0",
     sceneId: "custom-scene-" + Date.now(),
     name: "New Custom Scene",
     description: "",
