@@ -6,6 +6,8 @@ import { getThemeKit, getAllThemeKits } from '../src/js/studio/studio-theme-kits
 import { applyThemeToProject } from '../src/js/studio/studio-motion-tokens.js';
 import { buildProjectPackage } from '../src/js/studio/studio-package-builder.js';
 import { validatePackage } from '../src/js/studio/studio-package-validator.js';
+import { runFullProjectQa } from '../src/js/studio/studio-qa-runner.js';
+import { runReleaseAssistant } from '../src/js/studio/studio-release-assistant.js';
 
 console.log('▶ Running studio.test.js...');
 
@@ -14,9 +16,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.4.0', 'AnimX version should be 3.4.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.4.0', 'versionInfo should be 3.4.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio Collaboration-Free Project Packaging and Theme Kits', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.5.0', 'AnimX version should be 3.5.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.5.0', 'versionInfo should be 3.5.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio QA Automation and Release Assistant', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
@@ -30,7 +32,7 @@ export async function run() {
     
     // Check Project State defaults
     const state = getProjectState();
-    assert.strictEqual(state.version, '3.4.0', 'Project state should default to 3.4.0');
+    assert.strictEqual(state.version, '3.5.0', 'Project state should default to 3.5.0');
     assert.strictEqual(state.motionStyle, 'smooth-professional', 'Default motion style should be smooth-professional');
     assert.strictEqual(state.sections.length, 0, 'Should start with no sections');
     
@@ -56,7 +58,7 @@ export async function run() {
     // Check Project Packaging
     const pkgObj = buildProjectPackage(themedState);
     assert.strictEqual(pkgObj.schema, 'animx-package', 'Schema ID should be correct');
-    assert.strictEqual(pkgObj.animxVersion, '3.4.0', 'Package version should match animx version');
+    assert.strictEqual(pkgObj.animxVersion, '3.5.0', 'Package version should match animx version');
     
     const validResult = validatePackage(JSON.stringify(pkgObj));
     assert.strictEqual(validResult.ok, true, 'Valid package should pass validation');
@@ -68,6 +70,28 @@ export async function run() {
     const maliciousPkg = JSON.stringify({ schema: 'animx-package', badData: '<script>alert()</script>' });
     const maliciousResult = validatePackage(maliciousPkg);
     assert.strictEqual(maliciousResult.errors.length > 0, true, 'Malicious package should generate an error');
+    
+    // Check QA Runner
+    const qaState = JSON.parse(JSON.stringify(themedState));
+    qaState.sections.push({ type: 'hero', settings: { headingPreset: 'fade-up' } });
+    const qaReport = runFullProjectQa(qaState);
+    assert.strictEqual(qaReport.status, 'pass', 'QA report should pass for a default valid project');
+    assert.strictEqual(qaReport.score, 100, 'Score should be 100 initially');
+    
+    // Inject bad export payload
+    const badState = JSON.parse(JSON.stringify(themedState));
+    badState.name = "<script>alert(1)</script>";
+    badState.sections.push({ type: 'hero', settings: { headingPreset: 'unknown-preset-123' } });
+    
+    const badQaReport = runFullProjectQa(badState);
+    assert.strictEqual(badQaReport.status, 'fail', 'QA report should fail if script tag or unknown preset is found');
+    assert.strictEqual(badQaReport.score < 100, true, 'Score should be penalized');
+    assert.strictEqual(badQaReport.errors.length > 0, true, 'Should have errors mapped from nested reports');
+    
+    // Check Release Assistant
+    const releaseRes = runReleaseAssistant(badState);
+    assert.strictEqual(releaseRes.ready, false, 'Release should not be ready with failed QA');
+    assert.strictEqual(releaseRes.releaseDraft.includes('unknown-preset-123'), true, 'Draft should list known limitations');
     
     console.log('✅ studio.test.js passed.');
   } catch (error) {

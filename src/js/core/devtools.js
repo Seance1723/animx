@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.4.0',
-    release: 'Studio Collaboration-Free Project Packaging and Theme Kits',
+    version: '3.5.0',
+    release: 'Studio QA Automation and Release Assistant',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.4.0',
-    release: 'Studio Collaboration-Free Project Packaging and Theme Kits',
+    version: '3.5.0',
+    release: 'Studio QA Automation and Release Assistant',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

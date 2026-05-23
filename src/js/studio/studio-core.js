@@ -14,6 +14,9 @@ import { getThemeKit, getAllThemeKits } from './studio-theme-kits.js';
 import { applyThemeToProject } from './studio-motion-tokens.js';
 import { buildProjectPackage, downloadPackageFile } from './studio-package-builder.js';
 import { validatePackage } from './studio-package-validator.js';
+import { runFullProjectQa } from './studio-qa-runner.js';
+import { runReleaseAssistant } from './studio-release-assistant.js';
+import { draftReleaseNotes } from './studio-release-notes.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -40,6 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.buildProjectPackage = buildProjectPackage;
   window.AnimXStudio.downloadPackageFile = downloadPackageFile;
   window.AnimXStudio.validatePackage = validatePackage;
+  
+  // Expose QA and Release APIs for UI
+  window.AnimXStudio.runFullProjectQa = runFullProjectQa;
+  window.AnimXStudio.runReleaseAssistant = runReleaseAssistant;
+  window.AnimXStudio.draftReleaseNotes = draftReleaseNotes;
   
   // Load state from localStorage
   const state = loadState();
