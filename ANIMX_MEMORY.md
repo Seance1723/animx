@@ -73,7 +73,7 @@
 - **v3.25.0** - Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs. Added atmospheric background generators (particles, waves, gradients), decorative CSS-only UI ornaments, and scene-wide ambient motion controls.
 - **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.27.0** - Advanced Page Transitions, Section Transitions, and Route Motion Packs. Opt-in routing, secure external link skipping, shared element FLIP measurement, and native View Transition API enhancements.
-- **v3.28.0** - Advanced CMS, WordPress, Webflow, and No-Code Animation Recipes. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
+- **v3.29.0** - Advanced Animation Marketplace-Ready Preset Packaging — Local Only. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
 - **Next planned version:** v3.29.0 Advanced Animation Marketplace-Ready Preset Packaging — Local OnlyRegistry)
 
 ## Completed Milestones

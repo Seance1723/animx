@@ -32,9 +32,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.28.0', 'AnimX version should be 3.28.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.28.0', 'versionInfo should be 3.28.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced CMS, WordPress, Webflow, and No-Code Animation Recipes', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.29.0', 'AnimX version should be 3.29.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.29.0', 'versionInfo should be 3.29.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced Animation Marketplace-Ready Preset Packaging — Local Only', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
