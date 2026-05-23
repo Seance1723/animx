@@ -1,5 +1,5 @@
 /**
- * AnimX Runtime Validator (v3.16.0)
+ * AnimX Runtime Validator (v3.17.0)
  * Evaluates the runtime health of all loaded presets.
  */
 
@@ -9,7 +9,7 @@ export function validateRuntime() {
 
   const report = {
     ok: true,
-    version: "3.16.0",
+    version: "3.17.0",
     generatedAt: new Date().toISOString(),
     checked: {
       presets: 0,

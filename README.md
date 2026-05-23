@@ -11,8 +11,8 @@
 - **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
+- **v3.17.0**: Advanced Scroll Storytelling, Responsive Motion Breakpoints, and Viewport Scene Packs.
 - **v3.16.0**: Motion State Manager, Trigger Orchestration, and Conditional Animation Rules.
-- **v3.15.0**: Animation Composer, Effect Chaining, and Variant Builder.
 - **v3.7.0**: Studio Handoff Documentation and Client Delivery Kits.
 - **v3.6.0**: Advanced Creative Animation Catalog.
 - **v2.9.0**: Security and Defensive Runtime Hardening
