@@ -115,7 +115,7 @@ import { packs, registerPack, getPack, getPacks, getPackCatalog, destroyPacks, v
 import { finalAudit } from './audit/one-stop-qa-report.js';
 import { compatApi } from './compat/compat-api.js';
 
-const VERSION = '3.33.0';
+const VERSION = '3.34.0';
 
 // Optional Studio shortcut
 export function studio() {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimX v3.34.0 - TRANSITIONS</title>
+  <!-- Local dist references only. No CDN. -->
+  <link rel="stylesheet" href="../dist/animx.min.css">
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: #0f172a; color: #f8fafc; }
+    header { padding: 2rem; background: #1e293b; text-align: center; border-bottom: 1px solid #334155; }
+    header h1 { margin: 0 0 1rem 0; font-size: 2.5rem; color: #38bdf8; }
+    nav { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+    nav a { color: #f8fafc; text-decoration: none; padding: 0.5rem 1rem; background: #334155; border-radius: 4px; transition: background 0.2s; }
+    nav a:hover { background: #475569; }
+    main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .card { background: #1e293b; padding: 1.5rem; border-radius: 8px; border: 1px solid #334155; }
+    .card h3 { margin-top: 0; color: #38bdf8; }
+    .btn { display: inline-block; padding: 0.5rem 1rem; background: #38bdf8; color: #0f172a; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 1rem; }
+    .reduced-motion-note { background: #3f6212; padding: 1rem; text-align: center; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="reduced-motion-note">Accessibility Note: AnimX respects <code>prefers-reduced-motion</code> natively. Testing locally requires OS-level toggling or dev-tools simulation.</div>
+  
+  <header>
+    <h1>AnimX: TRANSITIONS</h1>
+    <p>Zero-Dependency Animation Engine v3.34.0</p>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="showcase.html">Showcase</a>
+      <a href="../docs/index.md" target="_blank">Documentation</a>
+      <a href="playground.html">Playground</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="studio.html">Studio</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Transitions Category</h2><div class="card" data-ax="page-transition">Transitioning Element</div>
+  </main>
+
+  <!-- Local JS only -->
+  <script src="../dist/animx.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.AnimX) AnimX.init();
+    });
+  </script>
+</body>
+</html>

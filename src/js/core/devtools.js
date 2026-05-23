@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.33.0',
-    release: 'Documentation Portal Finalization and Public API Reference Completion',
+    version: '3.34.0',
+    release: 'Full Demo Website, Showcase Pages, and Industry Example Completion',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.33.0',
-    release: 'Documentation Portal Finalization and Public API Reference Completion',
+    version: '3.34.0',
+    release: 'Full Demo Website, Showcase Pages, and Industry Example Completion',
     dependency: 'zero-runtime-dependency',
     features: features()
   };
