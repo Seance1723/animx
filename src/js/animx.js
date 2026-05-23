@@ -51,7 +51,12 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '3.10.0';
+// v3.11.0 Migration APIs
+import { checkCompatibility } from './migration/compatibility-checker.js';
+import { getDeprecations } from './migration/deprecation-checker.js';
+import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
+
+const VERSION = '3.11.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -256,6 +261,19 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
+  // v3.11.0 Migration APIs
+  checkCompatibility() {
+    return checkCompatibility();
+  }
+
+  getDeprecations() {
+    return getDeprecations();
+  }
+
+  migrateDataAttributes(node, options) {
+    return migrateDataAttributes(node, options);
+  }
+
   // Expose SVG Morph
   svgMorph(target, options) { return this._svgMorph(target, options); }
   morphPath(target, toPathSelector, options) { return this._morphPath(target, toPathSelector, options); }
@@ -586,8 +604,8 @@ AnimX.build = {
   version: VERSION,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.10.0",
-      release: "Studio Final UX Polish and Public Studio Release",
+      version: "3.11.0",
+      release: "Core LTS Stabilization and Migration Toolkit",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']

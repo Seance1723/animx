@@ -42,6 +42,10 @@ import { renderHomeDashboard, checkOnboarding } from './studio-home.js';
 import { renderReleaseChecklist } from './studio-release-readiness.js';
 import { renderEmptyState, safeExecute, clearStudioData } from './studio-ux-polish.js';
 
+// v3.11.0 Migration APIs
+import { migrateProject } from '../migration/studio-project-migrator.js';
+import { runLtsApiAudit } from '../lts/lts-api-audit.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
   if (!window.AnimX) {
@@ -129,6 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.renderEmptyState = renderEmptyState;
   window.AnimXStudio.safeExecute = safeExecute;
   window.AnimXStudio.clearStudioData = clearStudioData;
+  window.AnimXStudio.migrateProject = migrateProject;
+  window.AnimXStudio.runLtsApiAudit = runLtsApiAudit;
   
   // Init Navigation
   initNavigation();

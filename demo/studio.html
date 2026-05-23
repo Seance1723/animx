@@ -12,7 +12,7 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.10.0</span>
+      <span class="ax-studio-version">v3.11.0</span>
     </div>
     <div class="ax-studio-actions">
       <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
@@ -22,7 +22,7 @@
 
   <div class="ax-studio-layout">
     
-    <!-- Sidebar Navigation (v3.10.0) -->
+    <!-- Sidebar Navigation (v3.11.0) -->
     <nav class="ax-studio-sidebar-nav">
       <div class="nav-group">Main</div>
       <button data-mode="home" class="active">Dashboard / Home</button>
@@ -46,6 +46,7 @@
       <button data-mode="handoff">Handoff Docs</button>
       <button data-mode="checklist">Public Checklist</button>
       <button data-mode="export">Export Builder</button>
+      <button data-mode="migration" style="color: #8b5cf6;">Migration Toolkit</button>
     </nav>
     
     <div class="ax-studio-main-content">
@@ -53,6 +54,25 @@
       <!-- HOME DASHBOARD -->
       <section id="panel-home" class="ax-studio-panel" style="display: block;">
         <div id="panel-home-content"></div>
+      </section>
+
+      <!-- MIGRATION TOOLKIT -->
+      <section id="panel-migration" class="ax-studio-panel" style="display: none;">
+        <h2>Core LTS Migration Toolkit (v3.11.0)</h2>
+        <p>Safely upgrade old AnimX DOM markup or Studio v2/v3 projects into the LTS standard.</p>
+        
+        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+          <button class="ax-btn ax-btn-primary" onclick="alert(JSON.stringify(window.AnimX.checkCompatibility(), null, 2))">Run Compatibility Check</button>
+          <button class="ax-btn" onclick="alert(JSON.stringify(window.AnimXStudio.runLtsApiAudit(), null, 2))">Run LTS API Audit</button>
+        </div>
+
+        <h3 style="margin-top: 2rem;">Migrate Data Attributes (DOM)</h3>
+        <button class="ax-btn" onclick="console.log(window.AnimX.migrateDataAttributes(document.body, {dryRun:true})); alert('Dry run complete. Check console.')">Dry-Run DOM Migration</button>
+
+        <h3 style="margin-top: 2rem;">Migrate Studio Project JSON</h3>
+        <textarea id="migration-json-input" rows="6" style="width:100%;" placeholder="Paste old v3.2.0 project JSON here..."></textarea>
+        <button class="ax-btn" style="margin-top: 10px;" onclick="document.getElementById('migration-json-output').value = JSON.stringify(window.AnimXStudio.migrateProject(document.getElementById('migration-json-input').value), null, 2)">Migrate Project</button>
+        <textarea id="migration-json-output" rows="6" style="width:100%; margin-top:10px;" readonly placeholder="Migrated JSON will appear here..."></textarea>
       </section>
 
       <!-- SETTINGS -->
@@ -83,7 +103,7 @@
     }
   </script>
   <script>
-    // UI overrides for v3.10.0 replaced by studio-navigation.js
+    // UI overrides for v3.11.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;

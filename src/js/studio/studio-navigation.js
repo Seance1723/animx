@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Navigation (v3.10.0)
+ * AnimX Studio Navigation (v3.11.0)
  * Handles the unified sidebar routing, active states, and Command Menu (Ctrl+K).
  */
 

@@ -23,6 +23,12 @@ const files = [
   'src/js/studio/studio-recipe-library.js',
   'src/js/studio/studio-custom-preset-builder.js',
   'src/js/studio/studio-scene-schema.js',
+  'src/js/studio/studio-home.js',
+  'src/js/studio/studio-release-readiness.js',
+  'src/js/studio/studio-ux-polish.js',
+  'src/js/studio/studio-navigation.js',
+  'demo/studio.html',
+  'demo/index.html',
   'tests/core.test.js',
   'tests/dx.test.js',
   'tests/smoke.test.js',
@@ -33,8 +39,8 @@ files.forEach(f => {
   const p = path.resolve(__dirname, '../', f);
   if (fs.existsSync(p)) {
     let content = fs.readFileSync(p, 'utf8');
-    content = content.replace(/3\.9\.0/g, '3.10.0');
-    content = content.replace(/Studio Advanced Timeline Scene Builder/g, 'Studio Final UX Polish and Public Studio Release');
+    content = content.replace(/3\.10\.0/g, '3.11.0');
+    content = content.replace(/Studio Final UX Polish and Public Studio Release/g, 'Core LTS Stabilization and Migration Toolkit');
     fs.writeFileSync(p, content);
     console.log('Bumped', f);
   } else {
