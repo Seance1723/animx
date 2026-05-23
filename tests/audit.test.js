@@ -5,7 +5,7 @@ export function run() {
   try {
     const report = AnimX.finalAudit();
     
-    assert.strictEqual(report.version, '3.31.0', 'Audit version matches');
+    assert.strictEqual(report.version, '3.32.0', 'Audit version matches');
     assert.ok(report.summary.catalog.includes('presets audited'), 'Catalog summary is valid');
     
     // We expect there might be some 'needs-review' items depending on the exact coverage, 

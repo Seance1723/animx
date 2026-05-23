@@ -107,5 +107,7 @@
 @import 'gestures/gesture-states';
 @import 'presets/element-presets';
 
-// v3.18.0 3D & Spatial
 @import 'spatial/perspective';
+
+// v3.32.0 Compat & Fallbacks
+@import 'compat/fallbacks';

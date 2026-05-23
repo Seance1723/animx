@@ -1,0 +1,36 @@
+/**
+ * AnimX Fallback Utilities
+ * Exposes simple classes for UI/UX developers dealing with legacy environments.
+ */
+
+.ax-no-waapi {
+  // Empty hook for external stylesheets
+}
+
+.ax-no-intersection-observer {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.ax-reduced-motion {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.ax-fallback-mode {
+  // General indicator
+}
+
+// Ensure no stuck hidden
+.ax-legacy-safe {
+  [data-ax] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+}

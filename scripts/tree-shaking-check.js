@@ -17,7 +17,7 @@ export function generateTreeShakingReport() {
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
 
   const report = {
-    version: "3.31.0",
+    version: "3.32.0",
     generatedAt: new Date().toISOString(),
     esmEntry: !!pkg.exports?.['.']?.import,
     coreEntry: !!pkg.exports?.['./core']?.import,

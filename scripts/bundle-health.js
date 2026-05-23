@@ -13,7 +13,7 @@ export function generateBundleHealth() {
   }
 
   const report = {
-    version: "3.31.0",
+    version: "3.32.0",
     generatedAt: new Date().toISOString(),
     status: "ok",
     warnings: [],

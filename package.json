@@ -1,6 +1,6 @@
 {
   "name": "animx",
-  "version": "3.31.0",
+  "version": "3.32.0",
   "description": "Zero-dependency animation engine",
   "main": "dist/animx.js",
   "style": "dist/animx.css",
