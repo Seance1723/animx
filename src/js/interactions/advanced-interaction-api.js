@@ -1,5 +1,5 @@
 /**
- * AnimX Advanced Interaction API (v3.23.0)
+ * AnimX Advanced Interaction API (v3.24.0)
  */
 
 import { initButton } from './button-effects-engine.js';

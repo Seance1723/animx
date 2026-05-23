@@ -4,7 +4,7 @@ let subscribers = [];
 export function getProjectState() {
   if (!currentProject) {
     currentProject = {
-      version: "3.23.0",
+      version: "3.24.0",
       projectId: "proj-" + Date.now(),
       name: "Untitled Project",
       type: "custom",

@@ -22,6 +22,7 @@
 - [ ] Verify **Media Slices** preserve original `<img>` tags and respect reduced motion (v3.21.0).
 - [ ] Verify **Dropdowns and Menus** correctly toggle `aria-expanded` and clean up styles (v3.22.0).
 - [ ] Verify **Table Staggers** keep `display: table-row` intact for accessibility (v3.23.0).
+- [ ] Verify **Modals and Tooltips** detail their focus-trap caveats clearly in documentation (v3.24.0).
 
 ## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.

@@ -1,5 +1,5 @@
 /**
- * AnimX Advanced Data UI API (v3.23.0)
+ * AnimX Advanced Data UI API (v3.24.0)
  */
 
 import { initCard } from './card-motion-engine.js';

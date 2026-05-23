@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.23.0',
-    release: 'Advanced Card, Grid, List, Table, and Dashboard Motion Packs',
+    version: '3.24.0',
+    release: 'Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.23.0',
-    release: 'Advanced Card, Grid, List, Table, and Dashboard Motion Packs',
+    version: '3.24.0',
+    release: 'Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

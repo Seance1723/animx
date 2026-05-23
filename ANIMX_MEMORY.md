@@ -69,6 +69,7 @@
 - **v3.21.0** - Advanced Media Reveal, Image Masking, Video Motion, and Gallery Effects. Added image reveal, mask, clip, slice, curtain, gallery stagger, and before/after slider UIs safely without external slider library dependencies.
 - **v3.22.0** - Advanced Button, Link, Navigation, and Micro-Interaction Packs. Added button hover choreography, dropdown reveals, native ripple engines, magnetic cursors, and state machines mapping idle/loading/success UX flows.
 - **v3.23.0** - Advanced Card, Grid, List, Table, and Dashboard Motion Packs. Added table row animations preserving native ARIA semantics, dashboard KPI updates, chart reveals, and masonry grid staggering.
+- **v3.24.0** - Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion. Added input validation choreographies, auto-generating toast stacks, modal motion, and tooltip pops without relying on heavy external popover or modal dependencies.
 
 ## Completed Milestones
 

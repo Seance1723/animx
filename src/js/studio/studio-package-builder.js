@@ -2,7 +2,7 @@ export function buildProjectPackage(projectState) {
   return {
     schema: "animx-package",
     schemaVersion: "1.0",
-    animxVersion: "3.23.0",
+    animxVersion: "3.24.0",
     packageId: projectState.projectId || `pkg-${Date.now()}`,
     name: projectState.name || "Untitled Package",
     type: "project-package",

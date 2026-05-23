@@ -49,12 +49,12 @@ import { runLtsApiAudit } from '../lts/lts-api-audit.js';
 // v3.12.0 Coverage Matrix
 import { generateCoverageMatrix } from '../coverage/coverage-matrix.js';
 
-// v3.23.0 Runtime Health
+// v3.24.0 Runtime Health
 import { validateRuntime } from '../runtime/runtime-validator.js';
 import { runPerformanceAudit } from '../runtime/runtime-performance-audit.js';
 import { runCleanupAudit } from '../runtime/runtime-cleanup-audit.js';
 
-// v3.23.0 Pattern Library
+// v3.24.0 Pattern Library
 import { getPatterns } from '../patterns/pattern-registry.js';
 import { getIndustryPacks } from '../patterns/industry-demo-packs.js';
 import { exportPatternHTML, exportPatternJS } from '../patterns/pattern-export.js';
