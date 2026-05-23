@@ -1,6 +1,6 @@
 {
   "name": "animx",
-  "version": "3.29.0",
+  "version": "3.30.0",
   "description": "Zero-dependency animation engine",
   "main": "dist/animx.js",
   "style": "dist/animx.css",
@@ -10,7 +10,7 @@
     "build:full": "vite build",
     "build:core": "vite build -c vite.core.config.js",
     "build:studio": "vite build -c vite.studio.config.js",
-    "build": "npm run build:full && npm run build:core && npm run build:studio && node build-post.js",
+    "build": "npm run build:full && npm run build:core && npm run build:studio && node build-post.js && node scripts/generate-audits.js",
     "verify:dist": "node scripts/verify-dist.js",
     "size": "node scripts/size-check.js",
     "preview": "vite preview --host 0.0.0.0 --port 4173",

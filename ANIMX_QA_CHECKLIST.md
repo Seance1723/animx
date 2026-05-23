@@ -59,9 +59,18 @@
 - [ ] Verify stroke-dash drawing resolves cleanly without breaking viewBox.
 - [ ] Test `data-ax-svg` drawing automatically on scroll.
 
-## 9. CMS / No-Code Integrations
+## 9. CMS / No-Code
 - [ ] Verify `observeCMS()` captures newly injected content.
 - [ ] Test editor-safe mode by injecting `wp-admin` into body class.
+
+### 3.29.0 Verification (Local Packs)
+- [x] Zero-dependency JSON parsing logic operates correctly.
+- [x] XSS and Prototype Pollution payloads rejected.
+
+### 3.30.0 Final Audit Verification
+- [x] `AnimX.finalAudit()` validates all presets without crashing.
+- [x] Playground and Studio include all 22 animation lab panels.
+- [x] Build scripts successfully generate QA JSON outputs.
 
 ## 10. Developer Experience
 - [ ] Open console and run `AnimX.diagnose()`.

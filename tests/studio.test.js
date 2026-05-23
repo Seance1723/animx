@@ -31,10 +31,10 @@ export async function run() {
   try {
     const AnimX = (await import('../src/js/animx.js')).default;
     
-    // Check version
-    assert.strictEqual(AnimX.build.version, '3.29.0', 'AnimX version should be 3.29.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.29.0', 'versionInfo should be 3.29.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced Animation Marketplace-Ready Preset Packaging — Local Only', 'release name should match');
+    // Validate version tracking
+    assert.strictEqual(AnimX.version, '3.30.0', 'AnimX version should be 3.30.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.30.0', 'versionInfo should be 3.30.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Final Animation Catalog Audit, Playground Completion, and One-Stop Coverage QA', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
