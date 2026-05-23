@@ -75,8 +75,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.27.0',
-    release: 'Advanced Page Transitions, Section Transitions, and Route Motion Packs',
+    version: '3.28.0',
+    release: 'Advanced CMS, WordPress, Webflow, and No-Code Animation Recipes',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',

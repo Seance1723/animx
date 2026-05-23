@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.27.0
+import { elementPresets } from './presets/element-presets.js'; // v3.28.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -46,22 +46,22 @@ import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdv
 import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
-import { cms, refreshCMS, observeCMS, disconnectCMS, getCMSRecipes, applyRecipe, bindCMSApi } from './cms/cms-api.js';
+// Old CMS API (v1.7) replaced by Advanced CMS API (v3.28.0)
 import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.27.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.28.0
 
-// v3.27.0 Migration APIs
+// v3.28.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.27.0 Runtime Validation APIs
+// v3.28.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.27.0 Composer
+// v3.28.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -105,7 +105,10 @@ import { svgRoute, icon, logo, lineArt, handwriting, infographic, svgChart, svgD
 // v3.27.0 Advanced Page Transitions, Section Transitions, and Route Motion Packs
 import { pageTransition, sectionTransition, routeMotion, viewTransition, contentSwap, sharedElement, transitionLink, transitionTo, transitionFrom, transitionState, validateTransition, getTransitionEffects, destroyTransitions } from './transitions/transition-api.js';
 
-const VERSION = '3.27.0';
+// v3.28.0 Advanced CMS, WordPress, Webflow, and No-Code Animation Recipes
+import { cms, applyRecipe, registerRecipe, getRecipe, getRecipes, getCMSRecipes, refreshCMS, observeCMS, disconnectCMS, validateCMSRecipe, exportCMSRecipe, cmsAudit, destroyCMS } from './cms/advanced-cms-api.js';
+
+const VERSION = '3.28.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -140,7 +143,7 @@ class AnimXCore {
     bindComponentAnimX(this);
     bindScrollSceneAnimX(this);
     bindSvgAnimX(this);
-    bindCMSApi(this);
+    // bindCMSApi(this); - Replaced by v3.28.0
     bindLayoutAnimX(this);
     bindGestureAnimX(this);
   }
@@ -306,7 +309,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.27.0 Migration APIs
+  // v3.28.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -319,7 +322,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.27.0 Runtime Validation APIs
+  // v3.28.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -374,7 +377,7 @@ class AnimXCore {
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
 
-  // Physics & Easing APIs (v3.27.0)
+  // Physics & Easing APIs (v3.28.0)
   easing(target, config) { return easing(target, config); }
   registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
   getEase(name) { return getEase(name); }
@@ -389,7 +392,7 @@ class AnimXCore {
   validatePhysics(config) { return validatePhysics(config); }
   destroyPhysics() { return destroyPhysics(); }
 
-  // Advanced Text APIs (v3.27.0)
+  // Advanced Text APIs (v3.28.0)
   rollText(target, config) { return rollText(target, config); }
   slotText(target, config) { return slotText(target, config); }
   scrambleText(target, config) { return scrambleText(target, config); }
@@ -401,7 +404,7 @@ class AnimXCore {
   validateTextEffect(config) { return validateTextEffect(config); }
   destroyTextEffects() { return destroyTextEffects(); }
 
-  // Advanced Media APIs (v3.27.0)
+  // Advanced Media APIs (v3.28.0)
   media(target, config) { return media(target, config); }
   imageReveal(target, config) { return imageReveal(target, config); }
   imageMask(target, config) { return imageMask(target, config); }
@@ -416,7 +419,7 @@ class AnimXCore {
   getMediaEffects() { return getMediaEffects(); }
   destroyMediaEffects() { return destroyMediaEffects(); }
 
-  // Advanced Interaction APIs (v3.27.0)
+  // Advanced Interaction APIs (v3.28.0)
   button(target, config) { return button(target, config); }
   link(target, config) { return link(target, config); }
   nav(target, config) { return nav(target, config); }
@@ -430,7 +433,7 @@ class AnimXCore {
   validateInteractionEffect(config) { return validateInteractionEffect(config); }
   getInteractionEffects() { return getInteractionEffects(); }
 
-  // Advanced Data UI APIs (v3.27.0)
+  // Advanced Data UI APIs (v3.28.0)
   card(target, config) { return card(target, config); }
   grid(target, config) { return grid(target, config); }
   list(target, config) { return list(target, config); }
@@ -446,7 +449,7 @@ class AnimXCore {
   getDataUIEffects() { return getDataUIEffects(); }
   destroyDataUI() { return destroyDataUI(); }
 
-  // Advanced UI Feedback APIs (v3.27.0)
+  // Advanced UI Feedback APIs (v3.28.0)
   form(target, config) { return form(target, config); }
   input(target, config) { return input(target, config); }
   validationMotion(target, config) { return validationMotion(target, config); }
@@ -467,7 +470,7 @@ class AnimXCore {
   getFeedbackEffects() { return getFeedbackEffects(); }
   destroyFeedback() { return destroyFeedback(); }
 
-  // Advanced Background Motion APIs (v3.27.0)
+  // Advanced Background Motion APIs (v3.28.0)
   background(target, config) { return background(target, config); }
   gradient(target, config) { return gradient(target, config); }
   meshGradient(target, config) { return meshGradient(target, config); }
@@ -483,7 +486,7 @@ class AnimXCore {
   getBackgroundEffects() { return getBackgroundEffects(); }
   destroyBackgrounds() { return destroyBackgrounds(); }
 
-  // Advanced SVG Motion APIs (v3.27.0)
+  // Advanced SVG Motion APIs (v3.28.0)
   svgRoute(target, config) { return svgRoute(target, config); }
   icon(target, config) { return icon(target, config); }
   logo(target, config) { return logo(target, config); }
@@ -496,7 +499,7 @@ class AnimXCore {
   getSVGEffects() { return getSVGEffects(); }
   destroySVG() { return destroySVG(); }
 
-  // Advanced Transition APIs (v3.27.0)
+  // Advanced Transition APIs (v3.28.0)
   pageTransition(config) { return pageTransition(config); }
   sectionTransition(target, config) { return sectionTransition(target, config); }
   routeMotion(config) { return routeMotion(config); }
@@ -510,6 +513,21 @@ class AnimXCore {
   validateTransition(config) { return validateTransition(config); }
   getTransitionEffects() { return getTransitionEffects(); }
   destroyTransitions() { return destroyTransitions(); }
+
+  // Advanced CMS APIs (v3.28.0)
+  cms(config) { return cms(config); }
+  applyRecipe(target, recipeId) { return applyRecipe(target, recipeId); }
+  registerRecipe(id, config) { return registerRecipe(id, config); }
+  getRecipe(id) { return getRecipe(id); }
+  getRecipes() { return getRecipes(); }
+  getCMSRecipes() { return getCMSRecipes(); }
+  refreshCMS(root) { return refreshCMS(root); }
+  observeCMS(root, config) { return observeCMS(root, config); }
+  disconnectCMS() { return disconnectCMS(); }
+  validateCMSRecipe(recipe) { return validateCMSRecipe(recipe); }
+  exportCMSRecipe(recipeId, format) { return exportCMSRecipe(recipeId, format); }
+  cmsAudit() { return cmsAudit(); }
+  destroyCMS() { return destroyCMS(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -519,30 +537,7 @@ class AnimXCore {
     return copyExample(presetName, type);
   }
 
-  // CMS / No-Code APIs
-  cms(root, options) {
-    return cms(root, options);
-  }
-
-  refreshCMS(root) {
-    return refreshCMS(root);
-  }
-
-  observeCMS(root, options) {
-    return observeCMS(root, options);
-  }
-
-  disconnectCMS() {
-    return disconnectCMS();
-  }
-
-  getCMSRecipes() {
-    return getCMSRecipes();
-  }
-
-  applyRecipe(target, recipeName) {
-    return applyRecipe(target, recipeName);
-  }
+  // Old CMS APIs replaced by v3.28.0 implementation above
 
   refresh(root) {
     performanceMonitor.trackRefresh();
@@ -950,10 +945,23 @@ AnimX.build = {
   validateTransition,
   getTransitionEffects,
   destroyTransitions,
+  cms,
+  applyRecipe,
+  registerRecipe,
+  getRecipe,
+  getRecipes,
+  getCMSRecipes,
+  refreshCMS,
+  observeCMS,
+  disconnectCMS,
+  validateCMSRecipe,
+  exportCMSRecipe,
+  cmsAudit,
+  destroyCMS,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.27.0",
-      release: "Advanced Page Transitions, Section Transitions, and Route Motion Packs",
+      version: "3.28.0",
+      release: "Advanced CMS, WordPress, Webflow, and No-Code Animation Recipes",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
