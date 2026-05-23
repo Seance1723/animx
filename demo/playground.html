@@ -245,9 +245,9 @@
       <button class="filter-btn" data-filter="data">Data & Tables</button>
     </div>
 
-    <!-- NEW V3.15.0 CATEGORIES -->
+    <!-- NEW V3.16.0 CATEGORIES -->
     <section class="category-section" data-category="nav">
-      <h2>Nav & Tabs (v3.15.0)</h2>
+      <h2>Nav & Tabs (v3.16.0)</h2>
       <div class="playground-grid">
         <div class="demo-card">
           <a href="#" class="ax-nav-link-underline-slide" style="font-size: 1.2rem; color: #000; font-weight: 500;">Hover Me</a>
@@ -261,7 +261,7 @@
     </section>
 
     <section class="category-section" data-category="data">
-      <h2>Tables, Lists & KPI (v3.15.0)</h2>
+      <h2>Tables, Lists & KPI (v3.16.0)</h2>
       <div class="playground-grid">
         <div class="demo-card" data-ax="list-row-reveal">
           <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 1</div>
@@ -421,9 +421,9 @@
       
     </div>
 
-    <!-- v3.15.0 INDUSTRY DEMO PACKS -->
+    <!-- v3.16.0 INDUSTRY DEMO PACKS -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Industry Demo Packs (v3.15.0)</h2>
+      <h2>Industry Demo Packs (v3.16.0)</h2>
       <p>Combine multiple patterns into vertical scrolling experiences.</p>
       <div class="playground-grid">
         <div class="demo-card" style="background: #f8fafc;">
@@ -439,9 +439,9 @@
       </div>
     </section>
 
-    <!-- v3.15.0 ANIMATION COMPOSER PLAYGROUND -->
+    <!-- v3.16.0 ANIMATION COMPOSER PLAYGROUND -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Animation Composer Playground (v3.15.0)</h2>
+      <h2>Animation Composer Playground (v3.16.0)</h2>
       <p>Test composed combinations of effects on a single element.</p>
       
       <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
@@ -464,9 +464,35 @@
       </div>
     </section>
 
+    <!-- v3.16.0 MOTION STATE PLAYGROUND -->
+    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
+      <h2>Motion State & Trigger Playground (v3.16.0)</h2>
+      <p>Test declarative logic binding custom events or states to animations.</p>
+      
+      <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
+        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>Target</h3>
+          <div class="state-target" data-ax-state="idle" data-ax-state-idle="fade-up" data-ax-state-loading="card-lift" data-ax-state-success="card-spotlight-hover" style="height: 150px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+            State: Idle
+          </div>
+        </div>
+        
+        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>Control Panel</h3>
+          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <button class="ax-btn ax-btn-sm" onclick="document.querySelector('.state-target').setAttribute('data-ax-state', 'idle'); document.querySelector('.state-target').innerText='State: Idle'">Set Idle</button>
+            <button class="ax-btn ax-btn-sm" style="background: #f59e0b; color: #fff;" onclick="document.querySelector('.state-target').setAttribute('data-ax-state', 'loading'); document.querySelector('.state-target').innerText='State: Loading'">Set Loading</button>
+            <button class="ax-btn ax-btn-sm" style="background: #10b981; color: #fff;" onclick="document.querySelector('.state-target').setAttribute('data-ax-state', 'success'); document.querySelector('.state-target').innerText='State: Success'">Set Success</button>
+            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: #fff;" onclick="AnimX.trigger('custom-fail'); document.querySelector('.state-target').innerText='Triggered custom-fail'">Trigger custom-fail Event</button>
+          </div>
+          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Notice how clicking the buttons swaps the <code>data-ax-state</code> attribute, and AnimX watches the DOM using <code>MutationObserver</code> to fire the corresponding variant instantly.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- v3.13.0 HEALTH CHECK UTILITY -->
     <div style="margin-top: 40px; padding: 20px; background: #fffbeb; border: 1px solid #fef08a; border-radius: 8px;">
-      <h3>Playground Active Verification (v3.15.0)</h3>
+      <h3>Playground Active Verification (v3.16.0)</h3>
       <p>Ensure current DOM is safe and not leaking listeners.</p>
       <button class="ax-btn ax-btn-sm" onclick="console.log(window.AnimX.validateRuntime()); alert('Checked! See console for details.');">Validate Active Runtime</button>
     </div>

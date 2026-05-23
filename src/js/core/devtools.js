@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.15.0',
-    release: 'Animation Composer, Effect Chaining, and Variant Builder',
+    version: '3.16.0',
+    release: 'Motion State Manager, Trigger Orchestration, and Conditional Animation Rules',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.15.0',
-    release: 'Animation Composer, Effect Chaining, and Variant Builder',
+    version: '3.16.0',
+    release: 'Motion State Manager, Trigger Orchestration, and Conditional Animation Rules',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

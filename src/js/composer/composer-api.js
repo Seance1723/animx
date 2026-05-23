@@ -1,5 +1,5 @@
 /**
- * AnimX Composer API (v3.15.0)
+ * AnimX Composer API (v3.16.0)
  * Safely stacks multiple animation effects onto a single target.
  */
 
@@ -8,7 +8,7 @@ import { getVariant } from './variant-registry.js';
 // Removed invalid core/init import
 
 export function compose(target, effectsConfig) {
-  const elements = typeof target === 'string' ? document.querySelectorAll(target) : (target instanceof NodeList ? target : [target]);
+  const elements = typeof target === 'string' ? document.querySelectorAll(target) : ((typeof NodeList !== 'undefined' && target instanceof NodeList) || Array.isArray(target) ? target : [target]);
   if (!elements || elements.length === 0) return null;
 
   // If a string is passed, check if it's a variant

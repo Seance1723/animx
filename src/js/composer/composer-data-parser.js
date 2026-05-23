@@ -1,5 +1,5 @@
 /**
- * AnimX Composer Data Parser (v3.15.0)
+ * AnimX Composer Data Parser (v3.16.0)
  * Scans DOM for data-ax-compose and data-ax-variant on load.
  */
 

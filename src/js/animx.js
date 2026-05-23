@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.15.0
+import { elementPresets } from './presets/element-presets.js'; // v3.16.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,23 +51,26 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.15.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.16.0
 
-// v3.15.0 Migration APIs
+// v3.16.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.15.0 Runtime Validation APIs
+// v3.16.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.15.0 Composer
+// v3.16.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
 import { initComposerDOM } from './composer/composer-data-parser.js';
 
-const VERSION = '3.15.0';
+// v3.16.0 State
+import { state, setState, getState, toggleState, trigger, rule, initStateDOM, destroyStateDOM } from './state/state-api.js';
+
+const VERSION = '3.16.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -268,7 +271,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.15.0 Migration APIs
+  // v3.16.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -281,7 +284,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.15.0 Runtime Validation APIs
+  // v3.16.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -310,6 +313,16 @@ class AnimXCore {
   validateChain(timeline) {
     return validateChain(timeline);
   }
+
+  // State APIs (v3.16.0)
+  state(target, config) { return state(target, config); }
+  setState(target, stateName) { return setState(target, stateName); }
+  getState(target) { return getState(target); }
+  toggleState(target, statesMap) { return toggleState(target, statesMap); }
+  trigger(eventName, payload) { return trigger(eventName, payload); }
+  rule(target, config) { return rule(target, config); }
+  when(target, config) { return rule(target, config); }
+  destroyStates() { return destroyStateDOM(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -615,10 +628,16 @@ AnimX.build = {
   getVariant,
   getVariants,
   validateChain,
+  state,
+  setState,
+  getState,
+  toggleState,
+  trigger,
+  rule,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.15.0",
-      release: "Animation Composer, Effect Chaining, and Variant Builder",
+      version: "3.16.0",
+      release: "Motion State Manager, Trigger Orchestration, and Conditional Animation Rules",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
@@ -633,6 +652,7 @@ if (typeof window !== 'undefined') {
       const conf = getConfig();
       if (conf.autoInit) AnimX.init();
       initComposerDOM();
+      initStateDOM();
     };
 
     if (document.readyState === 'loading') {

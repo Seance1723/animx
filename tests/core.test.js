@@ -4,7 +4,7 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    assert.strictEqual(AnimX.version, '3.15.0', 'Version should match package');
+    assert.strictEqual(AnimX.version, '3.16.0', 'Version should match package');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));
@@ -13,10 +13,10 @@ export function run() {
     assert.doesNotThrow(() => safeInst.destroy());
     assert.doesNotThrow(() => AnimX.destroy('.missing-target-does-not-crash'));
 
-    // v3.15.0 Migration Hook Tests
+    // v3.16.0 Migration Hook Tests
     assert.strictEqual(typeof AnimX.migrateDataAttributes, 'function', 'migrateDataAttributes API should exist');
 
-    // v3.15.0 Composer API Tests
+    // v3.16.0 Composer API Tests
     assert.strictEqual(typeof AnimX.compose, 'function', 'compose API should exist');
     assert.strictEqual(typeof AnimX.registerVariant, 'function', 'registerVariant API should exist');
     assert.strictEqual(typeof AnimX.validateChain, 'function', 'validateChain API should exist');
@@ -33,10 +33,19 @@ export function run() {
     ]);
     assert.strictEqual(validation.ok, true, "Valid chain should pass");
 
+    // v3.16.0 State API Tests
+    assert.strictEqual(typeof AnimX.state, 'function', 'state API should exist');
+    assert.strictEqual(typeof AnimX.setState, 'function', 'setState API should exist');
+    assert.strictEqual(typeof AnimX.trigger, 'function', 'trigger API should exist');
+
+    const stateTarget = document.createElement('div');
+    AnimX.state(stateTarget, { initial: "idle", states: { idle: "fade", loading: "zoom" } });
+    assert.strictEqual(AnimX.getState(stateTarget), "idle", "State should initialize correctly");
+
     console.log('[Tests] core API check passed');
     
   } catch (err) {
-    throw e;
+    throw err;
   }
 }
 

@@ -61,7 +61,8 @@
 - **v3.13.0** - Animation Runtime Validation, Performance Hardening, and Demo Verification. Built the Runtime Toolkit (`runtime-validator.js`, `runtime-performance-audit.js`, `runtime-cleanup-audit.js`) to programmatically verify that active presets contain valid metadata and do not leak memory. Implemented `AnimX.validateRuntime()` into core. Added the Runtime Health panel to Studio.
 - **v3.14.0** - Real-World Animation Pattern Library and Industry Demo Packs. Added the Pattern Library architecture (`pattern-registry.js`, `industry-demo-packs.js`, `pattern-export.js`) enabling users to copy-paste complete UI section blocks (SaaS, Ecommerce, Dashboards) in Data HTML or JS Timeline formats. Core AnimX remains zero-dependency.
 - **v3.15.0** - Animation Composer, Effect Chaining, and Variant Builder. Implemented the core `AnimX.compose()` and `AnimX.registerVariant()` APIs, allowing safe combination of multiple effects (e.g., entrance + hover). Added `data-ax-variant` parser. Extended Studio with a Visual Composer. Core AnimX remains under 20KB.
-- **Next planned version:** v3.16.0
+- **v3.16.0** - Motion State Manager, Trigger Orchestration, and Conditional Animation Rules. Built a declarative State Machine leveraging a debounced `MutationObserver`. Added `AnimX.setState()`, `AnimX.trigger()`, and `AnimX.when()`. Supported `data-ax-state` attribute routing. Core footprint remains under 20KB.
+- **Next planned version:** v3.17.0
 
 ## Completed Milestones
 
