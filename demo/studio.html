@@ -23,7 +23,14 @@
       <button class="ax-studio-mode-btn" data-mode="packages">Packages</button>
       <button class="ax-studio-mode-btn" data-mode="qa">QA Assistant</button>
       <button class="ax-studio-mode-btn" data-mode="catalog">Creative Catalog</button>
-      <button class="ax-studio-mode-btn" data-mode="release">Release</button>
+      <button class="ax-studio-mode-btn" data-mode="handoff">Handoff Documentation</button>
+      <button class="ax-studio-mode-btn" data-mode="delivery">Delivery Kit</button>
+      <button class="ax-studio-mode-btn" data-mode="guides">Implementation Guides</button>
+      <button class="ax-studio-mode-btn" data-mode="map">Animation Map</button>
+      <button class="ax-studio-mode-btn" data-mode="inventory">Preset Inventory</button>
+      <button class="ax-studio-mode-btn" data-mode="summary">Summary</button>
+      <button class="ax-studio-mode-btn" data-mode="checklist">Deployment Checklist</button>
+      <button class="ax-studio-mode-btn" data-mode="export">Export</button>
     </div>
     <div class="ax-studio-actions">
       <button id="btn-device-desktop" title="Desktop View">💻</button>
@@ -85,6 +92,147 @@
         <div class="ax-catalog-grid" id="catalog-grid">
            <!-- Populated by JS -->
         </div>
+      </section>
+
+      <!-- HANDOFF PANEL -->
+      <section id="panel-handoff" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Handoff Documentation</h2>
+        <select id="handoff-doc-type">
+          <option value="client">Client Motion Guide</option>
+          <option value="developer">Developer Implementation Guide</option>
+          <option value="cms">CMS Editor Guide</option>
+          <option value="wordpress">WordPress Handoff Guide</option>
+          <option value="webflow">Webflow Handoff Guide</option>
+        </select>
+        <button id="btn-generate-handoff">Generate Document</button>
+        <button id="btn-copy-handoff">Copy Markdown</button>
+        <button id="btn-dl-handoff-md">Download Markdown</button>
+        <button id="btn-dl-handoff-html">Download HTML</button>
+        <button id="btn-dl-handoff-json">Download JSON</button>
+        <pre id="handoff-preview" style="margin-top: 1rem; padding: 1rem; background: #eee; white-space: pre-wrap;"></pre>
+      </section>
+
+      <!-- DELIVERY KIT PANEL -->
+      <section id="panel-delivery" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Delivery Kit Generator</h2>
+        <div>
+          <label><input type="checkbox" id="dk-client" checked> Include Client Guide</label><br>
+          <label><input type="checkbox" id="dk-dev" checked> Include Developer Guide</label><br>
+          <label><input type="checkbox" id="dk-cms" checked> Include CMS Guide</label><br>
+          <label><input type="checkbox" id="dk-wp" checked> Include WordPress Guide</label><br>
+          <label><input type="checkbox" id="dk-webflow" checked> Include Webflow Guide</label><br>
+          <label><input type="checkbox" id="dk-map" checked> Include Animation Map</label><br>
+          <label><input type="checkbox" id="dk-inv" checked> Include Preset Inventory</label><br>
+          <label><input type="checkbox" id="dk-qa" checked> Include QA Summary</label><br>
+          <label><input type="checkbox" id="dk-a11y" checked> Include Accessibility Summary</label><br>
+          <label><input type="checkbox" id="dk-sec" checked> Include Security Summary</label><br>
+          <label><input type="checkbox" id="dk-chk" checked> Include Deployment Checklist</label>
+        </div>
+        <button id="btn-generate-dk">Generate Full Delivery Kit</button>
+        <button id="btn-copy-dk-json">Copy Delivery Kit JSON</button>
+        <button id="btn-dl-dk-json">Download Delivery Kit JSON</button>
+        <button id="btn-dl-dk-md">Download Delivery Kit Markdown</button>
+      </section>
+
+      <!-- IMPLEMENTATION GUIDES PANEL -->
+      <section id="panel-guides" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Implementation Guides</h2>
+        <select id="guides-platform">
+          <option value="html">HTML</option>
+          <option value="cms">CMS</option>
+          <option value="wordpress">WordPress</option>
+          <option value="webflow">Webflow</option>
+          <option value="react">React</option>
+          <option value="vue">Vue</option>
+        </select>
+        <div id="guides-preview" style="margin-top: 1rem; padding: 1rem; background: #f9f9f9;"></div>
+      </section>
+
+      <!-- ANIMATION MAP PANEL -->
+      <section id="panel-map" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Animation Map</h2>
+        <button id="btn-generate-map">Generate Animation Map</button>
+        <button id="btn-copy-map">Copy Markdown</button>
+        <button id="btn-dl-map-json">Download JSON</button>
+        <div id="map-preview" style="margin-top: 1rem; padding: 1rem; background: #f9f9f9;">
+          <table border="1" cellpadding="5" cellspacing="0" style="width:100%; border-collapse: collapse;">
+            <thead><tr><th>Section</th><th>Target</th><th>Preset</th><th>Trigger</th><th>Duration</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Hero</td><td>.hero-title</td><td>text-mask-up</td><td>load</td><td>700ms</td><td></td></tr>
+              <tr><td>Feature Cards</td><td>.feature-card</td><td>fade-up</td><td>scroll</td><td>600ms</td><td></td></tr>
+              <tr><td>CTA</td><td>.cta-button</td><td>button-glow-soft</td><td>hover/focus</td><td>300ms</td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PRESET INVENTORY PANEL -->
+      <section id="panel-inventory" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Preset Inventory</h2>
+        <button id="btn-generate-inv">Generate Preset Inventory</button>
+        <button id="btn-copy-inv">Copy Inventory</button>
+        <button id="btn-dl-inv-json">Download JSON</button>
+        <div id="inv-preview" style="margin-top: 1rem; padding: 1rem; background: #f9f9f9;"></div>
+      </section>
+
+      <!-- SUMMARY PANEL -->
+      <section id="panel-summary" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>QA / Accessibility / Security Summary</h2>
+        <button id="btn-run-qa">Run QA Summary</button>
+        <button id="btn-run-a11y">Run Accessibility Summary</button>
+        <button id="btn-run-sec">Run Security Summary</button>
+        <button id="btn-copy-summary">Copy Summary</button>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <div style="flex:1; border: 1px solid #ccc; padding: 1rem;">
+            <h3>QA Summary</h3>
+            <pre id="summary-qa">Status: Not run</pre>
+          </div>
+          <div style="flex:1; border: 1px solid #ccc; padding: 1rem;">
+            <h3>Accessibility Summary</h3>
+            <pre id="summary-a11y">Status: Not run<br>(Note: not WCAG certification)</pre>
+          </div>
+          <div style="flex:1; border: 1px solid #ccc; padding: 1rem;">
+            <h3>Security Summary</h3>
+            <pre id="summary-sec">Status: Not run<br>No eval/new Function used.<br>(Note: not a security certification)</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEPLOYMENT CHECKLIST PANEL -->
+      <section id="panel-checklist" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Deployment Checklist</h2>
+        <button id="btn-copy-chk">Copy Checklist</button>
+        <button id="btn-dl-chk-md">Download Checklist Markdown</button>
+        <button id="btn-reset-chk">Reset Checklist</button>
+        <ul id="checklist-preview" style="margin-top: 1rem; list-style: none; padding: 0;">
+          <li><label><input type="checkbox"> animx.min.css copied</label></li>
+          <li><label><input type="checkbox"> animx.min.js copied</label></li>
+          <li><label><input type="checkbox"> CSS loaded before page content</label></li>
+          <li><label><input type="checkbox"> JS loaded before closing body</label></li>
+          <li><label><input type="checkbox"> optional adapters loaded only if needed</label></li>
+          <li><label><input type="checkbox"> no console errors</label></li>
+          <li><label><input type="checkbox"> animations verified</label></li>
+          <li><label><input type="checkbox"> reduced motion verified</label></li>
+          <li><label><input type="checkbox"> keyboard/focus verified</label></li>
+          <li><label><input type="checkbox"> CMS refresh verified if dynamic content exists</label></li>
+          <li><label><input type="checkbox"> QA summary reviewed</label></li>
+          <li><label><input type="checkbox"> accessibility summary reviewed</label></li>
+          <li><label><input type="checkbox"> security summary reviewed</label></li>
+        </ul>
+      </section>
+
+      <!-- EXPORT PANEL -->
+      <section id="panel-export" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <h2>Export</h2>
+        <select id="export-format">
+          <option value="markdown">Markdown</option>
+          <option value="html">HTML</option>
+          <option value="json">JSON</option>
+        </select>
+        <button id="btn-export-doc">Export Current Document</button>
+        <button id="btn-export-kit">Export Full Delivery Kit</button>
+        <button id="btn-copy-export">Copy Export</button>
+        <button id="btn-dl-export">Download Export</button>
       </section>
       
     </main>

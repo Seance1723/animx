@@ -26,6 +26,11 @@
       height: 100vh;
       overflow: hidden;
     }
+    .playground-wrapper {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
     /* Layout */
     .sidebar {
       width: 320px;
@@ -223,7 +228,7 @@
   </style>
 </head>
 <body>
-
+<div class="playground-wrapper">
   <!-- LEFT SIDEBAR -->
   <div class="sidebar">
     <div class="header">
@@ -683,6 +688,90 @@
 
     // Boot
     window.addEventListener('DOMContentLoaded', init);
+  </script>
+  <!-- v3.7.0 Handoff and Delivery Kit Playground -->
+  <section class="ax-section" style="background: #f1f5f9; color: #333; padding: 4rem 2rem; border-top: 2px solid #ccc;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 style="color: #0f172a; margin-bottom: 0.5rem; font-size: 2rem;">v3.7.0 Handoff and Delivery Kit Playground</h2>
+      <p style="color: #475569; margin-bottom: 2rem; font-size: 1.1rem;">Preview generated handoff documents and delivery kits with sample project data.</p>
+      
+      <div style="background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0;">Sample Project: AnimX SaaS Landing Demo</h3>
+        <p style="color: #64748b;"><strong>Used Presets:</strong> text-mask-up, fade-up, card-lift-soft, button-glow-soft, number-counter-smooth, layout-expand, section-curtain-reveal</p>
+        
+        <div style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('client')">Generate Client Guide</button>
+          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('developer')">Generate Developer Guide</button>
+          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('map')">Generate Animation Map</button>
+          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('inv')">Generate Preset Inventory</button>
+          <button class="ax-btn" style="background: #10b981; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold;" onclick="playgroundGenerate('kit')">Generate Full Delivery Kit</button>
+          <button class="ax-btn" style="background: #cbd5e1; color: #0f172a; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundCopy()">Copy Markdown / Code</button>
+          <button class="ax-btn" style="background: #cbd5e1; color: #0f172a; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundDownload()">Download JSON</button>
+        </div>
+        
+        <pre id="pg-handoff-preview" style="background: #1e293b; color: #f8fafc; padding: 1.5rem; border-radius: 6px; overflow-x: auto; min-height: 200px; font-family: monospace; white-space: pre-wrap;">// Output will appear here</pre>
+      </div>
+    </div>
+  </section>
+
+  <script src="../dist/studio/animx-studio.js"></script>
+  <script>
+    const sampleState = {
+      name: "AnimX SaaS Landing Demo",
+      motionStyle: "smooth-professional",
+      sections: [
+        { type: "Hero" },
+        { type: "Features" },
+        { type: "Pricing" },
+        { type: "Stats" },
+        { type: "FAQ" },
+        { type: "CTA" }
+      ]
+    };
+
+    function pgEscape(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    function playgroundGenerate(type) {
+      if (!window.AnimXStudio || !window.AnimXStudio.generateClientMotionGuide) {
+         document.getElementById('pg-handoff-preview').innerHTML = "Studio Handoff APIs not loaded.";
+         return;
+      }
+      let output = "";
+      if (type === 'client') {
+        output = window.AnimXStudio.generateClientMotionGuide(sampleState);
+      } else if (type === 'developer') {
+        output = window.AnimXStudio.generateDeveloperGuide(sampleState);
+      } else if (type === 'map') {
+        output = window.AnimXStudio.generateAnimationMap(sampleState);
+      } else if (type === 'inv') {
+        output = window.AnimXStudio.generatePresetInventory(sampleState);
+      } else if (type === 'kit') {
+        const kit = window.AnimXStudio.generateDeliveryKit(sampleState, {
+          includeClient: true, includeDev: true, includeCms: true, includeWp: true, includeWebflow: true,
+          includeMap: true, includeInventory: true, includeQa: true, includeChecklist: true
+        });
+        output = JSON.stringify(kit, null, 2);
+      }
+      document.getElementById('pg-handoff-preview').innerHTML = pgEscape(output);
+    }
+
+    function playgroundCopy() {
+      const text = document.getElementById('pg-handoff-preview').textContent;
+      navigator.clipboard.writeText(text).then(() => alert('Copied!'));
+    }
+    
+    function playgroundDownload() {
+      const text = document.getElementById('pg-handoff-preview').textContent;
+      const blob = new Blob([text], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'animx-playground-export.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
   </script>
 </body>
 </html>

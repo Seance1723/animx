@@ -11,6 +11,8 @@
 - **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
+- **v3.7.0**: Studio Handoff Documentation and Client Delivery Kits.
+- **v3.6.0**: Advanced Creative Animation Catalog.
 - **v2.9.0**: Security and Defensive Runtime Hardening
 - **v2.8.0**: Accessibility and Compliance Hardening
 - **v2.7.0**: Production Optimization and Bundle Control

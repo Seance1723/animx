@@ -9,6 +9,16 @@ import { validatePackage } from '../src/js/studio/studio-package-validator.js';
 import { runFullProjectQa } from '../src/js/studio/studio-qa-runner.js';
 import { runReleaseAssistant } from '../src/js/studio/studio-release-assistant.js';
 import { getCreativeEffects, getCreativeFamilies } from '../src/js/creative/creative-catalog.js';
+import { 
+  generateClientMotionGuide, 
+  generateDeveloperGuide, 
+  generateCMSGuide, 
+  generateWordPressGuide, 
+  generateWebflowGuide
+} from '../src/js/studio/studio-handoff.js';
+import { generateDeliveryKit } from '../src/js/studio/studio-delivery.js';
+import fs from 'fs';
+import path from 'path';
 
 console.log('▶ Running studio.test.js...');
 
@@ -17,9 +27,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.6.0', 'AnimX version should be 3.6.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.6.0', 'versionInfo should be 3.6.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced Creative Animation Catalog and Playground Expansion', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.7.0', 'AnimX version should be 3.7.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.7.0', 'versionInfo should be 3.7.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio Handoff Documentation and Client Delivery Kits', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
@@ -33,7 +43,7 @@ export async function run() {
     
     // Check Project State defaults
     const state = getProjectState();
-    assert.strictEqual(state.version, '3.6.0', 'Project state should default to 3.6.0');
+    assert.strictEqual(state.version, '3.7.0', 'Project state should default to 3.7.0');
     assert.strictEqual(state.motionStyle, 'smooth-professional', 'Default motion style should be smooth-professional');
     assert.strictEqual(state.sections.length, 0, 'Should start with no sections');
     
@@ -59,7 +69,7 @@ export async function run() {
     // Check Project Packaging
     const pkgObj = buildProjectPackage(themedState);
     assert.strictEqual(pkgObj.schema, 'animx-package', 'Schema ID should be correct');
-    assert.strictEqual(pkgObj.animxVersion, '3.6.0', 'Package version should match animx version');
+    assert.strictEqual(pkgObj.animxVersion, '3.7.0', 'Package version should match animx version');
     
     const validResult = validatePackage(JSON.stringify(pkgObj));
     assert.strictEqual(validResult.ok, true, 'Valid package should pass validation');
@@ -104,6 +114,35 @@ export async function run() {
     assert.strictEqual(families.includes('roll'), true, 'Families should include roll');
     assert.strictEqual(families.includes('kinetic'), true, 'Families should include kinetic');
     
+    // Check Handoff and Delivery Kits
+    const sampleProject = { name: "Test Project", motionStyle: "default", sections: [] };
+    const devGuide = generateDeveloperGuide(sampleProject);
+    assert.strictEqual(devGuide.includes('animx.min.css'), true, 'Dev guide should include css loading');
+    assert.strictEqual(devGuide.includes('animx.min.js'), true, 'Dev guide should include js loading');
+    
+    const wpGuide = generateWordPressGuide(sampleProject);
+    assert.strictEqual(wpGuide.includes("wp_enqueue_style('animx'"), true, 'WP guide should include enqueue style');
+    
+    const dkOptions = { includeClient: true, includeDev: true, includeCms: true, includeWp: true, includeWebflow: true, includeMap: true, includeInventory: true, includeQa: true, includeChecklist: true };
+    const deliveryKit = generateDeliveryKit(sampleProject, dkOptions);
+    assert.strictEqual(deliveryKit.version, '3.7.0', 'Delivery Kit should include version 3.7.0');
+    assert.strictEqual(deliveryKit.projectName, 'Test Project', 'Delivery Kit should match project name');
+    
+    // HTML checks
+    const studioHtml = fs.readFileSync(path.resolve('./demo/studio.html'), 'utf8');
+    assert.strictEqual(studioHtml.includes('Handoff Documentation'), true, 'demo/studio.html should contain Handoff Documentation');
+    assert.strictEqual(studioHtml.includes('Delivery Kit'), true, 'demo/studio.html should contain Delivery Kit');
+    assert.strictEqual(studioHtml.includes('Client Motion Guide'), true, 'demo/studio.html should contain Client Motion Guide');
+    assert.strictEqual(studioHtml.includes('Developer Implementation Guide'), true, 'demo/studio.html should contain Developer Implementation Guide');
+    assert.strictEqual(studioHtml.includes('WordPress Handoff Guide'), true, 'demo/studio.html should contain WordPress Handoff Guide');
+    assert.strictEqual(studioHtml.includes('Webflow Handoff Guide'), true, 'demo/studio.html should contain Webflow Handoff Guide');
+    assert.strictEqual(studioHtml.includes('Animation Map'), true, 'demo/studio.html should contain Animation Map');
+    assert.strictEqual(studioHtml.includes('Preset Inventory'), true, 'demo/studio.html should contain Preset Inventory');
+    
+    // Playground Checks
+    const playgroundHtml = fs.readFileSync(path.resolve('./demo/playground.html'), 'utf8');
+    assert.strictEqual(playgroundHtml.includes('Handoff and Delivery Kit Playground'), true, 'demo/playground.html should contain Handoff and Delivery Kit Playground');
+
     console.log('✅ studio.test.js passed.');
   } catch (error) {
     console.error('❌ studio.test.js failed:', error);

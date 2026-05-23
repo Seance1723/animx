@@ -18,6 +18,16 @@ import { runFullProjectQa } from './studio-qa-runner.js';
 import { runReleaseAssistant } from './studio-release-assistant.js';
 import { draftReleaseNotes } from './studio-release-notes.js';
 import { getCreativeEffects, getCreativeFamilies } from '../creative/creative-catalog.js';
+import { 
+  generateClientMotionGuide, 
+  generateDeveloperGuide, 
+  generateCMSGuide, 
+  generateWordPressGuide, 
+  generateWebflowGuide,
+  generateDeploymentChecklist,
+  escapeHtml
+} from './studio-handoff.js';
+import { generateAnimationMap, generatePresetInventory, generateDeliveryKit } from './studio-delivery.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -53,6 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // Expose Creative Catalog
   window.AnimXStudio.getCreativeEffects = getCreativeEffects;
   window.AnimXStudio.getCreativeFamilies = getCreativeFamilies;
+
+  // Expose Handoff & Delivery APIs
+  window.AnimXStudio.generateClientMotionGuide = generateClientMotionGuide;
+  window.AnimXStudio.generateDeveloperGuide = generateDeveloperGuide;
+  window.AnimXStudio.generateCMSGuide = generateCMSGuide;
+  window.AnimXStudio.generateWordPressGuide = generateWordPressGuide;
+  window.AnimXStudio.generateWebflowGuide = generateWebflowGuide;
+  window.AnimXStudio.generateDeploymentChecklist = generateDeploymentChecklist;
+  window.AnimXStudio.generateAnimationMap = generateAnimationMap;
+  window.AnimXStudio.generatePresetInventory = generatePresetInventory;
+  window.AnimXStudio.generateDeliveryKit = generateDeliveryKit;
+  window.AnimXStudio.escapeHtml = escapeHtml;
   
   // Load state from localStorage
   const state = loadState();

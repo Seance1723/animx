@@ -75,8 +75,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.6.0',
-    release: 'Advanced Creative Animation Catalog and Playground Expansion',
+    version: '3.7.0',
+    release: 'Studio Handoff Documentation and Client Delivery Kits',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',
