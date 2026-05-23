@@ -1,5 +1,5 @@
 /**
- * AnimX Easing API (v3.21.0)
+ * AnimX Easing API (v3.22.0)
  * Exports bezier curve parsers and the easing registry.
  */
 import { registerEase, getEase, getEases, validateEase } from './easing-registry.js';

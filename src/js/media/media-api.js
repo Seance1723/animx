@@ -1,5 +1,5 @@
 /**
- * AnimX Advanced Media API (v3.21.0)
+ * AnimX Advanced Media API (v3.22.0)
  */
 
 import { initImageReveal, initImageMask } from './image-reveal-engine.js';

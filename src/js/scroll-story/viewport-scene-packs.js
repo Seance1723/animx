@@ -1,5 +1,5 @@
 /**
- * AnimX Viewport Scene Packs (v3.21.0)
+ * AnimX Viewport Scene Packs (v3.22.0)
  * Pre-configured scrolling templates for SaaS, eCommerce, Portfolios.
  */
 

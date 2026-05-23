@@ -66,7 +66,8 @@
 - **v3.18.0** - Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs. Introduced zero-dependency DOM-based 3D CSS transforms and highly-optimized pointer parallax tracking. Added `AnimX.spatial()`, `AnimX.threeD()`, and `AnimX.depthScene()`.
 - **v3.19.0** - Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics. Integrated mathematical approximations for `requestAnimationFrame` Spring, Elastic, and Snap UIs alongside an advanced custom bezier Easing Registry.
 - **v3.20.0** - Advanced Creative Text Reveal, Rolling Typography, and Scroll Type Studio. Deployed zero-dependency GSAP-style text engines including Scrambles, Counters, Marquees, and split-text accessibility wrappers ensuring `aria-hidden` fragmentation.
-- **v3.21.0** - Advanced Media Reveal, Image Masking, Video Motion, and Gallery Effects.
+- **v3.21.0** - Advanced Media Reveal, Image Masking, Video Motion, and Gallery Effects. Added image reveal, mask, clip, slice, curtain, gallery stagger, and before/after slider UIs safely without external slider library dependencies.
+- **v3.22.0** - Advanced Button, Link, Navigation, and Micro-Interaction Packs. Added button hover choreography, dropdown reveals, native ripple engines, magnetic cursors, and state machines mapping idle/loading/success UX flows.
 
 ## Completed Milestones
 

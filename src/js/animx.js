@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.21.0
+import { elementPresets } from './presets/element-presets.js'; // v3.22.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,17 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.21.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.22.0
 
-// v3.21.0 Migration APIs
+// v3.22.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.21.0 Runtime Validation APIs
+// v3.22.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.21.0 Composer
+// v3.22.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -87,7 +87,10 @@ import { rollText, slotText, scrambleText, marqueeText, counterText, scrollText,
 // v3.21.0 Advanced Media & Gallery Effects
 import { media, imageReveal, imageMask, imageClip, mediaHover, mediaParallax, videoMotion, gallery, lightboxMotion, beforeAfter, validateMediaEffect, getMediaEffects, destroyMediaEffects } from './media/media-api.js';
 
-const VERSION = '3.21.0';
+// v3.22.0 Advanced Button, Link, Navigation, and Micro-Interaction Packs
+import { button, link, nav, menu, dropdown, mobileMenu, micro, buttonState, navState, tabIndicator, validateInteractionEffect, getInteractionEffects } from './interactions/advanced-interaction-api.js';
+
+const VERSION = '3.22.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -288,7 +291,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.21.0 Migration APIs
+  // v3.22.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -301,7 +304,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.21.0 Runtime Validation APIs
+  // v3.22.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -356,7 +359,7 @@ class AnimXCore {
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
 
-  // Physics & Easing APIs (v3.21.0)
+  // Physics & Easing APIs (v3.22.0)
   easing(target, config) { return easing(target, config); }
   registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
   getEase(name) { return getEase(name); }
@@ -371,7 +374,7 @@ class AnimXCore {
   validatePhysics(config) { return validatePhysics(config); }
   destroyPhysics() { return destroyPhysics(); }
 
-  // Advanced Text APIs (v3.21.0)
+  // Advanced Text APIs (v3.22.0)
   rollText(target, config) { return rollText(target, config); }
   slotText(target, config) { return slotText(target, config); }
   scrambleText(target, config) { return scrambleText(target, config); }
@@ -383,7 +386,7 @@ class AnimXCore {
   validateTextEffect(config) { return validateTextEffect(config); }
   destroyTextEffects() { return destroyTextEffects(); }
 
-  // Advanced Media APIs (v3.21.0)
+  // Advanced Media APIs (v3.22.0)
   media(target, config) { return media(target, config); }
   imageReveal(target, config) { return imageReveal(target, config); }
   imageMask(target, config) { return imageMask(target, config); }
@@ -397,6 +400,20 @@ class AnimXCore {
   validateMediaEffect(config) { return validateMediaEffect(config); }
   getMediaEffects() { return getMediaEffects(); }
   destroyMediaEffects() { return destroyMediaEffects(); }
+
+  // Advanced Interaction APIs (v3.22.0)
+  button(target, config) { return button(target, config); }
+  link(target, config) { return link(target, config); }
+  nav(target, config) { return nav(target, config); }
+  menu(target, config) { return menu(target, config); }
+  dropdown(target, config) { return dropdown(target, config); }
+  mobileMenu(target, config) { return mobileMenu(target, config); }
+  micro(target, config) { return micro(target, config); }
+  buttonState(target, config) { return buttonState(target, config); }
+  navState(target, config) { return navState(target, config); }
+  tabIndicator(target, config) { return tabIndicator(target, config); }
+  validateInteractionEffect(config) { return validateInteractionEffect(config); }
+  getInteractionEffects() { return getInteractionEffects(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -754,10 +771,22 @@ AnimX.build = {
   validateMediaEffect,
   getMediaEffects,
   destroyMediaEffects,
+  button,
+  link,
+  nav,
+  menu,
+  dropdown,
+  mobileMenu,
+  micro,
+  buttonState,
+  navState,
+  tabIndicator,
+  validateInteractionEffect,
+  getInteractionEffects,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.21.0",
-      release: "Advanced Media Reveal, Image Masking, Video Motion, and Gallery Effects",
+      version: "3.22.0",
+      release: "Advanced Button, Link, Navigation, and Micro-Interaction Packs",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
