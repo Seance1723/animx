@@ -1,0 +1,21 @@
+/**
+ * AnimX Perspective & Spatial CSS Hooks (v3.18.0)
+ */
+
+.ax-preserve-3d {
+  transform-style: preserve-3d;
+  perspective: var(--ax-perspective, 1000px);
+}
+
+.ax-card-3d-tilt-soft {
+  transition: transform 0.2s ease-out;
+  /* Bind to JS variables set by pointer-depth.js */
+  transform: rotateY(calc(var(--ax-pointer-x, 0) * 10deg)) rotateX(calc(var(--ax-pointer-y, 0) * -10deg));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ax-preserve-3d, .ax-card-3d-tilt-soft {
+    transform: none !important;
+    transition: none !important;
+  }
+}

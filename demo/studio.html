@@ -12,7 +12,7 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.17.0</span>
+      <span class="ax-studio-version">v3.18.0</span>
     </div>
     <div class="ax-studio-actions">
       <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
@@ -22,7 +22,7 @@
 
   <div class="ax-studio-layout">
     
-    <!-- Sidebar Navigation (v3.17.0) -->
+    <!-- Sidebar Navigation (v3.18.0) -->
     <nav class="ax-studio-sidebar-nav">
       <div class="nav-group">Main</div>
       <button data-mode="home" class="active">Dashboard / Home</button>
@@ -39,6 +39,7 @@
       <button data-mode="composer" style="color: #f59e0b;">Animation Composer</button>
       <button data-mode="states" style="color: #ef4444;">Motion State Rules</button>
       <button data-mode="scroll" style="color: #8b5cf6;">Scroll Story Builder</button>
+      <button data-mode="three-d" style="color: #ec4899;">3D Motion Builder</button>
       <button data-mode="coverage" style="color: #10b981;">Coverage Matrix</button>
       
       <div class="nav-group">Projects</div>
@@ -64,7 +65,7 @@
 
       <!-- PATTERN LIBRARY -->
       <section id="panel-patterns" class="ax-studio-panel" style="display: none;">
-        <h2>Real-World Pattern Library (v3.17.0)</h2>
+        <h2>Real-World Pattern Library (v3.18.0)</h2>
         <p>Production-ready component sequences for SaaS, Ecommerce, and Dashboards.</p>
         
         <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
@@ -81,7 +82,7 @@
 
       <!-- ANIMATION COMPOSER -->
       <section id="panel-composer" class="ax-studio-panel" style="display: none;">
-        <h2>Animation Composer & Variant Builder (v3.17.0)</h2>
+        <h2>Animation Composer & Variant Builder (v3.18.0)</h2>
         <p>Compose multiple effects safely. Warns against transform and opacity conflicts.</p>
         
         <div style="margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
@@ -110,7 +111,7 @@
 
       <!-- MOTION STATE RULES -->
       <section id="panel-states" class="ax-studio-panel" style="display: none;">
-        <h2>Motion State Rules (v3.17.0)</h2>
+        <h2>Motion State Rules (v3.18.0)</h2>
         <p>Visually build reactive states, conditional rules, and custom event triggers without coding logic.</p>
         
         <div style="margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
@@ -138,7 +139,7 @@
 
       <!-- SCROLL STORY BUILDER -->
       <section id="panel-scroll" class="ax-studio-panel" style="display: none;">
-        <h2>Scroll Story Builder (v3.17.0)</h2>
+        <h2>Scroll Story Builder (v3.18.0)</h2>
         <p>Visually sequence animations tied to scroll percentage, and define responsive motion breakpoints.</p>
         
         <div style="margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
@@ -163,9 +164,34 @@
         </div>
       </section>
 
+      <!-- 3D MOTION BUILDER -->
+      <section id="panel-three-d" class="ax-studio-panel" style="display: none;">
+        <h2>3D Motion Builder (v3.18.0)</h2>
+        <p>Visually configure native CSS 3D transforms and pointer-depth spatial interactions without WebGL.</p>
+        
+        <div style="margin-top: 1rem; padding: 1rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>Perspective & Pointer Settings</h3>
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+            <button class="ax-btn ax-btn-sm" style="background: #ec4899; color: white;">Perspective: 1000px</button>
+            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;">Depth Layers: Active</button>
+            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;">Reduced Motion: Bypass</button>
+          </div>
+          
+          <h3>Spatial Preview</h3>
+          <div style="padding: 3rem; background: #f8fafc; border: 1px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; perspective: 1000px;">
+            <div style="width: 200px; height: 120px; background: linear-gradient(135deg, #ec4899, #8b5cf6); border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); transform: rotateY(15deg) rotateX(10deg); transition: transform 0.3s; cursor: pointer;">
+              <span style="display: block; padding: 45px 0; text-align: center; color: white; font-weight: bold; transform: translateZ(40px);">3D Depth Card</span>
+            </div>
+          </div>
+          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+            <button class="ax-btn ax-btn-primary" onclick="alert('3D Configuration Copied as Data Attributes!')">Copy Export Code</button>
+          </div>
+        </div>
+      </section>
+
       <!-- RUNTIME HEALTH -->
       <section id="panel-health" class="ax-studio-panel" style="display: none;">
-        <h2>Runtime Health & Performance (v3.17.0)</h2>
+        <h2>Runtime Health & Performance (v3.18.0)</h2>
         <p>Verify that all presets map to real behaviors, and audit active DOM hooks.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -177,7 +203,7 @@
 
       <!-- COVERAGE MATRIX -->
       <section id="panel-coverage" class="ax-studio-panel" style="display: none;">
-        <h2>Animation Coverage Matrix (v3.17.0)</h2>
+        <h2>Animation Coverage Matrix (v3.18.0)</h2>
         <p>Real-time audit of preset coverage across all element types.</p>
         <button class="ax-btn ax-btn-primary" onclick="renderCoverageMatrix()">Generate Matrix Report</button>
         <div id="coverage-matrix-output" style="margin-top: 1.5rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"></div>
@@ -185,7 +211,7 @@
 
       <!-- MIGRATION TOOLKIT -->
       <section id="panel-migration" class="ax-studio-panel" style="display: none;">
-        <h2>Core LTS Migration Toolkit (v3.17.0)</h2>
+        <h2>Core LTS Migration Toolkit (v3.18.0)</h2>
         <p>Safely upgrade old AnimX DOM markup or Studio v2/v3 projects into the LTS standard.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -230,7 +256,7 @@
     }
   </script>
   <script>
-    // UI overrides for v3.17.0 replaced by studio-navigation.js
+    // UI overrides for v3.18.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;

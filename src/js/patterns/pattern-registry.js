@@ -1,5 +1,5 @@
 /**
- * AnimX Pattern Registry (v3.17.0)
+ * AnimX Pattern Registry (v3.18.0)
  * Stores real-world section-level patterns.
  */
 

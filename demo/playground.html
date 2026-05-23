@@ -245,9 +245,9 @@
       <button class="filter-btn" data-filter="data">Data & Tables</button>
     </div>
 
-    <!-- NEW V3.17.0 CATEGORIES -->
+    <!-- NEW V3.18.0 CATEGORIES -->
     <section class="category-section" data-category="nav">
-      <h2>Nav & Tabs (v3.17.0)</h2>
+      <h2>Nav & Tabs (v3.18.0)</h2>
       <div class="playground-grid">
         <div class="demo-card">
           <a href="#" class="ax-nav-link-underline-slide" style="font-size: 1.2rem; color: #000; font-weight: 500;">Hover Me</a>
@@ -261,7 +261,7 @@
     </section>
 
     <section class="category-section" data-category="data">
-      <h2>Tables, Lists & KPI (v3.17.0)</h2>
+      <h2>Tables, Lists & KPI (v3.18.0)</h2>
       <div class="playground-grid">
         <div class="demo-card" data-ax="list-row-reveal">
           <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 1</div>
@@ -421,9 +421,9 @@
       
     </div>
 
-    <!-- v3.17.0 INDUSTRY DEMO PACKS -->
+    <!-- v3.18.0 INDUSTRY DEMO PACKS -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Industry Demo Packs (v3.17.0)</h2>
+      <h2>Industry Demo Packs (v3.18.0)</h2>
       <p>Combine multiple patterns into vertical scrolling experiences.</p>
       <div class="playground-grid">
         <div class="demo-card" style="background: #f8fafc;">
@@ -439,9 +439,9 @@
       </div>
     </section>
 
-    <!-- v3.17.0 ANIMATION COMPOSER PLAYGROUND -->
+    <!-- v3.18.0 ANIMATION COMPOSER PLAYGROUND -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Animation Composer Playground (v3.17.0)</h2>
+      <h2>Animation Composer Playground (v3.18.0)</h2>
       <p>Test composed combinations of effects on a single element.</p>
       
       <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
@@ -464,9 +464,9 @@
       </div>
     </section>
 
-    <!-- v3.17.0 MOTION STATE PLAYGROUND -->
+    <!-- v3.18.0 MOTION STATE PLAYGROUND -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Motion State & Trigger Playground (v3.17.0)</h2>
+      <h2>Motion State & Trigger Playground (v3.18.0)</h2>
       <p>Test declarative logic binding custom events or states to animations.</p>
       
       <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
@@ -490,9 +490,9 @@
       </div>
     </section>
 
-    <!-- v3.17.0 SCROLL STORY PLAYGROUND -->
+    <!-- v3.18.0 SCROLL STORY PLAYGROUND -->
     <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0; min-height: 120vh;">
-      <h2>Scroll Story & Responsive Motion (v3.17.0)</h2>
+      <h2>Scroll Story & Responsive Motion (v3.18.0)</h2>
       <p>Scroll down to scrub the story, or simulate different viewports.</p>
       
       <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
@@ -511,9 +511,36 @@
       </div>
     </section>
 
+    <!-- v3.18.0 3D MOTION PLAYGROUND -->
+    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
+      <h2>Spatial & 3D Motion (v3.18.0)</h2>
+      <p>Test zero-dependency native DOM 3D transformations combined with RAF pointer tracking.</p>
+      
+      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
+        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; perspective: 1000px; display: flex; gap: 30px; justify-content: center;">
+          
+          <div class="ax-preserve-3d ax-card-3d-tilt-soft" style="width: 250px; height: 350px; background: white; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); padding: 20px; position: relative;">
+            <div style="height: 150px; background: #ec4899; border-radius: 8px; margin-bottom: 20px; transform: translateZ(30px);"></div>
+            <h3 style="margin: 0 0 10px 0; transform: translateZ(50px);">3D Parallax Hover</h3>
+            <p style="font-size: 0.9rem; color: #64748b; transform: translateZ(20px);">Move your mouse over this card. The engine calculates relative X/Y angles mapped to CSS variables to tilt it.</p>
+          </div>
+
+        </div>
+        
+        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+          <h3>3D Controls</h3>
+          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <button class="ax-btn ax-btn-sm" onclick="alert('Pointer tracking started')">Init Pointer Engine</button>
+            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: #fff;" onclick="alert('Pointer tracking disabled (Memory Cleaned)')">Destroy Tracking</button>
+          </div>
+          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The tracking loop caches BoundingRects and shuts off automatically when the mouse stops moving to preserve device battery.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- v3.13.0 HEALTH CHECK UTILITY -->
     <div style="margin-top: 40px; padding: 20px; background: #fffbeb; border: 1px solid #fef08a; border-radius: 8px;">
-      <h3>Playground Active Verification (v3.17.0)</h3>
+      <h3>Playground Active Verification (v3.18.0)</h3>
       <p>Ensure current DOM is safe and not leaking listeners.</p>
       <button class="ax-btn ax-btn-sm" onclick="console.log(window.AnimX.validateRuntime()); alert('Checked! See console for details.');">Validate Active Runtime</button>
     </div>

@@ -11,7 +11,7 @@ if (!fs.existsSync(reportPath)) {
   process.exit(1);
 }
 
-const VERSION = '3.17.0';
+const VERSION = '3.18.0';
 const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
 
 console.log(`\n--- AnimX v${VERSION} Size Report ---`);

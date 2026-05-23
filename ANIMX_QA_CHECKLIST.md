@@ -16,6 +16,7 @@
 - [ ] Validate **Animation Composer** chains handle conflicts safely (v3.15.0).
 - [ ] Verify **State Manager** MutationObservers are safely garbage collected on destroy (v3.16.0).
 - [ ] Ensure **Scroll Story** loops sleep when offscreen to preserve battery (v3.17.0).
+- [ ] Validate **Spatial 3D Tracking** shuts off when reduced-motion is detected (v3.18.0).
 
 ## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.

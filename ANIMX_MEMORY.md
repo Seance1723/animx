@@ -63,7 +63,8 @@
 - **v3.15.0** - Animation Composer, Effect Chaining, and Variant Builder. Implemented the core `AnimX.compose()` and `AnimX.registerVariant()` APIs, allowing safe combination of multiple effects (e.g., entrance + hover). Added `data-ax-variant` parser. Extended Studio with a Visual Composer. Core AnimX remains under 20KB.
 - **v3.16.0** - Motion State Manager, Trigger Orchestration, and Conditional Animation Rules. Built a declarative State Machine leveraging a debounced `MutationObserver`. Added `AnimX.setState()`, `AnimX.trigger()`, and `AnimX.when()`. Supported `data-ax-state` attribute routing. Core footprint remains under 20KB.
 - **v3.17.0** - Advanced Scroll Storytelling, Responsive Motion Breakpoints, and Viewport Scene Packs. Created `AnimX.scrollStory()` powered by an `IntersectionObserver` toggled requestAnimationFrame scrubber. Added `AnimX.responsiveMotion()`. Shipped default story scene packs.
-- **Next planned version:** v3.18.0
+- **v3.18.0** - Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs. Introduced zero-dependency DOM-based 3D CSS transforms and highly-optimized pointer parallax tracking. Added `AnimX.spatial()`, `AnimX.threeD()`, and `AnimX.depthScene()`.
+- **Next planned version:** v3.19.0
 
 ## Completed Milestones
 
