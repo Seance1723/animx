@@ -6,14 +6,14 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.36.0 Final Release Candidate QA checks...');
+    console.log('[Tests] Running AnimX v3.37.0 RC Issue Fix, Blocker Closure, and Regression Patch Pass checks...');
 
     // 1. Version checks
-    assert.strictEqual(AnimX.version, '3.36.0', 'AnimX.version should be 3.36.0');
+    assert.strictEqual(AnimX.version, '3.37.0', 'AnimX.version should be 3.37.0');
     
     const info = AnimX.versionInfo();
-    assert.strictEqual(info.version, '3.36.0', 'versionInfo version should match');
-    assert.ok(info.release.includes('Final Release Candidate QA and v4.0.0 Preparation'), 'versionInfo release string should contain Final Release Candidate QA and v4.0.0 Preparation');
+    assert.strictEqual(info.version, '3.37.0', 'versionInfo version should match');
+    assert.ok(info.release.includes('RC Issue Fix, Blocker Closure, and Regression Patch Pass'), 'versionInfo release string should contain RC Issue Fix, Blocker Closure, and Regression Patch Pass');
 
     // 2. Demo existence checks
     const demoPath = path.resolve(process.cwd(), 'demo');

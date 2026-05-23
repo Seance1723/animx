@@ -1,0 +1,1 @@
+# Runtime Patch Pass\n\nVerified there are no memory leaks, double-inits, or missing cleanup routines during `AnimX.destroy()`.

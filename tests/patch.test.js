@@ -4,7 +4,7 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.37.0 RC Final Verification checks...');
+    console.log('[Tests] Running AnimX v3.37.0 RC Issue Fix and Regression checks...');
 
     // 1. Version Asserts
     assert.strictEqual(AnimX.version, '3.37.0', 'Global version must be exactly 3.37.0');
@@ -21,7 +21,7 @@ export function run() {
     assert.strictEqual(typeof AnimX.cms, 'function', 'cms() must exist');
     assert.strictEqual(typeof AnimX.compatReport, 'function', 'compat API must exist');
 
-    console.log('[Tests] RC Verification passed');
+    console.log('[Tests] RC Patch Verification passed');
   } catch (err) {
     throw err;
   }

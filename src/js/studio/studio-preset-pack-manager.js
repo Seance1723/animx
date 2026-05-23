@@ -4,7 +4,8 @@
  * Local-only, zero-dependency.
  */
 
-const STORAGE_KEY = 'animx_studio_preset_packs';
+const STORAGE_KEY = 'animx-studio-preset-packs';
+let memoryStore = {};
 
 const DEFAULT_PACKS = [
   {
@@ -39,13 +40,19 @@ const DEFAULT_PACKS = [
 
 export function getPresetPacks() {
   try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (!data) return JSON.parse(JSON.stringify(DEFAULT_PACKS));
-    return JSON.parse(data);
-  } catch (e) {
-    console.warn('[AnimX Studio] Failed to read preset packs from storage.', e);
-    return JSON.parse(JSON.stringify(DEFAULT_PACKS));
+    if (typeof localStorage !== 'undefined') {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (data) {
+        return JSON.parse(data);
+      }
+    }
+  } catch (err) {
+    console.warn('[AnimX Studio] Falling back to memory storage. ' + err.message);
+    if (memoryStore[STORAGE_KEY]) {
+      return JSON.parse(memoryStore[STORAGE_KEY]);
+    }
   }
+  return JSON.parse(JSON.stringify(DEFAULT_PACKS));
 }
 
 export function savePresetPack(pack) {
@@ -61,11 +68,16 @@ export function savePresetPack(pack) {
   }
   
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(packs));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(packs));
+    } else {
+      memoryStore[STORAGE_KEY] = JSON.stringify(packs);
+    }
     return true;
   } catch (e) {
-    console.error('[AnimX Studio] Storage full or inaccessible.', e);
-    return false;
+    console.error('[AnimX Studio] Storage full or inaccessible. Using memory store.', e);
+    memoryStore[STORAGE_KEY] = JSON.stringify(packs);
+    return true;
   }
 }
 

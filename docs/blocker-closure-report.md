@@ -1,0 +1,1 @@
+# Blocker Closure Report\n\n- **[AX-KNOWN-001] Safari Local Storage Quotas**: Fixed via graceful in-memory storage fallbacks.\n\n**Status:** Ready

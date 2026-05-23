@@ -1,0 +1,1 @@
+# Known Issues Resolution\n\n- [Fixed] Safari Local Storage Quotas.\n- [Deferred] Safari 3D Perspective sub-pixel shifts.

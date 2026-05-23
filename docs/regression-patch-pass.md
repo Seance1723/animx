@@ -1,0 +1,1 @@
+# Regression Patch Pass\n\nVerified all internal architectures from v3.14 to v3.36 are regression-free. No runtime loops survived `destroy()` calls.

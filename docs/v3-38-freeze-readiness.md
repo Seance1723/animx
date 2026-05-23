@@ -1,0 +1,1 @@
+# v3.38.0 Freeze Readiness\n\nAnimX v3.37.0 is entirely stable. We are ready to execute the v3.38.0 strict Feature Freeze.

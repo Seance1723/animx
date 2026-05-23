@@ -21,7 +21,8 @@ async function runTests() {
     './docs.test.js',
     './demo.test.js',
     './hardening.test.js',
-    './rc.test.js');
+    './rc.test.js',
+    './patch.test.js');
   }
 
   for (const file of files) {

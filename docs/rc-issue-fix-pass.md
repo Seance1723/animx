@@ -1,0 +1,1 @@
+# RC Issue Fix Pass (v3.37.0)\n\nAnimX v3.37.0 successfully closed remaining release candidate blockers and executed a regression patch pass prior to the v3.38.0 strict feature freeze.

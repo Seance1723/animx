@@ -6,17 +6,24 @@
 import { DEFAULT_SCENE_TEMPLATES } from './studio-scene-schema.js';
 import { validateScene } from './studio-scene-validator.js';
 
-const STORAGE_KEY = 'animx_studio_scenes';
+const SCENE_STORAGE_KEY = 'animx-studio-scenes';
+let sceneMemoryStore = {};
 
 export function getSavedScenes() {
   try {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (!data) return JSON.parse(JSON.stringify(DEFAULT_SCENE_TEMPLATES));
-    return JSON.parse(data);
-  } catch (e) {
-    console.warn('[AnimX Studio] Failed to read scenes from storage.', e);
-    return JSON.parse(JSON.stringify(DEFAULT_SCENE_TEMPLATES));
+    if (typeof localStorage !== 'undefined') {
+      const data = localStorage.getItem(SCENE_STORAGE_KEY);
+      if (data) {
+        return JSON.parse(data);
+      }
+    }
+  } catch (err) {
+    console.warn('[AnimX Studio] Falling back to memory storage for scenes. ' + err.message);
+    if (sceneMemoryStore[SCENE_STORAGE_KEY]) {
+      return JSON.parse(sceneMemoryStore[SCENE_STORAGE_KEY]);
+    }
   }
+  return JSON.parse(JSON.stringify(DEFAULT_SCENE_TEMPLATES));
 }
 
 export function saveScene(scene) {
@@ -24,18 +31,23 @@ export function saveScene(scene) {
   scene.updatedAt = new Date().toISOString();
   
   const scenes = getSavedScenes();
-  const idx = scenes.findIndex(s => s.sceneId === scene.sceneId);
-  if (idx >= 0) {
-    scenes[idx] = scene;
+  const existingIndex = scenes.findIndex(s => s.sceneId === scene.sceneId);
+  if (existingIndex >= 0) {
+    scenes[existingIndex] = scene;
   } else {
     scenes.push(scene);
   }
   
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(scenes));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(SCENE_STORAGE_KEY, JSON.stringify(scenes));
+    } else {
+      sceneMemoryStore[SCENE_STORAGE_KEY] = JSON.stringify(scenes);
+    }
     return true;
-  } catch (e) {
-    console.error('[AnimX Studio] Storage full or inaccessible.', e);
+  } catch (err) {
+    console.warn('[AnimX Studio] Storage full or inaccessible. Using memory store for scenes.', err.message);
+    sceneMemoryStore[SCENE_STORAGE_KEY] = JSON.stringify(scenes);
     return false;
   }
 }

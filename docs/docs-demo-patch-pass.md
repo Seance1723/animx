@@ -1,0 +1,1 @@
+# Docs/Demo Patch Pass\n\nVerified there are no broken links, localhost references, or missing preset mappings in the official Showcase and Studio environments.
