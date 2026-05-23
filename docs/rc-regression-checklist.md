@@ -1,0 +1,1 @@
+# RC Regression Checklist\n\n- [x] Core APIs backwards compatible\n- [x] Preset registry retains all v1-v3 presets\n- [x] No breaking structural changes to Data Attributes

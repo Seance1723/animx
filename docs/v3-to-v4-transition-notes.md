@@ -1,0 +1,1 @@
+# v3 to v4 Transition Notes\n\nUpgrading from v3.x.x to v4.0.0 will require zero code changes for standard users relying on `AnimX.animate()` or HTML `data-ax` attributes.

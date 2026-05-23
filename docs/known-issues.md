@@ -1,0 +1,1 @@
+# Known Issues\n\n- **[AX-KNOWN-001]** Local Storage Quotas: Safari strict mode occasionally wipes Studio preset pack caches.\n- **[AX-KNOWN-002]** Safari 3D: `perspective()` triggers minor sub-pixel rendering shifts on certain scaled flexbox layouts.

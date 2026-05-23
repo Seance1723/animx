@@ -1,0 +1,1 @@
+# RC Public API Freeze Checklist\n\n- [x] `AnimX.animate()` and `AnimX.timeline()` are locked\n- [x] Plugin interfaces are stable\n- [x] Runtime safety guardrails active

@@ -1,0 +1,1 @@
+# Release Candidate QA (v3.36.0)\n\nThis version constitutes the final QA pass before transitioning to v4.0.0. All automated checks verify regression stability, version coherence, and zero-dependency compliance.

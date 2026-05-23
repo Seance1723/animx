@@ -1,0 +1,1 @@
+# RC Security & Accessibility\n\n- [x] Prototype pollution disabled\n- [x] Fallbacks trigger on `(prefers-reduced-motion: reduce)`

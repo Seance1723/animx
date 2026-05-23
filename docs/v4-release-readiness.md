@@ -1,0 +1,1 @@
+# v4.0.0 Release Readiness\n\nThe API is officially frozen. Only bugfixes and severe performance regressions will be accepted between v3.36.0 and v4.0.0 RC1.

@@ -1,0 +1,1 @@
+# RC Dist Checklist\n\n- [x] `animx.min.js` validates correctly\n- [x] `animx.min.css` includes core layout primitives\n- [x] ES Modules output remains isolated
