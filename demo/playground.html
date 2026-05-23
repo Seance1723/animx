@@ -245,9 +245,9 @@
       <button class="filter-btn" data-filter="data">Data & Tables</button>
     </div>
 
-    <!-- NEW V3.12.0 CATEGORIES -->
+    <!-- NEW V3.13.0 CATEGORIES -->
     <section class="category-section" data-category="nav">
-      <h2>Nav & Tabs (v3.12.0)</h2>
+      <h2>Nav & Tabs (v3.13.0)</h2>
       <div class="playground-grid">
         <div class="demo-card">
           <a href="#" class="ax-nav-link-underline-slide" style="font-size: 1.2rem; color: #000; font-weight: 500;">Hover Me</a>
@@ -261,7 +261,7 @@
     </section>
 
     <section class="category-section" data-category="data">
-      <h2>Tables, Lists & KPI (v3.12.0)</h2>
+      <h2>Tables, Lists & KPI (v3.13.0)</h2>
       <div class="playground-grid">
         <div class="demo-card" data-ax="list-row-reveal">
           <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 1</div>
@@ -420,6 +420,14 @@
       </div>
       
     </div>
+
+    <!-- v3.13.0 HEALTH CHECK UTILITY -->
+    <div style="margin-top: 40px; padding: 20px; background: #fffbeb; border: 1px solid #fef08a; border-radius: 8px;">
+      <h3>Playground Active Verification (v3.13.0)</h3>
+      <p>Ensure current DOM is safe and not leaking listeners.</p>
+      <button class="ax-btn ax-btn-sm" onclick="console.log(window.AnimX.validateRuntime()); alert('Checked! See console for details.');">Validate Active Runtime</button>
+    </div>
+
   </div>
 
   <script src="../dist/animx.min.js"></script>

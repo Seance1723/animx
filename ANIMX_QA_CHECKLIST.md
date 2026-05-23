@@ -1,14 +1,19 @@
-# AnimX QA Checklist (v2.3.0)
+# AnimX QA Checklist (v3.13.0)
 
-**Target Version:** 2.3.0
+**Target Version:** 3.13.0
 
 ## 1. Build & Serve
 - [ ] Run `npm run build` - verify it completes without errors.
-- [ ] Run `npm test` - verify all 17 test suites pass.
+- [ ] Run `npm test` - verify all test suites pass.
 - [ ] Run `npm run dev` - verify dev server loads locally.
 - [ ] Run `npm run preview` - verify production build preview loads.
 
-## 2. Core Animations
+## 2. Automated Tools
+- [ ] Ensure `npm run size-check` shows core is under 20KB minified.
+- [ ] Run **AnimX Studio QA Runner** to evaluate accessibility rules.
+- [ ] Run **Studio Runtime Validation** (v3.13.0) to ensure zero memory leaks.
+
+## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.
 - [ ] Scroll down and verify entrance animations execute properly.
 - [ ] Ensure missing targets don't cause console errors.

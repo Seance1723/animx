@@ -33,20 +33,26 @@ const files = [
   'src/js/migration/data-attribute-migrator.js',
   'src/js/migration/studio-project-migrator.js',
   'src/js/lts/lts-api-audit.js',
+  'src/js/coverage/coverage-matrix.js',
+  'src/js/runtime/runtime-validator.js',
+  'src/js/runtime/runtime-performance-audit.js',
+  'src/js/runtime/runtime-cleanup-audit.js',
   'demo/studio.html',
   'demo/index.html',
+  'demo/playground.html',
   'tests/core.test.js',
   'tests/dx.test.js',
   'tests/smoke.test.js',
-  'tests/studio.test.js'
+  'tests/studio.test.js',
+  'tests/registry.test.js'
 ];
 
 files.forEach(f => {
   const p = path.resolve(__dirname, '../', f);
   if (fs.existsSync(p)) {
     let content = fs.readFileSync(p, 'utf8');
-    content = content.replace(/3\.11\.0/g, '3.12.0');
-    content = content.replace(/Core LTS Stabilization and Migration Toolkit/g, 'Complete Animation Coverage Matrix and Missing Effects Completion');
+    content = content.replace(/3\.12\.0/g, '3.13.0');
+    content = content.replace(/Complete Animation Coverage Matrix and Missing Effects Completion/g, 'Animation Runtime Validation, Performance Hardening, and Demo Verification');
     fs.writeFileSync(p, content);
     console.log('Bumped', f);
   } else {

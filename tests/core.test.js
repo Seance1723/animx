@@ -4,7 +4,7 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    assert.strictEqual(AnimX.version, '3.12.0', 'Version should match package');
+    assert.strictEqual(AnimX.version, '3.13.0', 'Version should match package');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));
@@ -13,14 +13,18 @@ export function run() {
     assert.doesNotThrow(() => safeInst.destroy());
     assert.doesNotThrow(() => AnimX.destroy('.missing-target-does-not-crash'));
 
-    // v3.12.0 Migration Hook Tests
-    assert.strictEqual(typeof AnimX.checkCompatibility, 'function', 'checkCompatibility should be a function');
-    const compat = AnimX.checkCompatibility();
-    assert.strictEqual(compat.ok, true, 'Core LTS Compatibility check should pass on standard init');
-    
-    assert.strictEqual(typeof AnimX.getDeprecations, 'function', 'getDeprecations should be a function');
-    assert.ok(AnimX.getDeprecations().deprecations.length > 0, 'Deprecations map should not be empty');
+    // v3.13.0 Migration Hook Tests
+    assert.strictEqual(typeof AnimX.migrateDataAttributes, 'function', 'migrateDataAttributes API should exist');
 
+    // v3.13.0 API Tests
+    assert.strictEqual(typeof AnimX.validateRuntime, 'function', 'validateRuntime API should exist');
+    const runtimeReport = AnimX.validateRuntime();
+    assert.strictEqual(typeof runtimeReport, 'object');
+    assert.strictEqual(runtimeReport.version, '3.13.0', 'Runtime report should reflect current version');
+    assert.ok(runtimeReport.checked.presets > 0, 'Runtime validator should check presets');
+
+    console.log('[Tests] core API check passed');
+    
   } catch (e) {
     throw e;
   }

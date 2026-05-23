@@ -12,7 +12,7 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.12.0</span>
+      <span class="ax-studio-version">v3.13.0</span>
     </div>
     <div class="ax-studio-actions">
       <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
@@ -22,7 +22,7 @@
 
   <div class="ax-studio-layout">
     
-    <!-- Sidebar Navigation (v3.12.0) -->
+    <!-- Sidebar Navigation (v3.13.0) -->
     <nav class="ax-studio-sidebar-nav">
       <div class="nav-group">Main</div>
       <button data-mode="home" class="active">Dashboard / Home</button>
@@ -48,6 +48,7 @@
       <button data-mode="checklist">Public Checklist</button>
       <button data-mode="export">Export Builder</button>
       <button data-mode="migration" style="color: #8b5cf6;">Migration Toolkit</button>
+      <button data-mode="health" style="color: #f43f5e;">Runtime Health</button>
     </nav>
     
     <div class="ax-studio-main-content">
@@ -57,9 +58,21 @@
         <div id="panel-home-content"></div>
       </section>
 
+      <!-- RUNTIME HEALTH -->
+      <section id="panel-health" class="ax-studio-panel" style="display: none;">
+        <h2>Runtime Health & Performance (v3.13.0)</h2>
+        <p>Verify that all presets map to real behaviors, and audit active DOM hooks.</p>
+        
+        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+          <button class="ax-btn ax-btn-primary" onclick="alert(JSON.stringify(window.AnimXStudio.validateRuntime(), null, 2))">Run Validation Toolkit</button>
+          <button class="ax-btn" onclick="alert(JSON.stringify(window.AnimXStudio.runPerformanceAudit(), null, 2))">Run Performance Audit</button>
+          <button class="ax-btn" onclick="alert(JSON.stringify(window.AnimXStudio.runCleanupAudit(), null, 2))">Run Cleanup Verify</button>
+        </div>
+      </section>
+
       <!-- COVERAGE MATRIX -->
       <section id="panel-coverage" class="ax-studio-panel" style="display: none;">
-        <h2>Animation Coverage Matrix (v3.12.0)</h2>
+        <h2>Animation Coverage Matrix (v3.13.0)</h2>
         <p>Real-time audit of preset coverage across all element types.</p>
         <button class="ax-btn ax-btn-primary" onclick="renderCoverageMatrix()">Generate Matrix Report</button>
         <div id="coverage-matrix-output" style="margin-top: 1.5rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"></div>
@@ -67,7 +80,7 @@
 
       <!-- MIGRATION TOOLKIT -->
       <section id="panel-migration" class="ax-studio-panel" style="display: none;">
-        <h2>Core LTS Migration Toolkit (v3.12.0)</h2>
+        <h2>Core LTS Migration Toolkit (v3.13.0)</h2>
         <p>Safely upgrade old AnimX DOM markup or Studio v2/v3 projects into the LTS standard.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -112,7 +125,7 @@
     }
   </script>
   <script>
-    // UI overrides for v3.12.0 replaced by studio-navigation.js
+    // UI overrides for v3.13.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;

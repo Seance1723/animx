@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Custom Preset Builder (v3.12.0)
+ * AnimX Studio Custom Preset Builder (v3.13.0)
  */
 
 export function buildCustomPreset(formData) {

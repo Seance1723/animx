@@ -49,6 +49,11 @@ import { runLtsApiAudit } from '../lts/lts-api-audit.js';
 // v3.12.0 Coverage Matrix
 import { generateCoverageMatrix } from '../coverage/coverage-matrix.js';
 
+// v3.13.0 Runtime Health
+import { validateRuntime } from '../runtime/runtime-validator.js';
+import { runPerformanceAudit } from '../runtime/runtime-performance-audit.js';
+import { runCleanupAudit } from '../runtime/runtime-cleanup-audit.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
   if (!window.AnimX) {
@@ -139,6 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.migrateProject = migrateProject;
   window.AnimXStudio.runLtsApiAudit = runLtsApiAudit;
   window.AnimXStudio.generateCoverageMatrix = generateCoverageMatrix;
+  window.AnimXStudio.validateRuntime = validateRuntime;
+  window.AnimXStudio.runPerformanceAudit = runPerformanceAudit;
+  window.AnimXStudio.runCleanupAudit = runCleanupAudit;
   
   // Init Navigation
   initNavigation();
