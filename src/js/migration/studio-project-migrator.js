@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Project JSON Migrator (v3.19.0)
+ * AnimX Studio Project JSON Migrator (v3.20.0)
  * Ensures old v3.2.0 payload exports can still be loaded without errors.
  */
 
@@ -7,7 +7,7 @@ export function migrateProject(projectJsonStr, options = { dryRun: true }) {
   const result = {
     ok: false,
     from: "unknown",
-    to: "3.19.0",
+    to: "3.20.0",
     migrated: null,
     changes: [],
     warnings: [],
@@ -38,7 +38,7 @@ export function migrateProject(projectJsonStr, options = { dryRun: true }) {
       result.from = data.version;
     }
 
-    data.version = "3.19.0";
+    data.version = "3.20.0";
     
     result.ok = true;
     result.migrated = data;

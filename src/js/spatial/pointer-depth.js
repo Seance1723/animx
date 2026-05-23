@@ -1,5 +1,5 @@
 /**
- * AnimX Pointer Depth Engine (v3.19.0)
+ * AnimX Pointer Depth Engine (v3.20.0)
  * Uses requestAnimationFrame to map pointer coordinates to CSS custom properties.
  */
 

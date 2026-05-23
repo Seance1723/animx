@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.19.0
+import { elementPresets } from './presets/element-presets.js'; // v3.20.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,17 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.19.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.20.0
 
-// v3.19.0 Migration APIs
+// v3.20.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.19.0 Runtime Validation APIs
+// v3.20.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.19.0 Composer
+// v3.20.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -81,7 +81,10 @@ import { threeD, perspective, validate3D } from './three-d/three-d-api.js';
 import { easing, registerEase, getEase, getEases, validateEase } from './easing/easing-api.js';
 import { physics, spring, inertia, bounce, snap, elastic, validatePhysics, destroyPhysics } from './physics/physics-api.js';
 
-const VERSION = '3.19.0';
+// v3.20.0 Advanced Text Typography
+import { rollText, slotText, scrambleText, marqueeText, counterText, scrollText, kineticText, typeText, validateTextEffect, destroyTextEffects } from './text/advanced-text-api.js';
+
+const VERSION = '3.20.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -282,7 +285,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.19.0 Migration APIs
+  // v3.20.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -295,7 +298,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.19.0 Runtime Validation APIs
+  // v3.20.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -350,7 +353,7 @@ class AnimXCore {
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
 
-  // Physics & Easing APIs (v3.19.0)
+  // Physics & Easing APIs (v3.20.0)
   easing(target, config) { return easing(target, config); }
   registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
   getEase(name) { return getEase(name); }
@@ -364,6 +367,18 @@ class AnimXCore {
   elastic(target, config) { return elastic(target, config); }
   validatePhysics(config) { return validatePhysics(config); }
   destroyPhysics() { return destroyPhysics(); }
+
+  // Advanced Text APIs (v3.20.0)
+  rollText(target, config) { return rollText(target, config); }
+  slotText(target, config) { return slotText(target, config); }
+  scrambleText(target, config) { return scrambleText(target, config); }
+  marqueeText(target, config) { return marqueeText(target, config); }
+  counterText(target, config) { return counterText(target, config); }
+  scrollText(target, config) { return scrollText(target, config); }
+  kineticText(target, config) { return kineticText(target, config); }
+  typeText(target, config) { return typeText(target, config); }
+  validateTextEffect(config) { return validateTextEffect(config); }
+  destroyTextEffects() { return destroyTextEffects(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -698,10 +713,20 @@ AnimX.build = {
   elastic,
   validatePhysics,
   destroyPhysics,
+  rollText,
+  slotText,
+  scrambleText,
+  marqueeText,
+  counterText,
+  scrollText,
+  kineticText,
+  typeText,
+  validateTextEffect,
+  destroyTextEffects,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.19.0",
-      release: "Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics",
+      version: "3.20.0",
+      release: "Advanced Creative Text Reveal, Rolling Typography, and Scroll Type Studio",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']

@@ -65,7 +65,7 @@
 - **v3.17.0** - Advanced Scroll Storytelling, Responsive Motion Breakpoints, and Viewport Scene Packs. Created `AnimX.scrollStory()` powered by an `IntersectionObserver` toggled requestAnimationFrame scrubber. Added `AnimX.responsiveMotion()`. Shipped default story scene packs.
 - **v3.18.0** - Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs. Introduced zero-dependency DOM-based 3D CSS transforms and highly-optimized pointer parallax tracking. Added `AnimX.spatial()`, `AnimX.threeD()`, and `AnimX.depthScene()`.
 - **v3.19.0** - Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics. Integrated mathematical approximations for `requestAnimationFrame` Spring, Elastic, and Snap UIs alongside an advanced custom bezier Easing Registry.
-- **Next planned version:** v3.20.0
+- **v3.20.0** - Advanced Creative Text Reveal, Rolling Typography, and Scroll Type Studio. Deployed zero-dependency GSAP-style text engines including Scrambles, Counters, Marquees, and split-text accessibility wrappers ensuring `aria-hidden` fragmentation.
 
 ## Completed Milestones
 

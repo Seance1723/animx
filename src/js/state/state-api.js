@@ -1,5 +1,5 @@
 /**
- * AnimX State API Export Bundle (v3.19.0)
+ * AnimX State API Export Bundle (v3.20.0)
  */
 export { registerState as state, setState, getState, toggleState } from './motion-state-manager.js';
 export { trigger } from './trigger-orchestrator.js';
