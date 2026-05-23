@@ -32,9 +32,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.26.0', 'AnimX version should be 3.26.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.26.0', 'versionInfo should be 3.26.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.27.0', 'AnimX version should be 3.27.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.27.0', 'versionInfo should be 3.27.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced Page Transitions, Section Transitions, and Route Motion Packs', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');

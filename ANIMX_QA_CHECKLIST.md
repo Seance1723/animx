@@ -25,6 +25,7 @@
 - [ ] Verify **Modals and Tooltips** detail their focus-trap caveats clearly in documentation (v3.24.0).
 - [ ] Verify **Particle Lite Engine** strictly caps DOM injection at 50 nodes per container (v3.25.0).
 - [ ] Verify **SVG Path Engine** safely computes length even if element is initially hidden (v3.26.0).
+- [ ] Verify **Route Engine** strictly ignores external domains, target="_blank", and javascript URIs (v3.27.0).
 
 ## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.

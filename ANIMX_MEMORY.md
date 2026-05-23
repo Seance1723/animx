@@ -72,6 +72,7 @@
 - **v3.24.0** - Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion. Added input validation choreographies, auto-generating toast stacks, modal motion, and tooltip pops without relying on heavy external popover or modal dependencies.
 - **v3.25.0** - Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs. Added atmospheric background generators (particles, waves, gradients), decorative CSS-only UI ornaments, and scene-wide ambient motion controls.
 - **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
+- **v3.27.0** - Advanced Page Transitions, Section Transitions, and Route Motion Packs. Opt-in routing, secure external link skipping, shared element FLIP measurement, and native View Transition API enhancements.
 
 ## Completed Milestones
 
