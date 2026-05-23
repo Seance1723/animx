@@ -22,6 +22,7 @@ const files = [
   'src/js/studio/studio-preset-pack-manager.js',
   'src/js/studio/studio-recipe-library.js',
   'src/js/studio/studio-custom-preset-builder.js',
+  'src/js/studio/studio-scene-schema.js',
   'tests/core.test.js',
   'tests/dx.test.js',
   'tests/smoke.test.js',
@@ -32,8 +33,8 @@ files.forEach(f => {
   const p = path.resolve(__dirname, '../', f);
   if (fs.existsSync(p)) {
     let content = fs.readFileSync(p, 'utf8');
-    content = content.replace(/3\.8\.0/g, '3.9.0');
-    content = content.replace(/Studio Local Preset Pack Manager and Custom Recipe Library/g, 'Studio Advanced Timeline Scene Builder');
+    content = content.replace(/3\.9\.0/g, '3.10.0');
+    content = content.replace(/Studio Advanced Timeline Scene Builder/g, 'Studio Final UX Polish and Public Studio Release');
     fs.writeFileSync(p, content);
     console.log('Bumped', f);
   } else {

@@ -36,6 +36,12 @@ import { getSavedScenes, importScene, clearScenes, exportSceneJSON } from './stu
 import { validateScene, generateSceneReport } from './studio-scene-validator.js';
 import { SCENE_SCHEMA_ID, DEFAULT_SCENE_TEMPLATES } from './studio-scene-schema.js';
 
+// v3.10.0 UX Polish Modules
+import { initNavigation, navigateTo } from './studio-navigation.js';
+import { renderHomeDashboard, checkOnboarding } from './studio-home.js';
+import { renderReleaseChecklist } from './studio-release-readiness.js';
+import { renderEmptyState, safeExecute, clearStudioData } from './studio-ux-polish.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
   if (!window.AnimX) {
@@ -115,6 +121,21 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.validateScene = validateScene;
   window.AnimXStudio.generateSceneReport = generateSceneReport;
   window.AnimXStudio.DEFAULT_SCENE_TEMPLATES = DEFAULT_SCENE_TEMPLATES;
+  
+  // Expose UX Polish APIs (v3.10.0)
+  window.AnimXStudio.navigateTo = navigateTo;
+  window.AnimXStudio.renderHomeDashboard = renderHomeDashboard;
+  window.AnimXStudio.renderReleaseChecklist = renderReleaseChecklist;
+  window.AnimXStudio.renderEmptyState = renderEmptyState;
+  window.AnimXStudio.safeExecute = safeExecute;
+  window.AnimXStudio.clearStudioData = clearStudioData;
+  
+  // Init Navigation
+  initNavigation();
+  checkOnboarding();
+  
+  // Default route
+  navigateTo('home');
   
   // Load state from localStorage
   const state = loadState();

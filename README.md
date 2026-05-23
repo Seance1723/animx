@@ -11,8 +11,8 @@
 - **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
+- **v3.10.0**: Studio Final UX Polish and Public Studio Release.
 - **v3.9.0**: Studio Advanced Timeline Scene Builder.
-- **v3.8.0**: Studio Local Preset Pack Manager and Custom Recipe Library.
 - **v3.7.0**: Studio Handoff Documentation and Client Delivery Kits.
 - **v3.6.0**: Advanced Creative Animation Catalog.
 - **v2.9.0**: Security and Defensive Runtime Hardening

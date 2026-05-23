@@ -12,89 +12,78 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.0.0</span>
-    </div>
-    <div class="ax-studio-modes">
-      <button class="ax-studio-mode-btn active" data-mode="preset">Elements</button>
-      <button class="ax-studio-mode-btn" data-mode="project">Projects</button>
-      <button class="ax-studio-mode-btn" data-mode="workflow">Workflows</button>
-      <button class="ax-studio-mode-btn" data-mode="scanner">Scanner</button>
-      <button class="ax-studio-mode-btn" data-mode="themes">Theme Kits</button>
-      <button class="ax-studio-mode-btn" data-mode="packages">Packages</button>
-      <button class="ax-studio-mode-btn" data-mode="qa">QA Assistant</button>
-      <button class="ax-studio-mode-btn" data-mode="catalog">Creative Catalog</button>
-      <button class="ax-studio-mode-btn" data-mode="preset-packs">Preset Packs</button>
-      <button class="ax-studio-mode-btn" data-mode="recipe-library">Recipe Library</button>
-      <button class="ax-studio-mode-btn" data-mode="custom-preset">Custom Preset Builder</button>
-      <button class="ax-studio-mode-btn" data-mode="scene-builder" style="background:#8b5cf6; color:white;">Timeline Scene Builder</button>
-      <button class="ax-studio-mode-btn" data-mode="handoff">Handoff Documentation</button>
-      <button class="ax-studio-mode-btn" data-mode="delivery">Delivery Kit</button>
-      <button class="ax-studio-mode-btn" data-mode="guides">Implementation Guides</button>
-      <button class="ax-studio-mode-btn" data-mode="map">Animation Map</button>
-      <button class="ax-studio-mode-btn" data-mode="inventory">Preset Inventory</button>
-      <button class="ax-studio-mode-btn" data-mode="summary">Summary</button>
-      <button class="ax-studio-mode-btn" data-mode="checklist">Deployment Checklist</button>
-      <button class="ax-studio-mode-btn" data-mode="export">Export</button>
+      <span class="ax-studio-version">v3.10.0</span>
     </div>
     <div class="ax-studio-actions">
-      <button id="btn-device-desktop" title="Desktop View">💻</button>
-      <button id="btn-device-tablet" title="Tablet View">📱</button>
-      <button id="btn-device-mobile" title="Mobile View">📱</button>
-      <button id="btn-reduced-motion" title="Toggle Reduced Motion">RM</button>
-      <button id="btn-audit" title="Run Audit">Audit</button>
-      <button id="btn-export-json" title="Export as JSON">⬇️ JSON</button>
-      <button id="btn-import-json" title="Import JSON">⬆️ JSON</button>
+      <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
+      <button class="ax-btn" onclick="AnimXStudio.navigateTo('help')">Help / Shortcuts</button>
     </div>
   </div>
 
   <div class="ax-studio-layout">
     
-    <div class="ax-studio-sidebar" id="studio-sidebar">
-      <h3>Templates</h3>
-      <div id="template-list"></div>
+    <!-- Sidebar Navigation (v3.10.0) -->
+    <nav class="ax-studio-sidebar-nav">
+      <div class="nav-group">Main</div>
+      <button data-mode="home" class="active">Dashboard / Home</button>
+      <button data-mode="scene-builder">Timeline Builder</button>
+      <button data-mode="catalog">Creative Catalog</button>
+      <button data-mode="scanner">HTML Scanner</button>
       
-      <h3 style="margin-top: 20px;">Presets</h3>
-      <input type="text" id="preset-search" placeholder="Search presets...">
-      <div id="preset-list"></div>
-    </div>
+      <div class="nav-group">Libraries</div>
+      <button data-mode="preset">Elements Library</button>
+      <button data-mode="preset-packs">Preset Packs</button>
+      <button data-mode="recipe-library">Recipe Library</button>
+      <button data-mode="themes">Theme Kits</button>
+      
+      <div class="nav-group">Projects</div>
+      <button data-mode="project">Project Presets</button>
+      <button data-mode="workflow">Workflows</button>
+      <button data-mode="packages">Packages</button>
+      
+      <div class="nav-group">Release & Delivery</div>
+      <button data-mode="qa">QA Assistant</button>
+      <button data-mode="handoff">Handoff Docs</button>
+      <button data-mode="checklist">Public Checklist</button>
+      <button data-mode="export">Export Builder</button>
+    </nav>
     
-    <div class="ax-studio-canvas-area">
-      <div class="ax-studio-canvas" id="studio-canvas">
+    <div class="ax-studio-main-content">
+      
+      <!-- HOME DASHBOARD -->
+      <section id="panel-home" class="ax-studio-panel" style="display: block;">
+        <div id="panel-home-content"></div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="panel-settings" class="ax-studio-panel" style="display: none;">
+        <h2>Studio Settings</h2>
+        <p>Manage your local Studio environment.</p>
+        <button class="ax-btn" style="background:#ef4444; color:white; margin-top:20px;" onclick="AnimXStudio.clearStudioData()">Wipe Local Data</button>
+      </section>
+
+      <!-- HELP -->
+      <section id="panel-help" class="ax-studio-panel" style="display: none;">
+        <h2>Help & Shortcuts</h2>
+        <ul>
+          <li><code>Ctrl + K</code>: Open Command Menu</li>
+          <li><code>Escape</code>: Close Menus</li>
+        </ul>
+        <p>Studio is 100% local. See <code>docs/studio-user-guide.md</code> for more info.</p>
+      </section>
+
+      <!-- CANVAS AREA (Legacy fallback for core components) -->
+      <div class="ax-studio-canvas-area" id="studio-canvas" style="display: none;">
+        <div class="ax-studio-canvas" id="studio-canvas-inner">
+          <div style="padding: 50px; text-align: center;"><h1 data-ax="fade-up">Select a template to begin</h1></div>
+        </div>
+      </div>
         document.getElementById('studio-canvas').innerHTML = '<div style="padding: 50px; text-align: center;"><h1 data-ax="fade-up">Select a template to begin</h1></div>';
       window.AnimX.scan();
     }
   </script>
   <script>
-    // Integration logic for v3.8.0 panels
-    document.addEventListener('DOMContentLoaded', () => {
-      // Toggle logic for modes
-      const modeBtns = document.querySelectorAll('.ax-studio-mode-btn');
-      const panels = document.querySelectorAll('.ax-studio-panel');
-      const canvasArea = document.getElementById('studio-canvas');
-      
-      modeBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          modeBtns.forEach(b => b.classList.remove('active'));
-          e.target.classList.add('active');
-          const mode = e.target.getAttribute('data-mode');
-          
-          panels.forEach(p => p.style.display = 'none');
-          canvasArea.style.display = 'none';
-          
-          if (document.getElementById(`panel-${mode}`)) {
-             document.getElementById(`panel-${mode}`).style.display = 'block';
-             
-             // Initial load for specific modes
-             if (mode === 'preset-packs') loadPresetPacks();
-             if (mode === 'recipe-library') loadRecipes();
-             if (mode === 'scene-builder') {
-                if (window.AnimXStudio.loadScenesUI) window.AnimXStudio.loadScenesUI();
-             }
-          } else {
-             canvasArea.style.display = 'block';
-          }
-        });
-      });
+    // UI overrides for v3.10.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;

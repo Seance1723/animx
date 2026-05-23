@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.9.0',
-    release: 'Studio Advanced Timeline Scene Builder',
+    version: '3.10.0',
+    release: 'Studio Final UX Polish and Public Studio Release',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.9.0',
-    release: 'Studio Advanced Timeline Scene Builder',
+    version: '3.10.0',
+    release: 'Studio Final UX Polish and Public Studio Release',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

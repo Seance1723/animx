@@ -1,0 +1,193 @@
+// AnimX Studio Final Polish (v3.10.0)
+// Overhauls the Studio layout for a clean sidebar/content layout.
+
+.ax-studio-layout {
+  display: flex;
+  height: calc(100vh - 60px); // subtract top bar
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
+// Sidebar Navigation
+.ax-studio-sidebar-nav {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  overflow-y: auto;
+
+  .nav-group {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    width: 100%;
+    color: #334155;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+
+    &.active {
+      background-color: #eff6ff;
+      color: #2563eb;
+      border-right: 3px solid #2563eb;
+      font-weight: 600;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: -2px;
+    }
+  }
+}
+
+// Main Content Area
+.ax-studio-main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+// Dashboard Grid
+.ax-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.ax-dashboard-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+  h3 { margin-top: 0; color: #0f172a; }
+  p { color: #64748b; margin-bottom: 1.5rem; }
+}
+
+.ax-dash-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ax-status-card {
+  background: #f8fafc;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      &:last-child { border-bottom: none; }
+    }
+  }
+}
+
+// Empty States
+.ax-empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: white;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+
+  .ax-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #94a3b8;
+  }
+  
+  h3 { margin-top: 0; color: #1e293b; }
+  p { color: #64748b; margin-bottom: 1.5rem; }
+}
+
+// Command Menu Overlay
+#ax-command-menu {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.5);
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+
+  .ax-cmd-box {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    max-width: 90%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    input {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 1.1rem;
+      outline: none;
+    }
+
+    .ax-cmd-results {
+      max-height: 300px;
+      overflow-y: auto;
+      
+      button {
+        width: 100%;
+        text-align: left;
+        padding: 1rem;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #f1f5f9;
+        cursor: pointer;
+        
+        &:hover { background: #f8fafc; }
+      }
+    }
+  }
+}
+
+// Onboarding Overlay
+.ax-onboarding-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ax-onboarding-box {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    max-width: 600px;
+    text-align: center;
+
+    h2 { margin-top: 0; color: #0f172a; }
+    p { color: #475569; font-size: 1.1rem; }
+    ul { text-align: left; color: #475569; margin-bottom: 2rem; }
+  }
+}
