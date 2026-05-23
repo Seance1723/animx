@@ -23,7 +23,8 @@ async function runTests() {
     './hardening.test.js',
     './rc.test.js',
     './patch.test.js',
-    './freeze.test.js');
+    './freeze.test.js',
+    './package.test.js');
   }
 
   for (const file of files) {

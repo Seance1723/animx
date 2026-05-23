@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.38.0',
-    release: 'Final Docs, Demo, Playground, Gallery, and Studio Freeze',
+    version: '3.39.0',
+    release: 'Final Package Dry Run, Distribution Audit, and Release Notes Lock',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

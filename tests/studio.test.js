@@ -32,9 +32,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Validate version tracking
-    assert.strictEqual(AnimX.version, '3.38.0', 'AnimX version should be 3.38.0');
-    assert.strictEqual(AnimX.versionInfo().version, '3.38.0', 'versionInfo should be 3.38.0');
-    assert.strictEqual(AnimX.versionInfo().release, 'Final Docs, Demo, Playground, Gallery, and Studio Freeze', 'release name should match');
+    assert.strictEqual(AnimX.version, '3.39.0', 'AnimX version should be 3.39.0');
+    assert.strictEqual(AnimX.versionInfo().version, '3.39.0', 'versionInfo should be 3.39.0');
+    assert.strictEqual(AnimX.versionInfo().release, 'Final Package Dry Run, Distribution Audit, and Release Notes Lock', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');

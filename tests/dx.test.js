@@ -15,6 +15,6 @@ import AnimX from '../src/js/animx.js';
     assert.ok(AnimX.copyExample);
     
     const diag = AnimX.diagnose();
-    assert.strictEqual(AnimX.versionInfo().version, '3.38.0', 'Version should match package');
+    assert.strictEqual(AnimX.versionInfo().version, '3.39.0', 'Version should match package');
     const feats = AnimX.features();
     assert.ok('waapi' in feats);
