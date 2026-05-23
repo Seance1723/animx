@@ -1,5 +1,5 @@
 /**
- * AnimX Advanced Text API (v3.24.0)
+ * AnimX Advanced Text API (v3.25.0)
  */
 
 import { initRollingText } from './rolling-text-engine.js';

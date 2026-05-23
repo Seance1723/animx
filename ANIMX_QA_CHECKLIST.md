@@ -23,6 +23,7 @@
 - [ ] Verify **Dropdowns and Menus** correctly toggle `aria-expanded` and clean up styles (v3.22.0).
 - [ ] Verify **Table Staggers** keep `display: table-row` intact for accessibility (v3.23.0).
 - [ ] Verify **Modals and Tooltips** detail their focus-trap caveats clearly in documentation (v3.24.0).
+- [ ] Verify **Particle Lite Engine** strictly caps DOM injection at 50 nodes per container (v3.25.0).
 
 ## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.

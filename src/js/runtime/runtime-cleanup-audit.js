@@ -1,5 +1,5 @@
 /**
- * AnimX Runtime Cleanup Audit (v3.24.0)
+ * AnimX Runtime Cleanup Audit (v3.25.0)
  * Verifies that AnimX.clearInstances() correctly unmounts everything.
  */
 
@@ -18,7 +18,7 @@ export function runCleanupAudit() {
   let hasOrphans = finalInstances > 0;
 
   return {
-    version: "3.24.0",
+    version: "3.25.0",
     ok: !hasOrphans,
     initialInstances,
     finalInstances,

@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Recipe Library (v3.24.0)
+ * AnimX Studio Recipe Library (v3.25.0)
  * Handles CRUD, validation, import/export for local custom recipes.
  * Local-only, zero-dependency.
  */
@@ -114,7 +114,7 @@ export function importRecipe(jsonStr) {
 
 export function exportRecipeToJS(recipe) {
   if (!recipe || !recipe.steps) return '';
-  let js = `// AnimX v3.24.0 Recipe: ${recipe.name}\nAnimX.timeline()`;
+  let js = `// AnimX v3.25.0 Recipe: ${recipe.name}\nAnimX.timeline()`;
   recipe.steps.forEach(step => {
     let opts = step.options ? JSON.stringify(step.options) : '{}';
     if (step.mode === 'text' && step.options) {
@@ -130,7 +130,7 @@ export function exportRecipeToJS(recipe) {
 
 export function exportRecipeToHTML(recipe) {
   if (!recipe || !recipe.steps) return '';
-  let html = `<!-- AnimX v3.24.0 Recipe: ${recipe.name} -->\n<section data-ax-recipe="${recipe.id}">\n`;
+  let html = `<!-- AnimX v3.25.0 Recipe: ${recipe.name} -->\n<section data-ax-recipe="${recipe.id}">\n`;
   recipe.steps.forEach(step => {
     html += `  <!-- Target: ${step.target} | Preset: ${step.preset} -->\n`;
   });

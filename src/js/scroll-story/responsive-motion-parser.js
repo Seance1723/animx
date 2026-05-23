@@ -1,5 +1,5 @@
 /**
- * AnimX Responsive Motion Engine (v3.24.0)
+ * AnimX Responsive Motion Engine (v3.25.0)
  * Evaluates breakpoints to apply different animation payloads per device.
  */
 

@@ -1,5 +1,5 @@
 /**
- * AnimX Composer API (v3.24.0)
+ * AnimX Composer API (v3.25.0)
  * Safely stacks multiple animation effects onto a single target.
  */
 

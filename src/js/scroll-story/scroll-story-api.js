@@ -1,5 +1,5 @@
 /**
- * AnimX Scroll Story API Export Bundle (v3.24.0)
+ * AnimX Scroll Story API Export Bundle (v3.25.0)
  */
 
 export { scrollStory } from './scroll-story-runner.js';

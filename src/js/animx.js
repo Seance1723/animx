@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.24.0
+import { elementPresets } from './presets/element-presets.js'; // v3.25.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,17 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.24.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.25.0
 
-// v3.24.0 Migration APIs
+// v3.25.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.24.0 Runtime Validation APIs
+// v3.25.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.24.0 Composer
+// v3.25.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -96,7 +96,10 @@ import { card, grid, list, table, dashboard, kpi, chartReveal, feed, kanban, fil
 // v3.24.0 Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion
 import { form, input, validationMotion, checkbox, radio, switchEl as switchMotion, range, modal, drawer, toast, tooltip, popover, accordion, upload, progressFeedback, uiFeedback, validateFeedbackEffect, getFeedbackEffects, destroyFeedback } from './feedback/feedback-api.js';
 
-const VERSION = '3.24.0';
+// v3.25.0 Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs
+import { background, gradient, meshGradient, aurora, orbs, blobs, spotlight, cursorGlow, particleLite, noise, atmosphere, validateBackgroundEffect, getBackgroundEffects, destroyBackgrounds } from './backgrounds/background-api.js';
+
+const VERSION = '3.25.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -297,7 +300,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.24.0 Migration APIs
+  // v3.25.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -310,7 +313,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.24.0 Runtime Validation APIs
+  // v3.25.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -365,7 +368,7 @@ class AnimXCore {
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
 
-  // Physics & Easing APIs (v3.24.0)
+  // Physics & Easing APIs (v3.25.0)
   easing(target, config) { return easing(target, config); }
   registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
   getEase(name) { return getEase(name); }
@@ -380,7 +383,7 @@ class AnimXCore {
   validatePhysics(config) { return validatePhysics(config); }
   destroyPhysics() { return destroyPhysics(); }
 
-  // Advanced Text APIs (v3.24.0)
+  // Advanced Text APIs (v3.25.0)
   rollText(target, config) { return rollText(target, config); }
   slotText(target, config) { return slotText(target, config); }
   scrambleText(target, config) { return scrambleText(target, config); }
@@ -392,7 +395,7 @@ class AnimXCore {
   validateTextEffect(config) { return validateTextEffect(config); }
   destroyTextEffects() { return destroyTextEffects(); }
 
-  // Advanced Media APIs (v3.24.0)
+  // Advanced Media APIs (v3.25.0)
   media(target, config) { return media(target, config); }
   imageReveal(target, config) { return imageReveal(target, config); }
   imageMask(target, config) { return imageMask(target, config); }
@@ -407,7 +410,7 @@ class AnimXCore {
   getMediaEffects() { return getMediaEffects(); }
   destroyMediaEffects() { return destroyMediaEffects(); }
 
-  // Advanced Interaction APIs (v3.24.0)
+  // Advanced Interaction APIs (v3.25.0)
   button(target, config) { return button(target, config); }
   link(target, config) { return link(target, config); }
   nav(target, config) { return nav(target, config); }
@@ -421,7 +424,7 @@ class AnimXCore {
   validateInteractionEffect(config) { return validateInteractionEffect(config); }
   getInteractionEffects() { return getInteractionEffects(); }
 
-  // Advanced Data UI APIs (v3.24.0)
+  // Advanced Data UI APIs (v3.25.0)
   card(target, config) { return card(target, config); }
   grid(target, config) { return grid(target, config); }
   list(target, config) { return list(target, config); }
@@ -437,7 +440,7 @@ class AnimXCore {
   getDataUIEffects() { return getDataUIEffects(); }
   destroyDataUI() { return destroyDataUI(); }
 
-  // Advanced UI Feedback APIs (v3.24.0)
+  // Advanced UI Feedback APIs (v3.25.0)
   form(target, config) { return form(target, config); }
   input(target, config) { return input(target, config); }
   validationMotion(target, config) { return validationMotion(target, config); }
@@ -457,6 +460,22 @@ class AnimXCore {
   validateFeedbackEffect(config) { return validateFeedbackEffect(config); }
   getFeedbackEffects() { return getFeedbackEffects(); }
   destroyFeedback() { return destroyFeedback(); }
+
+  // Advanced Background Motion APIs (v3.25.0)
+  background(target, config) { return background(target, config); }
+  gradient(target, config) { return gradient(target, config); }
+  meshGradient(target, config) { return meshGradient(target, config); }
+  aurora(target, config) { return aurora(target, config); }
+  orbs(target, config) { return orbs(target, config); }
+  blobs(target, config) { return blobs(target, config); }
+  spotlight(target, config) { return spotlight(target, config); }
+  cursorGlow(target, config) { return cursorGlow(target, config); }
+  particleLite(target, config) { return particleLite(target, config); }
+  noise(target, config) { return noise(target, config); }
+  atmosphere(target, config) { return atmosphere(target, config); }
+  validateBackgroundEffect(config) { return validateBackgroundEffect(config); }
+  getBackgroundEffects() { return getBackgroundEffects(); }
+  destroyBackgrounds() { return destroyBackgrounds(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -859,10 +878,24 @@ AnimX.build = {
   validateFeedbackEffect,
   getFeedbackEffects,
   destroyFeedback,
+  background,
+  gradient,
+  meshGradient,
+  aurora,
+  orbs,
+  blobs,
+  spotlight,
+  cursorGlow,
+  particleLite,
+  noise,
+  atmosphere,
+  validateBackgroundEffect,
+  getBackgroundEffects,
+  destroyBackgrounds,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.24.0",
-      release: "Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion",
+      version: "3.25.0",
+      release: "Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
