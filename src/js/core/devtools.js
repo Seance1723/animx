@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.7.0',
-    release: 'Studio Handoff Documentation and Client Delivery Kits',
+    version: '3.8.0',
+    release: 'Studio Local Preset Pack Manager and Custom Recipe Library',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.7.0',
-    release: 'Studio Handoff Documentation and Client Delivery Kits',
+    version: '3.8.0',
+    release: 'Studio Local Preset Pack Manager and Custom Recipe Library',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

@@ -1,5 +1,5 @@
 export const creativeCatalog = {
-  version: "3.7.0",
+  version: "3.8.0",
   families: ["roll", "scroll", "kinetic", "3d", "hover"],
   effects: [
     {

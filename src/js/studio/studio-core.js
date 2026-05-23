@@ -28,6 +28,9 @@ import {
   escapeHtml
 } from './studio-handoff.js';
 import { generateAnimationMap, generatePresetInventory, generateDeliveryKit } from './studio-delivery.js';
+import { getPresetPacks, savePresetPack, deletePresetPack, importPresetPack, exportPresetPack, clearPresetPacks, validatePresetPack } from './studio-preset-pack-manager.js';
+import { getRecipes, saveRecipe, deleteRecipe, importRecipe, validateRecipe, exportRecipeToJS, exportRecipeToHTML } from './studio-recipe-library.js';
+import { buildCustomPreset } from './studio-custom-preset-builder.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -75,6 +78,25 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.generatePresetInventory = generatePresetInventory;
   window.AnimXStudio.generateDeliveryKit = generateDeliveryKit;
   window.AnimXStudio.escapeHtml = escapeHtml;
+
+  // Expose Preset Pack & Recipe Library APIs (v3.8.0)
+  window.AnimXStudio.getPresetPacks = getPresetPacks;
+  window.AnimXStudio.savePresetPack = savePresetPack;
+  window.AnimXStudio.deletePresetPack = deletePresetPack;
+  window.AnimXStudio.importPresetPack = importPresetPack;
+  window.AnimXStudio.exportPresetPack = exportPresetPack;
+  window.AnimXStudio.clearPresetPacks = clearPresetPacks;
+  window.AnimXStudio.validatePresetPack = validatePresetPack;
+  
+  window.AnimXStudio.getRecipes = getRecipes;
+  window.AnimXStudio.saveRecipe = saveRecipe;
+  window.AnimXStudio.deleteRecipe = deleteRecipe;
+  window.AnimXStudio.importRecipe = importRecipe;
+  window.AnimXStudio.validateRecipe = validateRecipe;
+  window.AnimXStudio.exportRecipeToJS = exportRecipeToJS;
+  window.AnimXStudio.exportRecipeToHTML = exportRecipeToHTML;
+  
+  window.AnimXStudio.buildCustomPreset = buildCustomPreset;
   
   // Load state from localStorage
   const state = loadState();

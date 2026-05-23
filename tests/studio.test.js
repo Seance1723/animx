@@ -17,6 +17,8 @@ import {
   generateWebflowGuide
 } from '../src/js/studio/studio-handoff.js';
 import { generateDeliveryKit } from '../src/js/studio/studio-delivery.js';
+import { validatePresetPack, importPresetPack } from '../src/js/studio/studio-preset-pack-manager.js';
+import { validateRecipe, importRecipe } from '../src/js/studio/studio-recipe-library.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -27,9 +29,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.7.0', 'AnimX version should be 3.7.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.7.0', 'versionInfo should be 3.7.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio Handoff Documentation and Client Delivery Kits', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.8.0', 'AnimX version should be 3.8.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.8.0', 'versionInfo should be 3.8.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio Local Preset Pack Manager and Custom Recipe Library', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
@@ -43,7 +45,7 @@ export async function run() {
     
     // Check Project State defaults
     const state = getProjectState();
-    assert.strictEqual(state.version, '3.7.0', 'Project state should default to 3.7.0');
+    assert.strictEqual(state.version, '3.8.0', 'Project state should default to 3.8.0');
     assert.strictEqual(state.motionStyle, 'smooth-professional', 'Default motion style should be smooth-professional');
     assert.strictEqual(state.sections.length, 0, 'Should start with no sections');
     
@@ -69,7 +71,7 @@ export async function run() {
     // Check Project Packaging
     const pkgObj = buildProjectPackage(themedState);
     assert.strictEqual(pkgObj.schema, 'animx-package', 'Schema ID should be correct');
-    assert.strictEqual(pkgObj.animxVersion, '3.7.0', 'Package version should match animx version');
+    assert.strictEqual(pkgObj.animxVersion, '3.8.0', 'Package version should match animx version');
     
     const validResult = validatePackage(JSON.stringify(pkgObj));
     assert.strictEqual(validResult.ok, true, 'Valid package should pass validation');
@@ -125,7 +127,7 @@ export async function run() {
     
     const dkOptions = { includeClient: true, includeDev: true, includeCms: true, includeWp: true, includeWebflow: true, includeMap: true, includeInventory: true, includeQa: true, includeChecklist: true };
     const deliveryKit = generateDeliveryKit(sampleProject, dkOptions);
-    assert.strictEqual(deliveryKit.version, '3.7.0', 'Delivery Kit should include version 3.7.0');
+    assert.strictEqual(deliveryKit.version, '3.8.0', 'Delivery Kit should include version 3.8.0');
     assert.strictEqual(deliveryKit.projectName, 'Test Project', 'Delivery Kit should match project name');
     
     // HTML checks
@@ -143,6 +145,19 @@ export async function run() {
     const playgroundHtml = fs.readFileSync(path.resolve('./demo/playground.html'), 'utf8');
     assert.strictEqual(playgroundHtml.includes('Handoff and Delivery Kit Playground'), true, 'demo/playground.html should contain Handoff and Delivery Kit Playground');
 
+    // v3.8.0 Preset Pack & Recipe Tests
+    const badPackStr = JSON.stringify({ schema: "animx-preset-pack", packId: "test", name: "Test", __proto__: { poll: "ution" }, presets: [] }).replace('"presets":[]', '"__proto__":{"poll":"ution"},"presets":[]');
+    const badPackResult = importPresetPack(badPackStr);
+    assert.strictEqual(badPackResult.success, false, 'Should block __proto__ in preset pack import');
+    
+    const validPackStr = JSON.stringify({ schema: "animx-preset-pack", packId: "test", name: "Test", presets: [] });
+    const importResult = importPresetPack(validPackStr);
+    assert.strictEqual(importResult.success, true, 'Should successfully import valid pack json');
+    
+    const badRecipeStr = JSON.stringify({ id: "test", name: "Test", steps: [{ target: "<script>alert(1)</script>", preset: "fade" }] });
+    const badRecipeResult = importRecipe(badRecipeStr);
+    assert.strictEqual(badRecipeResult.success, false, 'Should fail to import recipe with script tags');
+    
     console.log('✅ studio.test.js passed.');
   } catch (error) {
     console.error('❌ studio.test.js failed:', error);

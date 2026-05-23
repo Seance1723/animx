@@ -51,7 +51,7 @@ import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
 
-const VERSION = '3.7.0';
+const VERSION = '3.8.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -586,8 +586,8 @@ AnimX.build = {
   version: VERSION,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.7.0",
-      release: "Studio Handoff Documentation and Client Delivery Kits",
+      version: "3.8.0",
+      release: "Studio Local Preset Pack Manager and Custom Recipe Library",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']

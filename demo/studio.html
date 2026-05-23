@@ -23,6 +23,9 @@
       <button class="ax-studio-mode-btn" data-mode="packages">Packages</button>
       <button class="ax-studio-mode-btn" data-mode="qa">QA Assistant</button>
       <button class="ax-studio-mode-btn" data-mode="catalog">Creative Catalog</button>
+      <button class="ax-studio-mode-btn" data-mode="preset-packs">Preset Packs</button>
+      <button class="ax-studio-mode-btn" data-mode="recipe-library">Recipe Library</button>
+      <button class="ax-studio-mode-btn" data-mode="custom-preset">Custom Preset Builder</button>
       <button class="ax-studio-mode-btn" data-mode="handoff">Handoff Documentation</button>
       <button class="ax-studio-mode-btn" data-mode="delivery">Delivery Kit</button>
       <button class="ax-studio-mode-btn" data-mode="guides">Implementation Guides</button>
@@ -56,13 +59,98 @@
     
     <div class="ax-studio-canvas-area">
       <div class="ax-studio-canvas" id="studio-canvas">
-        <!-- Templates loaded here -->
-        <div class="ax-studio-canvas-content">
-          <div style="padding: 50px; text-align: center;">
-            <h1 data-ax="fade-up">Select a template to begin</h1>
-          </div>
-          </section>
+        document.getElementById('studio-canvas').innerHTML = '<div style="padding: 50px; text-align: center;"><h1 data-ax="fade-up">Select a template to begin</h1></div>';
+      window.AnimX.scan();
+    }
+  </script>
+  <script>
+    // Integration logic for v3.8.0 panels
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle logic for modes
+      const modeBtns = document.querySelectorAll('.ax-studio-mode-btn');
+      const panels = document.querySelectorAll('.ax-studio-panel');
+      const canvasArea = document.getElementById('studio-canvas');
+      
+      modeBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          modeBtns.forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          const mode = e.target.getAttribute('data-mode');
+          
+          panels.forEach(p => p.style.display = 'none');
+          canvasArea.style.display = 'none';
+          
+          if (document.getElementById(`panel-${mode}`)) {
+             document.getElementById(`panel-${mode}`).style.display = 'block';
+             
+             // Initial load for specific modes
+             if (mode === 'preset-packs') loadPresetPacks();
+             if (mode === 'recipe-library') loadRecipes();
+          } else {
+             canvasArea.style.display = 'block';
+          }
+        });
+      });
 
+      function loadPresetPacks() {
+        if (!window.AnimXStudio.getPresetPacks) return;
+        const packs = window.AnimXStudio.getPresetPacks();
+        const list = document.getElementById('preset-pack-list');
+        list.innerHTML = packs.map(p => `
+          <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 6px;">
+            <h3 style="margin-top:0;">${p.name}</h3>
+            <p style="color:#666; font-size:0.9rem;">ID: ${p.packId}</p>
+            <p><strong>Presets:</strong> ${p.presets ? p.presets.length : 0}</p>
+            <button onclick="alert('Export: ' + window.AnimXStudio.exportPresetPack('${p.packId}'))">Export JSON</button>
+          </div>
+        `).join('');
+      }
+
+      function loadRecipes() {
+        if (!window.AnimXStudio.getRecipes) return;
+        const recipes = window.AnimXStudio.getRecipes();
+        const list = document.getElementById('recipe-list');
+        list.innerHTML = recipes.map(r => `
+          <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 6px; cursor: pointer;" onclick="previewRecipe('${r.id}')">
+            <h3 style="margin-top:0;">${r.name}</h3>
+            <p>Type: ${r.type}</p>
+            <p><strong>Steps:</strong> ${r.steps ? r.steps.length : 0}</p>
+          </div>
+        `).join('');
+      }
+
+      window.previewRecipe = function(id) {
+        const recipes = window.AnimXStudio.getRecipes();
+        const r = recipes.find(x => x.id === id);
+        if (!r) return;
+        const js = window.AnimXStudio.exportRecipeToJS(r);
+        const html = window.AnimXStudio.exportRecipeToHTML(r);
+        document.getElementById('recipe-code-preview').innerText = js + "\n\n" + html;
+      };
+
+      document.getElementById('btn-build-cp')?.addEventListener('click', () => {
+        const data = {
+          name: document.getElementById('cp-name').value,
+          base: document.getElementById('cp-base').value,
+          type: document.getElementById('cp-type').value,
+          duration: document.getElementById('cp-duration').value,
+          delay: document.getElementById('cp-delay').value,
+          ease: document.getElementById('cp-ease').value
+        };
+        const preset = window.AnimXStudio.buildCustomPreset(data);
+        document.getElementById('cp-json-preview').innerText = JSON.stringify(preset, null, 2);
+      });
+      
+      document.getElementById('btn-clear-packs')?.addEventListener('click', () => {
+        if (confirm("Clear local preset packs?")) {
+          window.AnimXStudio.clearPresetPacks();
+          loadPresetPacks();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
       <!-- CREATIVE CATALOG PANEL -->
       <section id="panel-catalog" class="ax-studio-panel" style="display: none;">
         <div class="ax-panel-header">
@@ -91,6 +179,65 @@
 
         <div class="ax-catalog-grid" id="catalog-grid">
            <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- PRESET PACK MANAGER -->
+      <section id="panel-preset-packs" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <div class="ax-panel-header">
+          <h2>Local Preset Pack Manager</h2>
+          <p>Organize, import, and validate reusable animation preset packs for your projects.</p>
+        </div>
+        <div style="margin: 1rem 0; display: flex; gap: 10px;">
+          <button id="btn-import-pack" class="ax-btn">Import Pack JSON</button>
+          <button id="btn-clear-packs" class="ax-btn">Clear Local Packs</button>
+        </div>
+        <div id="preset-pack-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+           <!-- JS Populated -->
+        </div>
+      </section>
+
+      <!-- RECIPE LIBRARY -->
+      <section id="panel-recipe-library" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <div class="ax-panel-header">
+          <h2>Custom Recipe Library</h2>
+          <p>Build and store reusable animation sequences.</p>
+        </div>
+        <div style="margin: 1rem 0; display: flex; gap: 10px;">
+          <button id="btn-create-recipe" class="ax-btn">Create New Recipe</button>
+          <button id="btn-import-recipe" class="ax-btn">Import Recipe JSON</button>
+        </div>
+        <div id="recipe-list" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+           <!-- JS Populated -->
+        </div>
+        <div id="recipe-preview-container" style="margin-top: 2rem; border: 1px solid #ccc; padding: 1rem;">
+          <h3>Recipe Code Preview</h3>
+          <pre id="recipe-code-preview" style="background: #1e293b; color: white; padding: 1rem; border-radius: 6px;">Select a recipe to preview HTML/JS exports.</pre>
+        </div>
+      </section>
+
+      <!-- CUSTOM PRESET BUILDER -->
+      <section id="panel-custom-preset" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <div class="ax-panel-header">
+          <h2>Custom Preset Builder</h2>
+          <p>Safely build custom presets based on core primitives.</p>
+        </div>
+        <div style="display: flex; gap: 2rem;">
+          <div style="flex: 1;">
+            <form id="form-custom-preset" style="display: flex; flex-direction: column; gap: 10px;">
+              <label>Name: <input type="text" id="cp-name" value="my-custom-reveal"></label>
+              <label>Base Preset: <input type="text" id="cp-base" value="fade-up"></label>
+              <label>Type: <select id="cp-type"><option value="element">Element</option><option value="text">Text</option></select></label>
+              <label>Duration: <input type="number" id="cp-duration" value="800"></label>
+              <label>Delay: <input type="number" id="cp-delay" value="0"></label>
+              <label>Ease: <input type="text" id="cp-ease" value="smooth"></label>
+              <button type="button" id="btn-build-cp" class="ax-btn">Build & Validate</button>
+            </form>
+          </div>
+          <div style="flex: 1; border-left: 1px solid #ccc; padding-left: 2rem;">
+            <h3>Generated Preset JSON</h3>
+            <pre id="cp-json-preview" style="background: #eee; padding: 1rem; white-space: pre-wrap;"></pre>
+          </div>
         </div>
       </section>
 

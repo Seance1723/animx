@@ -52,7 +52,8 @@
 - **v3.4.0** - Studio Collaboration-Free Project Packaging and Theme Kits. Introduced JSON package exporting/importing, Motion Tokens, and global Theme Kits, all leveraging secure, local-only browser APIs.
 - **v3.5.0** - Studio QA Automation and Release Assistant. Added rule-based project/export/preset QA logic, generating local release checklists and automated Markdown release notes.
 - **v3.6.0** - Advanced Creative Animation Catalog and Playground Expansion. Massively expanded the zero-dependency animation catalog using a SCSS "primitive + modifier" architecture. Added Rolling Text, Kinetic Typography, Scroll Fill Typography, and Component effects. Integrated a live Creative Catalog previewer directly into the Studio UI.
-- **v3.7.0** - Studio Handoff Documentation and Client Delivery Kits.
+- **v3.7.0** - Studio Handoff Documentation and Client Delivery Kits. Demo, playground, and studio pages were updated so handoff and delivery-kit options are visible and usable. Added visible Handoff, Delivery Kit, Implementation Guide, Animation Map, Preset Inventory, QA Summary, Accessibility Summary, Security Summary, and Deployment Checklist panels. Core remains zero-dependency.
+- **v3.8.0** - Studio Local Preset Pack Manager and Custom Recipe Library. Added `studio-preset-pack-manager.js`, `studio-recipe-library.js`, and `studio-custom-preset-builder.js` entirely isolated inside `animx-studio.js`. Features local `localStorage` CRUD operations, strict JSON schema validation, and secure export routines that output JS, HTML, or Data configurations. 100% local, no cloud marketplace, no user accounts, zero runtime core dependency.
 
 ## Completed Milestones
 
