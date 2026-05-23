@@ -1,18 +1,37 @@
 {
   "name": "animx",
-  "version": "3.30.0",
+  "version": "3.31.0",
   "description": "Zero-dependency animation engine",
   "main": "dist/animx.js",
   "style": "dist/animx.css",
   "type": "module",
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/animx.esm.js",
+      "browser": "./dist/animx.min.js",
+      "default": "./dist/animx.min.js"
+    },
+    "./css": "./dist/animx.min.css",
+    "./core": {
+      "import": "./dist/animx.core.esm.js",
+      "browser": "./dist/animx.core.min.js"
+    },
+    "./preset-data": "./dist/animx.preset-data.json"
+  },
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 5173",
     "build:full": "vite build",
     "build:core": "vite build -c vite.core.config.js",
     "build:studio": "vite build -c vite.studio.config.js",
-    "build": "npm run build:full && npm run build:core && npm run build:studio && node build-post.js && node scripts/generate-audits.js",
+    "build": "npm run build:full && npm run build:core && npm run build:studio && node build-post.js && node scripts/generate-audits.js && npm run size && npm run verify:dist",
+    "build:prod": "npm run build",
+    "build:report": "node scripts/bundle-health.js",
     "verify:dist": "node scripts/verify-dist.js",
-    "size": "node scripts/size-check.js",
+    "size": "node scripts/size-report.js",
     "preview": "vite preview --host 0.0.0.0 --port 4173",
     "clean": "node -e \"const fs = require('fs'); fs.rmSync('dist', { recursive: true, force: true });\"",
     "test": "node tests/run.js"

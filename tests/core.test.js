@@ -4,7 +4,7 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    assert.strictEqual(AnimX.version, '3.30.0', 'Version should match package');
+    assert.strictEqual(AnimX.version, '3.31.0', 'Version should match package');
     assert.doesNotThrow(() => AnimX.config({ debug: true }));
     assert.doesNotThrow(() => AnimX.config({ debug: false }));
     assert.doesNotThrow(() => AnimX.ready(() => {}));

@@ -6,8 +6,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
       name: 'AnimX',
-      formats: ['iife'],
-      fileName: () => 'animx.js',
+      formats: ['es', 'iife'],
+      fileName: (format) => format === 'es' ? 'animx.esm.js' : 'animx.js',
     },
     outDir: 'dist',
     emptyOutDir: true,

@@ -6,8 +6,8 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/js/builds/animx-core.js'),
       name: 'AnimX',
-      formats: ['iife'],
-      fileName: () => 'animx.core.js',
+      formats: ['es', 'iife'],
+      fileName: (format) => format === 'es' ? 'animx.core.esm.js' : 'animx.core.js',
     },
     outDir: 'dist',
     emptyOutDir: false, // Don't empty because build:full runs first

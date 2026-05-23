@@ -11,7 +11,7 @@
 - **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
-- **v3.30.0**: Final Animation Catalog Audit, Playground Completion, and One-Stop Coverage QA.
+- **v3.31.0**: Production Build Optimization, Tree-Shaking Strategy, and Bundle Health.
 - **v3.27.0**: Advanced Page Transitions, Section Transitions, and Route Motion Packs.
 - **v3.26.0**: Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.25.0**: Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs.

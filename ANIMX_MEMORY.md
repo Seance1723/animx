@@ -73,8 +73,8 @@
 - **v3.25.0** - Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs. Added atmospheric background generators (particles, waves, gradients), decorative CSS-only UI ornaments, and scene-wide ambient motion controls.
 - **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.27.0** - Advanced Page Transitions, Section Transitions, and Route Motion Packs. Opt-in routing, secure external link skipping, shared element FLIP measurement, and native View Transition API enhancements.
-- **v3.30.0** - Final Animation Catalog Audit, Playground Completion, and One-Stop Coverage QA. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
-- **Next planned version:** v3.30.0 Final Animation Catalog Audit, Playground Completion, and One-Stop Coverage QARegistry)
+- **v3.31.0** - Production Build Optimization, Tree-Shaking Strategy, and Bundle Health. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
+- **Next planned version:** v3.31.0 Production Build Optimization, Tree-Shaking Strategy, and Bundle HealthRegistry)
 
 ## Completed Milestones
 
@@ -254,7 +254,13 @@ AnimX.readingProgress()
 - Use ANIMX_MEMORY.md as the project reference before making future changes.
 - Update ANIMX_MEMORY.md whenever a new version adds important architecture, API, file structure, or rule changes.
 
-## Token-Saving Rule for Future Prompts
+## Token-Saving Rule for v3.31.0 Production Build Optimization, Tree-Shaking Strategy, and Bundle Health
+- Implemented dual ESM/IIFE build outputs natively in Vite.
+- Validated package `sideEffects` mapping to permit proper tree-shaking of Named Exports.
+- Generated comprehensive build and size health artifacts during CI testing.
+- Kept zero-dependency architecture with legacy script fallbacks unaffected.
+
+## Future Roadmaps
 When generating future implementation prompts, do not repeat the entire project history.
 Instead, tell the coding agent:
 

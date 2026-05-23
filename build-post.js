@@ -30,6 +30,22 @@ async function run() {
       });
     }
 
+    // ESM JS
+    const esmPath = path.join(distDir, `${base}.esm.js`);
+    const minEsmPath = path.join(distDir, `${base}.esm.min.js`);
+    if (fs.existsSync(esmPath)) {
+      const code = fs.readFileSync(esmPath, 'utf8');
+      const result = await minify(code, { module: true });
+      fs.writeFileSync(minEsmPath, result.code);
+      console.log(`Generated ${base}.esm.min.js`);
+      
+      reportFiles.push({
+        file: `${base}.esm.min.js`,
+        bytes: Buffer.byteLength(result.code, 'utf8'),
+        kb: +(Buffer.byteLength(result.code, 'utf8') / 1024).toFixed(2)
+      });
+    }
+
     // CSS
     const cssPath = path.join(distDir, `${base}.css`);
     const minCssPath = path.join(distDir, `${base}.min.css`);
@@ -75,8 +91,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.28.0',
-    release: 'Advanced CMS, WordPress, Webflow, and No-Code Animation Recipes',
+    version: '3.31.0',
+    release: 'Production Build Optimization, Tree-Shaking Strategy, and Bundle Health',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',
@@ -96,7 +112,7 @@ async function run() {
     const categories = AnimX.getPresetCategories();
     
     const presetData = {
-      version: '2.6.0',
+      version: '3.31.0',
       total: presets.length,
       categories: categories,
       presets: presets
@@ -148,7 +164,7 @@ async function run() {
   const bundleReportPath = path.join(distDir, 'animx.bundle-report.json');
   const bundleReport = {
     name: "AnimX",
-    version: "2.7.0",
+    version: "3.31.0",
     generatedAt: new Date().toISOString(),
     files: reportFiles,
     builds: {
