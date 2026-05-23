@@ -1,0 +1,1 @@
+# Final Runtime Hardening\n\nInvalid selectors do not crash AnimX. Observers gracefully disconnect on destroy. Production logging is quiet by default unless `AnimX.config({ debug: true })` is set.

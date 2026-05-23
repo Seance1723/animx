@@ -1,0 +1,1 @@
+# Final Reduced-Motion Hardening\n\nWe strictly observe `(prefers-reduced-motion: reduce)`. Heavy 3D, infinite physics loops, and fast transitions immediately jump to their final readable states.

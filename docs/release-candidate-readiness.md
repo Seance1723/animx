@@ -1,0 +1,1 @@
+# Release Candidate Readiness\n\nWith security and accessibility hardened in v3.35.0, v3.36.0 will focus solely on the Final Release Candidate QA before AnimX v4.0.0.

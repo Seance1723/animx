@@ -1,0 +1,1 @@
+# Final Security Hardening (v3.35.0)\n\nAnimX guarantees zero execution of arbitrary strings. We do not use `eval`, `new Function`, or unsafe `innerHTML`. Prototype pollution is blocked at the parser level via `isSafeKey()` before any state merging occurs.

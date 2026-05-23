@@ -114,8 +114,9 @@ import { packs, registerPack, getPack, getPacks, getPackCatalog, destroyPacks, v
 // v3.32.0 Cross-Browser Compatibility, Fallback System, and Legacy Safety
 import { finalAudit } from './audit/one-stop-qa-report.js';
 import { compatApi } from './compat/compat-api.js';
+import { Hardening } from './hardening/hardening-api.js';
 
-const VERSION = '3.34.0';
+const VERSION = '3.35.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -1040,4 +1041,5 @@ if (typeof window !== 'undefined') {
   }
 }
 
+AnimX.Hardening = Hardening;
 export default AnimX;

@@ -1,0 +1,1 @@
+# Production Readiness\n\nAnimX is ready. No external dependencies, strict safe parsing, and defensive DOM querying.

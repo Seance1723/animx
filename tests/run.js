@@ -19,7 +19,8 @@ async function runTests() {
     './compat.test.js',
     './audit.test.js',
     './docs.test.js',
-    './demo.test.js');
+    './demo.test.js',
+    './hardening.test.js');
   }
 
   for (const file of files) {

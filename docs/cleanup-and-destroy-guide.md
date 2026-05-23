@@ -1,0 +1,1 @@
+# Cleanup and Destroy Guide\n\nCalling `AnimX.destroy()` safely clears all RAF loops, MutationObservers, and event listeners to prevent memory leaks in SPAs.

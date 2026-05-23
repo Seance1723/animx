@@ -1,0 +1,1 @@
+# Final Accessibility Hardening\n\nAnimX leaves focus outlines intact and ensures all fallback states keep text readable and media visible.

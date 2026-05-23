@@ -1,0 +1,1 @@
+# Safe Parser and Data Attributes\n\nAll `data-ax` strings are strictly parsed as data, not code. Callbacks are mapped internally, not executed from string. URLs strip `javascript:` prefixes.
