@@ -705,7 +705,7 @@
           <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('map')">Generate Animation Map</button>
           <button class="ax-btn" onclick="playgroundGenerate('inv')">Generate Preset Inventory</button>
           <button class="ax-btn ax-btn-primary" onclick="playgroundGenerate('kit')">Generate Full Delivery Kit</button>
-          <button class="ax-btn ax-btn-primary" style="background:#8b5cf6;" onclick="playgroundGenerate('recipe')">Export Selected as Recipe (v3.8.0)</button>
+          <button class="ax-btn ax-btn-primary" style="background:#8b5cf6;" onclick="playgroundGenerate('scene')">Export Timeline Scene (v3.9.0)</button>
           <button class="ax-btn" onclick="playgroundCopy()">Copy Output</button>
           <button class="ax-btn" onclick="playgroundDownload()">Download Output JSON</button>
         </div>
@@ -754,18 +754,13 @@
           includeMap: true, includeInventory: true, includeQa: true, includeChecklist: true
         });
         output = JSON.stringify(kit, null, 2);
-      } else if (type === 'recipe') {
-        // Mock recipe generation for playground
-        const mockRecipe = {
-           id: "playground-recipe",
-           name: "Playground Export",
-           type: "custom",
-           steps: [
-             { target: ".hero-title", preset: "text-mask-up" },
-             { target: ".hero-copy", preset: "fade-up", options: { delay: 200 } }
-           ]
-        };
-        output = window.AnimXStudio.exportRecipeToJS ? window.AnimXStudio.exportRecipeToJS(mockRecipe) : JSON.stringify(mockRecipe, null, 2);
+      } else if (type === 'scene') {
+        const mockScene = window.AnimXStudio.DEFAULT_SCENE_TEMPLATES ? window.AnimXStudio.DEFAULT_SCENE_TEMPLATES[0] : null;
+        if (mockScene) {
+           output = window.AnimXStudio.exportSceneJSON(mockScene.sceneId) || JSON.stringify(mockScene, null, 2);
+        } else {
+           output = "// Scene export not available.";
+        }
       }
       document.getElementById('pg-handoff-preview').innerHTML = pgEscape(output);
     }

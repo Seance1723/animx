@@ -38,7 +38,7 @@ export function scanDomStructure(rootElement) {
   summary.sections = sections.length || 1; // At least 1 section if body has content
   
   return {
-    version: "3.8.0",
+    version: "3.9.0",
     scannedAt: new Date().toISOString(),
     summary,
     elements,

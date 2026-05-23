@@ -5,7 +5,7 @@ import { getMotionStyles } from './studio-motion-system.js';
 
 export function createProject(name, type, motionStyle) {
   const newProj = {
-    version: "3.8.0",
+    version: "3.9.0",
     projectId: "proj-" + Date.now(),
     name: name || "New Project",
     type: type || "custom",

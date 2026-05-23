@@ -31,6 +31,10 @@ import { generateAnimationMap, generatePresetInventory, generateDeliveryKit } fr
 import { getPresetPacks, savePresetPack, deletePresetPack, importPresetPack, exportPresetPack, clearPresetPacks, validatePresetPack } from './studio-preset-pack-manager.js';
 import { getRecipes, saveRecipe, deleteRecipe, importRecipe, validateRecipe, exportRecipeToJS, exportRecipeToHTML } from './studio-recipe-library.js';
 import { buildCustomPreset } from './studio-custom-preset-builder.js';
+import { loadScenesUI, selectScene, createNewScene, uiPlayScene, uiStopScene } from './studio-scene-builder.js';
+import { getSavedScenes, importScene, clearScenes, exportSceneJSON } from './studio-scene-storage.js';
+import { validateScene, generateSceneReport } from './studio-scene-validator.js';
+import { SCENE_SCHEMA_ID, DEFAULT_SCENE_TEMPLATES } from './studio-scene-schema.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -97,6 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.exportRecipeToHTML = exportRecipeToHTML;
   
   window.AnimXStudio.buildCustomPreset = buildCustomPreset;
+
+  // Expose Advanced Timeline Scene Builder APIs (v3.9.0)
+  window.AnimXStudio.loadScenesUI = loadScenesUI;
+  window.AnimXStudio.selectScene = selectScene;
+  window.AnimXStudio.createNewScene = createNewScene;
+  window.AnimXStudio.uiPlayScene = uiPlayScene;
+  window.AnimXStudio.uiStopScene = uiStopScene;
+  window.AnimXStudio.getSavedScenes = getSavedScenes;
+  window.AnimXStudio.importScene = importScene;
+  window.AnimXStudio.clearScenes = clearScenes;
+  window.AnimXStudio.exportSceneJSON = exportSceneJSON;
+  window.AnimXStudio.validateScene = validateScene;
+  window.AnimXStudio.generateSceneReport = generateSceneReport;
+  window.AnimXStudio.DEFAULT_SCENE_TEMPLATES = DEFAULT_SCENE_TEMPLATES;
   
   // Load state from localStorage
   const state = loadState();

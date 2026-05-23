@@ -26,6 +26,7 @@
       <button class="ax-studio-mode-btn" data-mode="preset-packs">Preset Packs</button>
       <button class="ax-studio-mode-btn" data-mode="recipe-library">Recipe Library</button>
       <button class="ax-studio-mode-btn" data-mode="custom-preset">Custom Preset Builder</button>
+      <button class="ax-studio-mode-btn" data-mode="scene-builder" style="background:#8b5cf6; color:white;">Timeline Scene Builder</button>
       <button class="ax-studio-mode-btn" data-mode="handoff">Handoff Documentation</button>
       <button class="ax-studio-mode-btn" data-mode="delivery">Delivery Kit</button>
       <button class="ax-studio-mode-btn" data-mode="guides">Implementation Guides</button>
@@ -86,6 +87,9 @@
              // Initial load for specific modes
              if (mode === 'preset-packs') loadPresetPacks();
              if (mode === 'recipe-library') loadRecipes();
+             if (mode === 'scene-builder') {
+                if (window.AnimXStudio.loadScenesUI) window.AnimXStudio.loadScenesUI();
+             }
           } else {
              canvasArea.style.display = 'block';
           }
@@ -237,6 +241,66 @@
           <div style="flex: 1; border-left: 1px solid #ccc; padding-left: 2rem;">
             <h3>Generated Preset JSON</h3>
             <pre id="cp-json-preview" style="background: #eee; padding: 1rem; white-space: pre-wrap;"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- TIMELINE SCENE BUILDER -->
+      <section id="panel-scene-builder" class="ax-studio-panel" style="display: none; padding: 2rem;">
+        <div class="ax-panel-header">
+          <h2>Advanced Timeline Scene Builder (v3.9.0)</h2>
+          <p>Visually plan, preview, and export complex multi-element timeline sequences.</p>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
+          <button class="ax-btn" onclick="AnimXStudio.createNewScene()">Create New Scene</button>
+          <button class="ax-btn" onclick="AnimXStudio.uiPlayScene()">▶ Play Preview</button>
+          <button class="ax-btn" onclick="AnimXStudio.uiStopScene()">⏹ Stop Preview</button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 250px 1fr; gap: 2rem;">
+          <!-- Left Sidebar -->
+          <div>
+            <h3>Scene Library</h3>
+            <div id="scene-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem;">
+              <!-- Populated by JS -->
+            </div>
+            
+            <h3>Validation Report</h3>
+            <div id="scene-report-container" style="background: #f8fafc; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 6px;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          
+          <!-- Main Editor Area -->
+          <div>
+            <div style="border: 1px solid #ccc; padding: 1rem; margin-bottom: 2rem; border-radius: 6px; position: relative;">
+               <h3 style="margin-top:0;">Preview Canvas</h3>
+               <div style="padding: 2rem; background: white; border: 1px dashed #cbd5e1;">
+                  <h1 class="hero-title preview-target">Hero Title</h1>
+                  <p class="hero-copy preview-target">This is the secondary copy text.</p>
+                  <button class="hero-cta preview-target ax-btn ax-btn-primary">Call to Action</button>
+                  <div style="display:flex; gap: 1rem; margin-top: 2rem;">
+                     <div class="story-card preview-target" style="width:100px; height:100px; background:#e2e8f0;"></div>
+                     <div class="story-card preview-target" style="width:100px; height:100px; background:#e2e8f0;"></div>
+                     <div class="story-card preview-target" style="width:100px; height:100px; background:#e2e8f0;"></div>
+                  </div>
+               </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+               <div>
+                 <h3>Tracks</h3>
+                 <div id="scene-tracks-container"></div>
+               </div>
+               <div>
+                 <h3>Steps</h3>
+                 <div id="scene-steps-container"></div>
+               </div>
+            </div>
+            
+            <h3>Exported Code</h3>
+            <pre id="scene-export-preview" style="background: #1e293b; color: white; padding: 1rem; border-radius: 6px; white-space: pre-wrap;">Select a scene to generate exports.</pre>
           </div>
         </div>
       </section>

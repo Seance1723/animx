@@ -75,8 +75,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.8.0',
-    release: 'Studio Local Preset Pack Manager and Custom Recipe Library',
+    version: '3.9.0',
+    release: 'Studio Advanced Timeline Scene Builder',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',
