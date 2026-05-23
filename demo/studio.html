@@ -12,7 +12,7 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.11.0</span>
+      <span class="ax-studio-version">v3.12.0</span>
     </div>
     <div class="ax-studio-actions">
       <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
@@ -22,7 +22,7 @@
 
   <div class="ax-studio-layout">
     
-    <!-- Sidebar Navigation (v3.11.0) -->
+    <!-- Sidebar Navigation (v3.12.0) -->
     <nav class="ax-studio-sidebar-nav">
       <div class="nav-group">Main</div>
       <button data-mode="home" class="active">Dashboard / Home</button>
@@ -35,6 +35,7 @@
       <button data-mode="preset-packs">Preset Packs</button>
       <button data-mode="recipe-library">Recipe Library</button>
       <button data-mode="themes">Theme Kits</button>
+      <button data-mode="coverage" style="color: #10b981;">Coverage Matrix</button>
       
       <div class="nav-group">Projects</div>
       <button data-mode="project">Project Presets</button>
@@ -56,9 +57,17 @@
         <div id="panel-home-content"></div>
       </section>
 
+      <!-- COVERAGE MATRIX -->
+      <section id="panel-coverage" class="ax-studio-panel" style="display: none;">
+        <h2>Animation Coverage Matrix (v3.12.0)</h2>
+        <p>Real-time audit of preset coverage across all element types.</p>
+        <button class="ax-btn ax-btn-primary" onclick="renderCoverageMatrix()">Generate Matrix Report</button>
+        <div id="coverage-matrix-output" style="margin-top: 1.5rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"></div>
+      </section>
+
       <!-- MIGRATION TOOLKIT -->
       <section id="panel-migration" class="ax-studio-panel" style="display: none;">
-        <h2>Core LTS Migration Toolkit (v3.11.0)</h2>
+        <h2>Core LTS Migration Toolkit (v3.12.0)</h2>
         <p>Safely upgrade old AnimX DOM markup or Studio v2/v3 projects into the LTS standard.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -103,7 +112,7 @@
     }
   </script>
   <script>
-    // UI overrides for v3.11.0 replaced by studio-navigation.js
+    // UI overrides for v3.12.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;
@@ -160,6 +169,24 @@
           loadPresetPacks();
         }
       });
+      
+      window.renderCoverageMatrix = function() {
+        if (!window.AnimXStudio.generateCoverageMatrix) return;
+        const data = window.AnimXStudio.generateCoverageMatrix();
+        if (!data) return;
+        
+        document.getElementById('coverage-matrix-output').innerHTML = data.elements.map(el => `
+          <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; background: ${el.coverageScore >= 100 ? '#ecfdf5' : el.coverageScore > 0 ? '#fffbeb' : '#fef2f2'}">
+            <h3 style="margin-top:0; text-transform: capitalize;">${el.element}</h3>
+            <div style="font-size: 0.9rem; color: #64748b; margin-bottom: 0.5rem;">Score: ${el.coverageScore}% | Presets: ${el.totalPresets}</div>
+            <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+              ${el.dataAttributes ? '<span style="background:#e0f2fe; color:#0369a1; padding:2px 6px; border-radius:4px; font-size:10px;">Data</span>' : ''}
+              ${el.jsAPI ? '<span style="background:#fef08a; color:#854d0e; padding:2px 6px; border-radius:4px; font-size:10px;">JS</span>' : ''}
+              ${el.classAPI ? '<span style="background:#d9f99d; color:#3f6212; padding:2px 6px; border-radius:4px; font-size:10px;">Class</span>' : ''}
+            </div>
+          </div>
+        `).join('');
+      };
     });
   </script>
 </body>

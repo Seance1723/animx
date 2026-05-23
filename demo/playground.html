@@ -236,15 +236,46 @@
       <span style="font-size: 0.75rem; color: var(--muted)">v2.2.0</span>
     </div>
     
-    <div class="tabs" id="modeTabs">
-      <div class="tab active" data-mode="preset">Presets</div>
-      <div class="tab" data-mode="stagger">Stagger</div>
-      <div class="tab" data-mode="text">Text</div>
-      <div class="tab" data-mode="svg">SVG</div>
-      <div class="tab" data-mode="layout">Layout</div>
+    <div class="ax-playground-filters">
+      <button class="filter-btn active" data-filter="all">All Effects</button>
+      <button class="filter-btn" data-filter="text">Text & Typography</button>
+      <button class="filter-btn" data-filter="components">Cards & Buttons</button>
+      <button class="filter-btn" data-filter="layout">Layouts</button>
+      <button class="filter-btn" data-filter="nav">Nav & Tabs</button>
+      <button class="filter-btn" data-filter="data">Data & Tables</button>
     </div>
 
-    <!-- PRESET CONTROLS -->
+    <!-- NEW V3.12.0 CATEGORIES -->
+    <section class="category-section" data-category="nav">
+      <h2>Nav & Tabs (v3.12.0)</h2>
+      <div class="playground-grid">
+        <div class="demo-card">
+          <a href="#" class="ax-nav-link-underline-slide" style="font-size: 1.2rem; color: #000; font-weight: 500;">Hover Me</a>
+          <p class="demo-meta">Class: ax-nav-link-underline-slide</p>
+        </div>
+        <div class="demo-card">
+          <button class="ax-btn ax-active" onclick="AnimX.animate(this, 'tab-indicator-slide')">Slide Tab Indicator</button>
+          <p class="demo-meta">JS: tab-indicator-slide</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section" data-category="data">
+      <h2>Tables, Lists & KPI (v3.12.0)</h2>
+      <div class="playground-grid">
+        <div class="demo-card" data-ax="list-row-reveal">
+          <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 1</div>
+          <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 2</div>
+        </div>
+        <div class="demo-card">
+          <h1 id="kpi-demo" style="margin:0; font-size: 2.5rem; color: #3b82f6;">0</h1>
+          <p class="demo-meta">JS: kpi-number-roll</p>
+          <button class="ax-btn ax-btn-sm" onclick="AnimX.animate('#kpi-demo', 'kpi-number-roll', { value: 100 })">Roll Number</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPONENTS SECTION -->
     <div id="controls-preset" class="mode-controls">
       <div class="section">
         <label class="label">Search Preset</label>

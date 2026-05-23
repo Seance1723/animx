@@ -1,11 +1,11 @@
 /**
- * AnimX Deprecation Checker (v3.11.0)
+ * AnimX Deprecation Checker (v3.12.0)
  * Formal map of all API aliases mapped to their modern equivalents.
  */
 
 export function getDeprecations() {
   return {
-    version: "3.11.0",
+    version: "3.12.0",
     deprecations: [
       {
         old: "data-ax-trigger",

@@ -46,6 +46,9 @@ import { renderEmptyState, safeExecute, clearStudioData } from './studio-ux-poli
 import { migrateProject } from '../migration/studio-project-migrator.js';
 import { runLtsApiAudit } from '../lts/lts-api-audit.js';
 
+// v3.12.0 Coverage Matrix
+import { generateCoverageMatrix } from '../coverage/coverage-matrix.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
   if (!window.AnimX) {
@@ -135,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.clearStudioData = clearStudioData;
   window.AnimXStudio.migrateProject = migrateProject;
   window.AnimXStudio.runLtsApiAudit = runLtsApiAudit;
+  window.AnimXStudio.generateCoverageMatrix = generateCoverageMatrix;
   
   // Init Navigation
   initNavigation();

@@ -13,6 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
+import { elementPresets } from './presets/element-presets.js'; // v3.12.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -50,13 +51,14 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.12.0
 
-// v3.11.0 Migration APIs
+// v3.12.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-const VERSION = '3.11.0';
+const VERSION = '3.12.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -73,7 +75,7 @@ export function studio() {
 }
 
 // Pre-register all presets
-[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets)].forEach(preset => {
+[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets), ...elementPresets, ...cmsRecipes312].forEach(preset => {
   registerPreset(preset.name, preset);
 });
 
@@ -261,7 +263,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.11.0 Migration APIs
+  // v3.12.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -604,8 +606,8 @@ AnimX.build = {
   version: VERSION,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.11.0",
-      release: "Core LTS Stabilization and Migration Toolkit",
+      version: "3.12.0",
+      release: "Complete Animation Coverage Matrix and Missing Effects Completion",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']

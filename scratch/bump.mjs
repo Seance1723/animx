@@ -27,6 +27,12 @@ const files = [
   'src/js/studio/studio-release-readiness.js',
   'src/js/studio/studio-ux-polish.js',
   'src/js/studio/studio-navigation.js',
+  'src/js/migration/compatibility-checker.js',
+  'src/js/migration/deprecation-checker.js',
+  'src/js/migration/preset-alias-mapper.js',
+  'src/js/migration/data-attribute-migrator.js',
+  'src/js/migration/studio-project-migrator.js',
+  'src/js/lts/lts-api-audit.js',
   'demo/studio.html',
   'demo/index.html',
   'tests/core.test.js',
@@ -39,8 +45,8 @@ files.forEach(f => {
   const p = path.resolve(__dirname, '../', f);
   if (fs.existsSync(p)) {
     let content = fs.readFileSync(p, 'utf8');
-    content = content.replace(/3\.10\.0/g, '3.11.0');
-    content = content.replace(/Studio Final UX Polish and Public Studio Release/g, 'Core LTS Stabilization and Migration Toolkit');
+    content = content.replace(/3\.11\.0/g, '3.12.0');
+    content = content.replace(/Core LTS Stabilization and Migration Toolkit/g, 'Complete Animation Coverage Matrix and Missing Effects Completion');
     fs.writeFileSync(p, content);
     console.log('Bumped', f);
   } else {
