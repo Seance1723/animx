@@ -3,36 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v3.34.0 - FEEDBACK</title>
-  <!-- Local dist references only. No CDN. -->
+  <title>AnimX v3.40.0 - Feedback</title>
   <link rel="stylesheet" href="../dist/animx.min.css">
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: #0f172a; color: #f8fafc; }
-    header { padding: 2rem; background: #1e293b; text-align: center; border-bottom: 1px solid #334155; }
-    header h1 { margin: 0 0 1rem 0; font-size: 2.5rem; color: #38bdf8; }
-    nav { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-    nav a { color: #f8fafc; text-decoration: none; padding: 0.5rem 1rem; background: #334155; border-radius: 4px; transition: background 0.2s; }
+    :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f8fafc; --muted: #94a3b8; --primary: #6366f1; --accent: #818cf8; }
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    header { padding: 2rem; background: var(--panel); text-align: center; border-bottom: 1px solid var(--border); }
+    header h1 { margin: 0 0 0.5rem 0; font-size: 2.5rem; color: var(--accent); }
+    header p { color: var(--muted); margin: 0.25rem 0 0; }
+    nav { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+    nav a { color: var(--text); text-decoration: none; padding: 0.4rem 0.8rem; background: #334155; border-radius: 4px; font-size: 0.85rem; transition: background 0.2s; }
     nav a:hover { background: #475569; }
+    nav a.active { background: var(--primary); }
     main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-    .card { background: #1e293b; padding: 1.5rem; border-radius: 8px; border: 1px solid #334155; }
-    .card h3 { margin-top: 0; color: #38bdf8; }
-    .btn { display: inline-block; padding: 0.5rem 1rem; background: #38bdf8; color: #0f172a; text-decoration: none; border-radius: 4px; font-weight: bold; margin-top: 1rem; }
-    .reduced-motion-note { background: #3f6212; padding: 1rem; text-align: center; font-size: 0.9rem; }
+    .card { background: var(--panel); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border); transition: border-color 0.2s; }
+    .card:hover { border-color: var(--primary); }
+    .card h3 { margin-top: 0; color: var(--accent); }
+    .card p { color: var(--muted); font-size: 0.9rem; }
+    .btn { display: inline-block; padding: 0.5rem 1rem; background: var(--primary); color: white; text-decoration: none; border-radius: 6px; font-weight: bold; margin-top: 1rem; transition: background 0.2s; }
+    .btn:hover { background: #4f46e5; }
+    .reduced-motion-note { background: rgba(99,102,241,0.1); border-bottom: 1px solid var(--border); padding: 0.75rem; text-align: center; font-size: 0.85rem; color: var(--muted); }
   </style>
 </head>
 <body>
   <div class="reduced-motion-note">Accessibility Note: AnimX respects <code>prefers-reduced-motion</code> natively. Testing locally requires OS-level toggling or dev-tools simulation.</div>
   
   <header>
-    <h1>AnimX: FEEDBACK</h1>
-    <p>Zero-Dependency Animation Engine v3.34.0</p>
+    <h1>AnimX: Feedback</h1>
+    <p>Zero-Dependency Animation Engine v3.40.0</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="showcase.html">Showcase</a>
-      <a href="../docs/index.md" target="_blank">Documentation</a>
+      <a href="text.html">Text</a>
       <a href="playground.html">Playground</a>
       <a href="gallery.html">Gallery</a>
+      <a href="examples.html">Examples</a>
+      <a href="docs.html">Docs</a>
       <a href="studio.html">Studio</a>
     </nav>
   </header>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX Live Playground & Builder</title>
+  <title>AnimX v3.40.0 - Live Playground & Builder</title>
   <link rel="stylesheet" href="../dist/animx.min.css">
   <style>
     :root {
@@ -22,13 +22,23 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
     }
+    .pg-top-nav {
+      padding: 1rem 2rem;
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pg-top-nav h1 { margin: 0; font-size: 1.3rem; }
+    .pg-top-nav .version { font-size: 0.75rem; color: var(--muted); margin-left: 8px; }
+    .pg-top-nav nav { display: flex; gap: 0.75rem; }
+    .pg-top-nav nav a { color: var(--text); text-decoration: none; padding: 0.4rem 0.8rem; background: #334155; border-radius: 4px; font-size: 0.85rem; transition: background 0.2s; }
+    .pg-top-nav nav a:hover { background: #475569; }
     .playground-wrapper {
       display: flex;
-      height: 100vh;
+      height: calc(100vh - 56px);
       overflow: hidden;
     }
     /* Layout */
@@ -52,6 +62,7 @@
       border-left: 1px solid var(--border);
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
     }
 
     /* Common UI Elements */
@@ -217,63 +228,73 @@
       border-bottom-color: var(--primary);
     }
 
+    /* Sections below builder */
+    .pg-sections {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow-y: auto;
+    }
+    .pg-sections section {
+      margin-bottom: 3rem;
+      padding-top: 2rem;
+      border-top: 2px solid var(--border);
+    }
+    .pg-sections section:first-child { border-top: none; padding-top: 0; }
+    .pg-sections h2 { color: #818cf8; margin: 0 0 0.5rem; font-size: 1.5rem; }
+    .pg-sections p { color: var(--muted); margin: 0 0 1.5rem; }
+    .pg-section-grid {
+      display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;
+    }
+    .pg-section-grid > .pg-preview { flex: 2; min-width: 300px; padding: 40px; border-radius: 8px; }
+    .pg-section-grid > .pg-controls { flex: 1; min-width: 250px; padding: 20px; background: var(--panel-bg); border: 1px solid var(--border); border-radius: 8px; }
+    .pg-controls h3 { margin: 0 0 0.75rem; color: var(--text); font-size: 1rem; }
+    .pg-controls p { font-size: 0.85rem; color: var(--muted); margin-top: 1rem; }
+    .pg-btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .ax-btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
+    .ax-btn-primary { background: var(--primary); color: white; }
+    .ax-btn-primary:hover { background: var(--primary-hover); }
+    .ax-btn-secondary { background: #334155; color: var(--text); }
+    .ax-btn-secondary:hover { background: #475569; }
+    .ax-btn-success { background: #10b981; color: white; }
+    .ax-btn-warning { background: #f59e0b; color: white; }
+    .ax-btn-danger { background: #ef4444; color: white; }
+    .ax-btn-info { background: #0ea5e9; color: white; }
+
     /* Responsive */
     @media (max-width: 900px) {
-      body { flex-direction: column; overflow: auto; }
+      .playground-wrapper { flex-direction: column; height: auto; }
       .sidebar, .export-panel { width: 100%; border-right: none; border-left: none; border-bottom: 1px solid var(--border); }
       .canvas-container { min-height: 500px; }
+      .pg-section-grid { flex-direction: column; }
     }
     
     .hidden { display: none !important; }
   </style>
 </head>
 <body>
+<!-- TOP NAVIGATION BAR -->
+<div class="pg-top-nav">
+  <div style="display:flex;align-items:center;">
+    <h1>AnimX Playground</h1>
+    <span class="version">v3.40.0</span>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="showcase.html">Showcase</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="examples.html">Examples</a>
+    <a href="docs.html">Docs</a>
+    <a href="studio.html">Studio</a>
+  </nav>
+</div>
+
 <div class="playground-wrapper">
   <!-- LEFT SIDEBAR -->
   <div class="sidebar">
     <div class="header">
-      <span>AnimX Builder</span>
-      <span style="font-size: 0.75rem; color: var(--muted)">v2.2.0</span>
+      <span>Builder Controls</span>
     </div>
-    
-    <div class="ax-playground-filters">
-      <button class="filter-btn active" data-filter="all">All Effects</button>
-      <button class="filter-btn" data-filter="text">Text & Typography</button>
-      <button class="filter-btn" data-filter="components">Cards & Buttons</button>
-      <button class="filter-btn" data-filter="layout">Layouts</button>
-      <button class="filter-btn" data-filter="nav">Nav & Tabs</button>
-      <button class="filter-btn" data-filter="data">Data & Tables</button>
-    </div>
-
-    <!-- NEW V3.32.0 CATEGORIES -->
-    <section class="category-section" data-category="nav">
-      <h2>Nav & Tabs (v3.32.0)</h2>
-      <div class="playground-grid">
-        <div class="demo-card">
-          <a href="#" class="ax-nav-link-underline-slide" style="font-size: 1.2rem; color: #000; font-weight: 500;">Hover Me</a>
-          <p class="demo-meta">Class: ax-nav-link-underline-slide</p>
-        </div>
-        <div class="demo-card">
-          <button class="ax-btn ax-active" onclick="AnimX.animate(this, 'tab-indicator-slide')">Slide Tab Indicator</button>
-          <p class="demo-meta">JS: tab-indicator-slide</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="category-section" data-category="data">
-      <h2>Tables, Lists & KPI (v3.32.0)</h2>
-      <div class="playground-grid">
-        <div class="demo-card" data-ax="list-row-reveal">
-          <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 1</div>
-          <div style="padding: 10px; border-bottom: 1px solid #eee;">List Item 2</div>
-        </div>
-        <div class="demo-card">
-          <h1 id="kpi-demo" style="margin:0; font-size: 2.5rem; color: #3b82f6;">0</h1>
-          <p class="demo-meta">JS: kpi-number-roll</p>
-          <button class="ax-btn ax-btn-sm" onclick="AnimX.animate('#kpi-demo', 'kpi-number-roll', { value: 100 })">Roll Number</button>
-        </div>
-      </div>
-    </section>
 
     <!-- COMPONENTS SECTION -->
     <div id="controls-preset" class="mode-controls">
@@ -420,477 +441,376 @@
       </div>
       
     </div>
+  </div><!-- /.export-panel -->
+</div><!-- /.playground-wrapper -->
 
-    <!-- v3.32.0 INDUSTRY DEMO PACKS -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Industry Demo Packs (v3.32.0)</h2>
-      <p>Combine multiple patterns into vertical scrolling experiences.</p>
-      <div class="playground-grid">
-        <div class="demo-card" style="background: #f8fafc;">
-          <h3>SaaS Landing Page</h3>
-          <p style="font-size:0.9rem; color:#64748b">Includes Hero Premium, Feature Grid, and Pricing.</p>
-          <button class="ax-btn ax-btn-sm" style="margin-top:10px;">Preview Flow</button>
-        </div>
-        <div class="demo-card" style="background: #f8fafc;">
-          <h3>Dashboard Layout</h3>
-          <p style="font-size:0.9rem; color:#64748b">Includes KPI Row, List Reveals, and Chart Builds.</p>
-          <button class="ax-btn ax-btn-sm" style="margin-top:10px;">Preview Flow</button>
+<!-- DEMO SECTIONS (scrollable below the builder) -->
+<div class="pg-sections">
+
+  <!-- ANIMATION COMPOSER -->
+  <section>
+    <h2>Animation Composer</h2>
+    <p>Test composed combinations of effects on a single element.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background: var(--panel-bg); display:flex; align-items:center; justify-content:center;">
+        <div class="composer-target" style="height: 150px; width:250px; background: linear-gradient(135deg, #6366f1, #a855f7); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+          Hover Me (Premium Card)
         </div>
       </div>
-    </section>
-
-    <!-- v3.32.0 ANIMATION COMPOSER PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Animation Composer Playground (v3.32.0)</h2>
-      <p>Test composed combinations of effects on a single element.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
-        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Target</h3>
-          <div class="composer-target" data-ax-variant="premium-card-hover" style="height: 150px; background: linear-gradient(135deg, #6366f1, #a855f7); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-            Hover Me (Premium Card Variant)
-          </div>
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Composed Chain</h3>
-          <ul style="font-size: 0.9rem; color: #475569; padding-left: 20px;">
-            <li>1. Entrance: <code>fade-up</code></li>
-            <li>2. Hover: <code>card-lift</code></li>
-            <li>3. Hover: <code>card-spotlight-hover</code></li>
-          </ul>
-          <button class="ax-btn ax-btn-sm" style="margin-top: 10px;" onclick="AnimX.compose('.composer-target', 'premium-card-hover')">Replay Composition</button>
-        </div>
+      <div class="pg-controls">
+        <h3>Composed Chain</h3>
+        <ol style="font-size:0.85rem; color:var(--muted); padding-left:20px; margin:0 0 1rem;">
+          <li>Entrance: <code>fade-up</code></li>
+          <li>Hover: <code>card-lift</code></li>
+          <li>Hover: <code>card-spotlight-hover</code></li>
+        </ol>
+        <button class="ax-btn ax-btn-primary" onclick="typeof AnimX!=='undefined'&&AnimX.compose('.composer-target','premium-card-hover')">Replay Composition</button>
       </div>
-    </section>
-
-    <!-- v3.32.0 MOTION STATE PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Motion State & Trigger Playground (v3.32.0)</h2>
-      <p>Test declarative logic binding custom events or states to animations.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: stretch; margin-top: 20px;">
-        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Target</h3>
-          <div class="state-target" data-ax-state="idle" data-ax-state-idle="fade-up" data-ax-state-loading="card-lift" data-ax-state-success="card-spotlight-hover" style="height: 150px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-            State: Idle
-          </div>
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Control Panel</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" onclick="document.querySelector('.state-target').setAttribute('data-ax-state', 'idle'); document.querySelector('.state-target').innerText='State: Idle'">Set Idle</button>
-            <button class="ax-btn ax-btn-sm" style="background: #f59e0b; color: #fff;" onclick="document.querySelector('.state-target').setAttribute('data-ax-state', 'loading'); document.querySelector('.state-target').innerText='State: Loading'">Set Loading</button>
-            <button class="ax-btn ax-btn-sm" style="background: #10b981; color: #fff;" onclick="document.querySelector('.state-target').setAttribute('data-ax-state', 'success'); document.querySelector('.state-target').innerText='State: Success'">Set Success</button>
-            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: #fff;" onclick="AnimX.trigger('custom-fail'); document.querySelector('.state-target').innerText='Triggered custom-fail'">Trigger custom-fail Event</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Notice how clicking the buttons swaps the <code>data-ax-state</code> attribute, and AnimX watches the DOM using <code>MutationObserver</code> to fire the corresponding variant instantly.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 SCROLL STORY PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0; min-height: 120vh;">
-      <h2>Scroll Story & Responsive Motion (v3.32.0)</h2>
-      <p>Scroll down to scrub the story, or simulate different viewports.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div class="scroll-story-container" style="flex: 2; padding: 40px; background: #0f172a; color: white; border-radius: 8px; position: sticky; top: 20px; overflow: hidden; height: 300px; display: flex; align-items: center; justify-content: center;">
-          <h1 class="story-heading" style="font-size: 3rem; margin: 0; opacity: 0.2; transform: translateY(20px); transition: opacity 0.1s linear, transform 0.1s linear;">AnimX Story</h1>
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; position: sticky; top: 20px;">
-          <h3>Viewport Override</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" onclick="alert('Simulating Mobile MatchMedia...')">Mobile View</button>
-            <button class="ax-btn ax-btn-sm" style="background: #8b5cf6; color: #fff;" onclick="alert('Simulating Desktop MatchMedia...')">Desktop View</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Scroll the page. The heading opacity and transform are tied to the window scroll percentage using the AnimX requestAnimationFrame scrubber.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 3D MOTION PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Spatial & 3D Motion (v3.32.0)</h2>
-      <p>Test zero-dependency native DOM 3D transformations combined with RAF pointer tracking.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; perspective: 1000px; display: flex; gap: 30px; justify-content: center;">
-          
-          <div class="ax-preserve-3d ax-card-3d-tilt-soft" style="width: 250px; height: 350px; background: white; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); padding: 20px; position: relative;">
-            <div style="height: 150px; background: #ec4899; border-radius: 8px; margin-bottom: 20px; transform: translateZ(30px);"></div>
-            <h3 style="margin: 0 0 10px 0; transform: translateZ(50px);">3D Parallax Hover</h3>
-            <p style="font-size: 0.9rem; color: #64748b; transform: translateZ(20px);">Move your mouse over this card. The engine calculates relative X/Y angles mapped to CSS variables to tilt it.</p>
-          </div>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>3D Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" onclick="alert('Pointer tracking started')">Init Pointer Engine</button>
-            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: #fff;" onclick="alert('Pointer tracking disabled (Memory Cleaned)')">Destroy Tracking</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The tracking loop caches BoundingRects and shuts off automatically when the mouse stops moving to preserve device battery.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 PHYSICS MOTION PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Physics Motion & Easing (v3.32.0)</h2>
-      <p>Test advanced `requestAnimationFrame` physics loops mapping Hooke's Law (Springs) and Elastic equations natively.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; display: flex; gap: 30px; justify-content: center; align-items: center; min-height: 300px;">
-          
-          <div id="pg-spring-box" style="width: 120px; height: 120px; background: #0ea5e9; border-radius: 16px; box-shadow: 0 10px 25px rgba(14,165,233,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; cursor: pointer;">
-            Click Me
-          </div>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Physics Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #0ea5e9; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.spring('#pg-spring-box', {stiffness: 180, damping: 12})">Trigger Spring</button>
-            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: #fff;" onclick="typeof AnimX !== 'undefined' && AnimX.destroyPhysics()">Emergency Stop</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The physics engine contains a hard 5000ms maxDuration threshold to ensure loops terminate properly to prevent battery drain.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 TEXT MOTION PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Advanced Typography (v3.32.0)</h2>
-      <p>Test the zero-dependency Text Scramble, Slot Machine, Counter, and Marquee modules. <i>(All components fallback gracefully via aria-hidden spans to remain WCAG compliant).</i></p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 300px;">
-          
-          <h3 id="pg-scramble-text" style="font-size: 3rem; margin: 0; font-family: monospace;">AnimX Engine</h3>
-          <h3 id="pg-counter-text" style="font-size: 2.5rem; margin: 0; color: #84cc16;">0</h3>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Typography Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #84cc16; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.scrambleText('#pg-scramble-text', {charset: 'A-Z0-9', duration: 1500})">Trigger Scramble</button>
-            <button class="ax-btn ax-btn-sm" style="background: #0ea5e9; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.counterText('#pg-counter-text', {from: 0, to: 12500, format: 'compact'})">Trigger Counter</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The text splitting algorithms assign `aria-label` to the parent to ensure screen readers read the full text correctly while the CSS animations trigger.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 MEDIA MOTION PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Advanced Media Motion (v3.32.0)</h2>
-      <p>Test the zero-dependency Gallery Grids, Before/After slider, and Media Slicing engines. <i>(All components enforce strict accessibility rules around alt attributes and reduced-motion states).</i></p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 300px;">
-          
-          <div id="pg-before-after" style="width: 100%; max-width: 400px; height: 250px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; position: relative;">
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #94a3b8;">Original</div>
-            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #eab308; clip-path: inset(0 50% 0 0);">Modified</div>
-            <button style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30px; height: 30px; border-radius: 50%; background: white; border: 2px solid #333; cursor: grab;">⇔</button>
-          </div>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Media Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #eab308; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.beforeAfter('#pg-before-after', {reveal: 0.25})">Trigger Slider (25%)</button>
-            <button class="ax-btn ax-btn-sm" style="background: #0ea5e9; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.imageClip('#pg-before-after', {})">Trigger Slice Reveal</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The native slider uses pointer events over a dynamically injected handle. Keyboard accessibility is fully enforced.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 MICRO-INTERACTION PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Advanced Buttons & Links (v3.32.0)</h2>
-      <p>Test hover choreography, focus safety bounds, and state machines mapping idle/loading/success UX flows.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 300px;">
-          
-          <button id="pg-button" style="padding: 1rem 2rem; font-size: 1.25rem; font-weight: bold; background: #6366f1; color: white; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">Submit Form</button>
-
-          <a href="#" id="pg-link" style="font-size: 1.25rem; color: #333; font-weight: 500;">Hover over this link</a>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Interaction Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.button('#pg-button', {hover: 'button-glow', focus: 'button-focus-ring-pop'})">Init Button FX</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.link('#pg-link', {effect: 'link-underline-slide'})">Init Link FX</button>
-            <button class="ax-btn ax-btn-sm" style="background: #10b981; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.buttonState('#pg-button', {state: 'success'})">Set State: Success</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The button interactions automatically bind focus outlines natively for keyboard users to prevent `outline: none` accessibility traps.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 DATA UI PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Advanced Data UI Motion (v3.32.0)</h2>
-      <p>Test Card Grids, Table Row Staggers, Dashboard KPIs, and Chart Reveals.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 300px;">
-          
-          <table id="pg-table" style="width: 100%; max-width: 400px; border-collapse: collapse; background: white;">
-            <tbody>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 1rem;">Dashboard Row 1</td></tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 1rem;">Dashboard Row 2</td></tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 1rem;">Dashboard Row 3</td></tr>
-            </tbody>
-          </table>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Data UI Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #14b8a6; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.table('#pg-table', {effect: 'table-row-fade'})">Init Table Stagger</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.dashboard('#pg-table', {effect: 'dashboard-grid-stagger'})">Trigger Dashboard KPI</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Table animations preserve native <code>display: table-row</code> formatting to ensure ARIA screen reader traversal is completely uninterrupted.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 UI FEEDBACK PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Form, Modal, and Feedback Motion (v3.32.0)</h2>
-      <p>Test Validation States, Modals, Toasts, and Form Element interactions natively.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div style="flex: 2; padding: 60px; background: #f1f5f9; border-radius: 8px; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 300px;">
-          
-          <input id="pg-input" type="text" placeholder="Type here..." style="padding: 1rem; font-size: 1rem; width: 80%; max-width: 300px; border: 2px solid #cbd5e1; border-radius: 6px; outline: none;">
-          
-          <button id="pg-toast-btn" style="padding: 0.75rem 1.5rem; background: #ec4899; color: white; border: none; border-radius: 6px; cursor: pointer;">Spawn Toast</button>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Feedback Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #10b981; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.input('#pg-input', {focus: 'input-focus-glow'})">Init Focus Glow</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.toast('body', {effect: 'toast-slide-right'})">Init Toast System</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Feedback APIs automate complex state management (like tracking validation timers) without requiring React-style component wrappers.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 ATMOSPHERE PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Background, Decorative, and Ambient Motion (v3.32.0)</h2>
-      <p>Test Mesh Gradients, Spotlights, and Capped Particle systems.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div id="pg-atmosphere-box" style="flex: 2; padding: 60px; background: #0f172a; border-radius: 8px; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 400px; position: relative; overflow: hidden; color: white;">
-          
-          <h3 style="position: relative; z-index: 10; font-size: 2rem;">Ambient Lab</h3>
-          <p style="position: relative; z-index: 10; opacity: 0.8;">Interact with the background.</p>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Atmosphere Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #8b5cf6; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.particleLite('#pg-atmosphere-box', {count: 30})">Spawn Particles</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.spotlight('#pg-atmosphere-box', {effect: 'bg-spotlight-cursor'})">Init Spotlight</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Particle limits are hard-capped at 50 nodes per container to guarantee stable mobile framerates without requiring WebGL canvases.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 SVG PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>SVG, Icon, Logo, Path & Infographics (v3.32.0)</h2>
-      <p>Test logo reveals, handwriting traces, and path length caching failsafes.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div id="pg-svg-box" style="flex: 2; padding: 60px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 400px; position: relative;">
-          
-          <svg class="demo-logo" viewBox="0 0 200 100" width="200" height="100" stroke="#0ea5e9" stroke-width="3" fill="none" stroke-linecap="round">
-            <path d="M10,90 Q50,10 100,50 T190,10"></path>
-          </svg>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>SVG Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #0ea5e9; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.svgDraw('.demo-logo path', {effect: 'svg-draw-stagger'})">Draw Line</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.svgUndraw('.demo-logo path', {effect: 'svg-undraw'})">Undraw Line</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">AnimX calculates <code>getTotalLength()</code> securely, injecting temporary visibility flags to guarantee accurate dasharray metrics even when the SVG container is currently hidden.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 PAGE TRANSITION PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Page & Route Transitions (v3.32.0)</h2>
-      <p>Test secure link interception and shared element FLIP measurement.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div id="pg-route-box" style="flex: 2; padding: 60px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 400px; position: relative;">
-          
-          <a href="#demo" id="demo-route-link" style="padding: 15px 30px; background: #0f172a; color: white; text-decoration: none; border-radius: 6px; font-weight: bold;">Opt-In Navigation Link</a>
-          <a href="javascript:void(0)" style="color: #94a3b8; text-decoration: underline;">Ignored JS Link</a>
-
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Route Controls</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #f43f5e; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.routeMotion({links: '#demo-route-link'}); document.getElementById('demo-route-link').click();">Simulate Routing</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.pageTransition({enter: 'page-fade-in'})">Trigger Enter Page</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">AnimX completely ignores <code>javascript:</code>, <code>target="_blank"</code>, and external domain URLs to maintain security and native browser expectations.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 CMS RECIPE PLAYGROUND -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>CMS, WordPress, Webflow & No-Code Recipes (v3.32.0)</h2>
-      <p>Test dynamic content refresh using safe data-attribute pipelines and MutationObserver debouncing.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div id="pg-cms-box" style="flex: 2; padding: 40px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; min-height: 400px; display: flex; flex-direction: column; gap: 10px;">
-          <!-- Initial Items -->
-          <div class="cms-mock-item" data-ax-recipe="cms-feature-grid-stagger" style="padding: 15px; background: white; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-            <h4 data-ax-text-effect="text-mask-up" style="margin:0 0 5px 0;">Existing CMS Item 1</h4>
-            <p data-ax="fade-up" style="margin:0; font-size: 0.9rem; color:#64748b;">Loaded on page init.</p>
-          </div>
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Dynamic Injection Tester</h3>
-          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-            <button class="ax-btn ax-btn-sm" style="background: #f59e0b; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.observeCMS('#pg-cms-box'); document.getElementById('pg-cms-box').innerHTML += `<div class='cms-mock-item' data-ax-recipe='cms-feature-grid-stagger' style='padding: 15px; background: white; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'><h4 data-ax-text-effect='text-mask-up' style='margin:0 0 5px 0;'>Injected Item ${document.querySelectorAll('.cms-mock-item').length + 1}</h4><p data-ax='fade-up' style='margin:0; font-size: 0.9rem; color:#64748b;'>Loaded via AJAX / Mutation.</p></div>`;">Inject AJAX Item</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof AnimX !== 'undefined' && AnimX.refreshCMS('#pg-cms-box');">Manual Refresh (No Observer)</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">The MutationObserver captures the new node injection and safely triggers <code>applyRecipe</code> without double-initializing the existing nodes.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.32.0 LOCAL PACK MARKETPLACE PREVIEW -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Local Animation Pack Marketplace (v3.32.0)</h2>
-      <p>Preview JSON-based marketplace-ready packs without backend dependencies.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <!-- ... omitted for brevity ... -->
-      </div>
-    </section>
-
-    <!-- v3.32.0 COMPATIBILITY TESTER -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0; margin-bottom: 60px;">
-      <h2>Compatibility and Fallback Tester (v3.32.0)</h2>
-      <p>Simulate missing browser features to test graceful degradation natively without polyfills.</p>
-      
-      <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
-        <div id="pg-compat-box" style="flex: 2; padding: 60px; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; display: flex; flex-direction: column; gap: 30px; justify-content: center; align-items: center; min-height: 300px; position: relative;">
-          <div id="pg-compat-target" style="width: 200px; height: 120px; background: #14b8a6; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; border-radius: 8px;">
-            Target Element
-          </div>
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-          <h3>Fallback Simulator</h3>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: white;" onclick="typeof window !== 'undefined' && window._simulateMissingFeature && window._simulateMissingFeature('intersectionObserver'); alert('IntersectionObserver Disabled');">Simulate No IO</button>
-            <button class="ax-btn ax-btn-sm" style="background: #ef4444; color: white;" onclick="typeof window !== 'undefined' && window._simulateMissingFeature && window._simulateMissingFeature('clipPath'); alert('CSS clip-path Disabled');">Simulate No Clip-Path</button>
-            <button class="ax-btn ax-btn-sm" style="background: #eab308; color: white;" onclick="typeof AnimX !== 'undefined' && AnimX.animate('#pg-compat-target', 'text-mask-up')">Run Mask Reveal</button>
-            <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="typeof window !== 'undefined' && window._resetSimulations && window._resetSimulations(); alert('Simulations Reset');">Reset Capabilities</button>
-          </div>
-          <p style="margin-top:15px; font-size:0.85rem; color:#64748b;">Notice how missing features force AnimX to fall back to safe opacity/transform animations natively without stalling.</p>
-        </div>
-      </div>
-    </section>
-        <div style="flex: 2; display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
-          <!-- Pack Card -->
-          <div style="padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-            <h4 style="margin: 0 0 5px 0;">AnimX Text Essentials Pack</h4>
-            <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #64748b;">Core text reveals, masking, and staggering presets.</p>
-            <span style="font-size: 0.7rem; background: #e0e7ff; color: #4338ca; padding: 2px 6px; border-radius: 4px;">Free</span>
-            <span style="font-size: 0.7rem; background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px;">Verified</span>
-            <div style="margin-top: 15px; display: flex; gap: 5px;">
-              <button class="ax-btn ax-btn-sm ax-btn-primary">Preview Pack</button>
-              <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="alert('JSON Output Generated!')">Export JSON</button>
-            </div>
-          </div>
-          <!-- Pack Card -->
-          <div style="padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-            <h4 style="margin: 0 0 5px 0;">AnimX Media Reveal Pack</h4>
-            <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #64748b;">Image reveals, masks, clips, and parallax wrappers.</p>
-            <span style="font-size: 0.7rem; background: #e0e7ff; color: #4338ca; padding: 2px 6px; border-radius: 4px;">Free</span>
-            <span style="font-size: 0.7rem; background: #dcfce7; color: #166534; padding: 2px 6px; border-radius: 4px;">Verified</span>
-            <div style="margin-top: 15px; display: flex; gap: 5px;">
-              <button class="ax-btn ax-btn-sm ax-btn-primary">Preview Pack</button>
-              <button class="ax-btn ax-btn-sm" style="background: #e2e8f0; color: #1e293b;" onclick="alert('JSON Output Generated!')">Export JSON</button>
-            </div>
-          </div>
-        </div>
-        
-        <div style="flex: 1; padding: 20px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px;">
-          <h3>Local Install Tester</h3>
-          <p style="font-size: 0.85rem; color: #64748b;">Paste a pack JSON to test the offline installer mechanism.</p>
-          <textarea class="ax-input" style="width: 100%; min-height: 80px; margin-top: 10px; font-family: monospace;" placeholder="{ &quot;schema&quot;: &quot;animx-pack-manifest&quot;... }"></textarea>
-          <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <button class="ax-btn ax-btn-sm" style="background: #f59e0b; color: white;" onclick="alert('Running Security Audit... OK!\nValidation... OK!')">Validate & Audit</button>
-            <button class="ax-btn ax-btn-sm ax-btn-primary" onclick="alert('Dry Run Passed. No real install triggered.')">Import Dry Run</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- v3.13.0 HEALTH CHECK UTILITY -->
-    <div style="margin-top: 40px; padding: 20px; background: #fffbeb; border: 1px solid #fef08a; border-radius: 8px;">
-      <h3>Playground Active Verification (v3.32.0)</h3>
-      <p>Ensure current DOM is safe and not leaking listeners.</p>
-      <button class="ax-btn ax-btn-sm" onclick="console.log(window.AnimX.validateRuntime()); alert('Checked! See console for details.');">Validate Active Runtime</button>
     </div>
+  </section>
 
-    <!-- v3.32.0 FINAL COVERAGE MATRIX -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>Final Coverage Matrix (v3.32.0)</h2>
-      <p>Verifying all animation families and presets.</p>
-      <div style="padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-        <button class="ax-btn ax-btn-primary" onclick="if(window.AnimX) document.getElementById('playground-matrix').innerText=JSON.stringify(AnimX.finalAudit().matrix, null, 2)">Load Matrix</button>
-        <pre id="playground-matrix" style="margin-top: 15px; background: #0f172a; color: #34d399; padding: 15px; border-radius: 6px; font-family: monospace; max-height: 300px; overflow-y: auto;">Click to load matrix...</pre>
+  <!-- MOTION STATE -->
+  <section>
+    <h2>Motion State & Triggers</h2>
+    <p>Test declarative logic binding custom events or states to animations.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background: var(--panel-bg); display:flex; align-items:center; justify-content:center;">
+        <div class="state-target" data-ax-state="idle" style="height: 150px; width:250px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+          State: Idle
+        </div>
       </div>
-    </section>
-
-    <!-- v3.32.0 ONE STOP QA REPORT -->
-    <section style="margin-top: 60px; padding-top: 40px; border-top: 2px solid #e2e8f0;">
-      <h2>One-Stop QA Report (v3.32.0)</h2>
-      <p>Final audit report for catalog readiness.</p>
-      <div style="padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;">
-        <button class="ax-btn ax-btn-primary" style="background: #ef4444;" onclick="if(window.AnimX) document.getElementById('playground-report').innerText=JSON.stringify(AnimX.finalAudit(), null, 2)">Run Final Audit</button>
-        <pre id="playground-report" style="margin-top: 15px; background: #0f172a; color: #34d399; padding: 15px; border-radius: 6px; font-family: monospace; max-height: 300px; overflow-y: auto;">Click to run audit...</pre>
+      <div class="pg-controls">
+        <h3>Control Panel</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-secondary" onclick="document.querySelector('.state-target').setAttribute('data-ax-state','idle');document.querySelector('.state-target').innerText='State: Idle'">Set Idle</button>
+          <button class="ax-btn ax-btn-warning" onclick="document.querySelector('.state-target').setAttribute('data-ax-state','loading');document.querySelector('.state-target').innerText='State: Loading'">Set Loading</button>
+          <button class="ax-btn ax-btn-success" onclick="document.querySelector('.state-target').setAttribute('data-ax-state','success');document.querySelector('.state-target').innerText='State: Success'">Set Success</button>
+          <button class="ax-btn ax-btn-danger" onclick="typeof AnimX!=='undefined'&&AnimX.trigger('custom-fail');document.querySelector('.state-target').innerText='Triggered custom-fail'">Trigger Fail</button>
+        </div>
+        <p>AnimX watches <code>data-ax-state</code> changes via <code>MutationObserver</code> and fires matching variants instantly.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-  </div>
+  <!-- SCROLL STORY -->
+  <section>
+    <h2>Scroll Story & Responsive Motion</h2>
+    <p>Scroll down to scrub the story, or simulate different viewports.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background: var(--bg); display:flex; align-items:center; justify-content:center; min-height:300px;">
+        <h1 class="story-heading" style="font-size:3rem; margin:0; opacity:0.2; transform:translateY(20px); transition:opacity 0.1s linear,transform 0.1s linear; color:var(--text);">AnimX Story</h1>
+      </div>
+      <div class="pg-controls">
+        <h3>Viewport Override</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-secondary" onclick="alert('Simulating Mobile MatchMedia...')">Mobile View</button>
+          <button class="ax-btn ax-btn-primary" style="background:#8b5cf6;" onclick="alert('Simulating Desktop MatchMedia...')">Desktop View</button>
+        </div>
+        <p>The heading opacity and transform are tied to scroll percentage using the AnimX RAF scrubber.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D MOTION -->
+  <section>
+    <h2>Spatial & 3D Motion</h2>
+    <p>Test zero-dependency native DOM 3D transformations with RAF pointer tracking.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:#1e1b4b; perspective:1000px; display:flex; justify-content:center;">
+        <div class="ax-preserve-3d" style="width:250px; height:300px; background:var(--panel-bg); border-radius:12px; box-shadow:0 20px 40px rgba(0,0,0,0.3); padding:20px;">
+          <div style="height:120px; background:#ec4899; border-radius:8px; margin-bottom:15px;"></div>
+          <h3 style="margin:0 0 8px; color:var(--text);">3D Parallax Hover</h3>
+          <p style="font-size:0.85rem; color:var(--muted);">Move your mouse over this card for tilt effect.</p>
+        </div>
+      </div>
+      <div class="pg-controls">
+        <h3>3D Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-secondary" onclick="alert('Pointer tracking started')">Init Pointer Engine</button>
+          <button class="ax-btn ax-btn-danger" onclick="alert('Pointer tracking disabled')">Destroy Tracking</button>
+        </div>
+        <p>The tracking loop caches BoundingRects and shuts off when the mouse stops to preserve battery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHYSICS MOTION -->
+  <section>
+    <h2>Physics Motion & Easing</h2>
+    <p>Test advanced RAF physics loops with Springs and Elastic equations.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); display:flex; align-items:center; justify-content:center; min-height:300px;">
+        <div id="pg-spring-box" style="width:120px; height:120px; background:#0ea5e9; border-radius:16px; box-shadow:0 10px 25px rgba(14,165,233,0.3); display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; cursor:pointer;">Click Me</div>
+      </div>
+      <div class="pg-controls">
+        <h3>Physics Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-info" onclick="typeof AnimX!=='undefined'&&AnimX.spring('#pg-spring-box',{stiffness:180,damping:12})">Trigger Spring</button>
+          <button class="ax-btn ax-btn-danger" onclick="typeof AnimX!=='undefined'&&AnimX.destroyPhysics()">Emergency Stop</button>
+        </div>
+        <p>Hard 5000ms maxDuration threshold prevents runaway loops and battery drain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEXT MOTION -->
+  <section>
+    <h2>Advanced Typography</h2>
+    <p>Zero-dependency Text Scramble, Slot Machine, Counter, and Marquee — all WCAG compliant.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; min-height:250px;">
+        <h3 id="pg-scramble-text" style="font-size:2.5rem; margin:0; font-family:monospace; color:var(--text);">AnimX Engine</h3>
+        <h3 id="pg-counter-text" style="font-size:2rem; margin:0; color:#84cc16;">0</h3>
+      </div>
+      <div class="pg-controls">
+        <h3>Typography Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-success" onclick="typeof AnimX!=='undefined'&&AnimX.scrambleText('#pg-scramble-text',{charset:'A-Z0-9',duration:1500})">Trigger Scramble</button>
+          <button class="ax-btn ax-btn-info" onclick="typeof AnimX!=='undefined'&&AnimX.counterText('#pg-counter-text',{from:0,to:12500,format:'compact'})">Trigger Counter</button>
+        </div>
+        <p>Text splitting assigns <code>aria-label</code> to parent for correct screen reader behavior.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA MOTION -->
+  <section>
+    <h2>Advanced Media Motion</h2>
+    <p>Gallery Grids, Before/After slider, and Media Slicing with strict accessibility rules.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); display:flex; align-items:center; justify-content:center; min-height:300px;">
+        <div id="pg-before-after" style="width:100%; max-width:350px; height:200px; position:relative; border-radius:8px; overflow:hidden;">
+          <div style="position:absolute; inset:0; background:#94a3b8; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">Original</div>
+          <div style="position:absolute; inset:0; background:#eab308; clip-path:inset(0 50% 0 0); display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">Modified</div>
+        </div>
+      </div>
+      <div class="pg-controls">
+        <h3>Media Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-warning" onclick="typeof AnimX!=='undefined'&&AnimX.beforeAfter('#pg-before-after',{reveal:0.25})">Slider 25%</button>
+          <button class="ax-btn ax-btn-info" onclick="typeof AnimX!=='undefined'&&AnimX.imageClip('#pg-before-after',{})">Slice Reveal</button>
+        </div>
+        <p>Uses pointer events with keyboard accessibility fully enforced.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS & LINKS -->
+  <section>
+    <h2>Advanced Buttons & Links</h2>
+    <p>Hover choreography, focus safety bounds, and idle/loading/success UX flows.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; min-height:250px;">
+        <button id="pg-button" style="padding:1rem 2rem; font-size:1.25rem; font-weight:bold; background:#6366f1; color:white; border:none; border-radius:8px; cursor:pointer;">Submit Form</button>
+        <a href="#" id="pg-link" style="font-size:1.1rem; color:var(--muted);">Hover over this link</a>
+      </div>
+      <div class="pg-controls">
+        <h3>Interaction Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.button('#pg-button',{hover:'button-glow',focus:'button-focus-ring-pop'})">Init Button FX</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.link('#pg-link',{effect:'link-underline-slide'})">Init Link FX</button>
+          <button class="ax-btn ax-btn-success" onclick="typeof AnimX!=='undefined'&&AnimX.buttonState('#pg-button',{state:'success'})">State: Success</button>
+        </div>
+        <p>Focus outlines are bound natively for keyboard users to prevent <code>outline: none</code> traps.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA UI -->
+  <section>
+    <h2>Data UI Motion</h2>
+    <p>Card Grids, Table Row Staggers, Dashboard KPIs, and Chart Reveals.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); display:flex; align-items:center; justify-content:center; min-height:250px;">
+        <table id="pg-table" style="width:100%; max-width:400px; border-collapse:collapse;">
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:1rem; color:var(--text);">Dashboard Row 1</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:1rem; color:var(--text);">Dashboard Row 2</td></tr>
+            <tr style="border-bottom:1px solid var(--border);"><td style="padding:1rem; color:var(--text);">Dashboard Row 3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pg-controls">
+        <h3>Data UI Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn" style="background:#14b8a6;color:white;" onclick="typeof AnimX!=='undefined'&&AnimX.table('#pg-table',{effect:'table-row-fade'})">Table Stagger</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.dashboard('#pg-table',{effect:'dashboard-grid-stagger'})">Dashboard KPI</button>
+        </div>
+        <p>Table animations preserve native <code>display: table-row</code> for uninterrupted ARIA traversal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section>
+    <h2>Form, Modal & Feedback Motion</h2>
+    <p>Validation States, Modals, Toasts, and Form interactions.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); display:flex; flex-direction:column; gap:20px; align-items:center; justify-content:center; min-height:250px;">
+        <input id="pg-input" type="text" placeholder="Type here..." style="padding:1rem; font-size:1rem; width:80%; max-width:300px; border:2px solid var(--border); border-radius:6px; background:var(--bg); color:var(--text); outline:none;">
+        <button id="pg-toast-btn" style="padding:0.75rem 1.5rem; background:#ec4899; color:white; border:none; border-radius:6px; cursor:pointer;">Spawn Toast</button>
+      </div>
+      <div class="pg-controls">
+        <h3>Feedback Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-success" onclick="typeof AnimX!=='undefined'&&AnimX.input('#pg-input',{focus:'input-focus-glow'})">Init Focus Glow</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.toast('body',{effect:'toast-slide-right'})">Init Toast System</button>
+        </div>
+        <p>Feedback APIs automate complex state management without React-style wrappers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATMOSPHERE -->
+  <section>
+    <h2>Background & Ambient Motion</h2>
+    <p>Mesh Gradients, Spotlights, and Capped Particle systems.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" id="pg-atmosphere-box" style="background:var(--bg); min-height:350px; position:relative; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <h3 style="position:relative; z-index:10; font-size:2rem; color:var(--text);">Ambient Lab</h3>
+        <p style="position:relative; z-index:10; opacity:0.8; color:var(--muted);">Interact with the background.</p>
+      </div>
+      <div class="pg-controls">
+        <h3>Atmosphere Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn" style="background:#8b5cf6;color:white;" onclick="typeof AnimX!=='undefined'&&AnimX.particleLite('#pg-atmosphere-box',{count:30})">Spawn Particles</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.spotlight('#pg-atmosphere-box',{effect:'bg-spotlight-cursor'})">Init Spotlight</button>
+        </div>
+        <p>Particle limits hard-capped at 50 nodes per container for stable mobile framerates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SVG -->
+  <section>
+    <h2>SVG, Icon & Path Motion</h2>
+    <p>Logo reveals, handwriting traces, and path length caching failsafes.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); border:1px dashed var(--border); display:flex; align-items:center; justify-content:center; min-height:300px;">
+        <svg class="demo-logo" viewBox="0 0 200 100" width="200" height="100" stroke="#0ea5e9" stroke-width="3" fill="none" stroke-linecap="round">
+          <path d="M10,90 Q50,10 100,50 T190,10"></path>
+        </svg>
+      </div>
+      <div class="pg-controls">
+        <h3>SVG Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-info" onclick="typeof AnimX!=='undefined'&&AnimX.svgDraw('.demo-logo path',{effect:'svg-draw-stagger'})">Draw Line</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.svgUndraw('.demo-logo path',{effect:'svg-undraw'})">Undraw Line</button>
+        </div>
+        <p>AnimX calculates <code>getTotalLength()</code> securely with temporary visibility flags for hidden SVGs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE TRANSITIONS -->
+  <section>
+    <h2>Page & Route Transitions</h2>
+    <p>Secure link interception and shared element FLIP measurement.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); border:1px dashed var(--border); display:flex; flex-direction:column; gap:15px; align-items:center; justify-content:center; min-height:250px;">
+        <a href="#demo" id="demo-route-link" style="padding:12px 24px; background:var(--primary); color:white; text-decoration:none; border-radius:6px; font-weight:bold;">Opt-In Navigation Link</a>
+        <span style="color:var(--muted); font-size:0.85rem;">JS void links are safely ignored</span>
+      </div>
+      <div class="pg-controls">
+        <h3>Route Controls</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-danger" onclick="typeof AnimX!=='undefined'&&AnimX.routeMotion({links:'#demo-route-link'})">Simulate Routing</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.pageTransition({enter:'page-fade-in'})">Trigger Enter</button>
+        </div>
+        <p>AnimX ignores <code>javascript:</code>, <code>target="_blank"</code>, and external URLs for security.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CMS RECIPES -->
+  <section>
+    <h2>CMS & No-Code Recipes</h2>
+    <p>Dynamic content refresh with safe data-attribute pipelines and MutationObserver debouncing.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" id="pg-cms-box" style="background:var(--panel-bg); border:1px dashed var(--border); min-height:300px; display:flex; flex-direction:column; gap:10px; padding:20px;">
+        <div class="cms-mock-item" style="padding:15px; background:var(--bg); border:1px solid var(--border); border-radius:6px;">
+          <h4 style="margin:0 0 5px; color:var(--text);">Existing CMS Item 1</h4>
+          <p style="margin:0; font-size:0.9rem; color:var(--muted);">Loaded on page init.</p>
+        </div>
+      </div>
+      <div class="pg-controls">
+        <h3>Dynamic Injection</h3>
+        <div class="pg-btn-row" style="flex-direction:column;">
+          <button class="ax-btn ax-btn-warning" onclick="typeof AnimX!=='undefined'&&AnimX.observeCMS('#pg-cms-box');document.getElementById('pg-cms-box').innerHTML+='<div class=cms-mock-item style=padding:15px;background:var(--bg);border:1px_solid_var(--border);border-radius:6px;><h4 style=margin:0_0_5px;color:var(--text);>Injected Item '+(document.querySelectorAll('.cms-mock-item').length+1)+'</h4><p style=margin:0;font-size:0.9rem;color:var(--muted);>Via AJAX</p></div>'">Inject AJAX Item</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof AnimX!=='undefined'&&AnimX.refreshCMS('#pg-cms-box')">Manual Refresh</button>
+        </div>
+        <p>MutationObserver safely triggers <code>applyRecipe</code> without double-initializing existing nodes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPATIBILITY TESTER -->
+  <section>
+    <h2>Compatibility & Fallback Tester</h2>
+    <p>Simulate missing browser features to test graceful degradation without polyfills.</p>
+    <div class="pg-section-grid">
+      <div class="pg-preview" style="background:var(--panel-bg); border:1px dashed var(--border); display:flex; align-items:center; justify-content:center; min-height:250px;">
+        <div id="pg-compat-target" style="width:200px; height:120px; background:#14b8a6; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; border-radius:8px;">Target Element</div>
+      </div>
+      <div class="pg-controls">
+        <h3>Fallback Simulator</h3>
+        <div class="pg-btn-row">
+          <button class="ax-btn ax-btn-danger" onclick="typeof window!=='undefined'&&window._simulateMissingFeature&&window._simulateMissingFeature('intersectionObserver');alert('IntersectionObserver Disabled')">No IO</button>
+          <button class="ax-btn ax-btn-danger" onclick="typeof window!=='undefined'&&window._simulateMissingFeature&&window._simulateMissingFeature('clipPath');alert('clip-path Disabled')">No Clip-Path</button>
+          <button class="ax-btn ax-btn-warning" onclick="typeof AnimX!=='undefined'&&AnimX.animate('#pg-compat-target','text-mask-up')">Run Mask Reveal</button>
+          <button class="ax-btn ax-btn-secondary" onclick="typeof window!=='undefined'&&window._resetSimulations&&window._resetSimulations();alert('Reset')">Reset</button>
+        </div>
+        <p>Missing features force AnimX to fall back to safe opacity/transform animations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HEALTH CHECK -->
+  <section>
+    <h2>Runtime Health Check</h2>
+    <p>Ensure the current DOM is safe and not leaking listeners.</p>
+    <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+      <button class="ax-btn ax-btn-warning" onclick="if(window.AnimX){console.log(AnimX.validateRuntime());alert('Check console for details.')}">Validate Active Runtime</button>
+    </div>
+  </section>
+
+  <!-- COVERAGE MATRIX -->
+  <section>
+    <h2>Final Coverage Matrix</h2>
+    <p>Verify all animation families and presets.</p>
+    <button class="ax-btn ax-btn-primary" onclick="if(window.AnimX)document.getElementById('playground-matrix').innerText=JSON.stringify(AnimX.finalAudit().matrix,null,2)">Load Matrix</button>
+    <pre id="playground-matrix" style="margin-top:15px; background:var(--bg); color:#34d399; padding:15px; border-radius:6px; font-family:monospace; max-height:300px; overflow-y:auto; border:1px solid var(--border);">Click to load matrix...</pre>
+  </section>
+
+  <!-- QA REPORT -->
+  <section>
+    <h2>One-Stop QA Report</h2>
+    <p>Final audit report for catalog readiness.</p>
+    <button class="ax-btn ax-btn-danger" onclick="if(window.AnimX)document.getElementById('playground-report').innerText=JSON.stringify(AnimX.finalAudit(),null,2)">Run Final Audit</button>
+    <pre id="playground-report" style="margin-top:15px; background:var(--bg); color:#34d399; padding:15px; border-radius:6px; font-family:monospace; max-height:300px; overflow-y:auto; border:1px solid var(--border);">Click to run audit...</pre>
+  </section>
+
+  <!-- HANDOFF KIT -->
+  <section>
+    <h2>Handoff and Delivery Kit Playground</h2>
+    <p>Preview generated handoff documents and delivery kits with sample project data.</p>
+    <div style="background:var(--panel); padding:1.5rem; border-radius:8px; border:1px solid var(--border);">
+      <h3 style="margin-top:0; color:var(--text);">Sample Project: AnimX SaaS Landing Demo</h3>
+      <p style="color:var(--muted); font-size:0.9rem;"><strong>Used Presets:</strong> text-mask-up, fade-up, card-lift-soft, button-glow-soft, number-counter-smooth</p>
+      <div class="pg-btn-row" style="margin-top:1rem;">
+        <button class="ax-btn ax-btn-primary" onclick="playgroundGenerate('client')">Client Guide</button>
+        <button class="ax-btn ax-btn-primary" onclick="playgroundGenerate('developer')">Developer Guide</button>
+        <button class="ax-btn ax-btn-primary" onclick="playgroundGenerate('map')">Animation Map</button>
+        <button class="ax-btn ax-btn-secondary" onclick="playgroundGenerate('inv')">Preset Inventory</button>
+        <button class="ax-btn ax-btn-primary" onclick="playgroundGenerate('kit')">Full Delivery Kit</button>
+        <button class="ax-btn ax-btn-secondary" onclick="playgroundCopy()">Copy Output</button>
+        <button class="ax-btn ax-btn-secondary" onclick="playgroundDownload()">Download JSON</button>
+      </div>
+      <pre id="pg-handoff-preview" style="margin-top:1rem; background:var(--bg); color:#34d399; padding:15px; border-radius:6px; font-family:monospace; max-height:300px; overflow-y:auto; border:1px solid var(--border);">// Output will appear here</pre>
+    </div>
+  </section>
+
+</div><!-- /.pg-sections -->
 
   <script src="../dist/animx.min.js"></script>
   <script>
@@ -1189,96 +1109,40 @@
 
     // Boot
     window.addEventListener('DOMContentLoaded', init);
-  </script>
-  <!-- v3.7.0 Handoff and Delivery Kit Playground -->
-  <section class="ax-section" style="background: #f1f5f9; color: #333; padding: 4rem 2rem; border-top: 2px solid #ccc;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h2 style="color: #0f172a; margin-bottom: 0.5rem; font-size: 2rem;">v3.7.0 Handoff and Delivery Kit Playground</h2>
-      <p style="color: #475569; margin-bottom: 2rem; font-size: 1.1rem;">Preview generated handoff documents and delivery kits with sample project data.</p>
-      
-      <div style="background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-        <h3 style="margin-top: 0;">Sample Project: AnimX SaaS Landing Demo</h3>
-        <p style="color: #64748b;"><strong>Used Presets:</strong> text-mask-up, fade-up, card-lift-soft, button-glow-soft, number-counter-smooth, layout-expand, section-curtain-reveal</p>
-        
-        <div style="margin: 2rem 0; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('client')">Generate Client Guide</button>
-          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('developer')">Generate Developer Guide</button>
-          <button class="ax-btn" style="background: #6366f1; color: white; padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer;" onclick="playgroundGenerate('map')">Generate Animation Map</button>
-          <button class="ax-btn" onclick="playgroundGenerate('inv')">Generate Preset Inventory</button>
-          <button class="ax-btn ax-btn-primary" onclick="playgroundGenerate('kit')">Generate Full Delivery Kit</button>
-          <button class="ax-btn ax-btn-primary" style="background:#8b5cf6;" onclick="playgroundGenerate('scene')">Export Timeline Scene (v3.9.0)</button>
-          <button class="ax-btn" onclick="playgroundCopy()">Copy Output</button>
-          <button class="ax-btn" onclick="playgroundDownload()">Download Output JSON</button>
-        </div>
-        
-        <pre id="pg-handoff-preview" style="background: #1e293b; color: #f8fafc; padding: 1.5rem; border-radius: 6px; overflow-x: auto; min-height: 200px; font-family: monospace; white-space: pre-wrap;">// Output will appear here</pre>
-      </div>
-    </div>
-  </section>
 
-  <script src="../dist/studio/animx-studio.js"></script>
-  <script>
+    // --- Handoff Kit ---
     const sampleState = {
       name: "AnimX SaaS Landing Demo",
       motionStyle: "smooth-professional",
-      sections: [
-        { type: "Hero" },
-        { type: "Features" },
-        { type: "Pricing" },
-        { type: "Stats" },
-        { type: "FAQ" },
-        { type: "CTA" }
-      ]
+      sections: [{ type: "Hero" }, { type: "Features" }, { type: "Pricing" }, { type: "Stats" }, { type: "FAQ" }, { type: "CTA" }]
     };
 
-    function pgEscape(str) {
-      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    }
-
     function playgroundGenerate(type) {
-      if (!window.AnimXStudio || !window.AnimXStudio.generateClientMotionGuide) {
-         document.getElementById('pg-handoff-preview').innerHTML = "Studio Handoff APIs not loaded.";
-         return;
+      const S = window.AnimXStudio;
+      if (!S || !S.generateClientMotionGuide) {
+        document.getElementById('pg-handoff-preview').textContent = "Studio Handoff APIs not loaded. Include animx-studio.js.";
+        return;
       }
       let output = "";
-      if (type === 'client') {
-        output = window.AnimXStudio.generateClientMotionGuide(sampleState);
-      } else if (type === 'developer') {
-        output = window.AnimXStudio.generateDeveloperGuide(sampleState);
-      } else if (type === 'map') {
-        output = window.AnimXStudio.generateAnimationMap(sampleState);
-      } else if (type === 'inv') {
-        output = window.AnimXStudio.generatePresetInventory(sampleState);
-      } else if (type === 'kit') {
-        const kit = window.AnimXStudio.generateDeliveryKit(sampleState, {
-          includeClient: true, includeDev: true, includeCms: true, includeWp: true, includeWebflow: true,
-          includeMap: true, includeInventory: true, includeQa: true, includeChecklist: true
-        });
-        output = JSON.stringify(kit, null, 2);
-      } else if (type === 'scene') {
-        const mockScene = window.AnimXStudio.DEFAULT_SCENE_TEMPLATES ? window.AnimXStudio.DEFAULT_SCENE_TEMPLATES[0] : null;
-        if (mockScene) {
-           output = window.AnimXStudio.exportSceneJSON(mockScene.sceneId) || JSON.stringify(mockScene, null, 2);
-        } else {
-           output = "// Scene export not available.";
-        }
-      }
-      document.getElementById('pg-handoff-preview').innerHTML = pgEscape(output);
+      if (type === 'client') output = S.generateClientMotionGuide(sampleState);
+      else if (type === 'developer') output = S.generateDeveloperGuide(sampleState);
+      else if (type === 'map') output = S.generateAnimationMap(sampleState);
+      else if (type === 'inv') output = S.generatePresetInventory(sampleState);
+      else if (type === 'kit') output = JSON.stringify(S.generateDeliveryKit(sampleState, { includeClient: true, includeDev: true, includeCms: true, includeWp: true, includeWebflow: true, includeMap: true, includeInventory: true, includeQa: true, includeChecklist: true }), null, 2);
+      document.getElementById('pg-handoff-preview').textContent = output;
     }
 
     function playgroundCopy() {
       const text = document.getElementById('pg-handoff-preview').textContent;
       navigator.clipboard.writeText(text).then(() => alert('Copied!'));
     }
-    
+
     function playgroundDownload() {
       const text = document.getElementById('pg-handoff-preview').textContent;
-      const blob = new Blob([text], {type: 'application/json'});
+      const blob = new Blob([text], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url;
-      a.download = 'animx-playground-export.json';
-      a.click();
+      a.href = url; a.download = 'animx-playground-export.json'; a.click();
       URL.revokeObjectURL(url);
     }
   </script>
