@@ -10,6 +10,10 @@ import { sanitizeImportedHtml } from './studio-import-safety.js';
 import { scanDomStructure } from './studio-dom-scanner.js';
 import { generateSmartSuggestions } from './studio-smart-suggestions.js';
 import { generateScanReport } from './studio-scan-report.js';
+import { getThemeKit, getAllThemeKits } from './studio-theme-kits.js';
+import { applyThemeToProject } from './studio-motion-tokens.js';
+import { buildProjectPackage, downloadPackageFile } from './studio-package-builder.js';
+import { validatePackage } from './studio-package-validator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -28,6 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.scanDomStructure = scanDomStructure;
   window.AnimXStudio.generateSmartSuggestions = generateSmartSuggestions;
   window.AnimXStudio.generateScanReport = generateScanReport;
+  
+  // Expose Theme and Package APIs for UI
+  window.AnimXStudio.getThemeKit = getThemeKit;
+  window.AnimXStudio.getAllThemeKits = getAllThemeKits;
+  window.AnimXStudio.applyThemeToProject = applyThemeToProject;
+  window.AnimXStudio.buildProjectPackage = buildProjectPackage;
+  window.AnimXStudio.downloadPackageFile = downloadPackageFile;
+  window.AnimXStudio.validatePackage = validatePackage;
   
   // Load state from localStorage
   const state = loadState();

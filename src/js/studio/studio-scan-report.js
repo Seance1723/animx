@@ -1,6 +1,6 @@
 export function generateScanReport(scanData, safetyData, appliedSuggestions) {
   const data = {
-    version: "3.3.0",
+    version: "3.4.0",
     source: "paste",
     summary: scanData.summary,
     suggestions: appliedSuggestions.length,

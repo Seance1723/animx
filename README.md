@@ -1,14 +1,14 @@
 <div align="center">
-  <h3>The Zero-Dependency UI Animation Engine (v3.3.0)</h3>
+  <h3>The Zero-Dependency UI Animation Engine (v3.4.0)</h3>
   <p>Production-ready, accessible, and fast.</p>
 </div>
 
 ---
 
-## ⚡ What's New in v3.3.0
+## ⚡ What's New in v3.4.0
 
-- **Studio Import Scanner**: Paste existing HTML templates and let AnimX identify sections and components safely without executing scripts.
-- **Smart Suggestions**: Get rule-based animation suggestions for your headings, buttons, cards, and heroes instantly, then export the ready-to-use HTML.
+- **Project Packaging**: Export and import complete animation projects as standard JSON. Share and load your setups seamlessly without any cloud accounts or backends.
+- **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
 - **v2.9.0**: Security and Defensive Runtime Hardening
