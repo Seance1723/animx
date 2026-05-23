@@ -18,7 +18,7 @@ export function run() {
     const expandedCount = AnimX.getPresets().length;
     assert.ok(expandedCount > 0, 'Registry should expand after standard initialization');
 
-    // v3.13.0 Missing Effects tests
+    // v3.14.0 Missing Effects tests
     const navLink = AnimX.getPreset('nav-link-underline-slide');
     assert.ok(navLink, 'Missing effects nav preset should be registered');
     assert.strictEqual(navLink.element, 'link');
@@ -30,7 +30,7 @@ export function run() {
     const kpiRoll = AnimX.getPreset('kpi-number-roll');
     assert.ok(kpiRoll, 'Missing effects KPI preset should be registered');
 
-    console.log(`[Tests] Verified ${expandedCount} presets in registry, including v3.13.0 additions.`);
+    console.log(`[Tests] Verified ${expandedCount} presets in registry, including v3.14.0 additions.`);
     
   } catch (err) {
     throw err;

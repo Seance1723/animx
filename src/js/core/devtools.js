@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.13.0',
-    release: 'Animation Runtime Validation, Performance Hardening, and Demo Verification',
+    version: '3.14.0',
+    release: 'Real-World Animation Pattern Library and Industry Demo Packs',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.13.0',
-    release: 'Animation Runtime Validation, Performance Hardening, and Demo Verification',
+    version: '3.14.0',
+    release: 'Real-World Animation Pattern Library and Industry Demo Packs',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

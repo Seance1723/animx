@@ -1,5 +1,5 @@
 /**
- * AnimX Data Attribute Migrator (v3.13.0)
+ * AnimX Data Attribute Migrator (v3.14.0)
  * Scans a DOM tree and converts legacy `data-ax-trigger` into `data-ax-on`.
  */
 

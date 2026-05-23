@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.13.0
+import { elementPresets } from './presets/element-presets.js'; // v3.14.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,17 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.13.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.14.0
 
-// v3.13.0 Migration APIs
+// v3.14.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.13.0 Runtime Validation APIs
+// v3.14.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-const VERSION = '3.13.0';
+const VERSION = '3.14.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -266,7 +266,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.13.0 Migration APIs
+  // v3.14.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -279,7 +279,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.13.0 Runtime Validation APIs
+  // v3.14.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -614,8 +614,8 @@ AnimX.build = {
   version: VERSION,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.13.0",
-      release: "Animation Runtime Validation, Performance Hardening, and Demo Verification",
+      version: "3.14.0",
+      release: "Real-World Animation Pattern Library and Industry Demo Packs",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']

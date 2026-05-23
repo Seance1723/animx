@@ -12,7 +12,7 @@
   <div class="ax-studio-toolbar">
     <div class="ax-studio-title">
       <h1>AnimX <span>Studio</span></h1>
-      <span class="ax-studio-version">v3.13.0</span>
+      <span class="ax-studio-version">v3.14.0</span>
     </div>
     <div class="ax-studio-actions">
       <button class="ax-btn" onclick="AnimXStudio.navigateTo('settings')">Settings</button>
@@ -22,7 +22,7 @@
 
   <div class="ax-studio-layout">
     
-    <!-- Sidebar Navigation (v3.13.0) -->
+    <!-- Sidebar Navigation (v3.14.0) -->
     <nav class="ax-studio-sidebar-nav">
       <div class="nav-group">Main</div>
       <button data-mode="home" class="active">Dashboard / Home</button>
@@ -35,6 +35,7 @@
       <button data-mode="preset-packs">Preset Packs</button>
       <button data-mode="recipe-library">Recipe Library</button>
       <button data-mode="themes">Theme Kits</button>
+      <button data-mode="patterns" style="color: #3b82f6;">Real-World Patterns</button>
       <button data-mode="coverage" style="color: #10b981;">Coverage Matrix</button>
       
       <div class="nav-group">Projects</div>
@@ -58,9 +59,26 @@
         <div id="panel-home-content"></div>
       </section>
 
+      <!-- PATTERN LIBRARY -->
+      <section id="panel-patterns" class="ax-studio-panel" style="display: none;">
+        <h2>Real-World Pattern Library (v3.14.0)</h2>
+        <p>Production-ready component sequences for SaaS, Ecommerce, and Dashboards.</p>
+        
+        <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button class="filter-btn active" onclick="alert('Filtered to SaaS')">SaaS</button>
+          <button class="filter-btn" onclick="alert('Filtered to Dashboard')">Dashboard</button>
+          <button class="filter-btn" onclick="alert('Filtered to Ecommerce')">Ecommerce</button>
+          <button class="filter-btn" onclick="alert('Filtered to Blog/Docs')">Blog & Docs</button>
+        </div>
+
+        <div id="patterns-grid" style="margin-top: 2rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
+          <!-- Will be hydrated by JS -->
+        </div>
+      </section>
+
       <!-- RUNTIME HEALTH -->
       <section id="panel-health" class="ax-studio-panel" style="display: none;">
-        <h2>Runtime Health & Performance (v3.13.0)</h2>
+        <h2>Runtime Health & Performance (v3.14.0)</h2>
         <p>Verify that all presets map to real behaviors, and audit active DOM hooks.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -72,7 +90,7 @@
 
       <!-- COVERAGE MATRIX -->
       <section id="panel-coverage" class="ax-studio-panel" style="display: none;">
-        <h2>Animation Coverage Matrix (v3.13.0)</h2>
+        <h2>Animation Coverage Matrix (v3.14.0)</h2>
         <p>Real-time audit of preset coverage across all element types.</p>
         <button class="ax-btn ax-btn-primary" onclick="renderCoverageMatrix()">Generate Matrix Report</button>
         <div id="coverage-matrix-output" style="margin-top: 1.5rem; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));"></div>
@@ -80,7 +98,7 @@
 
       <!-- MIGRATION TOOLKIT -->
       <section id="panel-migration" class="ax-studio-panel" style="display: none;">
-        <h2>Core LTS Migration Toolkit (v3.13.0)</h2>
+        <h2>Core LTS Migration Toolkit (v3.14.0)</h2>
         <p>Safely upgrade old AnimX DOM markup or Studio v2/v3 projects into the LTS standard.</p>
         
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
@@ -125,7 +143,7 @@
     }
   </script>
   <script>
-    // UI overrides for v3.13.0 replaced by studio-navigation.js
+    // UI overrides for v3.14.0 replaced by studio-navigation.js
 
       function loadPresetPacks() {
         if (!window.AnimXStudio.getPresetPacks) return;
@@ -200,6 +218,28 @@
           </div>
         `).join('');
       };
+      window.renderPatterns = function() {
+        if (!window.AnimXStudio.getPatterns) return;
+        const patterns = window.AnimXStudio.getPatterns();
+        const grid = document.getElementById('patterns-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = patterns.map(p => `
+          <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem; background: #fff;">
+            <div style="font-size: 0.8rem; color: #6366f1; font-weight: bold; text-transform: uppercase;">${p.industry}</div>
+            <h3 style="margin: 0.5rem 0;">${p.name}</h3>
+            <p style="font-size: 0.9rem; color: #475569;">${p.description}</p>
+            <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+              <button class="ax-btn ax-btn-sm" onclick="alert(window.AnimXStudio.exportPatternHTML(window.AnimXStudio.getPatterns().find(x=>x.id==='${p.id}')))">Copy HTML</button>
+              <button class="ax-btn ax-btn-sm ax-btn-outline" onclick="alert(window.AnimXStudio.exportPatternJS(window.AnimXStudio.getPatterns().find(x=>x.id==='${p.id}')))">Copy JS</button>
+            </div>
+          </div>
+        `).join('');
+      };
+      
+      // Auto render on load
+      setTimeout(() => { if (window.renderPatterns) window.renderPatterns(); }, 500);
+
     });
   </script>
 </body>

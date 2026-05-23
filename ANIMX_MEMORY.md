@@ -59,6 +59,7 @@
 - **v3.11.0** - Core LTS Stabilization and Migration Toolkit. Implemented `AnimX.checkCompatibility()`, `AnimX.getDeprecations()`, and `AnimX.migrateDataAttributes()` into core. Created complex Studio JSON migration engines `migrateProject()` for backwards compatibility. Authored extensive LTS migration documentation. Public APIs remain fully backward compatible.
 - **v3.12.0** - Complete Animation Coverage Matrix and Missing Effects Completion. Implemented the `generateCoverageMatrix()` tool in Studio to calculate preset coverage scores across 25 element types. Added missing presets to core: `nav-link-underline-slide`, `kpi-number-roll`, `modal-pop`, `drawer-left`, `bg-aurora`, etc., complete with `reducedMotion` metadata fallback behavior. Updated `playground.html` with Nav, Data, and Component sections.
 - **v3.13.0** - Animation Runtime Validation, Performance Hardening, and Demo Verification. Built the Runtime Toolkit (`runtime-validator.js`, `runtime-performance-audit.js`, `runtime-cleanup-audit.js`) to programmatically verify that active presets contain valid metadata and do not leak memory. Implemented `AnimX.validateRuntime()` into core. Added the Runtime Health panel to Studio.
+- **v3.14.0** - Real-World Animation Pattern Library and Industry Demo Packs. Goal: Zero-dependency, performant, accessible animation framework.
 
 ## Completed Milestones
 

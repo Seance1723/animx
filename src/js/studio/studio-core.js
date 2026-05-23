@@ -49,10 +49,16 @@ import { runLtsApiAudit } from '../lts/lts-api-audit.js';
 // v3.12.0 Coverage Matrix
 import { generateCoverageMatrix } from '../coverage/coverage-matrix.js';
 
-// v3.13.0 Runtime Health
+// v3.14.0 Runtime Health
 import { validateRuntime } from '../runtime/runtime-validator.js';
 import { runPerformanceAudit } from '../runtime/runtime-performance-audit.js';
 import { runCleanupAudit } from '../runtime/runtime-cleanup-audit.js';
+
+// v3.14.0 Pattern Library
+import { getPatterns } from '../patterns/pattern-registry.js';
+import { getIndustryPacks } from '../patterns/industry-demo-packs.js';
+import { exportPatternHTML, exportPatternJS } from '../patterns/pattern-export.js';
+import { validatePattern } from '../patterns/pattern-validator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -147,6 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.validateRuntime = validateRuntime;
   window.AnimXStudio.runPerformanceAudit = runPerformanceAudit;
   window.AnimXStudio.runCleanupAudit = runCleanupAudit;
+  
+  window.AnimXStudio.getPatterns = getPatterns;
+  window.AnimXStudio.getIndustryPacks = getIndustryPacks;
+  window.AnimXStudio.exportPatternHTML = exportPatternHTML;
+  window.AnimXStudio.exportPatternJS = exportPatternJS;
+  window.AnimXStudio.validatePattern = validatePattern;
   
   // Init Navigation
   initNavigation();

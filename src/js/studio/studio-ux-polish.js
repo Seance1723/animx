@@ -1,5 +1,5 @@
 /**
- * AnimX Studio UX Polish Helpers (v3.13.0)
+ * AnimX Studio UX Polish Helpers (v3.14.0)
  * Handles empty states, safe errors, and global settings.
  */
 
