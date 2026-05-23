@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.20.0',
-    release: 'Advanced Creative Text Reveal, Rolling Typography, and Scroll Type Studio',
+    version: '3.21.0',
+    release: 'Advanced Media Reveal, Image Masking, Video Motion, and Gallery Effects',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.20.0',
-    release: 'Advanced Creative Text Reveal, Rolling Typography, and Scroll Type Studio',
+    version: '3.21.0',
+    release: 'Advanced Media Reveal, Image Masking, Video Motion, and Gallery Effects',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

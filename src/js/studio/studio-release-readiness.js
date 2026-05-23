@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Release Readiness (v3.20.0)
+ * AnimX Studio Release Readiness (v3.21.0)
  * Evaluates core library states to generate the Final Public Release Checklist.
  */
 
@@ -7,7 +7,7 @@ export function renderReleaseChecklist() {
   const container = document.getElementById('release-checklist-content');
   if (!container) return;
 
-  const version = window.AnimX?.version || "3.20.0";
+  const version = window.AnimX?.version || "3.21.0";
   const checks = [
     { label: `AnimX Core Version (${version}) verified`, passed: true },
     { label: "Zero-dependency constraint verified", passed: true },
@@ -19,7 +19,7 @@ export function renderReleaseChecklist() {
   container.innerHTML = `
     <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 2rem;">
       <h3 style="margin-top:0;">Release Readiness Report</h3>
-      <p style="color: #64748b;">Generated for AnimX Studio v3.20.0</p>
+      <p style="color: #64748b;">Generated for AnimX Studio v3.21.0</p>
       
       <ul style="list-style: none; padding: 0; margin-top: 1.5rem;">
         ${checks.map(c => `

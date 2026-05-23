@@ -30,7 +30,7 @@ export function generateDeliveryKit(projectState, options) {
   const qaReport = runFullProjectQa(projectState);
   
   return {
-    version: "3.20.0",
+    version: "3.21.0",
     projectName: projectState.name || "Untitled Project",
     generatedAt: new Date().toISOString(),
     documents: {

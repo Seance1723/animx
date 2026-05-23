@@ -19,6 +19,7 @@
 - [ ] Validate **Spatial 3D Tracking** shuts off when reduced-motion is detected (v3.18.0).
 - [ ] Ensure **Physics RAFs** successfully terminate when `maxDuration` threshold is met (v3.19.0).
 - [ ] Verify **Text Splitters** assign `aria-hidden` properly to child shards (v3.20.0).
+- [ ] Verify **Media Slices** preserve original `<img>` tags and respect reduced motion (v3.21.0).
 
 ## 3. Component Verifications
 - [ ] Verify standard `data-ax` utility classes trigger automatically.

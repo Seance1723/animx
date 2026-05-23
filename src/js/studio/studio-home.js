@@ -1,5 +1,5 @@
 /**
- * AnimX Studio Home Dashboard (v3.20.0)
+ * AnimX Studio Home Dashboard (v3.21.0)
  * Renders the dashboard cards, status center, and onboarding logic.
  */
 
@@ -46,7 +46,7 @@ export function renderHomeDashboard() {
         <h3>Status Center</h3>
         <ul>
           <li><strong>AnimX Core:</strong> v${version}</li>
-          <li><strong>Studio:</strong> v3.20.0 (Public Release)</li>
+          <li><strong>Studio:</strong> v3.21.0 (Public Release)</li>
           <li><strong>Storage:</strong> ${localStorage ? 'Local Available' : 'Unavailable'}</li>
           <li><strong>Safe Mode:</strong> Active</li>
         </ul>
@@ -68,7 +68,7 @@ function showOnboardingOverlay() {
   overlay.className = 'ax-onboarding-overlay';
   overlay.innerHTML = `
     <div class="ax-onboarding-box">
-      <h2>Welcome to AnimX Studio (v3.20.0)</h2>
+      <h2>Welcome to AnimX Studio (v3.21.0)</h2>
       <p>AnimX Studio is a <strong>100% local, zero-dependency visual builder</strong> for the AnimX core library.</p>
       <ul>
         <li>Everything runs in your browser. No accounts, no cloud.</li>
