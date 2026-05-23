@@ -17,6 +17,7 @@ import { validatePackage } from './studio-package-validator.js';
 import { runFullProjectQa } from './studio-qa-runner.js';
 import { runReleaseAssistant } from './studio-release-assistant.js';
 import { draftReleaseNotes } from './studio-release-notes.js';
+import { getCreativeEffects, getCreativeFamilies } from '../creative/creative-catalog.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Ensure core AnimX is available
@@ -48,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.AnimXStudio.runFullProjectQa = runFullProjectQa;
   window.AnimXStudio.runReleaseAssistant = runReleaseAssistant;
   window.AnimXStudio.draftReleaseNotes = draftReleaseNotes;
+  
+  // Expose Creative Catalog
+  window.AnimXStudio.getCreativeEffects = getCreativeEffects;
+  window.AnimXStudio.getCreativeFamilies = getCreativeFamilies;
   
   // Load state from localStorage
   const state = loadState();

@@ -1,0 +1,18 @@
+// Creative Catalog Base Tokens
+:root {
+  --ax-creative-duration: 0.8s;
+  --ax-creative-ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --ax-kinetic-intensity: 1;
+}
+
+.ax-reduced-motion {
+  --ax-creative-duration: 0.01s;
+  --ax-kinetic-intensity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ax-creative-duration: 0.01s;
+    --ax-kinetic-intensity: 0;
+  }
+}

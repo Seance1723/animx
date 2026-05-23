@@ -1,0 +1,14 @@
+// Kinetic Text Utilities
+.ax-kinetic-base {
+  display: inline-block;
+}
+
+.text-kinetic-wave {
+  display: inline-block;
+  animation: ax-kinetic-wave-anim var(--ax-creative-duration) var(--ax-creative-ease) infinite alternate;
+}
+
+@keyframes ax-kinetic-wave-anim {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(calc(-10px * var(--ax-kinetic-intensity))) scale(1.1); }
+}

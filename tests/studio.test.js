@@ -8,6 +8,7 @@ import { buildProjectPackage } from '../src/js/studio/studio-package-builder.js'
 import { validatePackage } from '../src/js/studio/studio-package-validator.js';
 import { runFullProjectQa } from '../src/js/studio/studio-qa-runner.js';
 import { runReleaseAssistant } from '../src/js/studio/studio-release-assistant.js';
+import { getCreativeEffects, getCreativeFamilies } from '../src/js/creative/creative-catalog.js';
 
 console.log('▶ Running studio.test.js...');
 
@@ -16,9 +17,9 @@ export async function run() {
     const AnimX = (await import('../src/js/animx.js')).default;
     
     // Check version
-    assert.strictEqual(AnimX.build.version, '3.5.0', 'AnimX version should be 3.5.0');
-    assert.strictEqual(AnimX.build.versionInfo().version, '3.5.0', 'versionInfo should be 3.5.0');
-    assert.strictEqual(AnimX.build.versionInfo().release, 'Studio QA Automation and Release Assistant', 'release name should match');
+    assert.strictEqual(AnimX.build.version, '3.6.0', 'AnimX version should be 3.6.0');
+    assert.strictEqual(AnimX.build.versionInfo().version, '3.6.0', 'versionInfo should be 3.6.0');
+    assert.strictEqual(AnimX.build.versionInfo().release, 'Advanced Creative Animation Catalog and Playground Expansion', 'release name should match');
     
     // Check if studio shortcut exists
     assert.strictEqual(typeof AnimX.studio, 'function', 'AnimX.studio() should exist');
@@ -32,7 +33,7 @@ export async function run() {
     
     // Check Project State defaults
     const state = getProjectState();
-    assert.strictEqual(state.version, '3.5.0', 'Project state should default to 3.5.0');
+    assert.strictEqual(state.version, '3.6.0', 'Project state should default to 3.6.0');
     assert.strictEqual(state.motionStyle, 'smooth-professional', 'Default motion style should be smooth-professional');
     assert.strictEqual(state.sections.length, 0, 'Should start with no sections');
     
@@ -58,7 +59,7 @@ export async function run() {
     // Check Project Packaging
     const pkgObj = buildProjectPackage(themedState);
     assert.strictEqual(pkgObj.schema, 'animx-package', 'Schema ID should be correct');
-    assert.strictEqual(pkgObj.animxVersion, '3.5.0', 'Package version should match animx version');
+    assert.strictEqual(pkgObj.animxVersion, '3.6.0', 'Package version should match animx version');
     
     const validResult = validatePackage(JSON.stringify(pkgObj));
     assert.strictEqual(validResult.ok, true, 'Valid package should pass validation');
@@ -92,6 +93,16 @@ export async function run() {
     const releaseRes = runReleaseAssistant(badState);
     assert.strictEqual(releaseRes.ready, false, 'Release should not be ready with failed QA');
     assert.strictEqual(releaseRes.releaseDraft.includes('unknown-preset-123'), true, 'Draft should list known limitations');
+    
+    // Check Creative Catalog
+    const effects = getCreativeEffects();
+    assert.strictEqual(Array.isArray(effects), true, 'Creative effects should return an array');
+    assert.strictEqual(effects.length > 0, true, 'Creative effects should not be empty');
+    assert.strictEqual(effects[0].category, 'rolling-text', 'First category should be rolling text');
+    
+    const families = getCreativeFamilies();
+    assert.strictEqual(families.includes('roll'), true, 'Families should include roll');
+    assert.strictEqual(families.includes('kinetic'), true, 'Families should include kinetic');
     
     console.log('✅ studio.test.js passed.');
   } catch (error) {

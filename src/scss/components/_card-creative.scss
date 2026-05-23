@@ -1,0 +1,12 @@
+// Creative Cards
+.ax-card-creative-base {
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card-spotlight-hover {
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+}

@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.5.0',
-    release: 'Studio QA Automation and Release Assistant',
+    version: '3.6.0',
+    release: 'Advanced Creative Animation Catalog and Playground Expansion',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.5.0',
-    release: 'Studio QA Automation and Release Assistant',
+    version: '3.6.0',
+    release: 'Advanced Creative Animation Catalog and Playground Expansion',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

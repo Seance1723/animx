@@ -82,6 +82,19 @@
 @use 'presets/skeleton' as preset-skeleton;
 @use 'presets/utility-combinations' as preset-utility;
 
+// ==========================================
+// 8. CREATIVE CATALOG (v3.6.0)
+// ==========================================
+@use 'creative/creative-base';
+@use 'text/rolling-text';
+@use 'text/kinetic-text';
+@use 'components/button-creative';
+@use 'components/card-creative';
+
+// ==========================================
+// 9. ANIMX STUDIO
+// ==========================================
+
 // 6. CMS / No-Code Layer
 @use 'cms/cms-base';
 

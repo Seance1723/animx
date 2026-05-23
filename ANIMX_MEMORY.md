@@ -51,6 +51,7 @@
 - **v3.3.0** - Studio Import Scanner and Smart Suggestions. Added safe HTML import, deterministic DOM scanning, and rule-based animation suggestions (zero-AI). Core remains zero-dependency.
 - **v3.4.0** - Studio Collaboration-Free Project Packaging and Theme Kits. Introduced JSON package exporting/importing, Motion Tokens, and global Theme Kits, all leveraging secure, local-only browser APIs.
 - **v3.5.0** - Studio QA Automation and Release Assistant. Added rule-based project/export/preset QA logic, generating local release checklists and automated Markdown release notes.
+- **v3.6.0** - Advanced Creative Animation Catalog and Playground Expansion. Massively expanded the zero-dependency animation catalog using a SCSS "primitive + modifier" architecture. Added Rolling Text, Kinetic Typography, Scroll Fill Typography, and Component effects. Integrated a live Creative Catalog previewer directly into the Studio UI.
 
 ## Completed Milestones
 

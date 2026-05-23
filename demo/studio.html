@@ -22,6 +22,7 @@
       <button class="ax-studio-mode-btn" data-mode="themes">Theme Kits</button>
       <button class="ax-studio-mode-btn" data-mode="packages">Packages</button>
       <button class="ax-studio-mode-btn" data-mode="qa">QA Assistant</button>
+      <button class="ax-studio-mode-btn" data-mode="catalog">Creative Catalog</button>
       <button class="ax-studio-mode-btn" data-mode="release">Release</button>
     </div>
     <div class="ax-studio-actions">
@@ -53,7 +54,40 @@
           <div style="padding: 50px; text-align: center;">
             <h1 data-ax="fade-up">Select a template to begin</h1>
           </div>
+          </section>
+
+      <!-- CREATIVE CATALOG PANEL -->
+      <section id="panel-catalog" class="ax-studio-panel" style="display: none;">
+        <div class="ax-panel-header">
+          <h2>Creative Catalog (v3.6.0)</h2>
+          <p>Browse and preview zero-dependency creative effects.</p>
         </div>
+        
+        <div class="ax-catalog-filters">
+          <select id="catalog-element-filter">
+            <option value="all">All Elements</option>
+            <option value="text">Text Effects</option>
+            <option value="button">Button Effects</option>
+            <option value="card">Card Effects</option>
+          </select>
+          <select id="catalog-family-filter">
+            <option value="all">All Families</option>
+            <option value="roll">Rolling Text</option>
+            <option value="kinetic">Kinetic Text</option>
+            <option value="scroll">Scroll Typography</option>
+          </select>
+        </div>
+
+        <div id="creative-preview-area" style="padding: 2rem; background: #fff; margin: 1rem 0; border: 1px solid #ccc;">
+           <h1 class="preview-target text-roll-up" style="font-size: 3rem;">Creative Typography</h1>
+        </div>
+
+        <div class="ax-catalog-grid" id="catalog-grid">
+           <!-- Populated by JS -->
+        </div>
+      </section>
+      
+    </main>
       </div>
       
       <div class="ax-studio-bottom-panel">

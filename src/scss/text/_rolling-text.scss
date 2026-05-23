@@ -1,0 +1,25 @@
+// Rolling Text Animations
+.ax-rolling-base {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+}
+
+@keyframes ax-text-roll-up {
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.text-roll-up {
+  animation: ax-text-roll-up var(--ax-creative-duration) var(--ax-creative-ease) forwards;
+}
+
+@keyframes ax-text-roll-down {
+  0% { transform: translateY(-100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.text-roll-down {
+  animation: ax-text-roll-down var(--ax-creative-duration) var(--ax-creative-ease) forwards;
+}
