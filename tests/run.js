@@ -15,7 +15,10 @@ async function runTests() {
   
   // Always run smoke test last
   if (fs.existsSync(path.join(__dirname, 'smoke.test.js'))) {
-    files.push('smoke.test.js');
+    files.push('smoke.test.js', './packs.test.js',
+    './compat.test.js',
+    './audit.test.js',
+    './docs.test.js');
   }
 
   for (const file of files) {

@@ -68,6 +68,7 @@
       <button data-mode="migration" style="color: #8b5cf6;">Migration Toolkit</button>
       <button data-mode="health" style="color: #f43f5e;">Runtime Health</button>
       <button data-mode="compat" style="color: #14b8a6;">Browser Compatibility</button>
+      <button data-mode="docs" style="color: #6366f1; font-weight: bold;">API & Docs</button>
     </nav>
     
     <div class="ax-studio-main-content">
@@ -589,6 +590,27 @@
 
         <h3 style="margin-top: 2rem;">Feature Support Matrix</h3>
         <pre id="compat-json-output" style="background: #0f172a; color: #38bdf8; padding: 15px; border-radius: 6px; font-family: monospace; white-space: pre-wrap; margin-top: 10px;">Click 'Generate Compatibility Report' to view local browser support data.</pre>
+      </section>
+
+      <!-- DOCUMENTATION & API -->
+      <section id="panel-docs" class="ax-studio-panel" style="display: none;">
+        <h2>Documentation & API Reference (v3.33.0)</h2>
+        <p>Zero-dependency local documentation explorer. Access guides, references, and audit reports without leaving the Studio.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;">
+          <a href="../docs/index.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">1. Docs Home</a>
+          <a href="../docs/public-api-reference.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">2. API Reference</a>
+          <a href="../docs/data-attributes-reference.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">3. Data Attributes</a>
+          <a href="../docs/preset-reference.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">4. Presets</a>
+          <a href="../docs/recipe-reference.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">5. Recipes & Packs</a>
+          <a href="../docs/installation.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">6. Installation Guides</a>
+          <a href="../docs/cms-and-no-code-guide.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">7. CMS / No-Code Guides</a>
+          <a href="../docs/accessibility-guide.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">8. Accessibility & Reduced Motion</a>
+          <a href="../docs/browser-support.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">9. Browser Compatibility</a>
+          <a href="../docs/troubleshooting.md" target="_blank" class="ax-btn" style="text-align: center; text-decoration: none;">10. Troubleshooting</a>
+          <button class="ax-btn ax-btn-primary" onclick="alert('Search integration relies on dist/animx.docs-search.json')">11. Docs Search</button>
+          <a href="../dist/reports/animx-docs-audit.json" target="_blank" class="ax-btn" style="background: #334155; color: white; text-align: center; text-decoration: none;">12. Docs Audit Report</a>
+        </div>
       </section>
 
       <!-- SETTINGS -->
