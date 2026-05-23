@@ -11,8 +11,8 @@
 - **Theme Kits & Motion Tokens**: Apply reusable Theme Kits (e.g., `premium-soft`) to instantly update motion tokens (easing, duration, stagger) globally across your project.
 
 ## ✨ Features
+- **v3.19.0**: Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics.
 - **v3.18.0**: Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs.
-- **v3.17.0**: Advanced Scroll Storytelling, Responsive Motion Breakpoints, and Viewport Scene Packs.
 - **v3.7.0**: Studio Handoff Documentation and Client Delivery Kits.
 - **v3.6.0**: Advanced Creative Animation Catalog.
 - **v2.9.0**: Security and Defensive Runtime Hardening

@@ -8,7 +8,7 @@ export function runFullProjectQa(projectState) {
   const checks = [];
   
   const report = {
-    version: "3.18.0",
+    version: "3.19.0",
     projectName: projectState.name || "Untitled",
     ranAt: new Date().toISOString(),
     score: 100,

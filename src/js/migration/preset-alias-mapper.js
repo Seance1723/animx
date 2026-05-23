@@ -1,5 +1,5 @@
 /**
- * AnimX Preset Alias Mapper (v3.18.0)
+ * AnimX Preset Alias Mapper (v3.19.0)
  * Safely resolves old v1.x camelCase naming conventions to v3.x kebab-case standard.
  */
 

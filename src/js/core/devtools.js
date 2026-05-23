@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.18.0',
-    release: 'Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs',
+    version: '3.19.0',
+    release: 'Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.18.0',
-    release: 'Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs',
+    version: '3.19.0',
+    release: 'Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics',
     dependency: 'zero-runtime-dependency',
     features: features()
   };

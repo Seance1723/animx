@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.18.0
+import { elementPresets } from './presets/element-presets.js'; // v3.19.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -51,17 +51,17 @@ import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.18.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.19.0
 
-// v3.18.0 Migration APIs
+// v3.19.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.18.0 Runtime Validation APIs
+// v3.19.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.18.0 Composer
+// v3.19.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -77,7 +77,11 @@ import { scrollStory, responsiveMotion, viewportMotion, validateScrollStory } fr
 import { spatial, depth, depthScene, destroySpatial } from './spatial/spatial-api.js';
 import { threeD, perspective, validate3D } from './three-d/three-d-api.js';
 
-const VERSION = '3.18.0';
+// v3.19.0 Advanced Physics & Easing
+import { easing, registerEase, getEase, getEases, validateEase } from './easing/easing-api.js';
+import { physics, spring, inertia, bounce, snap, elastic, validatePhysics, destroyPhysics } from './physics/physics-api.js';
+
+const VERSION = '3.19.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -278,7 +282,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.18.0 Migration APIs
+  // v3.19.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -291,7 +295,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.18.0 Runtime Validation APIs
+  // v3.19.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -345,6 +349,21 @@ class AnimXCore {
   perspective(target, config) { return perspective(target, config); }
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
+
+  // Physics & Easing APIs (v3.19.0)
+  easing(target, config) { return easing(target, config); }
+  registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
+  getEase(name) { return getEase(name); }
+  getEases() { return getEases(); }
+  validateEase(bezierStr) { return validateEase(bezierStr); }
+  physics(target, config) { return physics(target, config); }
+  spring(target, config) { return spring(target, config); }
+  inertia(target, config) { return inertia(target, config); }
+  bounce(target, config) { return bounce(target, config); }
+  snap(target, config) { return snap(target, config); }
+  elastic(target, config) { return elastic(target, config); }
+  validatePhysics(config) { return validatePhysics(config); }
+  destroyPhysics() { return destroyPhysics(); }
   
   getExamples(presetName) {
     return getExamples(presetName);
@@ -666,10 +685,23 @@ AnimX.build = {
   threeD,
   perspective,
   validate3D,
+  easing,
+  registerEase,
+  getEase,
+  getEases,
+  validateEase,
+  physics,
+  spring,
+  inertia,
+  bounce,
+  snap,
+  elastic,
+  validatePhysics,
+  destroyPhysics,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.18.0",
-      release: "Advanced 3D Motion, Spatial Effects, and Depth Interaction Packs",
+      version: "3.19.0",
+      release: "Advanced Physics Motion, Easing Curve Studio, and Natural Interaction Dynamics",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures']
