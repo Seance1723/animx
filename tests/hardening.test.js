@@ -4,7 +4,7 @@ import { Hardening } from '../src/js/hardening/hardening-api.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.40.0 Hardening Security checks...');
+    console.log('[Tests] Running AnimX v3.41.0 Hardening Security checks...');
 
     // 1. Prototype Pollution Guard
     const obj = {};
@@ -25,7 +25,7 @@ export function run() {
     
     // 4. Report structure
     const report = Hardening.report();
-    assert.strictEqual(report.version, '3.40.0', 'Hardening API version should be 3.40.0');
+    assert.strictEqual(report.version, '3.41.0', 'Hardening API version should be 3.41.0');
     assert.strictEqual(report.ok, true, 'Hardening API report should be OK');
 
     console.log('[Tests] Hardening verification passed');

@@ -6,21 +6,21 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.40.0 Final Sign-Off verification...');
+    console.log('[Tests] Running AnimX v3.41.0 Final Sign-Off verification...');
 
     // 1. Version
-    assert.strictEqual(AnimX.version, '3.40.0', 'Version must be 3.40.0');
-    assert.strictEqual(AnimX.versionInfo().version, '3.40.0', 'versionInfo version must be 3.40.0');
+    assert.strictEqual(AnimX.version, '3.41.0', 'Version must be 3.41.0');
+    assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be 3.41.0');
     assert.strictEqual(
       AnimX.versionInfo().release,
-      'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate',
+      'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
       'Release must match milestone'
     );
     assert.strictEqual(AnimX.versionInfo().dependency, 'zero-runtime-dependency');
 
     // 2. Package.json
     const pkg = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf8'));
-    assert.strictEqual(pkg.version, '3.40.0');
+    assert.strictEqual(pkg.version, '3.41.0');
     assert.ok(pkg.main);
     assert.ok(pkg.browser);
     assert.ok(pkg.module);

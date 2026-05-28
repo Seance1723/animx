@@ -1,0 +1,24 @@
+@import 'tokens';
+@import 'layout';
+@import 'landing';
+@import 'playground';
+@import 'docs';
+@import 'responsive';
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  &.primary { background: #007bff; color: #fff; }
+  &.secondary { background: #eee; color: #333; }
+}

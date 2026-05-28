@@ -6,14 +6,14 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.40.0 Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate checks...');
+    console.log('[Tests] Running AnimX v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal checks...');
 
     // 1. Version checks
-    assert.strictEqual(AnimX.version, '3.40.0', 'AnimX.version should be 3.40.0');
+    assert.strictEqual(AnimX.version, '3.41.0', 'AnimX.version should be 3.41.0');
     
     const info = AnimX.versionInfo();
-    assert.strictEqual(info.version, '3.40.0', 'versionInfo version should match');
-    assert.ok(info.release.includes('Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate'), 'versionInfo release string should contain Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate');
+    assert.strictEqual(info.version, '3.41.0', 'versionInfo version should match');
+    assert.ok(info.release.includes('Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal'), 'versionInfo release string should contain Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal');
 
     // 2. Demo existence checks
     const demoPath = path.resolve(process.cwd(), 'demo');

@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 3.40.0
+**Current Version**: 3.41.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## Version History
@@ -74,8 +74,9 @@
 - **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.27.0** - Advanced Page Transitions, Section Transitions, and Route Motion Packs. Opt-in routing, secure external link skipping, shared element FLIP measurement, and native View Transition API enhancements.
 - **v3.40.0** - Cross-Browser Compatibility, Fallback System, and Legacy Safety. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
-- **v3.40.0** - Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate. Passed GO decision with all P0/P1 criteria met. Added signoff API (`AnimX.signoff()`), 9 final sign-off JSON reports, public API freeze confirmation, security/accessibility/reduced-motion final confirmation, known issues lock, v4 launch gate, and v3.41 next-step report. No new animation features. Core remains zero-dependency.
-- **Next planned version:** v3.41.0 Final Launch Buffer and Public Release Packaging Guard
+- **v3.40.0** - Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate. Passed GO decision with all P0/P1 criteria met. Added signoff API (\`AnimX.signoff()\`), 9 final sign-off JSON reports, public API freeze confirmation, security/accessibility/reduced-motion final confirmation, known issues lock, v4 launch gate, and v3.41 next-step report. No new animation features. Core remains zero-dependency.
+- **v3.41.0** - Rebuilt the public demo experience as a React mini-site in animxWebsite focusing on Landing, Playground, and Documentation. Fully expanded the Playground page into a high-fidelity showroom containing all registered elements (Buttons, Cards, Forms, Overlays, Tabs, Table staggers, Skeletons, and Atmospheres) and effects (Entrance, Exit, Attention, Emphasis, Loops, Mask Reveals, and Typography), with real-world interactive stages and advanced JS API bindings. Configured natural page height auto-scaling (no controls scrollbar) and forced layout reflow resets (`void canvas.offsetHeight`) for flawless replay mechanics. The core AnimX remains zero-dependency with no new animation families. All tests (43/43) pass cleanly.
+- **Next planned version:** post-v3.41.0 updates or v4.0.0 if roadmap revised.
 
 ## Completed Milestones
 

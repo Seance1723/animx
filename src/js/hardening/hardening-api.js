@@ -18,7 +18,7 @@ export const Hardening = {
   report() {
     return {
       ok: true,
-      version: '3.40.0',
+      version: '3.41.0',
       security: {
         prototypeGuardActive: true,
         urlGuardActive: true,

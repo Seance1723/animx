@@ -1,11 +1,11 @@
 <div align="center">
-  <h3>The Zero-Dependency UI Animation Engine (v3.40.0)</h3>
+  <h3>The Zero-Dependency UI Animation Engine (v3.41.0)</h3>
   <p>Production-ready, accessible, and fast.</p>
 </div>
 
 ---
 
-## ⚡ What's New in v3.40.0
+## ⚡ What's New in v3.41.0
 
 - **Final Stable Release Sign-Off**: Passed GO decision with all P0/P1 criteria met.
 - **v4.0.0 Launch Gate**: v4 preparation can begin after v3.41.0 launch buffer.
@@ -13,8 +13,8 @@
 - **Sign-Off Reports**: Generated 9 final sign-off JSON reports in `dist/reports/`.
 
 ## ✨ Features
-- **v3.40.0**: Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate.
-- **v3.40.0**: Cross-Browser Compatibility, Fallback System, and Legacy Safety.
+- **v3.41.0**: Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal.
+- **v3.41.0**: Cross-Browser Compatibility, Fallback System, and Legacy Safety.
 - **v3.27.0**: Advanced Page Transitions, Section Transitions, and Route Motion Packs.
 - **v3.26.0**: Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.25.0**: Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs.
@@ -187,13 +187,13 @@ AnimX features a fully headless, zero-dependency Node.js test runner.
 npm test
 ```
 
-## 27. Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate (v3.40.0)
+## 27. Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal (v3.41.0)
 
-AnimX v3.40.0 has passed the final stable release sign-off with a GO decision. All P0/P1 criteria are met. The v4.0.0 launch gate is ready — v4 preparation can begin after the v3.41.0 launch buffer is complete.
+AnimX v3.41.0 has passed the final stable release sign-off with a GO decision. All P0/P1 criteria are met. The v4.0.0 launch gate is ready — v4 preparation can begin after the v3.41.0 launch buffer is complete.
 
 - Run `AnimX.signoff()` for the full sign-off report.
 - See `dist/reports/` for all generated JSON reports.
 - Next version: v3.41.0 Final Launch Buffer and Public Release Packaging Guard.
 
 ## 28. Release Status
-**v3.40.0** is the current stable release, recommended for production use.
+**v3.41.0** is the current stable release, recommended for production use.

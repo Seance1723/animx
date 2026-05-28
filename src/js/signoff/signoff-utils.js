@@ -1,5 +1,5 @@
-const VERSION = '3.40.0';
-const RELEASE = 'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate';
+const VERSION = '3.41.0';
+const RELEASE = 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal';
 
 export function ts() {
   return new Date().toISOString();

@@ -4,14 +4,14 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.40.0 Final Freeze verification...');
+    console.log('[Tests] Running AnimX v3.41.0 Final Freeze verification...');
 
     // 1. Version Asserts
-    assert.strictEqual(AnimX.version, '3.40.0', 'Global version must be exactly 3.40.0');
-    assert.strictEqual(AnimX.versionInfo().version, '3.40.0', 'versionInfo version must be exactly 3.40.0');
+    assert.strictEqual(AnimX.version, '3.41.0', 'Global version must be exactly 3.41.0');
+    assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be exactly 3.41.0');
     assert.strictEqual(
       AnimX.versionInfo().release,
-      'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate',
+      'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
       'Release metadata must match milestone'
     );
     assert.strictEqual(AnimX.versionInfo().dependency, 'zero-runtime-dependency', 'Must be zero-dependency');

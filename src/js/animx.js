@@ -13,7 +13,7 @@ import { findPreset, suggestPreset } from './presets/preset-search-index.js';
 import { cssPresets } from './presets/css-presets.js';
 import { componentPresets } from './components/component-presets.js';
 import { expandedPresets } from './presets/expanded-presets.js';
-import { elementPresets } from './presets/element-presets.js'; // v3.40.0
+import { elementPresets } from './presets/element-presets.js'; // v3.41.0
 
 import { accessibility, motionSafe } from './accessibility/accessibility-api.js';
 import { setReducedMotion, getReducedMotion } from './accessibility/accessibility-state.js';
@@ -46,22 +46,22 @@ import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdv
 import { bindScrollSceneAnimX } from './scroll/scroll-scene.js';
 import { refreshScrollMetrics, clearScrollTicker } from './scroll/scroll-ticker.js';
 import { svg, svgDraw, svgUndraw, svgProgress, svgPathFollow, bindSvgAnimX, destroySvg } from './svg/svg-api.js';
-// Old CMS API (v1.7) replaced by Advanced CMS API (v3.40.0)
+// Old CMS API (v1.7) replaced by Advanced CMS API (v3.41.0)
 import { bindLayoutAnimX } from './layout/layout-api.js';
 import { layoutPresets } from './layout/layout-presets.js';
 import { bindGestureAnimX } from './gestures/gesture-api.js';
 import { gesturePresets } from './gestures/gesture-presets.js';
-import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.40.0
+import { cmsRecipes312 } from './cms/cms-recipes-v3-12.js'; // v3.41.0
 
-// v3.40.0 Migration APIs
+// v3.41.0 Migration APIs
 import { checkCompatibility } from './migration/compatibility-checker.js';
 import { getDeprecations } from './migration/deprecation-checker.js';
 import { migrateDataAttributes } from './migration/data-attribute-migrator.js';
 
-// v3.40.0 Runtime Validation APIs
+// v3.41.0 Runtime Validation APIs
 import { validateRuntime } from './runtime/runtime-validator.js';
 
-// v3.40.0 Composer
+// v3.41.0 Composer
 import { compose, chain } from './composer/composer-api.js';
 import { registerVariant, getVariant, getVariants } from './composer/variant-registry.js';
 import { validateChain } from './composer/effect-conflict-resolver.js';
@@ -105,21 +105,21 @@ import { svgRoute, icon, logo, lineArt, handwriting, infographic, svgChart, svgD
 // v3.27.0 Advanced Page Transitions, Section Transitions, and Route Motion Packs
 import { pageTransition, sectionTransition, routeMotion, viewTransition, contentSwap, sharedElement, transitionLink, transitionTo, transitionFrom, transitionState, validateTransition, getTransitionEffects, destroyTransitions } from './transitions/transition-api.js';
 
-// v3.40.0 Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate
+// v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
 import { cms, applyRecipe, registerRecipe, getRecipe, getRecipes, getCMSRecipes, refreshCMS, observeCMS, disconnectCMS, validateCMSRecipe, exportCMSRecipe, cmsAudit, destroyCMS } from './cms/advanced-cms-api.js';
 
-// v3.40.0 Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate
+// v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
 import { packs, registerPack, getPack, getPacks, getPackCatalog, destroyPacks, validatePack, auditPack, importPack, exportPack, checkPackCompatibility, bindPacksApi } from './packs/pack-api.js';
 
-// v3.40.0 Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate
+// v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
 import { finalAudit } from './audit/one-stop-qa-report.js';
 import { compatApi } from './compat/compat-api.js';
 import { Hardening } from './hardening/hardening-api.js';
 
-// v3.40.0 Final Stable Release Sign-Off
+// v3.41.0 Final Stable Release Sign-Off
 import { signoff } from './signoff/signoff-api.js';
 
-const VERSION = '3.40.0';
+const VERSION = '3.41.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -154,7 +154,7 @@ class AnimXCore {
     bindComponentAnimX(this);
     bindScrollSceneAnimX(this);
     bindSvgAnimX(this);
-    // bindCMSApi(this); - Replaced by v3.40.0
+    // bindCMSApi(this); - Replaced by v3.41.0
     bindLayoutAnimX(this);
     bindGestureAnimX(this);
     bindPacksApi(this);
@@ -321,7 +321,7 @@ class AnimXCore {
 
   // --- Core API Bindings ---
   
-  // v3.40.0 Migration APIs
+  // v3.41.0 Migration APIs
   checkCompatibility() {
     return checkCompatibility();
   }
@@ -334,7 +334,7 @@ class AnimXCore {
     return migrateDataAttributes(node, options);
   }
 
-  // v3.40.0 Runtime Validation APIs
+  // v3.41.0 Runtime Validation APIs
   validateRuntime() {
     return validateRuntime();
   }
@@ -389,7 +389,7 @@ class AnimXCore {
   validate3D(config) { return validate3D(config); }
   destroySpatial() { return destroySpatial(); }
 
-  // Physics & Easing APIs (v3.40.0)
+  // Physics & Easing APIs (v3.41.0)
   easing(target, config) { return easing(target, config); }
   registerEase(name, bezierStr) { return registerEase(name, bezierStr); }
   getEase(name) { return getEase(name); }
@@ -404,7 +404,7 @@ class AnimXCore {
   validatePhysics(config) { return validatePhysics(config); }
   destroyPhysics() { return destroyPhysics(); }
 
-  // Advanced Text APIs (v3.40.0)
+  // Advanced Text APIs (v3.41.0)
   rollText(target, config) { return rollText(target, config); }
   slotText(target, config) { return slotText(target, config); }
   scrambleText(target, config) { return scrambleText(target, config); }
@@ -416,7 +416,7 @@ class AnimXCore {
   validateTextEffect(config) { return validateTextEffect(config); }
   destroyTextEffects() { return destroyTextEffects(); }
 
-  // Advanced Media APIs (v3.40.0)
+  // Advanced Media APIs (v3.41.0)
   media(target, config) { return media(target, config); }
   imageReveal(target, config) { return imageReveal(target, config); }
   imageMask(target, config) { return imageMask(target, config); }
@@ -431,7 +431,7 @@ class AnimXCore {
   getMediaEffects() { return getMediaEffects(); }
   destroyMediaEffects() { return destroyMediaEffects(); }
 
-  // Advanced Interaction APIs (v3.40.0)
+  // Advanced Interaction APIs (v3.41.0)
   button(target, config) { return button(target, config); }
   link(target, config) { return link(target, config); }
   nav(target, config) { return nav(target, config); }
@@ -445,7 +445,7 @@ class AnimXCore {
   validateInteractionEffect(config) { return validateInteractionEffect(config); }
   getInteractionEffects() { return getInteractionEffects(); }
 
-  // Advanced Data UI APIs (v3.40.0)
+  // Advanced Data UI APIs (v3.41.0)
   card(target, config) { return card(target, config); }
   grid(target, config) { return grid(target, config); }
   list(target, config) { return list(target, config); }
@@ -461,7 +461,7 @@ class AnimXCore {
   getDataUIEffects() { return getDataUIEffects(); }
   destroyDataUI() { return destroyDataUI(); }
 
-  // Advanced UI Feedback APIs (v3.40.0)
+  // Advanced UI Feedback APIs (v3.41.0)
   form(target, config) { return form(target, config); }
   input(target, config) { return input(target, config); }
   validationMotion(target, config) { return validationMotion(target, config); }
@@ -482,7 +482,7 @@ class AnimXCore {
   getFeedbackEffects() { return getFeedbackEffects(); }
   destroyFeedback() { return destroyFeedback(); }
 
-  // Advanced Background Motion APIs (v3.40.0)
+  // Advanced Background Motion APIs (v3.41.0)
   background(target, config) { return background(target, config); }
   gradient(target, config) { return gradient(target, config); }
   meshGradient(target, config) { return meshGradient(target, config); }
@@ -498,7 +498,7 @@ class AnimXCore {
   getBackgroundEffects() { return getBackgroundEffects(); }
   destroyBackgrounds() { return destroyBackgrounds(); }
 
-  // Advanced SVG Motion APIs (v3.40.0)
+  // Advanced SVG Motion APIs (v3.41.0)
   svgRoute(target, config) { return svgRoute(target, config); }
   icon(target, config) { return icon(target, config); }
   logo(target, config) { return logo(target, config); }
@@ -511,7 +511,7 @@ class AnimXCore {
   getSVGEffects() { return getSVGEffects(); }
   destroySVG() { return destroySVG(); }
 
-  // Advanced Transition APIs (v3.40.0)
+  // Advanced Transition APIs (v3.41.0)
   pageTransition(config) { return pageTransition(config); }
   sectionTransition(target, config) { return sectionTransition(target, config); }
   routeMotion(config) { return routeMotion(config); }
@@ -526,7 +526,7 @@ class AnimXCore {
   getTransitionEffects() { return getTransitionEffects(); }
   destroyTransitions() { return destroyTransitions(); }
 
-  // Advanced CMS APIs (v3.40.0)
+  // Advanced CMS APIs (v3.41.0)
   cms(config) { return cms(config); }
   applyRecipe(target, recipeId) { return applyRecipe(target, recipeId); }
   registerRecipe(id, config) { return registerRecipe(id, config); }
@@ -541,7 +541,7 @@ class AnimXCore {
   cmsAudit() { return cmsAudit(); }
   destroyCMS() { return destroyCMS(); }
   
-  // Advanced Animation Marketplace-Ready Preset Packaging (v3.40.0)
+  // Advanced Animation Marketplace-Ready Preset Packaging (v3.41.0)
   packs() { return packs(); }
   registerPack(pack) { return registerPack(pack); }
   getPack(id) { return getPack(id); }
@@ -554,13 +554,13 @@ class AnimXCore {
   checkPackCompatibility(pack) { return checkPackCompatibility(pack); }
   destroyPacks() { return destroyPacks(); }
   
-  // Final Animation Catalog Audit (v3.40.0)
+  // Final Animation Catalog Audit (v3.41.0)
   finalAudit() { return finalAudit(); }
 
-  // Final Stable Release Sign-Off (v3.40.0)
+  // Final Stable Release Sign-Off (v3.41.0)
   signoff() { return signoff(); }
   
-  // Compat System (v3.40.0)
+  // Compat System (v3.41.0)
   supports(feature) { return compatApi.supports(feature); }
   getFeatureSupport() { return compatApi.getFeatureSupport(); }
   getBrowserInfo() { return compatApi.getBrowserInfo(); }
@@ -577,7 +577,7 @@ class AnimXCore {
     return copyExample(presetName, type);
   }
 
-  // Old CMS APIs replaced by v3.40.0 implementation above
+  // Old CMS APIs replaced by v3.41.0 implementation above
 
   refresh(root) {
     performanceMonitor.trackRefresh();
@@ -1021,8 +1021,8 @@ AnimX.build = {
   signoff,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.40.0",
-      release: "Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate",
+      version: "3.41.0",
+      release: "Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures', 'packs', 'signoff']

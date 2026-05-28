@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.40.0',
-    release: 'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate',
+    version: '3.41.0',
+    release: 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.40.0',
-    release: 'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate',
+    version: '3.41.0',
+    release: 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
     dependency: 'zero-runtime-dependency',
     features: features()
   };
