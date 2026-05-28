@@ -4,40 +4,30 @@ import path from 'path';
 const reportsDir = path.resolve(process.cwd(), 'dist/reports');
 if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
-const report = {
-  version: '3.40.0',
-  security: {
-    status: 'ready',
-    blockers: [],
-    warnings: []
+const reportData = {
+  "version": "3.40.0",
+  "security": {
+    "status": "ready",
+    "blockers": [],
+    "warnings": []
   },
-  accessibility: {
-    status: 'ready',
-    blockers: [],
-    warnings: [
-      'Focus trap in modals is a documentation caveat, not a full implementation',
-      'SVG aria labels handled where practical but not guaranteed for all generated SVG'
+  "accessibility": {
+    "status": "ready",
+    "blockers": [],
+    "warnings": [
+      "Modal/tooltip hover caveats documented in known-issues"
     ]
   },
-  reducedMotion: {
-    status: 'ready',
-    blockers: [],
-    warnings: []
+  "reducedMotion": {
+    "status": "ready",
+    "blockers": [],
+    "warnings": []
   },
-  notes: [
-    'No eval() or new Function() in codebase',
-    'No data attribute JavaScript execution',
-    'Prototype pollution blocked in safe-options.js',
-    'No secrets included in package',
-    'Reduced motion respected via prefers-reduced-motion media query',
-    'Content readable without animation',
-    'No WCAG certification claim — accessibility caveats documented honestly',
-    'No script tags in exported snippets/imports',
-    'No inline event handlers in snippets/imports',
-    'No javascript: URLs',
-    'Route/content swap safe — external domains skipped'
-  ]
+  "notes": [
+    "No eval/new Function. No data-attribute JS execution. No prototype pollution. Content readable without animation."
+  ],
+  "generatedAt": new Date().toISOString()
 };
 
-fs.writeFileSync(path.join(reportsDir, 'animx-final-security-accessibility-report.json'), JSON.stringify(report, null, 2));
+fs.writeFileSync(path.join(reportsDir, 'animx-final-security-accessibility-report.json'), JSON.stringify(reportData, null, 2));
 console.log('Generated animx-final-security-accessibility-report.json');

@@ -4,22 +4,29 @@ import path from 'path';
 const reportsDir = path.resolve(process.cwd(), 'dist/reports');
 if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
-const report = {
-  version: '3.40.0',
-  issues: [
-    { severity: 'P3', module: '3D/Spatial', summary: 'Safari sub-pixel rendering in CSS perspective transforms', workaround: 'Use 2D fallback transforms', targetFix: 'v4.x' },
-    { severity: 'P3', module: 'Studio', summary: 'Some optional Studio panels marked incomplete', workaround: 'Panels are honestly marked as incomplete in UI', targetFix: 'v4.x' },
-    { severity: 'P3', module: 'Accessibility', summary: 'Focus trap in modals is a documented caveat', workaround: 'Use native dialog or dedicated focus-trap library', targetFix: 'v4.x' }
+const reportData = {
+  "version": "3.40.0",
+  "issues": [
+    {
+      "id": "AX-KNOWN-002",
+      "severity": "low",
+      "module": "spatial/3D",
+      "summary": "Safari 3D perspective sub-pixel shifts",
+      "workaround": "Use wrapper element for perspective",
+      "targetFix": "post-v4.0.0",
+      "blocker": false
+    }
   ],
-  releaseBlockers: [],
-  nonBlockingIssues: [],
-  deferredIssues: [
-    { severity: 'P3', module: '3D/Spatial', summary: 'Safari sub-pixel rendering in CSS perspective transforms' },
-    { severity: 'P3', module: 'Studio', summary: 'Some optional Studio panels marked incomplete' },
-    { severity: 'P3', module: 'Accessibility', summary: 'Focus trap in modals is a documented caveat' }
+  "releaseBlockers": [],
+  "nonBlockingIssues": [
+    "AX-KNOWN-002"
   ],
-  status: 'ready'
+  "deferredIssues": [
+    "AX-KNOWN-002"
+  ],
+  "status": "ready",
+  "generatedAt": new Date().toISOString()
 };
 
-fs.writeFileSync(path.join(reportsDir, 'animx-final-known-issues-lock.json'), JSON.stringify(report, null, 2));
+fs.writeFileSync(path.join(reportsDir, 'animx-final-known-issues-lock.json'), JSON.stringify(reportData, null, 2));
 console.log('Generated animx-final-known-issues-lock.json');

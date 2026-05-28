@@ -14,7 +14,7 @@
 
 ## ✨ Features
 - **v3.40.0**: Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate.
-- **v3.39.0**: Cross-Browser Compatibility, Fallback System, and Legacy Safety.
+- **v3.40.0**: Cross-Browser Compatibility, Fallback System, and Legacy Safety.
 - **v3.27.0**: Advanced Page Transitions, Section Transitions, and Route Motion Packs.
 - **v3.26.0**: Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.25.0**: Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs.

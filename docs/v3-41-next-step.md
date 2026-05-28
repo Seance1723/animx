@@ -1,19 +1,11 @@
-# v3.41.0 Next Step (from v3.40.0)
+# v3.41.0 Next Step (v3.40.0)
 
 ## Recommended Module
-**v3.41.0 Final Launch Buffer and Public Release Packaging Guard**
+v3.41.0 — Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
 
 ## Reason
-Final launch buffer and public release packaging guard needed before v4.0.0.
+Rebuild the scattered demo pages into a clean React mini-site with Landing, Playground, and Documentation.
 
-## Must Fix
-None — v3.40.0 sign-off passed with GO.
-
-## Should Fix
-- Final npm pack dry run with fresh install verification
-- Final cross-browser smoke test documentation
-
-## Can Defer
-- Safari 3D sub-pixel cosmetic issue (P3)
-- Optional Studio panel completion (P3)
-- Focus trap full implementation (P3)
+## Must Fix: None
+## Should Fix: Rebuild demo experience
+## Can Defer: AX-KNOWN-002

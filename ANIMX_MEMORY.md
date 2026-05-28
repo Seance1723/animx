@@ -73,7 +73,7 @@
 - **v3.25.0** - Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs. Added atmospheric background generators (particles, waves, gradients), decorative CSS-only UI ornaments, and scene-wide ambient motion controls.
 - **v3.26.0** - Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.27.0** - Advanced Page Transitions, Section Transitions, and Route Motion Packs. Opt-in routing, secure external link skipping, shared element FLIP measurement, and native View Transition API enhancements.
-- **v3.39.0** - Cross-Browser Compatibility, Fallback System, and Legacy Safety. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
+- **v3.40.0** - Cross-Browser Compatibility, Fallback System, and Legacy Safety. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
 - **v3.40.0** - Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate. Passed GO decision with all P0/P1 criteria met. Added signoff API (`AnimX.signoff()`), 9 final sign-off JSON reports, public API freeze confirmation, security/accessibility/reduced-motion final confirmation, known issues lock, v4 launch gate, and v3.41 next-step report. No new animation features. Core remains zero-dependency.
 - **Next planned version:** v3.41.0 Final Launch Buffer and Public Release Packaging Guard
 
@@ -255,7 +255,7 @@ AnimX.readingProgress()
 - Use ANIMX_MEMORY.md as the project reference before making future changes.
 - Update ANIMX_MEMORY.md whenever a new version adds important architecture, API, file structure, or rule changes.
 
-## Token-Saving Rule for v3.39.0 Cross-Browser Compatibility, Fallback System, and Legacy Safety
+## Token-Saving Rule for v3.40.0 Cross-Browser Compatibility, Fallback System, and Legacy Safety
 - Implemented dual ESM/IIFE build outputs natively in Vite.
 - Validated package `sideEffects` mapping to permit proper tree-shaking of Named Exports.
 - Generated comprehensive build and size health artifacts during CI testing.

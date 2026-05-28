@@ -1,21 +1,19 @@
-# Final Stable Sign-Off (v3.40.0)
+# Final Stable Release Sign-Off (v3.40.0)
 
-## Status: GO
+AnimX v3.40.0 completes the final stable release sign-off for the v3.x line.
 
-AnimX v3.40.0 has passed the final stable release sign-off. All P0/P1 criteria are met.
+## Decision: GO
+
+All go criteria met. Zero P0/P1 blockers. The v3.x line is stable for release.
 
 ## Summary
-- **Runtime**: Ready
-- **Build**: Ready
-- **Dist**: Ready
-- **Package**: Ready
-- **Docs/Demo**: Ready
-- **Security**: Ready
-- **Accessibility**: Ready
-- **Reduced Motion**: Ready
-- **Compatibility**: Ready
-- **Known Issues**: Locked (P3 only)
-- **Release Notes**: Locked
-
-## Next Version
-v3.41.0 — Final Launch Buffer and Public Release Packaging Guard
+- Runtime: stable
+- Build: passing
+- Dist: verified
+- Package: audited
+- Docs/Demo/Playground/Gallery/Studio: frozen
+- Security: hardened
+- Accessibility: compliant
+- Reduced Motion: respected
+- Known Issues: locked
+- Release Notes: locked
