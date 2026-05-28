@@ -6,9 +6,10 @@ import { registerRecipe, getRecipe, getRecipes, getCMSRecipes } from './cms-reci
 import { applyRecipe } from './cms-recipe-runner.js';
 import { refreshCMS } from './cms-refresh-manager.js';
 import { observeCMS, disconnectCMS } from './cms-mutation-observer.js';
+import { getConfig } from '../core/config.js';
 
 export function cms(config = {}) {
-  console.log('[AnimX CMS] Initializing...', config);
+  if (getConfig().debug || config.debug) console.log('[AnimX CMS] Initializing...', config);
   if (config.autoInit) {
     refreshCMS(config.root || document.body);
   }
@@ -23,7 +24,7 @@ export function validateCMSRecipe(recipe) {
 }
 
 export function exportCMSRecipe(recipeId, format = 'json') {
-  console.log(`[AnimX CMS] Exporting recipe ${recipeId} as ${format}`);
+  if (getConfig().debug) console.log(`[AnimX CMS] Exporting recipe ${recipeId} as ${format}`);
   return {};
 }
 
@@ -33,7 +34,7 @@ export function cmsAudit() {
 
 export function destroyCMS() {
   disconnectCMS();
-  console.log('[AnimX CMS] Destroyed (observers disconnected)');
+  if (getConfig().debug) console.log('[AnimX CMS] Destroyed (observers disconnected)');
 }
 
 export { registerRecipe, getRecipe, getRecipes, getCMSRecipes, applyRecipe, refreshCMS, observeCMS, disconnectCMS };

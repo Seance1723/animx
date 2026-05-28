@@ -5,16 +5,15 @@
 
 ---
 
-## ⚡ What's New in v3.41.0
+## What's New in v3.41.0
 
-- **Final Stable Release Sign-Off**: Passed GO decision with all P0/P1 criteria met.
-- **v4.0.0 Launch Gate**: v4 preparation can begin after v3.41.0 launch buffer.
-- **Public API Freeze**: All v3.x public APIs frozen and backward-compatible.
-- **Sign-Off Reports**: Generated 9 final sign-off JSON reports in `dist/reports/`.
+- **Animation Registry Rebuild**: Added a centralized source of truth for effect metadata.
+- **Capability Matrix**: Generated element-first readiness data for all required element groups.
+- **Playground Metadata Foundation**: Added safe preview/export metadata without touching website code.
+- **Validation Reports**: Generated registry, capability, playground, cross-check, and preset-data JSON outputs.
 
-## ✨ Features
-- **v3.41.0**: Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal.
-- **v3.41.0**: Cross-Browser Compatibility, Fallback System, and Legacy Safety.
+## Features
+- **v3.41.0**: Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation.
 - **v3.27.0**: Advanced Page Transitions, Section Transitions, and Route Motion Packs.
 - **v3.26.0**: Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.25.0**: Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs.
@@ -187,13 +186,13 @@ AnimX features a fully headless, zero-dependency Node.js test runner.
 npm test
 ```
 
-## 27. Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal (v3.41.0)
+## 27. Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation (v3.41.0)
 
-AnimX v3.41.0 has passed the final stable release sign-off with a GO decision. All P0/P1 criteria are met. The v4.0.0 launch gate is ready — v4 preparation can begin after the v3.41.0 launch buffer is complete.
+AnimX v3.41.0 rebuilt the animation registry and generated the capability matrix, playground readiness report, cross-check report, validation report, and preset-data JSON used by future modules.
 
-- Run `AnimX.signoff()` for the full sign-off report.
-- See `dist/reports/` for all generated JSON reports.
-- Next version: v3.41.0 Final Launch Buffer and Public Release Packaging Guard.
+- Run `AnimX.validateRegistry()` for registry validation.
+- See `dist/reports/` for generated registry and capability reports.
+- Next version: v3.42.0 Advanced Text Reveal and Split Animation Pack.
 
 ## 28. Release Status
 **v3.41.0** is the current stable release, recommended for production use.

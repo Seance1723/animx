@@ -91,8 +91,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.40.0',
-    release: 'Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate',
+    version: '3.41.0',
+    release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',
@@ -102,26 +102,59 @@ async function run() {
   fs.writeFileSync(versionJsonPath, JSON.stringify(versionJson, null, 2));
   console.log('Generated animx.version.json');
 
-  // 5. Generate animx.preset-data.json
+  // 5. Generate registry reports and animx.preset-data.json
   try {
+    const reportsDir = path.join(distDir, 'reports');
+    if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
+
     const presetDataPath = path.join(distDir, 'animx.preset-data.json');
     await import('./tests/setup.js');
     const AnimX = (await import('./src/js/animx.js')).default;
+    const {
+      buildPlaygroundReadinessReport,
+      buildEffectCrossCheckReport,
+      buildPresetData
+    } = await import('./src/js/registry/registry-report.js');
     
-    const presets = AnimX.getPresets();
-    const categories = AnimX.getPresetCategories();
-    
-    const presetData = {
-      version: '3.40.0',
-      total: presets.length,
-      categories: categories,
-      presets: presets
+    const generatedAt = new Date().toISOString();
+    const registry = AnimX.getRegistry();
+    const effects = registry.effects;
+    const capabilityMatrix = AnimX.getCapabilityMatrix();
+    capabilityMatrix.generatedAt = generatedAt;
+    const playgroundReport = buildPlaygroundReadinessReport(effects);
+    const crossCheckReport = buildEffectCrossCheckReport(effects);
+    const validationReport = AnimX.validateRegistry();
+    const searchReport = {
+      version: '3.41.0',
+      generatedAt,
+      samples: {
+        mask: AnimX.searchEffects('mask').map(effect => effect.id),
+        text: AnimX.getEffectsByElement('text').map(effect => effect.id),
+        ready: AnimX.getEffectsByStatus('ready').map(effect => effect.id)
+      }
+    };
+    const graphifyReport = {
+      version: '3.41.0',
+      generatedAt,
+      graphifyFound: fs.existsSync(path.resolve(__dirname, 'graphify-out', 'graph.json')),
+      graphifyRoot: fs.existsSync(path.resolve(__dirname, 'graphify-out', '.graphify_root'))
+        ? fs.readFileSync(path.resolve(__dirname, 'graphify-out', '.graphify_root'), 'utf8').trim()
+        : null
     };
     
+    const presetData = buildPresetData(effects, generatedAt);
+    
     fs.writeFileSync(presetDataPath, JSON.stringify(presetData, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-capability-matrix.json'), JSON.stringify(capabilityMatrix, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-playground-readiness.json'), JSON.stringify(playgroundReport, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-effect-cross-check-report.json'), JSON.stringify(crossCheckReport, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-registry-validation-report.json'), JSON.stringify(validationReport, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-registry-search-report.json'), JSON.stringify(searchReport, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-graphify-review-report.json'), JSON.stringify(graphifyReport, null, 2));
     console.log('Generated animx.preset-data.json');
+    console.log('Generated registry reports');
   } catch (err) {
-    console.error('Failed to generate preset data:', err);
+    console.error('Failed to generate registry reports:', err);
   }
 
   // 6. Build Adapters
@@ -164,7 +197,7 @@ async function run() {
   const bundleReportPath = path.join(distDir, 'animx.bundle-report.json');
   const bundleReport = {
     name: "AnimX",
-    version: "3.40.0",
+    version: "3.41.0",
     generatedAt: new Date().toISOString(),
     files: reportFiles,
     builds: {

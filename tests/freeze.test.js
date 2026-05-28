@@ -11,7 +11,7 @@ export function run() {
     assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be exactly 3.41.0');
     assert.strictEqual(
       AnimX.versionInfo().release,
-      'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
+      'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
       'Release metadata must match milestone'
     );
     assert.strictEqual(AnimX.versionInfo().dependency, 'zero-runtime-dependency', 'Must be zero-dependency');
@@ -27,7 +27,7 @@ export function run() {
     // 3. No backward-compat breakage
     const vInfo = AnimX.versionInfo();
     assert.ok(vInfo.name === 'AnimX', 'name must be AnimX');
-    assert.ok(typeof vInfo.features === 'object', 'features must be an object');
+    assert.deepStrictEqual(Object.keys(vInfo), ['name', 'version', 'release', 'dependency']);
 
     console.log('[Tests] Final Freeze verification passed');
   } catch (err) {

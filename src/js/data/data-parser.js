@@ -10,7 +10,7 @@ export function parseDataAttributes(element) {
   if (!ds.ax && !ds.axSvg) return null;
   
   // Handle no-code aliases
-  const rawAnimation = ds.ax || ds.axPreset || ds.axHoverPreset || null;
+  const rawAnimation = ds.axTextEffect || ds.ax || ds.axPreset || ds.axHoverPreset || null;
   const isScrollAlias = ds.axScroll !== undefined;
   
   // Basic attributes
@@ -66,11 +66,11 @@ export function parseDataAttributes(element) {
     }
   }
   
-  const isText = ds.axText !== undefined || ds.axTextType !== undefined;
+  const isText = ds.axText !== undefined || ds.axTextType !== undefined || ds.axTextEffect !== undefined;
   let textOptions = null;
   if (isText) {
     textOptions = {
-      type: ds.axTextType || 'split',
+      type: ds.axTextType || ds.axTextEffect || 'split',
       split: ds.axText || 'chars',
       animation,
       text: ds.axValue || null,

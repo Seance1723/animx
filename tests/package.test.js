@@ -13,7 +13,7 @@ export function run() {
     assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be exactly 3.41.0');
     assert.strictEqual(
       AnimX.versionInfo().release,
-      'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
+      'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
       'Release metadata must match milestone'
     );
     assert.strictEqual(AnimX.versionInfo().dependency, 'zero-runtime-dependency', 'Must be zero-dependency');

@@ -9,7 +9,7 @@ export function run() {
     // 1. Version Asserts
     assert.strictEqual(AnimX.version, '3.41.0', 'Global version must be exactly 3.41.0');
     assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be exactly 3.41.0');
-    assert.strictEqual(AnimX.versionInfo().release, 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal', 'Release metadata must match milestone');
+    assert.strictEqual(AnimX.versionInfo().release, 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation', 'Release metadata must match milestone');
     
     // 2. Core Modules Intact
     assert.strictEqual(typeof AnimX.animate, 'function', 'animate() must exist');

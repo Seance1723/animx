@@ -1,5 +1,5 @@
 const VERSION = '3.41.0';
-const RELEASE = 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal';
+const RELEASE = 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation';
 
 export function ts() {
   return new Date().toISOString();

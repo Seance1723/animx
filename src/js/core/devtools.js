@@ -35,7 +35,7 @@ export function diagnose() {
 
   return {
     version: '3.41.0',
-    release: 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
+    release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -67,9 +67,8 @@ export function versionInfo() {
   return {
     name: 'AnimX',
     version: '3.41.0',
-    release: 'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
-    dependency: 'zero-runtime-dependency',
-    features: features()
+    release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
+    dependency: 'zero-runtime-dependency'
   };
 }
 

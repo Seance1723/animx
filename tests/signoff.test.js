@@ -13,7 +13,7 @@ export function run() {
     assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be 3.41.0');
     assert.strictEqual(
       AnimX.versionInfo().release,
-      'Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal',
+      'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
       'Release must match milestone'
     );
     assert.strictEqual(AnimX.versionInfo().dependency, 'zero-runtime-dependency');
@@ -38,7 +38,7 @@ export function run() {
     // 4. versionInfo structure
     const vi = AnimX.versionInfo();
     assert.ok(vi.name === 'AnimX');
-    assert.ok(typeof vi.features === 'object');
+    assert.deepStrictEqual(Object.keys(vi), ['name', 'version', 'release', 'dependency']);
 
     console.log('[Tests] Final Sign-Off verification passed');
   } catch (err) {

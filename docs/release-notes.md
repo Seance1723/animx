@@ -1,5 +1,14 @@
 # Release Notes
 
+## v3.41.0 - Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation
+- **Registry:** Added centralized effect registry schema, taxonomy, search helpers, and validation.
+- **Capability Matrix:** Added element-first matrix output for playground and future module planning.
+- **Playground Metadata:** Added readiness metadata without modifying `animxWebsite`.
+- **Reports:** Added capability, playground readiness, effect cross-check, validation, search, and Graphify review JSON reports.
+- **Preset Data:** Rebuilt `dist/animx.preset-data.json` around the new registry.
+- **Rule:** Effects must not be marked `ready` unless implementation, usage mode, reduced-motion/fallback behavior, and metadata are verified.
+- **Next Module:** v3.42.0 Advanced Text Reveal and Split Animation Pack.
+
 ## v3.40.0 — Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate
 - **Final Sign-Off:** Passed final stable release sign-off with GO decision.
 - **Go/No-Go:** All P0/P1 criteria pass. One P3 waiver granted (Safari 3D sub-pixel cosmetic issue).
@@ -8,7 +17,7 @@
 - **Security/Accessibility:** No eval, no prototype pollution, reduced motion respected, content readable.
 - **Known Issues Lock:** No P0/P1/P2 issues remain. Three P3 items documented and deferred.
 - **v4 Launch Gate:** v4 preparation can begin after v3.41.0 launch buffer.
-- **Next Version:** v3.41.0 Final Launch Buffer and Public Release Packaging Guard.
+- **Follow-up:** Completed by v3.41.0 registry foundation work.
 - **Sign-Off Reports:** Generated 9 final sign-off JSON reports in `dist/reports/`.
 
 ## v2.5.0 — Advanced SVG Morphing

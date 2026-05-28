@@ -13,7 +13,7 @@ export function run() {
     
     const info = AnimX.versionInfo();
     assert.strictEqual(info.version, '3.41.0', 'versionInfo version should match');
-    assert.ok(info.release.includes('Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal'), 'versionInfo release string should contain Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal');
+    assert.ok(info.release.includes('Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation'), 'versionInfo release string should contain Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation');
 
     // 2. Docs existence checks
     const docsPath = path.resolve(process.cwd(), 'docs');

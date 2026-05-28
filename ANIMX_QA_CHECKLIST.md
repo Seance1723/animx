@@ -1,12 +1,17 @@
-# AnimX QA Checklist (v3.40.0)
+# AnimX QA Checklist (v3.41.0)
 
-**Target Version:** 3.40.0
+**Target Version:** 3.41.0
 
 ## 1. Build & Serve
 - [ ] Run `npm run build` - verify it completes without errors.
 - [ ] Run `npm test` - verify all test suites pass.
 - [ ] Run `npm run dev` - verify dev server loads locally.
 - [ ] Run `npm run preview` - verify production build preview loads.
+- [ ] Verify `AnimX.version` returns `3.41.0`.
+- [ ] Verify `AnimX.versionInfo()` returns the registry rebuild release metadata.
+- [ ] Verify `AnimX.getRegistry()` and `AnimX.validateRegistry()` work.
+- [ ] Verify `dist/animx.preset-data.json` exists and is valid JSON.
+- [ ] Verify registry reports exist under `dist/reports`.
 
 ## 2. Automated Tools
 - [ ] Ensure `npm run size-check` shows core is under 20KB minified.
@@ -85,18 +90,17 @@
 - [ ] Verify `AnimX.destroy()` safely removes active observers and resets inline CSS.
 - [ ] Confirm repetitive calls to `init()` or `refresh()` don't multiply bindings.
 
-### 3.40.0 Final Stable Sign-Off Verification
-- [x] `AnimX.version` returns `3.40.0`.
-- [x] `AnimX.versionInfo()` returns correct release metadata.
-- [x] `AnimX.signoff()` returns full sign-off structure.
-- [x] Go/no-go decision is `go`.
-- [x] `canReleaseV4` is `false` (v3.41.0 buffer required first).
-- [x] `nextVersion` is `3.41.0`.
-- [x] No P0/P1 blockers remain.
-- [x] Known issues lock has no release blockers.
-- [x] Package.json version is `3.40.0`.
-- [x] README references `3.40.0`.
-- [x] Release notes reference `3.40.0`.
+### 3.41.0 Registry Foundation Verification
+- [x] `AnimX.version` returns `3.41.0`.
+- [x] `AnimX.versionInfo()` returns registry rebuild release metadata.
+- [x] `AnimX.getRegistry()` returns effect metadata.
+- [x] `AnimX.validateRegistry()` returns `ok: true`.
+- [x] Capability matrix report is generated.
+- [x] Playground readiness report is generated.
+- [x] Cross-check report is generated.
+- [x] Package.json and package-lock versions are `3.41.0`.
+- [x] README references `3.41.0`.
+- [x] Release notes reference `3.41.0`.
 - [x] All required dist files exist.
 - [x] No `eval()` or `new Function()` in codebase.
 - [x] No external runtime dependencies.

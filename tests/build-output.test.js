@@ -19,6 +19,18 @@ import AnimX from '../src/js/animx.js';
       assert.ok(fs.existsSync(path.join(distPath, 'animx.demo.html')));
       assert.ok(fs.existsSync(path.join(distPath, 'animx.version.json')));
       assert.ok(fs.existsSync(path.join(distPath, 'animx.preset-data.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-capability-matrix.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-playground-readiness.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-effect-cross-check-report.json')));
+
+      [
+        'animx.preset-data.json',
+        path.join('reports', 'animx-capability-matrix.json'),
+        path.join('reports', 'animx-playground-readiness.json'),
+        path.join('reports', 'animx-effect-cross-check-report.json')
+      ].forEach(file => {
+        assert.doesNotThrow(() => JSON.parse(fs.readFileSync(path.join(distPath, file), 'utf-8')));
+      });
       
       if (fs.existsSync(path.join(distPath, 'animx.gallery.html'))) assert.ok(true);
       if (fs.existsSync(path.join(distPath, 'animx.docs.html'))) assert.ok(true);

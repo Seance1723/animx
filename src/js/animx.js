@@ -105,16 +105,20 @@ import { svgRoute, icon, logo, lineArt, handwriting, infographic, svgChart, svgD
 // v3.27.0 Advanced Page Transitions, Section Transitions, and Route Motion Packs
 import { pageTransition, sectionTransition, routeMotion, viewTransition, contentSwap, sharedElement, transitionLink, transitionTo, transitionFrom, transitionState, validateTransition, getTransitionEffects, destroyTransitions } from './transitions/transition-api.js';
 
-// v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
+// v3.41.0 Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation
 import { cms, applyRecipe, registerRecipe, getRecipe, getRecipes, getCMSRecipes, refreshCMS, observeCMS, disconnectCMS, validateCMSRecipe, exportCMSRecipe, cmsAudit, destroyCMS } from './cms/advanced-cms-api.js';
 
-// v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
+// v3.41.0 Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation
 import { packs, registerPack, getPack, getPacks, getPackCatalog, destroyPacks, validatePack, auditPack, importPack, exportPack, checkPackCompatibility, bindPacksApi } from './packs/pack-api.js';
 
-// v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal
+// v3.41.0 Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation
 import { finalAudit } from './audit/one-stop-qa-report.js';
 import { compatApi } from './compat/compat-api.js';
 import { Hardening } from './hardening/hardening-api.js';
+import { getRegistry, getEffects } from './registry/animation-registry.js';
+import { getEffectsByElement, getEffectsByFamily, getEffectsByStatus, searchEffects } from './registry/registry-search.js';
+import { getCapabilityMatrix } from './registry/capability-matrix.js';
+import { validateRegistry } from './registry/registry-validator.js';
 
 // v3.41.0 Final Stable Release Sign-Off
 import { signoff } from './signoff/signoff-api.js';
@@ -281,6 +285,38 @@ class AnimXCore {
   
   getPresetTags() {
     return getPresetTags();
+  }
+
+  getRegistry() {
+    return getRegistry();
+  }
+
+  getEffects() {
+    return getEffects();
+  }
+
+  getEffectsByElement(element) {
+    return getEffectsByElement(element);
+  }
+
+  getEffectsByFamily(family) {
+    return getEffectsByFamily(family);
+  }
+
+  getEffectsByStatus(status) {
+    return getEffectsByStatus(status);
+  }
+
+  searchEffects(query) {
+    return searchEffects(query);
+  }
+
+  getCapabilityMatrix() {
+    return getCapabilityMatrix();
+  }
+
+  validateRegistry() {
+    return validateRegistry();
   }
 
   // DX APIs
@@ -1022,7 +1058,7 @@ AnimX.build = {
   versionInfo: () => ({
       name: "AnimX",
       version: "3.41.0",
-      release: "Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal",
+      release: "Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures', 'packs', 'signoff']
