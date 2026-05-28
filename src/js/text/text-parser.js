@@ -1,15 +1,48 @@
 import { getConfig } from '../core/config.js';
 
+const SPLIT_ALIASES = {
+  chars: ['chars'],
+  characters: ['chars'],
+  words: ['words'],
+  lines: ['lines'],
+  'words-and-chars': ['words', 'chars'],
+  'chars-and-words': ['words', 'chars'],
+  'lines-and-words': ['lines', 'words']
+};
+
+export function normalizeSplitMode(split) {
+  if (Array.isArray(split)) {
+    const normalized = split.flatMap(item => normalizeSplitMode(item));
+    return [...new Set(normalized.length ? normalized : ['chars'])];
+  }
+  const raw = String(split || 'chars').trim().toLowerCase();
+  if (SPLIT_ALIASES[raw]) return SPLIT_ALIASES[raw];
+  if (raw.includes(' ')) {
+    return [...new Set(raw.split(/\s+/).flatMap(item => normalizeSplitMode(item)))];
+  }
+  return ['chars'];
+}
+
+function defaultSplitForEffect(effect, fallback) {
+  if (/^line-|paragraph-/.test(effect)) return 'lines';
+  if (/^word-/.test(effect)) return 'words';
+  if (/^char-/.test(effect)) return 'chars';
+  return fallback || 'chars';
+}
+
 export function normalizeTextOptions(options = {}) {
   const conf = getConfig().text || {};
+  const effect = options.effect || options.animation || conf.animation || 'text-rise';
+  const split = normalizeSplitMode(options.split || defaultSplitForEffect(effect, conf.split));
   
   return {
     type: options.type || conf.type || 'split',
-    split: options.split || conf.split || 'chars',
-    animation: options.animation || conf.animation || 'text-rise',
+    effect,
+    split,
+    animation: effect,
     stagger: options.stagger !== undefined ? options.stagger : conf.stagger,
     text: options.text || '',
-    mask: options.mask || false,
+    mask: options.mask !== undefined ? options.mask : (/mask|curtain|clip/.test(effect) ? true : false),
     speed: options.speed || conf.speed || conf.typewriterSpeed || 45,
     from: options.from !== undefined ? options.from : 0,
     to: options.to !== undefined ? options.to : 100,

@@ -29,7 +29,7 @@ export function goNoGoReview() {
     approvalNotes: [
       'All P0/P1 criteria pass',
       'One P3 waiver granted for Safari 3D sub-pixel cosmetic issue',
-      'Recommended: proceed to v3.41.0 launch buffer before v4.0.0'
+      'Recommended: proceed to v3.43.0 text module before v4.0.0'
     ]
   });
 }

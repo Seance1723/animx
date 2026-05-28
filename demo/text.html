@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AnimX v3.40.0 - Text</title>
+  <title>AnimX v3.42.0 - Text</title>
   <link rel="stylesheet" href="../dist/animx.min.css">
   <style>
     :root { --bg: #0f172a; --panel: #1e293b; --border: #334155; --text: #f8fafc; --muted: #94a3b8; --primary: #6366f1; --accent: #818cf8; }
@@ -31,7 +31,7 @@
   
   <header>
     <h1>AnimX: Text</h1>
-    <p>Zero-Dependency Animation Engine v3.40.0</p>
+    <p>Zero-Dependency Animation Engine v3.42.0</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="showcase.html">Showcase</a>
@@ -45,7 +45,37 @@
   </header>
 
   <main>
-    <h2>Text Motion Category</h2><p data-ax="scramble">Text effects powered by AnimX.</p>
+    <h2>Advanced Text Reveal Pack</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3 data-ax-text-effect="text-mask-up" data-ax-split="chars">Text Mask Up</h3>
+        <p>Masked text reveal with readable final-state fallback.</p>
+      </div>
+      <div class="card">
+        <h3 data-ax-text-effect="line-mask-up" data-ax-split="lines">Line Mask Up</h3>
+        <p>Line-oriented reveal for headings and short paragraphs.</p>
+      </div>
+      <div class="card">
+        <h3 data-ax-text-effect="word-fade-up" data-ax-split="words">Word Fade Up</h3>
+        <p>Staggered word build for editorial text blocks.</p>
+      </div>
+      <div class="card">
+        <h3 data-ax-text-effect="char-wave" data-ax-split="chars">Character Wave</h3>
+        <p>Character rhythm without external split libraries.</p>
+      </div>
+      <div class="card">
+        <h3 data-ax-text-effect="char-domino" data-ax-split="chars">Character Domino</h3>
+        <p>Sequential character reveal with safe cleanup support.</p>
+      </div>
+      <div class="card">
+        <h3 data-ax-text-effect="char-elastic-pop" data-ax-split="chars">Elastic Pop</h3>
+        <p>Playful character pop with reduced-motion final state.</p>
+      </div>
+      <div class="card">
+        <h3 data-ax-text-effect="paragraph-line-build" data-ax-split="lines">Paragraph Line Build</h3>
+        <p>Builds paragraph text line by line and remains revertible.</p>
+      </div>
+    </div>
   </main>
 
   <!-- Local JS only -->

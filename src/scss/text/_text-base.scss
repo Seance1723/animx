@@ -2,18 +2,31 @@
   /* wrapper */
 }
 
+.ax-split {
+  white-space: normal;
+}
+
 .ax-text-char,
 .ax-text-word,
-.ax-text-line {
+.ax-text-line,
+.ax-split-char,
+.ax-split-word,
+.ax-split-line {
   display: inline-block;
 }
 
-.ax-text-line {
+.ax-text-line,
+.ax-split-line {
   display: block;
 }
 
-.ax-text-mask {
+.ax-text-mask,
+.ax-text-mask-clip {
   display: inline-block;
   overflow: hidden;
   vertical-align: bottom;
+}
+
+.ax-text-line-inner {
+  display: inline-block;
 }

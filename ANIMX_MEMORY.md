@@ -1,7 +1,7 @@
 # AnimX Project Memory
 
 **Project**: AnimX
-**Current Version**: 3.41.0
+**Current Version**: 3.42.0
 **Core Goal**: Zero-dependency browser animation library. Output only one CSS file and one JS file.
 
 ## Version History
@@ -76,7 +76,8 @@
 - **v3.40.0** - Cross-Browser Compatibility, Fallback System, and Legacy Safety. Added safe data-attribute pipelines, MutationObserver debouncing for dynamic content, and WP/Webflow HTML export snippets. Core remains strictly zero-dependency.
 - **v3.40.0** - Final Stable Release Sign-Off and v4.0.0 Launch Readiness Gate. Passed GO decision with all P0/P1 criteria met. Added signoff API (\`AnimX.signoff()\`), 9 final sign-off JSON reports, public API freeze confirmation, security/accessibility/reduced-motion final confirmation, known issues lock, v4 launch gate, and v3.41 next-step report. No new animation features. Core remains zero-dependency.
 - **v3.41.0** - Rebuilt the animation registry, capability matrix, and playground-ready metadata foundation. Added centralized effect registry, schema/taxonomy, element-first capability matrix, usage mode metadata, effect status rules, reduced-motion metadata, fallback metadata, playground readiness metadata, registry validation, registry search/query helpers, `dist/animx.preset-data.json`, and registry/capability/playground/cross-check reports. Effects must not be marked ready unless implementation, usage mode, fallback/reduced-motion behavior, and metadata are verified. No website work was done in this module. No new animation families were added except small fixes needed for existing references. Core AnimX remains zero-dependency.
-- **Next planned version:** v3.42.0 Advanced Text Reveal and Split Animation Pack.
+- **v3.42.0** - Added the Advanced Text Reveal and Split Animation Pack. Implemented zero-dependency text split engine upgrades, line/word/character split support, text reveal effects, masked text reveal effects, word and character stagger effects, paragraph line build effects, cleanup/revert behavior, accessibility-safe split metadata, reduced-motion final-state behavior, registry metadata for text effects, playground-ready metadata for ready text effects, and text effect reports/cross-checks. No website work was done. No rolling/typewriter/scramble effects were added; those belong to v3.43.0. Core AnimX remains zero-dependency.
+- **Next planned version:** v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack.
 
 ## Completed Milestones
 
@@ -97,8 +98,8 @@
 
 ## Current Objective
 
-**AnimX v3.41.0 registry foundation is current.**
-Next Planned Version: **v3.42.0 Advanced Text Reveal and Split Animation Pack**
+**AnimX v3.42.0 text reveal pack is current.**
+Next Planned Version: **v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack**
 
 ## v0.0.1 - Foundation (Completed)
 - Set up project structure, SCSS variables, Vite build, and basic tests.
@@ -277,7 +278,7 @@ Instead, tell the coding agent:
 
 ## v3.41.0 Registry Foundation Memory
 
-Current version: 3.41.0
+Version covered: 3.41.0
 
 v3.41.0 rebuilt the animation registry, capability matrix, and playground-ready metadata foundation.
 
@@ -303,3 +304,30 @@ Core AnimX remains zero-dependency.
 
 Next planned module:
 v3.42.0 Advanced Text Reveal and Split Animation Pack
+
+## v3.42.0 Text Reveal Pack Memory
+
+Current version: 3.42.0
+
+v3.42.0 added the Advanced Text Reveal and Split Animation Pack.
+
+The module implemented or upgraded:
+- zero-dependency text split engine
+- line, word, and character split support
+- text reveal effects
+- masked text reveal effects
+- word and character stagger effects
+- paragraph line build effects
+- text cleanup/revert behavior
+- accessibility-safe split metadata
+- reduced-motion final-state behavior
+- registry metadata for text effects
+- playground-ready metadata for ready text effects
+- text effect reports and cross-checks
+
+No website work was done.
+No rolling/typewriter/scramble effects were added in this module; those belong to v3.43.0.
+Core AnimX remains zero-dependency.
+
+Next planned module:
+v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack

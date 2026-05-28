@@ -4,12 +4,12 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.41.0 RC Issue Fix and Regression checks...');
+    console.log('[Tests] Running AnimX v3.42.0 RC Issue Fix and Regression checks...');
 
     // 1. Version Asserts
-    assert.strictEqual(AnimX.version, '3.41.0', 'Global version must be exactly 3.41.0');
-    assert.strictEqual(AnimX.versionInfo().version, '3.41.0', 'versionInfo version must be exactly 3.41.0');
-    assert.strictEqual(AnimX.versionInfo().release, 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation', 'Release metadata must match milestone');
+    assert.strictEqual(AnimX.version, '3.42.0', 'Global version must be exactly 3.42.0');
+    assert.strictEqual(AnimX.versionInfo().version, '3.42.0', 'versionInfo version must be exactly 3.42.0');
+    assert.strictEqual(AnimX.versionInfo().release, 'Advanced Text Reveal and Split Animation Pack', 'Release metadata must match milestone');
     
     // 2. Core Modules Intact
     assert.strictEqual(typeof AnimX.animate, 'function', 'animate() must exist');

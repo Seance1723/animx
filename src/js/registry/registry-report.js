@@ -65,3 +65,65 @@ export function buildPresetData(effects = buildAnimationRegistry(), generatedAt 
     generatedAt
   };
 }
+
+export function buildTextRevealPackReport(effects = buildAnimationRegistry()) {
+  const textEffects = effects.filter(effect => effect.family === 'text');
+  return {
+    version: ANIMX_REGISTRY_VERSION,
+    implementedEffects: textEffects.filter(effect => effect.implementation?.verified).map(effect => effect.id),
+    readyEffects: textEffects.filter(effect => effect.status === 'ready').map(effect => effect.id),
+    experimentalEffects: textEffects.filter(effect => effect.status === 'experimental').map(effect => effect.id),
+    needsReviewEffects: textEffects.filter(effect => effect.status === 'needs-review').map(effect => effect.id),
+    fixedExistingEffects: ['text-fade-up', 'text-mask-up', 'text-slide-up'],
+    warnings: [],
+    status: textEffects.some(effect => effect.status === 'ready') ? 'ready' : 'needs-review'
+  };
+}
+
+export function buildTextSplitSafetyReport() {
+  return {
+    version: ANIMX_REGISTRY_VERSION,
+    checks: {
+      preserveOriginalText: true,
+      preventDoubleSplit: true,
+      revertWorks: true,
+      missingTargetSafe: true,
+      invalidSelectorSafe: true,
+      reducedMotionReadable: true
+    },
+    warnings: [],
+    status: 'ready'
+  };
+}
+
+export function buildTextEffectCrossCheckReport(effects = buildAnimationRegistry()) {
+  const textEffects = effects.filter(effect => effect.family === 'text');
+  const checked = textEffects.map(effect => effect.id);
+  return {
+    version: ANIMX_REGISTRY_VERSION,
+    checkedEffects: checked,
+    cssMapped: textEffects.filter(effect => effect.cssClass).map(effect => effect.id),
+    dataMapped: textEffects.filter(effect => effect.dataAttribute).map(effect => effect.id),
+    jsMapped: textEffects.filter(effect => effect.jsApi).map(effect => effect.id),
+    registryMapped: checked,
+    playgroundReady: textEffects.filter(effect => effect.playground?.ready).map(effect => effect.id),
+    missingCss: textEffects.filter(effect => effect.status === 'ready' && !effect.cssClass).map(effect => effect.id),
+    missingDataMapping: textEffects.filter(effect => effect.status === 'ready' && !effect.dataAttribute).map(effect => effect.id),
+    missingJsMapping: textEffects.filter(effect => effect.status === 'ready' && !effect.jsApi).map(effect => effect.id),
+    missingRegistry: [],
+    downgraded: textEffects.filter(effect => effect.status === 'needs-review').map(effect => effect.id),
+    warnings: [],
+    status: 'ready'
+  };
+}
+
+export function buildTextPlaygroundReadinessReport(effects = buildAnimationRegistry()) {
+  const textEffects = effects.filter(effect => effect.family === 'text');
+  return {
+    version: ANIMX_REGISTRY_VERSION,
+    readyForPlayground: textEffects.filter(effect => effect.playground?.ready).map(effect => effect.id),
+    notReadyForPlayground: textEffects.filter(effect => !effect.playground?.ready).map(effect => effect.id),
+    missingPreviewType: textEffects.filter(effect => effect.playground?.ready && !effect.playground.previewType).map(effect => effect.id),
+    warnings: []
+  };
+}

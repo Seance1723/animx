@@ -1,20 +1,20 @@
 <div align="center">
-  <h3>The Zero-Dependency UI Animation Engine (v3.41.0)</h3>
+  <h3>The Zero-Dependency UI Animation Engine (v3.42.0)</h3>
   <p>Production-ready, accessible, and fast.</p>
 </div>
 
 ---
 
-## What's New in v3.41.0
+## What's New in v3.42.0
 
-- **Animation Registry Rebuild**: Added a centralized source of truth for effect metadata.
-- **Capability Matrix**: Generated element-first readiness data for all required element groups.
-- **Playground Metadata Foundation**: Added safe preview/export metadata without touching website code.
-- **Validation Reports**: Generated registry, capability, playground, cross-check, and preset-data JSON outputs.
+- **Advanced Text Reveal Pack**: Added real line, word, character, mask, blur, and paragraph reveal effects.
+- **Split Engine Upgrade**: Added split modes for chars, words, lines, words-and-chars, and lines-and-words.
+- **Safe Cleanup**: `AnimX.revertText()` restores original text and removes split markers.
+- **Registry Reports**: Generated text reveal, split safety, cross-check, and playground readiness reports.
 
 ## Features
+- **v3.42.0**: Advanced Text Reveal and Split Animation Pack.
 - **v3.41.0**: Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation.
-- **v3.27.0**: Advanced Page Transitions, Section Transitions, and Route Motion Packs.
 - **v3.26.0**: Advanced SVG, Icon, Logo, Path, and Infographic Motion Packs.
 - **v3.25.0**: Advanced Background, Decorative Motion, Ambient Effects, and Visual Atmosphere Packs.
 - **v3.24.0**: Advanced Form, Modal, Drawer, Toast, Tooltip, and UI Feedback Motion.
@@ -186,13 +186,13 @@ AnimX features a fully headless, zero-dependency Node.js test runner.
 npm test
 ```
 
-## 27. Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation (v3.41.0)
+## 27. Advanced Text Reveal and Split Animation Pack (v3.42.0)
 
-AnimX v3.41.0 rebuilt the animation registry and generated the capability matrix, playground readiness report, cross-check report, validation report, and preset-data JSON used by future modules.
+AnimX v3.42.0 adds real text reveal effects across line, word, character, mask, blur, cascade, and paragraph patterns with registry-backed metadata.
 
-- Run `AnimX.validateRegistry()` for registry validation.
-- See `dist/reports/` for generated registry and capability reports.
-- Next version: v3.42.0 Advanced Text Reveal and Split Animation Pack.
+- Run `AnimX.text()` for split text reveal effects.
+- Run `AnimX.revertText()` to restore original content.
+- Next version: v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack.
 
 ## 28. Release Status
-**v3.41.0** is the current stable release, recommended for production use.
+**v3.42.0** is the current stable release, recommended for production use.

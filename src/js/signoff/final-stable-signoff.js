@@ -27,7 +27,7 @@ export function finalStableSignoff(options = {}) {
       { severity: 'P3', module: '3D/Spatial', summary: 'Safari sub-pixel shifts in perspective transforms', workaround: 'Use fallback 2D transforms', targetFix: 'v4.x' }
     ],
     recommendations: [
-      'Proceed to v3.41.0 Final Launch Buffer and Public Release Packaging Guard',
+      'Proceed to v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack',
       'Do not release v4.0.0 until launch buffer is verified'
     ]
   };

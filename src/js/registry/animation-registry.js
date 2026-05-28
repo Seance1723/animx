@@ -6,6 +6,7 @@ import { cloneRegistryValue, normalizeEffectId, normalizeElement, normalizeFamil
 const registryCache = { presetCount: -1, effects: null };
 
 function statusForPreset(id, preset) {
+  if (preset && ['ready', 'experimental', 'needs-review', 'deprecated'].includes(preset.status)) return preset.status;
   if (READY_CSS_EFFECT_IDS.has(id)) return 'ready';
   if (preset && preset.experimental) return 'experimental';
   if (preset && preset.deprecated) return 'deprecated';
@@ -19,7 +20,11 @@ function cssPresetToEffect(preset) {
   const family = normalizeFamily(preset);
   const element = normalizeElement(preset);
   const ready = status === 'ready';
-  const dataAttribute = `data-ax="${id}"`;
+  const implemented = ready || status === 'experimental';
+  const split = preset.split || (id.startsWith('line-') || id.startsWith('paragraph-') ? 'lines' : id.startsWith('word-') ? 'words' : id.startsWith('char-') ? 'chars' : undefined);
+  const dataAttribute = family === 'text'
+    ? `data-ax-text-effect="${id}"${split ? ` data-ax-split="${split}"` : ''}`
+    : `data-ax="${id}"`;
 
   return createEffectRecord({
     id,
@@ -30,19 +35,20 @@ function cssPresetToEffect(preset) {
     description: preset.description || `${titleFromId(id)} animation.`,
     status,
     usageModes: {
-      class: ready,
-      data: ready,
-      js: ready,
-      cms: ready
+      class: implemented,
+      data: implemented,
+      js: implemented,
+      cms: implemented
     },
-    cssClass: ready ? cssClass : '',
-    dataAttribute: ready ? dataAttribute : '',
-    jsApi: ready ? 'AnimX.animate' : '',
+    cssClass: implemented ? cssClass : '',
+    dataAttribute: implemented ? dataAttribute : '',
+    jsApi: implemented ? 'AnimX.animate' : '',
     options: {
       duration: true,
       delay: true,
       easing: true,
       stagger: family === 'text' || element === 'card' || element === 'table-row',
+      split: split || false,
       direction: /-(up|down|left|right)$/.test(id),
       intensity: /-(soft|hard|strong)$/.test(id)
     },
@@ -59,7 +65,7 @@ function cssPresetToEffect(preset) {
       previewType: ready ? element : '',
       defaultText: 'Animate anything with AnimX',
       defaultOptions: {},
-      supportedControls: ready ? ['duration', 'delay', 'easing'] : [],
+      supportedControls: ready ? (family === 'text' ? ['split', 'duration', 'delay', 'stagger', 'easing'] : ['duration', 'delay', 'easing']) : [],
       exportTypes: ready ? ['html', 'class', 'data', 'js', 'react', 'cms'] : []
     },
     docs: {
@@ -71,9 +77,9 @@ function cssPresetToEffect(preset) {
       testIds: []
     },
     implementation: {
-      kind: ready ? 'css-preset' : 'metadata',
-      verified: ready,
-      source: ready ? cssClass : ''
+      kind: implemented ? 'css-preset' : 'metadata',
+      verified: implemented,
+      source: implemented ? cssClass : ''
     }
   });
 }

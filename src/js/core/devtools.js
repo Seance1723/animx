@@ -34,8 +34,8 @@ export function diagnose() {
   if (presets.length === 0) issues.push('No presets registered.');
 
   return {
-    version: '3.41.0',
-    release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
+    version: '3.42.0',
+    release: 'Advanced Text Reveal and Split Animation Pack',
     build: 'full',
     dependency: 'zero-runtime-dependency',
     cssLoaded: cssDetected,
@@ -66,8 +66,8 @@ export function features() {
 export function versionInfo() {
   return {
     name: 'AnimX',
-    version: '3.41.0',
-    release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
+    version: '3.42.0',
+    release: 'Advanced Text Reveal and Split Animation Pack',
     dependency: 'zero-runtime-dependency'
   };
 }

@@ -1,6 +1,6 @@
 # Public Api Reference
 
-AnimX v3.33.0 Documentation.
+AnimX v3.42.0 Documentation.
 
 This document covers public api reference.
 
@@ -40,6 +40,19 @@ This document covers public api reference.
 - AnimX.marqueeText()
 - AnimX.counterText()
 - AnimX.validateTextEffect()
+
+v3.42 text reveal usage:
+
+```js
+AnimX.text(".headline", {
+  effect: "char-wave",
+  split: "chars",
+  duration: 700,
+  stagger: 45
+});
+
+AnimX.revertText(".headline");
+```
 
 ## Media
 - AnimX.media()

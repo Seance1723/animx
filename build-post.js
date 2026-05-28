@@ -91,8 +91,8 @@ async function run() {
   const versionJsonPath = path.join(distDir, 'animx.version.json');
   const versionJson = {
     name: 'AnimX',
-    version: '3.41.0',
-    release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
+    version: '3.42.0',
+    release: 'Advanced Text Reveal and Split Animation Pack',
     dependency: 'zero-runtime-dependency',
     defaultFiles: {
       css: 'animx.min.css',
@@ -113,7 +113,11 @@ async function run() {
     const {
       buildPlaygroundReadinessReport,
       buildEffectCrossCheckReport,
-      buildPresetData
+      buildPresetData,
+      buildTextRevealPackReport,
+      buildTextSplitSafetyReport,
+      buildTextEffectCrossCheckReport,
+      buildTextPlaygroundReadinessReport
     } = await import('./src/js/registry/registry-report.js');
     
     const generatedAt = new Date().toISOString();
@@ -125,7 +129,7 @@ async function run() {
     const crossCheckReport = buildEffectCrossCheckReport(effects);
     const validationReport = AnimX.validateRegistry();
     const searchReport = {
-      version: '3.41.0',
+      version: '3.42.0',
       generatedAt,
       samples: {
         mask: AnimX.searchEffects('mask').map(effect => effect.id),
@@ -134,7 +138,7 @@ async function run() {
       }
     };
     const graphifyReport = {
-      version: '3.41.0',
+      version: '3.42.0',
       generatedAt,
       graphifyFound: fs.existsSync(path.resolve(__dirname, 'graphify-out', 'graph.json')),
       graphifyRoot: fs.existsSync(path.resolve(__dirname, 'graphify-out', '.graphify_root'))
@@ -151,6 +155,10 @@ async function run() {
     fs.writeFileSync(path.join(reportsDir, 'animx-registry-validation-report.json'), JSON.stringify(validationReport, null, 2));
     fs.writeFileSync(path.join(reportsDir, 'animx-registry-search-report.json'), JSON.stringify(searchReport, null, 2));
     fs.writeFileSync(path.join(reportsDir, 'animx-graphify-review-report.json'), JSON.stringify(graphifyReport, null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-text-reveal-pack-report.json'), JSON.stringify(buildTextRevealPackReport(effects), null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-text-split-safety-report.json'), JSON.stringify(buildTextSplitSafetyReport(), null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-text-effect-cross-check-report.json'), JSON.stringify(buildTextEffectCrossCheckReport(effects), null, 2));
+    fs.writeFileSync(path.join(reportsDir, 'animx-text-playground-readiness.json'), JSON.stringify(buildTextPlaygroundReadinessReport(effects), null, 2));
     console.log('Generated animx.preset-data.json');
     console.log('Generated registry reports');
   } catch (err) {
@@ -197,7 +205,7 @@ async function run() {
   const bundleReportPath = path.join(distDir, 'animx.bundle-report.json');
   const bundleReport = {
     name: "AnimX",
-    version: "3.41.0",
+    version: "3.42.0",
     generatedAt: new Date().toISOString(),
     files: reportFiles,
     builds: {

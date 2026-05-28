@@ -1,5 +1,14 @@
 # Release Notes
 
+## v3.42.0 - Advanced Text Reveal and Split Animation Pack
+- **Text Split Engine:** Upgraded zero-dependency split/revert behavior for chars, words, lines, words-and-chars, and lines-and-words.
+- **Ready Effects:** Added line, word, character, mask, blur, cascade, and paragraph build reveal effects.
+- **Experimental Effects:** Added implemented-but-not-promoted advanced text reveal variants.
+- **Data Attributes:** Added `data-ax-text-effect` and `data-ax-split` scan support.
+- **Registry:** Registered real text effects with status, usage, fallback, reduced-motion, and playground metadata.
+- **Reports:** Added text reveal pack, split safety, text cross-check, and text playground readiness reports.
+- **Next Module:** v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack.
+
 ## v3.41.0 - Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation
 - **Registry:** Added centralized effect registry schema, taxonomy, search helpers, and validation.
 - **Capability Matrix:** Added element-first matrix output for playground and future module planning.

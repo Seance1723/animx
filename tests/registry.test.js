@@ -14,11 +14,11 @@ export function run() {
     assert.ok(AnimX.searchPresets('fade').length > 0);
     assert.ok(AnimX.getPresetsByCategory('entrance').length > 0);
     assert.ok(AnimX.getPresetCategories().length > 0);
-    assert.strictEqual(AnimX.version, '3.41.0');
+    assert.strictEqual(AnimX.version, '3.42.0');
     assert.deepStrictEqual(AnimX.versionInfo(), {
       name: 'AnimX',
-      version: '3.41.0',
-      release: 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation',
+      version: '3.42.0',
+      release: 'Advanced Text Reveal and Split Animation Pack',
       dependency: 'zero-runtime-dependency'
     });
 
@@ -38,7 +38,7 @@ export function run() {
     assert.ok(kpiRoll, 'Missing effects KPI preset should be registered');
 
     const registry = AnimX.getRegistry();
-    assert.strictEqual(registry.version, '3.41.0');
+    assert.strictEqual(registry.version, '3.42.0');
     assert.ok(Array.isArray(registry.effects));
     assert.ok(registry.effects.length > 0, 'Animation registry should expose effects');
 
@@ -74,13 +74,13 @@ export function run() {
     assert.deepStrictEqual(AnimX.getEffectsByElement(null), []);
 
     const matrix = AnimX.getCapabilityMatrix();
-    assert.strictEqual(matrix.version, '3.41.0');
+    assert.strictEqual(matrix.version, '3.42.0');
     assert.ok(matrix.elements.text);
     assert.ok(matrix.elements.button);
     assert.strictEqual(matrix.summary.totalEffects, registry.effects.length);
 
     const validation = AnimX.validateRegistry();
-    assert.strictEqual(validation.version, '3.41.0');
+    assert.strictEqual(validation.version, '3.42.0');
     assert.strictEqual(validation.ok, true, validation.errors.join('\n'));
 
     console.log(`[Tests] Verified ${expandedCount} presets in registry, including v3.26.0 additions.`);

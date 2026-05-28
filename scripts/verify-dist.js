@@ -15,7 +15,14 @@ export function verifyDist() {
   const files = [
     'animx.css', 'animx.min.css',
     'animx.js', 'animx.min.js',
-    'animx.demo.html'
+    'animx.demo.html',
+    'animx.preset-data.json',
+    'reports/animx-capability-matrix.json',
+    'reports/animx-playground-readiness.json',
+    'reports/animx-text-reveal-pack-report.json',
+    'reports/animx-text-split-safety-report.json',
+    'reports/animx-text-effect-cross-check-report.json',
+    'reports/animx-text-playground-readiness.json'
   ];
 
   let ok = true;
@@ -33,7 +40,7 @@ export function verifyDist() {
   }
 
   const report = {
-    version: "3.41.0",
+    version: "3.42.0",
     generatedAt: new Date().toISOString(),
     status: ok ? "ok" : "failed",
     issues

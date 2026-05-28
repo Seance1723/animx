@@ -20,3 +20,5 @@ An effect can be playground-ready only when:
 Generated output:
 - `dist/reports/animx-playground-readiness.json`
 - `dist/animx.preset-data.json`
+
+v3.42 text reveal effects add playground metadata for ready line, word, character, mask, blur, and paragraph text reveals. Rolling, slot, typewriter, and scramble playground metadata remains reserved for v3.43.0.

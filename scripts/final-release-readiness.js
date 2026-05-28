@@ -23,7 +23,7 @@ const reportData = {
   "blockers": [],
   "warnings": [],
   "recommendations": [
-    "Proceed to v3.41.0"
+    "Proceed to v3.43.0"
   ],
   "generatedAt": new Date().toISOString()
 };

@@ -7,7 +7,7 @@ export function parseDataAttributes(element) {
   if (!element || !element.dataset) return null;
   
   const ds = element.dataset;
-  if (!ds.ax && !ds.axSvg) return null;
+  if (!ds.ax && !ds.axSvg && !ds.axTextEffect && !ds.axSplit) return null;
   
   // Handle no-code aliases
   const rawAnimation = ds.axTextEffect || ds.ax || ds.axPreset || ds.axHoverPreset || null;
@@ -66,13 +66,14 @@ export function parseDataAttributes(element) {
     }
   }
   
-  const isText = ds.axText !== undefined || ds.axTextType !== undefined || ds.axTextEffect !== undefined;
+  const isText = ds.axText !== undefined || ds.axTextType !== undefined || ds.axTextEffect !== undefined || ds.axSplit !== undefined || (typeof rawAnimation === 'string' && rawAnimation.startsWith('text-'));
   let textOptions = null;
   if (isText) {
     textOptions = {
-      type: ds.axTextType || ds.axTextEffect || 'split',
-      split: ds.axText || 'chars',
-      animation,
+      type: ds.axTextType || 'split',
+      split: ds.axSplit || ds.axText || undefined,
+      effect: ds.axTextEffect || animation,
+      animation: ds.axTextEffect || animation,
       text: ds.axValue || null,
       mask: ds.axMask === 'true' ? true : (ds.axMask === 'lines' ? 'lines' : false),
       speed: parseInt(ds.axSpeed, 10) || parseInt(ds.axTypewriterSpeed, 10) || 45,

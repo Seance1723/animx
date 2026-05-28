@@ -1,5 +1,5 @@
-const VERSION = '3.41.0';
-const RELEASE = 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation';
+const VERSION = '3.42.0';
+const RELEASE = 'Advanced Text Reveal and Split Animation Pack';
 
 export function ts() {
   return new Date().toISOString();

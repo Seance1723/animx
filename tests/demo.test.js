@@ -6,14 +6,14 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.41.0 Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation checks...');
+    console.log('[Tests] Running AnimX v3.42.0 Advanced Text Reveal and Split Animation Pack checks...');
 
     // 1. Version checks
-    assert.strictEqual(AnimX.version, '3.41.0', 'AnimX.version should be 3.41.0');
+    assert.strictEqual(AnimX.version, '3.42.0', 'AnimX.version should be 3.42.0');
     
     const info = AnimX.versionInfo();
-    assert.strictEqual(info.version, '3.41.0', 'versionInfo version should match');
-    assert.ok(info.release.includes('Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation'), 'versionInfo release string should contain Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation');
+    assert.strictEqual(info.version, '3.42.0', 'versionInfo version should match');
+    assert.ok(info.release.includes('Advanced Text Reveal and Split Animation Pack'), 'versionInfo release string should contain Advanced Text Reveal and Split Animation Pack');
 
     // 2. Demo existence checks
     const demoPath = path.resolve(process.cwd(), 'demo');

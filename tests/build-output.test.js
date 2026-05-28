@@ -22,12 +22,20 @@ import AnimX from '../src/js/animx.js';
       assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-capability-matrix.json')));
       assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-playground-readiness.json')));
       assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-effect-cross-check-report.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-text-reveal-pack-report.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-text-split-safety-report.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-text-effect-cross-check-report.json')));
+      assert.ok(fs.existsSync(path.join(distPath, 'reports', 'animx-text-playground-readiness.json')));
 
       [
         'animx.preset-data.json',
         path.join('reports', 'animx-capability-matrix.json'),
         path.join('reports', 'animx-playground-readiness.json'),
-        path.join('reports', 'animx-effect-cross-check-report.json')
+        path.join('reports', 'animx-effect-cross-check-report.json'),
+        path.join('reports', 'animx-text-reveal-pack-report.json'),
+        path.join('reports', 'animx-text-split-safety-report.json'),
+        path.join('reports', 'animx-text-effect-cross-check-report.json'),
+        path.join('reports', 'animx-text-playground-readiness.json')
       ].forEach(file => {
         assert.doesNotThrow(() => JSON.parse(fs.readFileSync(path.join(distPath, file), 'utf-8')));
       });

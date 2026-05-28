@@ -6,10 +6,10 @@ if (!fs.existsSync(reportsDir)) fs.mkdirSync(reportsDir, { recursive: true });
 
 const reportData = {
   "version": "3.40.0",
-  "nextVersion": "3.41.0",
+  "nextVersion": "3.43.0",
   "needed": true,
   "reason": "Final launch buffer before v4.0.0. Rebuild public demo experience.",
-  "recommendedModule": "v3.41.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal",
+  "recommendedModule": "v3.43.0 Demo Website UX Rebuild, React Mini-Site, Journey Landing, Playground Builder, and Documentation Portal",
   "mustFix": [],
   "shouldFix": [
     "Rebuild scattered demo pages into a clean React mini-site"

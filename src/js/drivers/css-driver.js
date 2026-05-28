@@ -31,7 +31,7 @@ export function createCSSDriver(element, preset, options, instance) {
       
       // Remove any existing ax preset classes to avoid conflicts
       Array.from(element.classList).forEach(cls => {
-        if (cls.startsWith('ax-') && cls !== 'ax-paused' && cls !== 'ax-running' && cls !== 'ax-hidden' && cls !== 'ax-visible' && cls !== className) {
+        if (cls.startsWith('ax-') && !cls.startsWith('ax-text-') && !cls.startsWith('ax-split') && cls !== 'ax-paused' && cls !== 'ax-running' && cls !== 'ax-hidden' && cls !== 'ax-visible' && cls !== className) {
           element.classList.remove(cls);
         }
       });

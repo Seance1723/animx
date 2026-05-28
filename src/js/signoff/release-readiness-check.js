@@ -19,7 +19,7 @@ export function releaseReadinessCheck() {
       'Optional Studio panels honestly marked incomplete (P3)'
     ],
     recommendations: [
-      'Proceed to v3.41.0 for launch buffer before v4.0.0'
+      'Proceed to v3.43.0 for rolling/typewriter text work before v4.0.0'
     ]
   });
 }

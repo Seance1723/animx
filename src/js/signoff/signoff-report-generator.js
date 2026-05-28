@@ -34,8 +34,8 @@ export function generateSignoffReport(checks) {
     blockers,
     warnings,
     knownIssues,
-    recommendations: checks.recommendations || ['Proceed to v3.41.0 launch buffer'],
-    nextVersion: '3.41.0'
+    recommendations: checks.recommendations || ['Proceed to v3.43.0 text module'],
+    nextVersion: '3.43.0'
   };
 }
 
@@ -154,10 +154,10 @@ export function generateV4LaunchGate(checks) {
     experimentalApis: checks.experimentalApis || [],
     releaseBlockers: blockers,
     nonBlockingIssues: checks.nonBlockingIssues || [],
-    requiredBeforeV4: checks.requiredBeforeV4 || ['Complete v3.41.0 launch buffer and public release packaging guard'],
+    requiredBeforeV4: checks.requiredBeforeV4 || ['Complete v3.43.0 rolling, slot, typewriter, and scramble text pack'],
     recommendedBeforeV4: checks.recommendedBeforeV4 || [],
-    notes: checks.notes || ['v4.0.0 should not be released until v3.41.0 launch buffer is complete'],
-    nextVersion: '3.41.0'
+    notes: checks.notes || ['v4.0.0 should not be released until v3.43.0 text module is complete'],
+    nextVersion: '3.43.0'
   };
 }
 
@@ -165,14 +165,14 @@ export function generateNextStepReport(checks) {
   const hasBlockers = (checks.mustFix || []).length > 0;
   return {
     version: VERSION,
-    nextVersion: '3.41.0',
+    nextVersion: '3.43.0',
     needed: true,
     reason: hasBlockers
       ? 'Must fix remaining items before v4.0.0 launch'
       : 'Final launch buffer and public release packaging guard needed before v4.0.0',
     recommendedModule: hasBlockers
-      ? 'v3.41.0 Blocker Fixes and Launch Preparation'
-      : 'v3.41.0 Final Launch Buffer and Public Release Packaging Guard',
+      ? 'v3.43.0 Blocker Fixes and Launch Preparation'
+      : 'v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack',
     mustFix: checks.mustFix || [],
     shouldFix: checks.shouldFix || [],
     canDefer: checks.canDefer || []

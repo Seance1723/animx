@@ -120,7 +120,7 @@ export function initData(forceScan = false) {
   
   // Normal animx scanning
   if (config.dataApi) {
-    const elements = document.querySelectorAll('[data-ax], [data-ax-svg], [data-ax-svg-morph], [data-ax-morph-icon]');
+    const elements = document.querySelectorAll('[data-ax], [data-ax-text-effect], [data-ax-split], [data-ax-svg], [data-ax-svg-morph], [data-ax-morph-icon]');
     elements.forEach(el => processElement(el, forceScan));
   }
   
@@ -236,7 +236,7 @@ export function refreshData(root = document) {
   if (!root || typeof root.querySelectorAll !== 'function') return;
   
   if (config.dataApi) {
-    const elements = root.querySelectorAll('[data-ax], [data-ax-svg], [data-ax-svg-morph], [data-ax-morph-icon]');
+    const elements = root.querySelectorAll('[data-ax], [data-ax-text-effect], [data-ax-split], [data-ax-svg], [data-ax-svg-morph], [data-ax-morph-icon]');
     elements.forEach(el => processElement(el, false));
   }
   

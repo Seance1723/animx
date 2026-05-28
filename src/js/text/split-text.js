@@ -28,16 +28,16 @@ function processTextNode(node, options, arrays) {
     }
 
     // Build Word
-    const wordWrapper = doWords ? createWrapper('span', 'ax-text-word') : document.createDocumentFragment();
+    const wordWrapper = doWords ? createWrapper('span', 'ax-text-word ax-split-word') : document.createDocumentFragment();
     if (doWords && options.preserveAccessibility) applyAriaHidden(wordWrapper);
 
     if (doChars) {
       const chars = segmentChars(wordText);
       chars.forEach(char => {
-        const charWrapper = createWrapper('span', 'ax-text-char', char);
+        const charWrapper = createWrapper('span', 'ax-text-char ax-split-char', char);
         if (options.preserveAccessibility) applyAriaHidden(charWrapper);
         if (options.mask && options.mask !== 'lines') {
-          const mask = createWrapper('span', 'ax-text-mask');
+          const mask = createWrapper('span', 'ax-text-mask ax-text-mask-clip');
           if (options.preserveAccessibility) applyAriaHidden(mask);
           mask.appendChild(charWrapper);
           wordWrapper.appendChild(mask);
@@ -52,7 +52,7 @@ function processTextNode(node, options, arrays) {
 
     if (doWords) {
       if (options.mask && options.mask !== 'lines' && !doChars) {
-        const mask = createWrapper('span', 'ax-text-mask');
+        const mask = createWrapper('span', 'ax-text-mask ax-text-mask-clip');
         if (options.preserveAccessibility) applyAriaHidden(mask);
         mask.appendChild(wordWrapper);
         fragment.appendChild(mask);
@@ -106,7 +106,7 @@ function detectLines(element, wordElements, options, arrays) {
   // Wrap lines
   lines.forEach(lineNodes => {
     if (lineNodes.length === 0) return;
-    const lineWrapper = createWrapper('span', 'ax-text-line');
+    const lineWrapper = createWrapper('span', 'ax-text-line ax-split-line');
     const innerWrapper = createWrapper('span', 'ax-text-line-inner');
     if (options.preserveAccessibility) applyAriaHidden(lineWrapper);
     
@@ -127,7 +127,7 @@ function detectLines(element, wordElements, options, arrays) {
     }
 
     if (options.mask && (options.mask === true || options.mask === 'lines')) {
-      const mask = createWrapper('span', 'ax-text-mask');
+      const mask = createWrapper('span', 'ax-text-mask ax-text-mask-clip');
       if (options.preserveAccessibility) applyAriaHidden(mask);
       lineWrapper.parentNode.insertBefore(mask, lineWrapper);
       mask.appendChild(lineWrapper);
@@ -138,6 +138,12 @@ function detectLines(element, wordElements, options, arrays) {
 }
 
 export function performSplitText(element, options) {
+  if (!element || !element.childNodes) {
+    return { element, originalHTML: '', originalText: '', chars: [], words: [], lines: [] };
+  }
+  if (element.dataset && element.dataset.axSplitActive === 'true') {
+    revertSplitText(element);
+  }
   const originalHTML = element.innerHTML;
   const originalText = getRawTextContent(element);
 
@@ -150,7 +156,14 @@ export function performSplitText(element, options) {
   }
 
   // Ensure element has split class
-  element.classList.add('ax-text-split');
+  const splitId = `ax-split-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  element.classList.add('ax-text-split', 'ax-split');
+  if (element.dataset) {
+    element.dataset.axSplitOrigin = originalText;
+    element.dataset.axSplit = Array.isArray(options.split) ? options.split.join(' ') : String(options.split || 'chars');
+    element.dataset.axSplitId = splitId;
+    element.dataset.axSplitActive = 'true';
+  }
 
   const arrays = { chars: [], words: [], lines: [] };
   
@@ -178,7 +191,8 @@ export function performSplitText(element, options) {
     words: arrays.words,
     lines: arrays.lines,
     type: 'split',
-    accessibilityPreserved
+    accessibilityPreserved,
+    splitId
   };
 
   saveTextState(element, state);
@@ -198,7 +212,13 @@ export function revertSplitText(element) {
   if (!state) return;
   
   element.innerHTML = state.originalHTML;
-  element.classList.remove('ax-text-split');
+  element.classList.remove('ax-text-split', 'ax-split');
+  if (element.dataset) {
+    delete element.dataset.axSplitOrigin;
+    delete element.dataset.axSplit;
+    delete element.dataset.axSplitId;
+    delete element.dataset.axSplitActive;
+  }
   if (state.accessibilityPreserved) {
     element.removeAttribute('aria-label');
   }

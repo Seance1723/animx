@@ -33,7 +33,7 @@ const reportData = {
     "AX-KNOWN-002"
   ],
   "requiredBeforeV4": [
-    "v3.41.0 final launch buffer"
+    "v3.43.0 final launch buffer"
   ],
   "recommendedBeforeV4": [
     "Final demo website UX rebuild"
@@ -41,7 +41,7 @@ const reportData = {
   "notes": [
     "v4.0.0 can begin preparation. Do not release v4 until v3.41 launch buffer is complete."
   ],
-  "nextVersion": "3.41.0",
+  "nextVersion": "3.43.0",
   "generatedAt": new Date().toISOString()
 };
 

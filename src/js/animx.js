@@ -40,6 +40,7 @@ import { bindScrollAnimX } from './scroll/scroll-observer.js';
 import { Timeline, bindTimelineAnimX } from './timeline/timeline.js';
 import { stagger, bindStaggerAnimX } from './stagger/stagger.js';
 import { text, splitText, revertText, bindTextAnimX } from './text/text-api.js';
+import { textRevealPresets } from './text/text-reveal-presets.js';
 import { interact, hover, press, focus, magnetic, ripple, tilt, feedback, bindInteractionAnimX, destroyInteractions } from './interactions/interaction-api.js';
 import { component, bindComponentAnimX } from './components/component-api.js';
 import { scrollProgress, parallax, pin, scrollScene, readingProgress, destroyAdvancedScroll } from './scroll/advanced-scroll-api.js';
@@ -123,7 +124,7 @@ import { validateRegistry } from './registry/registry-validator.js';
 // v3.41.0 Final Stable Release Sign-Off
 import { signoff } from './signoff/signoff-api.js';
 
-const VERSION = '3.41.0';
+const VERSION = '3.42.0';
 
 // Optional Studio shortcut
 export function studio() {
@@ -140,7 +141,7 @@ export function studio() {
 }
 
 // Pre-register all presets
-[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...layoutPresets, ...Object.values(gesturePresets), ...elementPresets, ...cmsRecipes312].forEach(preset => {
+[...Object.values(cssPresets), ...componentPresets, ...expandedPresets, ...textRevealPresets, ...layoutPresets, ...Object.values(gesturePresets), ...elementPresets, ...cmsRecipes312].forEach(preset => {
   registerPreset(preset.name, preset);
 });
 
@@ -1057,8 +1058,8 @@ AnimX.build = {
   signoff,
   versionInfo: () => ({
       name: "AnimX",
-      version: "3.41.0",
-      release: "Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation",
+      version: "3.42.0",
+      release: "Advanced Text Reveal and Split Animation Pack",
       dependency: "zero-runtime-dependency"
     }),
   modules: ['core', 'data', 'scroll', 'timeline', 'stagger', 'text', 'interactions', 'components', 'advanced-scroll', 'svg', 'cms', 'layout', 'gestures', 'packs', 'signoff']

@@ -6,14 +6,14 @@ import AnimX from '../src/js/animx.js';
 
 export function run() {
   try {
-    console.log('[Tests] Running AnimX v3.41.0 Documentation Portal checks...');
+    console.log('[Tests] Running AnimX v3.42.0 Documentation Portal checks...');
 
     // 1. Version checks
-    assert.strictEqual(AnimX.version, '3.41.0', 'AnimX.version should be 3.41.0');
+    assert.strictEqual(AnimX.version, '3.42.0', 'AnimX.version should be 3.42.0');
     
     const info = AnimX.versionInfo();
-    assert.strictEqual(info.version, '3.41.0', 'versionInfo version should match');
-    assert.ok(info.release.includes('Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation'), 'versionInfo release string should contain Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation');
+    assert.strictEqual(info.version, '3.42.0', 'versionInfo version should match');
+    assert.ok(info.release.includes('Advanced Text Reveal and Split Animation Pack'), 'versionInfo release string should contain Advanced Text Reveal and Split Animation Pack');
 
     // 2. Docs existence checks
     const docsPath = path.resolve(process.cwd(), 'docs');
@@ -38,7 +38,7 @@ export function run() {
 
     // 3. README check
     const readme = fs.readFileSync(path.resolve(process.cwd(), 'README.md'), 'utf8');
-    assert.ok(readme.includes('3.41.0'), 'README.md must reflect version 3.41.0');
+    assert.ok(readme.includes('3.42.0'), 'README.md must reflect version 3.42.0');
 
     console.log('[Tests] Documentation verification passed');
   } catch (err) {

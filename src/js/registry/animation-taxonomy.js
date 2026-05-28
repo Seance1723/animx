@@ -1,6 +1,6 @@
-export const ANIMX_REGISTRY_VERSION = '3.41.0';
+export const ANIMX_REGISTRY_VERSION = '3.42.0';
 
-export const ANIMX_REGISTRY_RELEASE = 'Animation Registry Rebuild, Capability Matrix, and Playground-Ready Metadata Foundation';
+export const ANIMX_REGISTRY_RELEASE = 'Advanced Text Reveal and Split Animation Pack';
 
 export const STATUS_VALUES = ['ready', 'experimental', 'needs-review', 'deprecated'];
 

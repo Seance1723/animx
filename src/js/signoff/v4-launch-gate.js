@@ -9,7 +9,7 @@ export function v4LaunchGate() {
       { severity: 'P3', summary: 'Safari 3D sub-pixel shifts' }
     ],
     requiredBeforeV4: [
-      'Complete v3.41.0 Final Launch Buffer and Public Release Packaging Guard'
+      'Complete v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack'
     ],
     recommendedBeforeV4: [
       'Final npm pack dry run with fresh install test',
@@ -17,8 +17,8 @@ export function v4LaunchGate() {
     ],
     notes: [
       'v3.40.0 stable release sign-off passed with GO decision',
-      'v4.0.0 preparation can begin after v3.41.0 launch buffer',
-      'Do not set current version to 4.0.0 until v3.41.0 is complete'
+      'v4.0.0 preparation can begin after v3.43.0 text module',
+      'Do not set current version to 4.0.0 until v3.43.0 is complete'
     ]
   });
 }

@@ -38,9 +38,9 @@ const reportData = {
     }
   ],
   "recommendations": [
-    "Proceed to v3.41.0 Final Launch Buffer and Public Release Packaging Guard"
+    "Proceed to v3.43.0 Rolling, Slot, Typewriter, and Scramble Text Pack"
   ],
-  "nextVersion": "3.41.0",
+  "nextVersion": "3.43.0",
   "generatedAt": new Date().toISOString()
 };
 
